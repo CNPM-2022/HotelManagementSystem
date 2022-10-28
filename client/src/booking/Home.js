@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { counterActions } from "../store/store";
+import { counterActions } from "../store/counterSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter.counter);
