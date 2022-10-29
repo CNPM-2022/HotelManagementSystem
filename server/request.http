@@ -6,8 +6,8 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "truc",
-    "password": "text"
+    "username": "thangdb",
+    "password": "123456"
 }
 
 
