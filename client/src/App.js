@@ -3,11 +3,14 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TopNav from "./components/TopNav";
+import { ToastContainer } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <BrowserRouter>
       <TopNav />
+      <ToastContainer />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
