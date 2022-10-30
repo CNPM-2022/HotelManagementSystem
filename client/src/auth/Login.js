@@ -27,8 +27,17 @@ const Login = () => {
         throw new Error(data.message || "Something went wrong");
       }
       if (data.success) {
-        localStorage.setItem("accessToken", data.accessToken);
-        dispatch(authActions.login());
+        const user = {
+          username: data.username,
+          accessToken: data.accessToken,
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        dispatch(
+          authActions.login({
+            token: data.accessToken,
+            user: data.username,
+          })
+        );
         navigate("/");
         toast.success(data.message);
       } else {

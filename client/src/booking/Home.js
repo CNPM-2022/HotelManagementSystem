@@ -1,12 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const UserName = useSelector((state) => state.auth.user);
   return (
     <div className="container-fluid h1 p-5 text-center">
-      <h1>Home</h1>
+      {isAuth && <h2>Welcome {UserName}</h2>}
       <p>{isAuth ? "You are logged in" : "You are not logged in"}</p>
     </div>
   );
