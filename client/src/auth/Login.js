@@ -27,16 +27,11 @@ const Login = () => {
         throw new Error(data.message || "Something went wrong");
       }
       if (data.success) {
-        const user = {
-          username: data.username,
-          accessToken: data.accessToken,
-          createdAt: data.createdAt,
-        };
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(data));
         dispatch(
           authActions.login({
             token: data.accessToken,
-            user: data.username,
+            user: data.user,
           })
         );
         navigate("/dashboard");

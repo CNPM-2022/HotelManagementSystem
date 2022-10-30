@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const DashboardNav = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <ul className="nav nav-tabs">
       <li className="nav-item">

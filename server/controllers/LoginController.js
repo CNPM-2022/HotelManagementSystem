@@ -39,7 +39,11 @@ const LoginController = async (req, res) => {
       success: true,
       message: "User logged in successfully",
       accessToken,
-      username,
+      user: {
+        username: user.username,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
     });
   } catch (error) {
     console.log(error);

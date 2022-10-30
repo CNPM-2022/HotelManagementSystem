@@ -7,14 +7,14 @@ const { Meta } = Card;
 
 const ConnectNav = () => {
   const auth = useSelector((state) => state.auth);
-  const { user, createAt } = auth;
+  const { user } = auth;
   return (
     <div className="d-flex justify-content-start rounded">
       <Card>
         <Meta
-          avatar={<Avatar>{user}</Avatar>}
-          title={user}
-          description={`Joined ${moment(createAt).fromNow()}`}
+          avatar={<Avatar>{user.username}</Avatar>}
+          title={user.username}
+          description={`Joined ${moment(user.createdAt).fromNow()}`}
         />
       </Card>
     </div>
