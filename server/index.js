@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-import fs from "fs";
 const morgan = require("morgan");
 import cors from "cors";
+import rooms from "./routes/rooms.js";
+import auth from "./routes/auth.js";
 
 //connect to mongodb
 const connectDB = async () => {
@@ -58,9 +59,9 @@ app.use(cors());
 
 //auto load routes
 
-fs.readdirSync("./routes").map((r) =>
-  app.use("/api/auth", require(`./routes/${r}`))
-);
+//routes
+app.use("/api/auth", auth);
+app.use("/api/rooms", rooms);
 
 app.listen(process.env.PORT, () =>
   console.log(`Example app listening on port ${process.env.PORT}!`)

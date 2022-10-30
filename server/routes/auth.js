@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
 
-const User = require("../models/User");
 import LoginController from "../controllers/LoginController";
 import RegisterController from "../controllers/RegisterController";
 
@@ -18,4 +15,4 @@ router.post("/register", RegisterController);
 
 router.post("/login", LoginController);
 
-module.exports = router;
+export default router;

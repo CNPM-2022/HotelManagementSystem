@@ -29,6 +29,9 @@ Content-Type: application/json
     "password": "123456"
 }
 
+###
+GET http://localhost:5000/api/rooms/allrooms
+
 
 
 

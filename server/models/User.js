@@ -16,9 +16,10 @@ const UserSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    stripeAccountId: "",
-    stripeSellers: {},
-    stripeSession: {},
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
