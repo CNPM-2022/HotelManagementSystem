@@ -30,6 +30,7 @@ const Login = () => {
         const user = {
           username: data.username,
           accessToken: data.accessToken,
+          createdAt: data.createdAt,
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(
@@ -38,7 +39,7 @@ const Login = () => {
             user: data.username,
           })
         );
-        navigate("/");
+        navigate("/dashboard");
         toast.success(data.message);
       } else {
         toast.error(data.message);

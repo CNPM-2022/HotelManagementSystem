@@ -33,9 +33,14 @@ const TopNav = () => {
         </>
       )}
       {isAuthenticated && (
-        <a className="nav-link" onClick={logoutHandler}>
-          LogOut
-        </a>
+        <>
+          <NavLink className="nav-link" to="/dashboard">
+            Dashboard
+          </NavLink>
+          <a className="nav-link" onClick={logoutHandler}>
+            LogOut
+          </a>
+        </>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ const initialAuthState = {
   isAuthenticated: false,
   token: null,
   user: null,
+  createAt: null,
 };
 
 const localStorageUser = JSON.parse(localStorage.getItem("user"));
@@ -12,10 +13,12 @@ if (localStorageUser !== null) {
   initialAuthState.isAuthenticated = true;
   initialAuthState.user = localStorageUser.username;
   initialAuthState.token = localStorageUser.accessToken;
+  initialAuthState.createAt = localStorageUser.createdAt;
 } else {
   initialAuthState.isAuthenticated = false;
   initialAuthState.user = null;
   initialAuthState.token = null;
+  initialAuthState.createAt = null;
 }
 
 const authSlice = createSlice({
