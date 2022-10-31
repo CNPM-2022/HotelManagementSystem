@@ -30,4 +30,15 @@ const getRoomsById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getAllRooms, getRoomsById };
+const roomById = asyncHandler(async (req, res) => {
+  const roomid = req.body.roomid;
+
+  try {
+    const rooms = await Rooms.findOne({ _id: req.body.roomid });
+    res.json(rooms);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+export { getAllRooms, getRoomsById, roomById };
