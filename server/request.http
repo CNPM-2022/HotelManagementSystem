@@ -32,6 +32,9 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/rooms/allrooms
 
+###
+GET http://localhost:5000/api/rooms/635ea234dce841597e4fa833
+
 
 
 

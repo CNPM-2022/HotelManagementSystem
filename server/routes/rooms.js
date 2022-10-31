@@ -2,8 +2,9 @@ import express from "express";
 
 const router = express.Router();
 
-import { getAllRooms } from "../controllers/RoomsController.js";
+import { getAllRooms, getRoomsById } from "../controllers/RoomsController.js";
 
 router.get("/allrooms", getAllRooms);
+router.get("/:id", getRoomsById);
 
 export default router;
