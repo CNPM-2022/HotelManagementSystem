@@ -1,12 +1,14 @@
 import counterReducer from "./counterSlice";
 import authReducer from "./authSlice";
-import roomReducer from "./roomsSlice";
+import roomsReducer from "./roomsSlice";
+import roomReducer from "./roomSlice";
 import { configureStore } from "@reduxjs/toolkit";
 const store = configureStore({
   reducer: {
     counter: counterReducer,
     auth: authReducer,
-    rooms: roomReducer,
+    rooms: roomsReducer,
+    room: roomReducer,
   },
 });
 

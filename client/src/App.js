@@ -10,6 +10,7 @@ import Register from "./auth/Register/Register";
 import Dashboard from "./user/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import RoomsScreen from "./page/RoomScreen/RoomScreen";
+import DetailRoom from "./page/DetailRoom/DetailRoom";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/rooms" element={<RoomsScreen />} />
+        <Route exact path="/room/:id" element={<DetailRoom />} />
 
         <Route exact path="/" element={<PrivateRoute />}>
           <Route exact path="/dashboard" element={<Dashboard />} />

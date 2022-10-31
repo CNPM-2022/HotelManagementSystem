@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from "react";
 import "../RoomScreen/RoomScreen.css";
-import { roomActions } from "../../store/roomsSlice";
+import { roomsActions } from "../../store/roomsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 
 const RoomsScreen = () => {
   const dispatch = useDispatch();
@@ -9,15 +10,15 @@ const RoomsScreen = () => {
 
   const getRooms = useCallback(async () => {
     try {
-      dispatch(roomActions.allRoomsRequest());
+      dispatch(roomsActions.allRoomsRequest());
       const res = await fetch("http://localhost:5000/api/rooms/allrooms");
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.message);
       }
-      dispatch(roomActions.allRoomsSuccess(data));
+      dispatch(roomsActions.allRoomsSuccess(data));
     } catch (error) {
-      dispatch(roomActions.allRoomsFail(error.message));
+      dispatch(roomsActions.allRoomsFail(error.message));
     }
   }, [dispatch]);
 
@@ -53,9 +54,11 @@ const RoomsScreen = () => {
                     </b>
 
                     <div style={{ float: "right" }}>
-                      <button className="btn btn-outline-warning">
-                        View Details
-                      </button>
+                      <LinkContainer to={`/room/${room._id}`}>
+                        <button className="btn btn-outline-warning">
+                          View Details
+                        </button>
+                      </LinkContainer>
                     </div>
                   </div>
                 </div>

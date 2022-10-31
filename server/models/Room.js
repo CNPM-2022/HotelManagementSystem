@@ -9,6 +9,7 @@ const roomSchema = mongoose.Schema(
     maxcount: {
       type: Number,
       required: true,
+      max: 3,
     },
     phonenumber: {
       type: Number,
@@ -23,9 +24,15 @@ const roomSchema = mongoose.Schema(
     type: {
       type: String,
       required: true,
+      default: "A",
+      enum: ["A", "B", "C"],
     },
     description: {
       type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
       required: true,
     },
   },

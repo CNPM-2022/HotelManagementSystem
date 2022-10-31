@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialRoomState = {
+const initialRoomsState = {
   isLoading: false,
   error: null,
   rooms: [],
 };
 
-const roomSlice = createSlice({
+const roomsSlice = createSlice({
   name: "rooms",
-  initialState: initialRoomState,
+  initialState: initialRoomsState,
   reducers: {
     allRoomsRequest(state) {
       state.isLoading = true;
@@ -24,5 +24,5 @@ const roomSlice = createSlice({
   },
 });
 
-export default roomSlice.reducer;
-export const roomActions = roomSlice.actions;
+export default roomsSlice.reducer;
+export const roomsActions = roomsSlice.actions;
