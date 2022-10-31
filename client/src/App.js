@@ -5,8 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 //component
 import Home from "./page/booking/Home";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
+import Login from "./auth/Login/Login";
+import Register from "./auth/Register/Register";
 import Dashboard from "./user/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import RoomsScreen from "./page/RoomScreen/RoomScreen";

@@ -1,10 +1,11 @@
 import React from "react";
-import LoginForm from "../components/auth/LoginForm";
+import LoginForm from "../../components/auth/LoginForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store/authSlice";
+import { authActions } from "../../store/authSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,12 +45,7 @@ const Login = () => {
     }
   };
 
-  return (
-    <div className="container-fluid p-5">
-      <h1 className="text-center">Login</h1>
-      <LoginForm onLogin={loginHandler} />
-    </div>
-  );
+  return <LoginForm onLogin={loginHandler} />;
 };
 
 export default Login;

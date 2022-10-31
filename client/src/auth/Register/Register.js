@@ -1,8 +1,9 @@
 import React from "react";
-import RegisterForm from "../components/auth/RegisterForm";
+import RegisterForm from "../../components/auth/RegisterForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store/authSlice";
+import { authActions } from "../../store/authSlice";
+import "./Register.css";
 
 //import toast
 import { toast } from "react-toastify";
@@ -40,12 +41,7 @@ const Regiter = () => {
     }
   };
 
-  return (
-    <div className="container-fluid p-5">
-      <h1 className="text-center">Register</h1>
-      <RegisterForm onRegister={registerHandler} />
-    </div>
-  );
+  return <RegisterForm onRegister={registerHandler} />;
 };
 
 export default Regiter;

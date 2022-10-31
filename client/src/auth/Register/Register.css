@@ -1,0 +1,13 @@
+.signin,
+.image {
+  min-height: 100vh;
+}
+.bg-image1 {
+  background-image: url("https://hdwallsource.com/img/2015/3/luxury-wallpaper-47182-48698-hd-wallpapers.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.btn {
+  width: 100%;
+}

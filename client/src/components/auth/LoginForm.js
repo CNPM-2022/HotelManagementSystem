@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = (props) => {
   const emailRef = useRef();
@@ -10,47 +11,77 @@ const LoginForm = (props) => {
 
   return (
     <React.Fragment>
-      <form onSubmit={submitHandler}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            ref={emailRef}
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+      <div className="maincontainer">
+        <div class="container-fluid">
+          <div class="row no-gutter">
+            <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+            <div class="col-md-6 bg-light bg-opacity-50">
+              <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-10 col-xl-7 mx-auto">
+                      <h3 class="display-5 font-weight-bold">Login Page</h3>
+                      <p class="text-muted mb-4 ">
+                        Login to your account to continue
+                      </p>
+                      <form onSubmit={submitHandler}>
+                        <div class="form-group mb-3">
+                          <input
+                            id="inputEmail"
+                            type="text"
+                            placeholder="Username"
+                            required=""
+                            autofocus=""
+                            class="form-control rounded-pill border-0 shadow-sm px-4"
+                            ref={emailRef}
+                          />
+                        </div>
+                        <div class="form-group mb-3">
+                          <input
+                            id="inputPassword"
+                            type="password"
+                            placeholder="Password"
+                            required=""
+                            class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                            ref={passwordRef}
+                          />
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                          <input
+                            id="customCheck1"
+                            type="checkbox"
+                            checked
+                            class="custom-control-input"
+                          />
+                          <label
+                            for="customCheck1"
+                            class="custom-control-label mx-2"
+                          >
+                            Remember password
+                          </label>
+                        </div>
+                        <p>
+                          New Customer?
+                          <Link to="/signup" className="px-2">
+                            Register Now
+                          </Link>
+                        </p>
+                        <button
+                          type="submit"
+                          class="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                        >
+                          Sign in
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            ref={passwordRef}
-          />
-        </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      </div>
     </React.Fragment>
   );
 };
