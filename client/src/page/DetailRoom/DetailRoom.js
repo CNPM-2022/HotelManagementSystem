@@ -48,9 +48,9 @@ const DetailRoom = () => {
                   <Col md={12}>
                     <Carousel nextLabel="" prevLabel="">
                       {room.imageurls &&
-                        room.imageurls.map((url) => {
+                        room.imageurls.map((url, index) => {
                           return (
-                            <Carousel.Item>
+                            <Carousel.Item key={index}>
                               <img
                                 src={url}
                                 className="img-fluid d-block w-100"
@@ -66,7 +66,7 @@ const DetailRoom = () => {
                 <Row>
                   <Col>
                     <br></br>
-                    <div class="vl">
+                    <div className="vl">
                       <h6 className="hj">Shangri-La Colombo</h6>
                       <h1 className="hj">{room.name}</h1>
                     </div>{" "}
@@ -77,7 +77,7 @@ const DetailRoom = () => {
                     <p>{room.description}</p>
                     <h6>Features</h6>
                     <h6>Bath & Personal Care</h6>
-                    <ul class="b">
+                    <ul className="b">
                       <li>Walk-in shower and/or separate bathtub</li>
                       <li>Bathroom mirror</li>
                       <li>Plush bathrobes and slippers</li>
@@ -86,7 +86,7 @@ const DetailRoom = () => {
                       <li>Iron and ironing board</li>
                     </ul>
                     <h6>Media & Entertainment</h6>
-                    <ul class="b">
+                    <ul className="b">
                       <li>High-speed Internet access</li>
                       <li>Flatscreen TV</li>
                       <li>
@@ -95,7 +95,7 @@ const DetailRoom = () => {
                       </li>
                     </ul>
                     <h6>Refreshments</h6>
-                    <ul class="b">
+                    <ul className="b">
                       <li>Minibar</li>
                       <li>Water</li>
                       <li>Tea and coffee making facilities</li>

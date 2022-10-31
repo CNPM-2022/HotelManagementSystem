@@ -25,11 +25,11 @@ const Landing = () => {
               data-aos="zoom-in"
               style={{ fontWeight: "bold" }}
             >
-              Wellcome {user.username} to Hotel
+              Wellcome {user.username} to
             </p>
           )}
-          <h2 style={{ color: "white", fontSize: "130px" }} data-aos="zoom-in">
-            SheyRooms
+          <h2 style={{ color: "white", fontSize: "100px" }} data-aos="zoom-in">
+            HOTEL CONTINENTAL SAIGON
           </h2>
           <h1 style={{ color: "white" }} data-aos="zoom-out">
             “There is only one boss. The Guest.

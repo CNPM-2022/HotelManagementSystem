@@ -11,6 +11,7 @@ import Dashboard from "./user/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import RoomsScreen from "./page/RoomScreen/RoomScreen";
 import DetailRoom from "./page/DetailRoom/DetailRoom";
+import Booking from "./page/Booking/Booking";
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
 
         <Route exact path="/" element={<PrivateRoute />}>
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route
+            exact
+            path="/roombook/:id/:fromdate/:todate"
+            element={<Booking />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
