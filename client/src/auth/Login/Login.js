@@ -35,7 +35,7 @@ const Login = () => {
             user: data.user,
           })
         );
-        navigate("/dashboard");
+        navigate("/");
         toast.success(data.message);
       } else {
         toast.error(data.message);

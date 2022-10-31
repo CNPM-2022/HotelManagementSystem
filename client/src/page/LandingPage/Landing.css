@@ -1,0 +1,14 @@
+.landing {
+  height: calc(100vh) !important;
+  background-image: url("https://images7.alphacoders.com/362/362619.jpg") !important;
+}
+.landing .btn {
+  background-color: white !important;
+  color: black !important;
+  margin-top: 10px !important;
+}
+.bg-image {
+  background-image: url("https://images7.alphacoders.com/362/362619.jpg");
+  background-size: cover;
+  background-position: center center;
+}

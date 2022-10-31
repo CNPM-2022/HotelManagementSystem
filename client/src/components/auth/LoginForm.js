@@ -63,7 +63,7 @@ const LoginForm = (props) => {
                         </div>
                         <p>
                           New Customer?
-                          <Link to="/signup" className="px-2">
+                          <Link to="/register" className="px-2">
                             Register Now
                           </Link>
                         </p>

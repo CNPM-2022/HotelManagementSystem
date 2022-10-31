@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //component
-import Home from "./page/booking/Home";
+import Landing from "./page/LandingPage/Landing";
 import Login from "./auth/Login/Login";
 import Register from "./auth/Register/Register";
 import Dashboard from "./user/Dashboard";
@@ -17,7 +17,7 @@ function App() {
       <TopNav />
       <ToastContainer />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Landing />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/rooms" element={<RoomsScreen />} />
