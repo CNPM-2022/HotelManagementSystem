@@ -12,51 +12,51 @@ const LoginForm = (props) => {
   return (
     <React.Fragment>
       <div className="maincontainer">
-        <div class="container-fluid">
-          <div class="row no-gutter">
-            <div class="col-md-6 d-none d-md-flex bg-image"></div>
+        <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="col-md-6 d-none d-md-flex bg-image"></div>
 
-            <div class="col-md-6 bg-light bg-opacity-50">
-              <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-10 col-xl-7 mx-auto">
-                      <h3 class="display-5 font-weight-bold">Login Page</h3>
-                      <p class="text-muted mb-4 ">
+            <div className="col-md-6 bg-light bg-opacity-50">
+              <div className="login d-flex align-items-center py-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-10 col-xl-7 mx-auto">
+                      <h3 className="display-5 font-weight-bold">Login Page</h3>
+                      <p className="text-muted mb-4 ">
                         Login to your account to continue
                       </p>
                       <form onSubmit={submitHandler}>
-                        <div class="form-group mb-3">
+                        <div className="form-group mb-3">
                           <input
                             id="inputEmail"
                             type="text"
                             placeholder="Username"
                             required=""
                             autofocus=""
-                            class="form-control rounded-pill border-0 shadow-sm px-4"
+                            className="form-control rounded-pill border-0 shadow-sm px-4"
                             ref={emailRef}
                           />
                         </div>
-                        <div class="form-group mb-3">
+                        <div className="form-group mb-3">
                           <input
                             id="inputPassword"
                             type="password"
                             placeholder="Password"
                             required=""
-                            class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                            className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                             ref={passwordRef}
                           />
                         </div>
-                        <div class="custom-control custom-checkbox mb-3">
+                        <div className="custom-control custom-checkbox mb-3">
                           <input
                             id="customCheck1"
                             type="checkbox"
                             checked
-                            class="custom-control-input"
+                            className="custom-control-input"
                           />
                           <label
                             for="customCheck1"
-                            class="custom-control-label mx-2"
+                            className="custom-control-label mx-2"
                           >
                             Remember password
                           </label>
@@ -69,7 +69,7 @@ const LoginForm = (props) => {
                         </p>
                         <button
                           type="submit"
-                          class="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                          className="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                         >
                           Sign in
                         </button>
