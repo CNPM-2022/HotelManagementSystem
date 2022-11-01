@@ -62,7 +62,7 @@ const RegisterForm = (props) => {
                         </div>
                         <button
                           type="submit"
-                          className="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                          className="btn btn_Register btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                         >
                           Register
                         </button>

@@ -69,7 +69,7 @@ const LoginForm = (props) => {
                         </p>
                         <button
                           type="submit"
-                          className="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                          className="btn btn_login btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                         >
                           Sign in
                         </button>
