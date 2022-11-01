@@ -28,7 +28,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 <NavLink className="navbar-brand d-flex" to="/">
                     <img
-                        className="mx-4"
+                        className="mr-4"
                         src="https://www.continentalsaigon.com/images/logo2021.png"
                         style={{ width: '120px', height: '60px' }}
                     ></img>

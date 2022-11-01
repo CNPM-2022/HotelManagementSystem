@@ -13,6 +13,7 @@ import DetailRoom from './page/DetailRoom/DetailRoom';
 import Booking from './page/Booking/Booking';
 import Navbar from './components/Navbar/Navbar';
 import Nav from './components/Navbar/Nav';
+import Footer from './components/Footer/Footer';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route exact path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
                 </Route>
             </Routes>
+            <Footer />
         </BrowserRouter>
     );
 }

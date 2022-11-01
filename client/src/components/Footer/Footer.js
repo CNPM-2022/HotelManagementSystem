@@ -1,110 +1,100 @@
-import React from "react";
-import "./Footer.css";
+import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
-  return (
-    <>
-      <footer>
-        <div className="container">
-          <div className="sec aboutus">
-            <h2>About Us</h2>
-            <p>
-              HOTEL CONTINENTAL SAIGON AS MONUMENT ARCHITECTURE ARTS OF THE
-              CITY. According to the Board of Monuments of the city's review,
-              Hotel Continental Saigon was built in 1880, with characteristic
-              architectural features, such as, a tile roof, thick brick walls,
-              spacious bedrooms and public areas, and four-meter high ceilings
-              to avoid the heat of the tropics and to make use of the wind and
-              natural light. The design of hotel is in the form of a rectangle,
-              in the center is a large garden with three frangipanies planted in
-              1880 and still flourishing today, these features create a unique
-              feeling of peace and quiet in the midst of this dynamic city that
-              can only be found at the Hotel Continental Saigon.
-            </p>
+    return (
+        <>
+            <footer className="mt-4">
+                <div className="container">
+                    <div className="sec aboutus">
+                        <h4>About Us</h4>
+                        <p>
+                            In terms of harmony in the city's architectural ensemble, along with the Municipal theatre
+                            (1898), Notre Dame Cathedral (1880), City Post Office (1891), People's Committee of Ho Chi
+                            Minh City (1898), ReunificationPalace (1966) and Ben Thanh Market (1914) the Hotel
+                            Continental Saigon is a focal point in the architecture of the downtown area, maintaining
+                            the past historical pe
+                        </p>
 
-            <ul className="sci">
-              <li>
-                <a href="#">
-                  <i className="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-youtube" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="sec quickLinks">
-            <h2>Quick Links</h2>
-            <ul>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-            </ul>
-          </div>
-          <div className="sec contact">
-            <h2>Contact Us</h2>
-            <ul className="info">
-              <li>
-                <span>
-                  <i class="fas fa-map-marker-alt"></i>
-                </span>
-                <span>
-                  132 - 134 Dong Khoi St., Dist 1,<br></br>Ho Chi Minh City,
-                  Vietnam
-                </span>
-              </li>
-              <li>
-                <span>
-                  <i class="fas fa-phone-alt"></i>
-                </span>
-                <span>Phone: (84.28) 38 299 201</span>
-              </li>
-              <li>
-                <span>
-                  <i class="fas fa-envelope"></i>
-                </span>
-                <span>
-                  119/2<br></br>moratuwa
-                </span>
-              </li>
-              <li>
-                <span>
-                  <i class="fas fa-map-marker-alt"></i>
-                </span>
-                <span>
-                  119/2<br></br>moratuwa
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </>
-  );
+                        <ul className="sci">
+                            <li>
+                                <a href="#">
+                                    <i className="fab fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i className="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i className="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i className="fab fa-youtube" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="sec quickLinks">
+                        <h4>USEFUL LINKS</h4>
+                        <ul>
+                            <li>
+                                <a href="#">Rooms & suites</a>
+                            </li>
+                            <li>
+                                <a href="#">Restaurants & Bars</a>
+                            </li>
+                            <li>
+                                <a href="#">Facilities</a>
+                            </li>
+                            <li>
+                                <a href="#">Discover hotel</a>
+                            </li>
+                            <li>
+                                <a href="#">City Highlight</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="sec contact">
+                        <h4>CONTACT INFO</h4>
+                        <ul className="info">
+                            <li>
+                                <span>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                <span>
+                                    132 - 134 Dong Khoi St., Dist 1,
+                                    <br></br> Ho Chi Minh City, Vietnam
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fas fa-phone-alt"></i>
+                                </span>
+                                <span>Phone: (84.28) 38 299 201</span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span>Email: continentalhotel@vnn.vn</span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span> Web: www.continentalsaigon.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </>
+    );
 };
 
 export default Footer;
