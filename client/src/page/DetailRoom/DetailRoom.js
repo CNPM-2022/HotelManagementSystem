@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Carousel, Row, Col, ListGroup } from 'react-bootstrap';
 import Loader from '../../components/Loader';
 import './DetailRoom.scss';
+import { getRoomById } from '../../services/apiServices';
 
 const DetailRoom = () => {
     const dispatch = useDispatch();
@@ -12,26 +13,23 @@ const DetailRoom = () => {
     const location = useLocation();
     const roomId = location.pathname.split('/')[2];
 
-    const GetDetailRoom = useCallback(
-        async (id) => {
-            try {
-                dispatch(roomActions.RoomByIdRequest());
-                const res = await fetch(`http://localhost:5000/api/rooms/${id}`);
-                const data = await res.json();
-                if (!res.ok) {
-                    throw new Error(data.message);
-                }
-                dispatch(roomActions.RoomByIdSuccess(data));
-            } catch (error) {
-                dispatch(roomActions.RoomByIdFail(error.message));
+    const GetDetailRoom = async () => {
+        try {
+            dispatch(roomActions.RoomByIdRequest());
+            const res = await getRoomById(roomId);
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.message);
             }
-        },
-        [dispatch],
-    );
+            dispatch(roomActions.RoomByIdSuccess(data));
+        } catch (error) {
+            dispatch(roomActions.RoomByIdFail(error.message));
+        }
+    };
 
     useEffect(() => {
-        GetDetailRoom(roomId);
-    }, [GetDetailRoom]);
+        GetDetailRoom();
+    }, []);
 
     return (
         <>

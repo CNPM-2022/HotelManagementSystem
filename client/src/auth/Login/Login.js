@@ -6,6 +6,7 @@ import { authActions } from '../../store/authSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
+import { postLogin } from '../../services/apiServices';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,18 +14,16 @@ const Login = () => {
 
     const loginHandler = async (username, password) => {
         try {
-            const res = await fetch('http://localhost:5000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                }),
-            });
-            const data = await res.json();
-            if (!res.ok) {
+            const options = {
+                username,
+                password,
+            };
+
+            const res = await postLogin(options);
+
+            const data = res.data;
+
+            if (!res.status === 200) {
                 throw new Error(data.message || 'Something went wrong');
             }
             if (data.success) {

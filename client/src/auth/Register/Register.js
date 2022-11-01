@@ -8,6 +8,7 @@ import './Register.scss';
 //import toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { postRegister } from '../../services/apiServices';
 
 const Regiter = () => {
     const navigate = useNavigate();
@@ -15,19 +16,11 @@ const Regiter = () => {
 
     const registerHandler = async (username, password) => {
         try {
-            const res = await fetch('http://localhost:5000/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                }),
-            });
+            const res = await postRegister({ username, password });
 
-            const data = await res.json();
-            if (!res.ok) {
+            const data = res.data;
+
+            if (res.status !== 200) {
                 throw new Error(data.message || 'Something went wrong');
             }
 

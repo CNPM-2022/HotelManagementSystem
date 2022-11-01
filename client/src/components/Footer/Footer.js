@@ -64,7 +64,7 @@ const Footer = () => {
                         <ul className="info">
                             <li>
                                 <span>
-                                    <i class="fas fa-map-marker-alt"></i>
+                                    <i className="fas fa-map-marker-alt"></i>
                                 </span>
                                 <span>
                                     132 - 134 Dong Khoi St., Dist 1,
@@ -73,19 +73,19 @@ const Footer = () => {
                             </li>
                             <li>
                                 <span>
-                                    <i class="fas fa-phone-alt"></i>
+                                    <i className="fas fa-phone-alt"></i>
                                 </span>
                                 <span>Phone: (84.28) 38 299 201</span>
                             </li>
                             <li>
                                 <span>
-                                    <i class="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"></i>
                                 </span>
                                 <span>Email: continentalhotel@vnn.vn</span>
                             </li>
                             <li>
                                 <span>
-                                    <i class="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"></i>
                                 </span>
                                 <span> Web: www.continentalsaigon.com</span>
                             </li>

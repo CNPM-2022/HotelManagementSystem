@@ -1,37 +1,43 @@
-import React, { useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import './RoomScreen.scss';
-import { roomsActions } from '../../store/roomsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+// import { roomsActions } from '../../store/roomsSlice';
+// import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { DatePicker, Space } from 'antd';
 import Loader from '../../components/Loader';
 import 'antd/dist/antd.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { getAllRooms } from '../../services/apiServices';
 AOS.init();
 const { RangePicker } = DatePicker;
 
 const RoomsScreen = () => {
-    const dispatch = useDispatch();
-    const { loading, rooms, error } = useSelector((state) => state.rooms);
+    // const dispatch = useDispatch();
+    // const { loading, rooms, error } = useSelector((state) => state.rooms);
 
-    const getRooms = useCallback(async () => {
-        try {
-            dispatch(roomsActions.allRoomsRequest());
-            const res = await fetch('http://localhost:5000/api/rooms/allrooms');
-            const data = await res.json();
-            if (!res.ok) {
-                throw new Error(data.message);
-            }
-            dispatch(roomsActions.allRoomsSuccess(data));
-        } catch (error) {
-            dispatch(roomsActions.allRoomsFail(error.message));
-        }
-    }, [dispatch]);
+    const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
         getRooms();
-    }, [getRooms]);
+    }, []);
+
+    const getRooms = async () => {
+        try {
+            // dispatch(roomsActions.allRoomsRequest());
+            const res = await getAllRooms();
+            const data = res.data;
+
+            if (res.status !== 200) {
+                throw new Error(data.message);
+            }
+
+            setRooms(data);
+            // dispatch(roomsActions.allRoomsSuccess(data));
+        } catch (error) {
+            // dispatch(roomsActions.allRoomsFail(error.message));
+        }
+    };
 
     return (
         <>
@@ -63,13 +69,10 @@ const RoomsScreen = () => {
             </div>
 
             <div className="row justify-content-center mt-5">
-                {loading ? (
-                    <Loader />
-                ) : error ? (
-                    <h1>Error...</h1>
-                ) : (
-                    <div className="col-md-9 mt-2">
-                        {rooms.map((room) => (
+                <div className="col-md-9 mt-2">
+                    {rooms &&
+                        rooms.length > 0 &&
+                        rooms.map((room) => (
                             <div className="row bs" key={room._id}>
                                 <div className="col-md-4">
                                     <img src={room.imageurls[0]} className="smallimg"></img>
@@ -95,8 +98,7 @@ const RoomsScreen = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                )}
+                </div>
             </div>
         </>
     );
