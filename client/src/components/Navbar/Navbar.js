@@ -6,7 +6,7 @@ import { authActions } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import '../Navbar/Nav.css';
+import '../Navbar/Nav.scss';
 import Swal from 'sweetalert2';
 
 const Navbar = () => {
