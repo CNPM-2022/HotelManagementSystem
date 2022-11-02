@@ -44,7 +44,17 @@ const Login = () => {
         }
     };
 
-    return <LoginForm onLogin={loginHandler} />;
+    return (
+        <div className="login-container">
+            <header className="header">
+                <span>Don't have an account yet?</span>
+                <button className="btn-signup" onClick={() => navigate('/register')}>
+                    Sign up
+                </button>
+            </header>
+            <LoginForm onLogin={loginHandler} />
+        </div>
+    );
 };
 
 export default Login;

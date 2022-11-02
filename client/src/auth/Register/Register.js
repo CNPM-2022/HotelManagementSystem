@@ -34,7 +34,15 @@ const Regiter = () => {
         }
     };
 
-    return <RegisterForm onRegister={registerHandler} />;
+    return (
+        <div className="register-container">
+            <header className="header">
+                <span>Already have an account?</span>
+                <button onClick={() => navigate('/login')}>Log in</button>
+            </header>
+            <RegisterForm onRegister={registerHandler} />
+        </div>
+    );
 };
 
 export default Regiter;

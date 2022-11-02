@@ -11,29 +11,37 @@ import PrivateRoute from './components/PrivateRoute';
 import RoomsScreen from './page/RoomScreen/RoomScreen';
 import DetailRoom from './page/DetailRoom/DetailRoom';
 import Booking from './page/Booking/Booking';
-import Navbar from './components/Navbar/Navbar';
-import Nav from './components/Navbar/Nav';
-import Footer from './components/Footer/Footer';
+import NotFound from './components/NotFound';
+import DefaultLayout from './layouts/DefaultLayout';
 
 function App() {
     return (
         <BrowserRouter>
-            <Navbar />
-            <Nav />
             <ToastContainer />
             <Routes>
-                <Route exact path="/" element={<Landing />} />
+                <Route
+                    exact
+                    path="/"
+                    element={
+                        <DefaultLayout>
+                            <Landing />
+                        </DefaultLayout>
+                    }
+                >
+                    <Route exact path="/rooms" element={<RoomsScreen />} />
+                    <Route exact path="/room/:id" element={<DetailRoom />} />
+                </Route>
+
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/register" element={<Register />} />
-                <Route exact path="/rooms" element={<RoomsScreen />} />
-                <Route exact path="/room/:id" element={<DetailRoom />} />
 
                 <Route exact path="/" element={<PrivateRoute />}>
                     <Route exact path="/dashboard" element={<Dashboard />} />
                     <Route exact path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
                 </Route>
+
+                <Route exact path="*" element={<NotFound />} />
             </Routes>
-            <Footer />
         </BrowserRouter>
     );
 }
