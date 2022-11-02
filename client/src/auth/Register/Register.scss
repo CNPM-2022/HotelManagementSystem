@@ -1,38 +1,63 @@
 .signin,
 .image {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 .bg-image1 {
-  background-image: url("https://hdwallsource.com/img/2015/3/luxury-wallpaper-47182-48698-hd-wallpapers.jpg");
-  background-size: cover;
-  background-position: center center;
+    background-image: url('https://hdwallsource.com/img/2015/3/luxury-wallpaper-47182-48698-hd-wallpapers.jpg');
+    background-size: cover;
+    background-position: center center;
 }
 
 .btn_Register {
-  width: 100%;
+    width: 100%;
 }
 
 .social-media {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 .social-icon {
-  height: 45px;
-  width: 45px;
-  align-items: center;
-  display: flex;
-  color: #444;
-  border: 1px solid #444;
-  border-radius: 50px;
-  margin: 0 5px;
-  text-decoration: none;
+    height: 45px;
+    width: 45px;
+    align-items: center;
+    display: flex;
+    color: #444;
+    border: 1px solid #444;
+    border-radius: 50px;
+    margin: 0 5px;
+    text-decoration: none;
 }
 .social-icon i {
-  margin-left: 14px;
+    margin-left: 14px;
 }
 
 .social-icon:hover {
-  color: #ffd700;
-  border-color: #ffd700;
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+.register-container {
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 58px;
+        padding: 0px 60px;
+        background-color: #181313;
+        color: #fff;
+
+        button {
+            padding: 3px 15px;
+            margin-left: 24px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #000;
+
+            &:hover {
+                background-color: #fff;
+            }
+        }
+    }
 }

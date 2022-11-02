@@ -11,3 +11,28 @@
 .btn_login {
     width: 100%;
 }
+
+.login-container {
+    .header {
+        height: 58px;
+        padding: 0 60px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: #181313;
+        color: #fff;
+
+        .btn-signup {
+            padding: 3px 15px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            margin-left: 24px;
+            color: #000;
+
+            &:hover {
+                background-color: #fff;
+            }
+        }
+    }
+}
