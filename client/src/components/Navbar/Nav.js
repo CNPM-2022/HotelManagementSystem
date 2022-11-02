@@ -12,8 +12,8 @@ const Nav1 = () => {
                     </Link>
                 </li>
                 <li className="nav-item" style={{ textIndent: '60px' }}>
-                    <Link style={{ color: 'white' }} className="nav-link active" aria-current="page" to="/restaurants">
-                        <strong>RESTAURANTS & BARS</strong>
+                    <Link style={{ color: 'white' }} className="nav-link active" aria-current="page" to="/admins">
+                        <strong>ADMIN</strong>
                     </Link>
                 </li>
                 <li className="nav-item" style={{ textIndent: '60px' }}>

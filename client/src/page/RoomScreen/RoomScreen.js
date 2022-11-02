@@ -75,7 +75,7 @@ const RoomsScreen = () => {
                         rooms.map((room) => (
                             <div className="row bs" key={room._id}>
                                 <div className="col-md-4">
-                                    <img src={room.imageurls[0]} className="smallimg"></img>
+                                    <img src={room.imageurls[0]} className="smallimg" alt="room"></img>
                                 </div>
                                 <div className="col-md-7">
                                     <h1>{room.name}</h1>
