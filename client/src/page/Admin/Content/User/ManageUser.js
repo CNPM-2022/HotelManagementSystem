@@ -68,7 +68,7 @@ function ManageUser() {
         setIsShowModalViewUser(true);
     };
 
-    const handleClickEditButton = (user) => {
+    const handleClickEditButton = (user, userId) => {
         setDataUserEdit(user);
         setIsShowModalEditUser(true);
     };
@@ -125,6 +125,7 @@ function ManageUser() {
                 show={isShowModalDeleteUser}
                 setShow={setIsShowModalDeleteUser}
                 dataUser={dataUserDelete}
+                fetchListUsers={fetchListUsers}
             />
         </div>
     );

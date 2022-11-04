@@ -22,7 +22,10 @@ function TableUser({ listUsers, handleClickViewButton, handleClickEditButton, ha
                                 <button className="btn btn-success" onClick={() => handleClickViewButton(user)}>
                                     View
                                 </button>
-                                <button className="btn btn-danger mx-3" onClick={() => handleClickEditButton(user)}>
+                                <button
+                                    className="btn btn-danger mx-3"
+                                    onClick={() => handleClickEditButton(user, user.id)}
+                                >
                                     Edit
                                 </button>
                                 <button className="btn btn-warning" onClick={() => handleClickDeleteButton(user)}>
