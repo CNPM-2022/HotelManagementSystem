@@ -108,12 +108,14 @@ POST http://localhost:5000/api/user/add
 Content-Type: application/json
 
 {
-    "username": "khanhtruc",
+    "username": "nghia123",
     "email": "khanhtruc123@gmail.com",
     "password": "080902",
     "Name": "Nguyen Quang Huynh",
+    "phoneNumber": "1234567890",
     "CMND": "0123456789",
-    "address": "Ha Noi"
+    "address": "Ha Noi",
+    "isAdmin": true
 }
 
 
