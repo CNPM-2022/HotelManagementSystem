@@ -1,5 +1,6 @@
 import { PlusCircleFilled } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getAllUsers } from '../../../../services/apiServices';
 
 import './ManageUser.scss';
 import ModalDeleteUser from './ModalDeleteUser';
@@ -7,32 +8,33 @@ import ModalManageUser from './ModalManageUser';
 import TableUser from './TableUser';
 
 function ManageUser() {
-    const listUsers = [
-        {
-            id: 1,
-            username: 'taivan',
-            email: 'taivannho5a@gmail.com',
-            role: 'ADMIN',
-        },
-        {
-            id: 2,
-            username: 'test2',
-            email: 'test2@gmail.com',
-            role: 'USER',
-        },
-        {
-            id: 3,
-            username: 'test3',
-            email: 'test3@gmail.com',
-            role: 'USER',
-        },
-        {
-            id: 4,
-            username: 'test4',
-            email: 'test4@gmail.com',
-            role: 'ADMIN',
-        },
-    ];
+    // const listUsers = [
+    //     {
+    //         id: 1,
+    //         username: 'taivan',
+    //         email: 'taivannho5a@gmail.com',
+    //         role: 'ADMIN',
+    //     },
+    //     {
+    //         id: 2,
+    //         username: 'test2',
+    //         email: 'test2@gmail.com',
+    //         role: 'USER',
+    //     },
+    //     {
+    //         id: 3,
+    //         username: 'test3',
+    //         email: 'test3@gmail.com',
+    //         role: 'USER',
+    //     },
+    //     {
+    //         id: 4,
+    //         username: 'test4',
+    //         email: 'test4@gmail.com',
+    //         role: 'ADMIN',
+    //     },
+    // ];
+    const [listUsers, setListUsers] = useState([]);
 
     const [isShowModalCreateUser, setIsShowModalCreateUser] = useState(false);
 
@@ -44,6 +46,22 @@ function ManageUser() {
 
     const [isShowModalDeleteUser, setIsShowModalDeleteUser] = useState(false);
     const [dataUserDelete, setDataUserDelete] = useState({});
+
+    useEffect(() => {
+        fetchListUsers();
+    }, []);
+
+    const fetchListUsers = async () => {
+        const res = await getAllUsers();
+
+        const data = res.data;
+
+        if (res.status !== 200) {
+            throw new Error(data.message);
+        }
+
+        setListUsers(data.users);
+    };
 
     const handleClickViewButton = (user) => {
         setDataUserView(user);
@@ -77,20 +95,30 @@ function ManageUser() {
                 />
             </div>
 
-            <ModalManageUser type="CREATE" show={isShowModalCreateUser} setShow={setIsShowModalCreateUser} />
+            <ModalManageUser
+                type="CREATE"
+                title="Add new user"
+                show={isShowModalCreateUser}
+                setShow={setIsShowModalCreateUser}
+                fetchListUsers={fetchListUsers}
+            />
 
             <ModalManageUser
                 type="VIEW"
+                title="User Information"
                 show={isShowModalViewUser}
                 setShow={setIsShowModalViewUser}
                 dataUser={dataUserView}
+                fetchListUsers={fetchListUsers}
             />
 
             <ModalManageUser
                 type="EDIT"
+                title="Edit user"
                 show={isShowModalEditUser}
                 setShow={setIsShowModalEditUser}
                 dataUser={dataUserEdit}
+                fetchListUsers={fetchListUsers}
             />
 
             <ModalDeleteUser

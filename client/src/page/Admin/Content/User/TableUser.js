@@ -12,12 +12,12 @@ function TableUser({ listUsers, handleClickViewButton, handleClickEditButton, ha
             </thead>
             <tbody>
                 {listUsers && listUsers.length > 0 ? (
-                    listUsers.map((user) => (
-                        <tr key={user.id}>
-                            <th scope="row">{user.id}</th>
+                    listUsers.map((user, index) => (
+                        <tr key={user._id}>
+                            <th scope="row">{index + 1}</th>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
-                            <td>{user.role}</td>
+                            <td>{user.isAdmin ? 'ADMIN' : 'USER'}</td>
                             <td>
                                 <button className="btn btn-success" onClick={() => handleClickViewButton(user)}>
                                     View

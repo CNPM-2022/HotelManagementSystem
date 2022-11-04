@@ -1,71 +1,74 @@
 import React, { useEffect } from 'react';
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const RegisterForm = (props) => {
-
     const formik = useFormik({
         initialValues: {
-            userName: "",
-            name: "",
-            email: "",
-            phone: "",
-            password: "",
-            confirmedPassword: "",
+            userName: '',
+            name: '',
+            email: '',
+            phone: '',
+            password: '',
+            confirmedPassword: '',
         },
 
         validationSchema: Yup.object({
-            name: Yup.string().required("Please fill in the name field")
-                .min(3, "Name with at least 3 character"),
-            userName: Yup.string().required("Please fill in the username field")
-                .matches(/^[a-zA-Z0-9_]{3,}$/, "Username does not include spaces and contain at least 3 character"),
-            email: Yup.string().required("Please fill in the email address field")
-                .matches(/^[A-Za-z0-9]{1,30}@[a-z0-9]{2,10}(\.[a-z0-9]{2,10}){1,3}$/, "Please enter a valid email address"),
-            phone: Yup.string().required("Please fill in the phone field")
-                .matches(/^0[0-9]{9}$/, "Please enter a valid phone number"),
-            password: Yup.string().required("Please fill in the password field")
+            name: Yup.string().required('Please fill in the name field').min(3, 'Name with at least 3 character'),
+            userName: Yup.string()
+                .required('Please fill in the username field')
+                .matches(/^[a-zA-Z0-9_]{3,}$/, 'Username does not include spaces and contain at least 3 character'),
+            email: Yup.string()
+                .required('Please fill in the email address field')
+                .matches(
+                    /^[A-Za-z0-9]{1,30}@[a-z0-9]{2,10}(\.[a-z0-9]{2,10}){1,3}$/,
+                    'Please enter a valid email address',
+                ),
+            phone: Yup.string()
+                .required('Please fill in the phone field')
+                .matches(/^0[0-9]{9}$/, 'Please enter a valid phone number'),
+            password: Yup.string()
+                .required('Please fill in the password field')
                 .matches(
                     /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/,
-                    "Password must be 7-19 characters and contain at least one letter, one number and a special character"
+                    'Password must be 7-19 characters and contain at least one letter, one number and a special character',
                 ),
-            confirmedPassword: Yup.string().required("Please comfirm your password")
-                .oneOf([Yup.ref("password"), null], "Password must match"),
+            confirmedPassword: Yup.string()
+                .required('Please comfirm your password')
+                .oneOf([Yup.ref('password'), null], 'Password must match'),
         }),
 
         onSubmit: (userInfor) => {
             /* window.alert("Form submitted"); */
             props.onRegister(userInfor);
         },
-
     });
 
     const handleFocus = (e) => {
-        document.getElementsByClassName(e.target.id)[0].classList.remove("errorMsg")
-    }
+        document.getElementsByClassName(e.target.id)[0].classList.remove('errorMsg');
+    };
 
     const hiddenPassword = (e) => {
-        const passField = document.getElementById("password");
-        if (passField.type === "password") {
-            passField.type = "text";
-            e.target.classList.add("hide-btn");
+        const passField = document.getElementById('password');
+        if (passField.type === 'password') {
+            passField.type = 'text';
+            e.target.classList.add('hide-btn');
         } else {
-            passField.type = "password";
-            e.target.classList.remove("hide-btn");
+            passField.type = 'password';
+            e.target.classList.remove('hide-btn');
         }
-
-    }
+    };
 
     const hiddenConfirmedPassword = (e) => {
-        const passField = document.getElementById("confirmedPassword");
-        if (passField.type === "password") {
-            passField.type = "text";
-            e.target.classList.add("hide-btn");
+        const passField = document.getElementById('confirmedPassword');
+        if (passField.type === 'password') {
+            passField.type = 'text';
+            e.target.classList.add('hide-btn');
         } else {
-            passField.type = "password";
-            e.target.classList.remove("hide-btn");
+            passField.type = 'password';
+            e.target.classList.remove('hide-btn');
         }
-
-    }
+    };
 
     return (
         <React.Fragment>
@@ -96,9 +99,11 @@ const RegisterForm = (props) => {
                                                         onFocus={handleFocus}
                                                     />
                                                 </div>
-                                                <div className='errorMsg name'>{formik.errors.name && (
-                                                    <p className="text-danger ms-4"> {formik.errors.name} </p>
-                                                )}</div>
+                                                <div className="errorMsg name">
+                                                    {formik.errors.name && (
+                                                        <p className="text-danger ms-4"> {formik.errors.name} </p>
+                                                    )}
+                                                </div>
                                                 <div className="form-group mb-3">
                                                     <input
                                                         id="userName"
@@ -113,9 +118,11 @@ const RegisterForm = (props) => {
                                                         onFocus={handleFocus}
                                                     />
                                                 </div>
-                                                <div className='errorMsg userName'>{formik.errors.userName && (
-                                                    <p className="text-danger ms-4"> {formik.errors.userName} </p>
-                                                )}</div>
+                                                <div className="errorMsg userName">
+                                                    {formik.errors.userName && (
+                                                        <p className="text-danger ms-4"> {formik.errors.userName} </p>
+                                                    )}
+                                                </div>
                                                 <div className="form-group mb-3">
                                                     <input
                                                         id="email"
@@ -129,9 +136,11 @@ const RegisterForm = (props) => {
                                                         onFocus={handleFocus}
                                                     />
                                                 </div>
-                                                <div className='errorMsg email'>{formik.errors.email && (
-                                                    <p className="text-danger ms-4"> {formik.errors.email} </p>
-                                                )}</div>
+                                                <div className="errorMsg email">
+                                                    {formik.errors.email && (
+                                                        <p className="text-danger ms-4"> {formik.errors.email} </p>
+                                                    )}
+                                                </div>
                                                 <div className="form-group mb-3">
                                                     <input
                                                         id="phone"
@@ -145,10 +154,12 @@ const RegisterForm = (props) => {
                                                         onFocus={handleFocus}
                                                     />
                                                 </div>
-                                                <div className='errorMsg phone'>{formik.errors.phone && (
-                                                    <p className="text-danger ms-4"> {formik.errors.phone} </p>
-                                                )}</div>
-                                                <div className='container2'>
+                                                <div className="errorMsg phone">
+                                                    {formik.errors.phone && (
+                                                        <p className="text-danger ms-4"> {formik.errors.phone} </p>
+                                                    )}
+                                                </div>
+                                                <div className="container2">
                                                     <div className="form-group mb-3">
                                                         <input
                                                             id="password"
@@ -163,12 +174,19 @@ const RegisterForm = (props) => {
                                                             onFocus={handleFocus}
                                                         />
                                                     </div>
-                                                    <span className="show-btn pass"><i className="fas fa-eye" onClick={hiddenPassword}></i></span>
-                                                    <div className='errorMsg password'>{formik.errors.password && (
-                                                        <p className="text-danger ms-4"> {formik.errors.password} </p>
-                                                    )}</div>
+                                                    <span className="show-btn pass">
+                                                        <i className="fas fa-eye" onClick={hiddenPassword}></i>
+                                                    </span>
+                                                    <div className="errorMsg password">
+                                                        {formik.errors.password && (
+                                                            <p className="text-danger ms-4">
+                                                                {' '}
+                                                                {formik.errors.password}{' '}
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                                <div className='container2'>
+                                                <div className="container2">
                                                     <div className="form-group mb-3">
                                                         <input
                                                             id="confirmedPassword"
@@ -183,19 +201,26 @@ const RegisterForm = (props) => {
                                                             onFocus={handleFocus}
                                                         />
                                                     </div>
-                                                    <span className="show-btn conf_pass"><i className="fas fa-eye" onClick={hiddenConfirmedPassword}></i></span>
-                                                    <div className='errorMsg confirmedPassword'>{formik.errors.confirmedPassword && (
-                                                        <p className="text-danger ms-4"> {formik.errors.confirmedPassword} </p>
-                                                    )}</div>
+                                                    <span className="show-btn conf_pass">
+                                                        <i className="fas fa-eye" onClick={hiddenConfirmedPassword}></i>
+                                                    </span>
+                                                    <div className="errorMsg confirmedPassword">
+                                                        {formik.errors.confirmedPassword && (
+                                                            <p className="text-danger ms-4">
+                                                                {' '}
+                                                                {formik.errors.confirmedPassword}{' '}
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </div>
                                                 <div className="custom-control custom-checkbox mb-3">
                                                     <input
                                                         id="customCheck1"
                                                         type="checkbox"
-                                                        defaultChecked
+                                                        checked
                                                         className="custom-control-input"
                                                     />
-                                                    <label htmlFor="customCheck1" className="custom-control-label mx-2">
+                                                    <label for="customCheck1" className="custom-control-label mx-2">
                                                         Remember password
                                                     </label>
                                                 </div>

@@ -1,43 +1,76 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { PlusCircleFilled } from '@ant-design/icons';
 import _ from 'lodash';
+import { postCreateUser } from '../../../../services/apiServices';
+import { toast } from 'react-toastify';
 
-function ModalManageUser({ show, setShow, type, dataUser = {} }) {
+function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsers }) {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [identity, setIdentity] = useState('');
+    const [address, setAddress] = useState('');
     const [role, setRole] = useState('USER');
-    const [previewImage, setPreviewImage] = useState('');
-    const [image, setImage] = useState('');
 
     useEffect(() => {
         if (show && !_.isEmpty(dataUser) && type !== 'CREATE') {
             setEmail(dataUser.email);
             setUsername(dataUser.username);
-            setRole(dataUser.role);
-
-            if (dataUser.image) {
-                //
+            if (dataUser.isAdmin) {
+                setRole('ADMIN');
+            } else {
+                setRole('USER');
             }
+            setName(dataUser.Name);
+            setAddress(dataUser.address);
+            setIdentity(dataUser.CMND);
         }
     }, [show]);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setName('');
+        setIdentity('');
+        setAddress('');
+        setRole('USER');
+        setShow(false);
+    };
 
-    const handleUploadImage = (e) => {
-        if (e.target?.files[0]) {
-            const objectURL = URL.createObjectURL(e.target.files[0]);
-            setPreviewImage(objectURL);
-            setImage(e.target.files[0]);
+    const handleSubmit = async () => {
+        if (!username || !email || !password || !name || !address || !identity) {
+            toast.error('Please fill out all fields');
+            return;
+        }
+
+        if (type === 'CREATE') {
+            const res = await postCreateUser({
+                username,
+                email,
+                password,
+                Name: name,
+                CMND: identity,
+                address,
+            });
+
+            if (res && res.data && res.data.success === true) {
+                toast.success(res.data.message);
+                fetchListUsers();
+            } else {
+                toast.error(res.message);
+            }
+
+            handleClose();
         }
     };
 
     return (
         <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>Add new user</Modal.Title>
+                <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form>
@@ -86,22 +119,37 @@ function ModalManageUser({ show, setShow, type, dataUser = {} }) {
                             </select>
                         </div>
 
-                        <div className="col-md-12">
-                            <label className="form-label btn btn-success image-upload-label" htmlFor="user-upload">
-                                <PlusCircleFilled />
-                                <span>Upload File Image</span>
-                            </label>
+                        <div className="col-md-6">
+                            <label className="form-label">Họ và tên</label>
                             <input
-                                type="file"
-                                id="user-upload"
-                                hidden
-                                onChange={handleUploadImage}
+                                type="text"
+                                className="form-control"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
                                 disabled={type === 'VIEW'}
                             />
                         </div>
 
-                        <div className="col-md-12 img-preview">
-                            {previewImage ? <img src={previewImage} alt="preview" /> : <span>Preview Image</span>}
+                        <div className="col-md-6">
+                            <label className="form-label">CMND/CCCD</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={identity}
+                                onChange={(event) => setIdentity(event.target.value)}
+                                disabled={type === 'VIEW'}
+                            />
+                        </div>
+
+                        <div className="col-md-12">
+                            <label className="form-label">Địa chỉ</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={address}
+                                onChange={(event) => setAddress(event.target.value)}
+                                disabled={type === 'VIEW'}
+                            />
                         </div>
                     </div>
                 </form>
@@ -110,9 +158,11 @@ function ModalManageUser({ show, setShow, type, dataUser = {} }) {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save
-                </Button>
+                {type !== 'VIEW' && (
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Save
+                    </Button>
+                )}
             </Modal.Footer>
         </Modal>
     );

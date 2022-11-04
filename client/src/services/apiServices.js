@@ -18,3 +18,11 @@ export const getAllRooms = () => {
 export const getRoomById = (id) => {
     return axios.get(`rooms/${id}`);
 };
+
+export const getAllUsers = () => {
+    return axios.get('user/all');
+};
+
+export const postCreateUser = (dataUser) => {
+    return axios.post('user/add', dataUser);
+};
