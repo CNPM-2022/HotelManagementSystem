@@ -26,11 +26,3 @@ export const getAllUsers = () => {
 export const postCreateUser = (dataUser) => {
     return axios.post('user/add', dataUser);
 };
-
-export const putUpdateUser = (dataUser) => {
-    return axios.put(`user/${dataUser.id}/change-info`, dataUser);
-};
-
-export const deleteUser = (userId) => {
-    return axios.delete(`user/${userId}/delete`);
-};

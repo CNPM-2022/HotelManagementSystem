@@ -99,7 +99,7 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Private
 const addUser = asyncHandler(async (req, res) => {
-    const { username, email, password, Name, CMND, address } = req.body;
+    const { username, email, password, Name, CMND, address, isAdmin } = req.body;
     if (!username || !email || !password || !Name || !CMND || !address) {
         res.status(400);
         throw new Error('Please fill all the fields');
@@ -118,6 +118,7 @@ const addUser = asyncHandler(async (req, res) => {
             Name,
             CMND,
             address,
+            isAdmin,
         });
         const user = await newUser.save();
         if (user) {
