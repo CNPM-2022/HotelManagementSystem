@@ -28,7 +28,6 @@ const UserSchema = new Schema(
         },
         CMND: {
             type: String,
-
             unique: true,
         },
         address: {
