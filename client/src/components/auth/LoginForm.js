@@ -30,7 +30,7 @@ const LoginForm = (props) => {
                                                         type="text"
                                                         placeholder="Username"
                                                         required=""
-                                                        autofocus=""
+                                                        autoFocus=""
                                                         className="form-control rounded-pill border-0 shadow-sm px-4"
                                                         ref={emailRef}
                                                     />
@@ -49,10 +49,10 @@ const LoginForm = (props) => {
                                                     <input
                                                         id="customCheck1"
                                                         type="checkbox"
-                                                        checked
+                                                        defaultChecked
                                                         className="custom-control-input"
                                                     />
-                                                    <label for="customCheck1" className="custom-control-label mx-2">
+                                                    <label htmlFor="customCheck1" className="custom-control-label mx-2">
                                                         Remember password
                                                     </label>
                                                 </div>
