@@ -37,35 +37,87 @@ GET http://localhost:5000/api/rooms/635ea234dce841597e4fa833
 
 
 
-# API for direction room
+# API for get list direction room
+#return list direction room
+ 
 ###
 GET http://localhost:5000/api/room-direction/all
 
-###
 
+
+#API for get room by direction (id)
+#return room by direction
+###
 GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
 
-# API for USER CHANGE INFO
-###
-PUT http://localhost:5000/api/user/636490c3f06ebbbb390c0984/change-info
-Content-Type: application/json
 
+
+# API for USER CHANGE INFO
+# RETURN USER INFO
+###
+PUT http://localhost:5000/api/user/6364b1921f450dc2040b5e48/change-info
+Content-Type: application/json
 {
-    "username": "quang",
+    "username": "quang2602",
     "email": "quanghuynwtf@gmail.com",
     "Name": "Nguyen Quang Huynh",
     "CMND": "0123456789",
     "address": "Ha Noi"
 }
 
+
+#API for change password
+#return user info change password
+#if fail return error
 ###
-PUT http://localhost:5000/api/user/636490c3f06ebbbb390c0984/change-password
+PUT http://localhost:5000/api/user/6364b1921f450dc2040b5e48/change-password
 Content-Type: application/json
 
 {
-    "password": "123478",
-    "newPassword": "123456"
+    "password": "test",
+    "newPassword": "26022002"
 }
+
+
+# API for delete user
+#return state:  success, fail
+###
+DELETE http://localhost:5000/api/user/6364b434b446c82c12997ee0/delete
+
+
+# API for get all user
+#return list user
+#return length of list user
+###
+GET http://localhost:5000/api/user/all
+
+
+# API for get user by id
+#return user info
+###
+GET http://localhost:5000/api/user/6364ba82bd044082f9504f22
+
+
+
+# API for add user by admin
+#return user info added
+###
+POST http://localhost:5000/api/user/add
+Content-Type: application/json
+
+{
+    "username": "khanhtruc",
+    "email": "khanhtruc123@gmail.com",
+    "password": "080902",
+    "Name": "Nguyen Quang Huynh",
+    "CMND": "0123456789",
+    "address": "Ha Noi"
+}
+
+
+
+
+
 
 
 
