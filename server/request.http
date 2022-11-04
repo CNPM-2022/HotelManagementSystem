@@ -6,7 +6,7 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "thangdb1",
+    "username": "quang",
     "password": "123456"
 }
 
@@ -34,6 +34,40 @@ GET http://localhost:5000/api/rooms/allrooms
 
 ###
 GET http://localhost:5000/api/rooms/635ea234dce841597e4fa833
+
+
+
+# API for direction room
+###
+GET http://localhost:5000/api/room-direction/all
+
+###
+
+GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
+
+# API for USER CHANGE INFO
+###
+PUT http://localhost:5000/api/user/636490c3f06ebbbb390c0984/change-info
+Content-Type: application/json
+
+{
+    "username": "quang",
+    "email": "quanghuynwtf@gmail.com",
+    "Name": "Nguyen Quang Huynh",
+    "CMND": "0123456789",
+    "address": "Ha Noi"
+}
+
+###
+PUT http://localhost:5000/api/user/636490c3f06ebbbb390c0984/change-password
+Content-Type: application/json
+
+{
+    "password": "123478",
+    "newPassword": "123456"
+}
+
+
 
 
 
