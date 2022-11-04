@@ -1,15 +1,28 @@
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { PlusCircleFilled } from '@ant-design/icons';
-import { useState } from 'react';
+import _ from 'lodash';
 
-function ModalManageUser({ show, setShow }) {
+function ModalManageUser({ show, setShow, type, dataUser = {} }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [role, setRole] = useState('USER');
     const [previewImage, setPreviewImage] = useState('');
     const [image, setImage] = useState('');
+
+    useEffect(() => {
+        if (show && !_.isEmpty(dataUser) && type !== 'CREATE') {
+            setEmail(dataUser.email);
+            setUsername(dataUser.username);
+            setRole(dataUser.role);
+
+            if (dataUser.image) {
+                //
+            }
+        }
+    }, [show]);
 
     const handleClose = () => setShow(false);
 
@@ -22,7 +35,7 @@ function ModalManageUser({ show, setShow }) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} size="lg">
+        <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
             <Modal.Header closeButton>
                 <Modal.Title>Add new user</Modal.Title>
             </Modal.Header>
@@ -36,6 +49,7 @@ function ModalManageUser({ show, setShow }) {
                                 className="form-control"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
+                                disabled={type !== 'CREATE'}
                             />
                         </div>
                         <div className="col-md-6">
@@ -45,6 +59,7 @@ function ModalManageUser({ show, setShow }) {
                                 className="form-control"
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
+                                disabled={type !== 'CREATE'}
                             />
                         </div>
                         <div className="col-md-6">
@@ -54,6 +69,7 @@ function ModalManageUser({ show, setShow }) {
                                 className="form-control"
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
+                                disabled={type === 'VIEW'}
                             />
                         </div>
                         <div className="col-md-6">
@@ -63,6 +79,7 @@ function ModalManageUser({ show, setShow }) {
                                 className="form-select"
                                 value={role}
                                 onChange={(event) => setRole(event.target.value)}
+                                disabled={type === 'VIEW'}
                             >
                                 <option value="USER">USER</option>
                                 <option value="ADMIN">ADMIN</option>
@@ -74,7 +91,13 @@ function ModalManageUser({ show, setShow }) {
                                 <PlusCircleFilled />
                                 <span>Upload File Image</span>
                             </label>
-                            <input type="file" id="user-upload" hidden onChange={handleUploadImage} />
+                            <input
+                                type="file"
+                                id="user-upload"
+                                hidden
+                                onChange={handleUploadImage}
+                                disabled={type === 'VIEW'}
+                            />
                         </div>
 
                         <div className="col-md-12 img-preview">
