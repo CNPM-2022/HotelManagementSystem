@@ -7,11 +7,8 @@ export const postLogin = ({ username, password }) => {
     });
 };
 
-export const postRegister = ({ username, password }) => {
-    return axios.post('auth/register', {
-        username,
-        password,
-    });
+export const postRegister = (userInfor) => {
+    return axios.post('auth/register', userInfor);
 };
 
 export const getAllRooms = () => {
@@ -20,4 +17,12 @@ export const getAllRooms = () => {
 
 export const getRoomById = (id) => {
     return axios.get(`rooms/${id}`);
+};
+
+export const getAllUsers = () => {
+    return axios.get('user/all');
+};
+
+export const postCreateUser = (dataUser) => {
+    return axios.post('user/add', dataUser);
 };

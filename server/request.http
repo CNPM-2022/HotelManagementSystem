@@ -12,7 +12,8 @@ Content-Type: application/json
     "password": "admin"
 }
 
-
+#API for Login
+#Return the API key
 ###
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
@@ -20,15 +21,6 @@ Content-Type: application/json
 {
     "username": "quang127",
     "password": "test"
-}
-
-###
-POST http://localhost:5000/api/auth/login
-Content-Type: application/json
-
-{
-    "username": "thangdb1",
-    "password": "123456"
 }
 
 ###

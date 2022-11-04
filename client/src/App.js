@@ -15,7 +15,7 @@ import NotFound from './components/NotFound';
 import DefaultLayout from './layouts/DefaultLayout';
 import Admin from './page/Admin/Admin';
 import AdminDashBoard from './page/Admin/Content/DashBoard';
-import ManageUser from './page/Admin/Content/ManageUser';
+import ManageUser from './page/Admin/Content/User/ManageUser';
 
 function App() {
     return (

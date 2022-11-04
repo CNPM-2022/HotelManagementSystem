@@ -61,3 +61,35 @@
         }
     }
 }
+
+.errorMsg {
+    display: none;
+}
+
+.conf_pass {
+    position: relative;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    top: -35px;
+    left: 90%;
+    float: left;
+}
+
+.pass {
+    position: relative;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    top: -35px;
+    left: 90%;
+    float: left;
+    margin-bottom: -30px;
+}
+
+.container input:valid ~ span {
+    display: blockinlin;
+}
+.container2 span i.hide-btn::before {
+    content: '\f070';
+}
