@@ -1,13 +1,15 @@
-GET http://localhost:5000
-
-
+#API for Register
+#Return the API key
 ###
 POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "quang",
-    "password": "123456"
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "Name": "Admin User",
+    "phoneNumber": "1234567890",
+    "password": "admin"
 }
 
 
