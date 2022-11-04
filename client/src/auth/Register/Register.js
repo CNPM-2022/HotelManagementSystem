@@ -14,9 +14,9 @@ const Regiter = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const registerHandler = async (username, password) => {
+    const registerHandler = async (userInfor) => {
         try {
-            const res = await postRegister({ username, password });
+            const res = await postRegister(userInfor);
 
             const data = res.data;
 
