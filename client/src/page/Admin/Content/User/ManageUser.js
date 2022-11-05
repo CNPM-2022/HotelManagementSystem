@@ -1,13 +1,16 @@
 import { PlusCircleFilled } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { getAllUsers } from '../../../../services/apiServices';
+import _ from 'lodash';
 
 import './ManageUser.scss';
 import ModalDeleteUser from './ModalDeleteUser';
 import ModalManageUser from './ModalManageUser';
-import TableUser from './TableUser';
+import TableUserPaginate from './TableUserPaginate';
 
 function ManageUser() {
+    const ITEMS_PER_PAGE = 6;
+
     const [listUsers, setListUsers] = useState([]);
 
     const [isShowModalCreateUser, setIsShowModalCreateUser] = useState(false);
@@ -20,6 +23,8 @@ function ManageUser() {
 
     const [isShowModalDeleteUser, setIsShowModalDeleteUser] = useState(false);
     const [dataUserDelete, setDataUserDelete] = useState({});
+
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         fetchListUsers();
@@ -34,7 +39,9 @@ function ManageUser() {
             throw new Error(data.message);
         }
 
-        setListUsers(data.users);
+        const chunkedUsers = _.chunk(data.users, ITEMS_PER_PAGE);
+
+        setListUsers(chunkedUsers);
     };
 
     const handleClickViewButton = (user) => {
@@ -52,6 +59,10 @@ function ManageUser() {
         setIsShowModalDeleteUser(true);
     };
 
+    const handlePageClick = (currentPageClicked) => {
+        setCurrentPage(currentPageClicked);
+    };
+
     return (
         <div className="manage-user-container">
             <h3>Manage User</h3>
@@ -61,11 +72,15 @@ function ManageUser() {
             </button>
 
             <div className="content-table">
-                <TableUser
-                    listUsers={listUsers}
+                <TableUserPaginate
+                    listUsers={listUsers[currentPage]}
                     handleClickViewButton={handleClickViewButton}
                     handleClickEditButton={handleClickEditButton}
                     handleClickDeleteButton={handleClickDeleteButton}
+                    itemsPerPage={ITEMS_PER_PAGE}
+                    currentPage={currentPage}
+                    handlePageClick={handlePageClick}
+                    pageCount={listUsers.length}
                 />
             </div>
 

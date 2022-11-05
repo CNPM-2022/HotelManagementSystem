@@ -9,10 +9,10 @@ import jwt from 'jsonwebtoken';
 // @access  Private
 
 const changeInfo = asyncHandler(async (req, res) => {
-    const { username, email, Name, CMND, address, isAdmin } = req.body;
+    const { username, email, Name, phoneNumber, CMND, address, isAdmin } = req.body;
     const id = req.params.id;
 
-    if (!username && !email && !Name && !CMND && !address) {
+    if (!username && !email && !Name && !CMND && !address && !isAdmin) {
         res.status(400);
         throw new Error('Please fill one of the fields');
     }
@@ -23,6 +23,7 @@ const changeInfo = asyncHandler(async (req, res) => {
             user.username = username;
             user.email = email;
             user.Name = Name;
+            user.phoneNumber = phoneNumber;
             user.CMND = CMND;
             user.address = address;
             user.isAdmin = isAdmin;
@@ -91,6 +92,42 @@ const getUsers = asyncHandler(async (req, res) => {
     try {
         const users = await User.find({});
         res.status(200).json({ success: true, lenghtOfUsers: users.length, users });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+// @desc   Get users with pagination
+// @route   GET /api/users/pagination
+// @access  Private
+const getUsersWithPagination = asyncHandler(async (req, res) => {
+    const { page, limit } = req.params;
+    try {
+        const startIndex = (Number(page) - 1) * Number(limit);
+        const endIndex = Number(page) * Number(limit);
+        const results = {};
+
+        if (endIndex < (await User.countDocuments().exec())) {
+            results.next = {
+                page: Number(page) + 1,
+                limit: Number(limit),
+            };
+        }
+
+        if (startIndex > 0) {
+            results.previous = {
+                page: Number(page) - 1,
+                limit: Number(limit),
+            };
+        }
+
+        results.results = await User.find().limit(Number(limit)).skip(startIndex).exec();
+        res.status(200).json({
+            success: true,
+            message: 'Get users with pagination success',
+            lenghtOfUsers: results.results.length,
+            results,
+        });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
@@ -172,4 +209,4 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 });
 
-export { changeInfo, changePassword, getUsers, addUser, getUserById, deleteUser };
+export { changeInfo, changePassword, getUsers, getUsersWithPagination, addUser, getUserById, deleteUser };

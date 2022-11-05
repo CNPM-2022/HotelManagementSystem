@@ -61,14 +61,18 @@ GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
 # API for USER CHANGE INFO
 # RETURN USER INFO
 ###
-PUT http://localhost:5000/api/user/6364b1921f450dc2040b5e48/change-info
+PUT http://localhost:5000/api/user/63652199299739c3475974fa/change-info
 Content-Type: application/json
+
 {
-    "username": "quang2602",
-    "email": "quanghuynwtf@gmail.com",
+    "username": "nghia123",
+    "email": "khanhtruc123@gmail.com",
+    "password": "080902",
     "Name": "Nguyen Quang Huynh",
+    "phoneNumber": "1234567890",
     "CMND": "0123456789",
-    "address": "Ha Noi"
+    "address": "Ha Noi",
+    "isAdmin": true
 }
 
 
@@ -96,6 +100,16 @@ DELETE http://localhost:5000/api/user/6364b434b446c82c12997ee0/delete
 #return length of list user
 ###
 GET http://localhost:5000/api/user/all
+
+
+# API for get all user
+#return list user
+#return length of list user
+#param: http://localhost:5000/api/user/:page/:limit
+#if http://localhost:5000/api/user then return all user
+
+###
+GET http://localhost:5000/api/user/1/4
 
 
 # API for get user by id
