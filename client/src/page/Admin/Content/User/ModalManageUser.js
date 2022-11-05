@@ -10,6 +10,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
     const [identity, setIdentity] = useState('');
     const [address, setAddress] = useState('');
     const [role, setRole] = useState('USER');
@@ -26,6 +27,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
             setName(dataUser.Name);
             setAddress(dataUser.address);
             setIdentity(dataUser.CMND);
+            setPhone(dataUser.phoneNumber);
         }
     }, [show]);
 
@@ -54,6 +56,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 Name: name,
                 CMND: identity,
                 address,
+                phoneNumber: phone,
+                isAdmin: role === 'ADMIN' ? true : false,
             });
 
             if (res && res.data && res.data.success === true) {
@@ -137,6 +141,17 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={identity}
                                 onChange={(event) => setIdentity(event.target.value)}
+                                disabled={type === 'VIEW'}
+                            />
+                        </div>
+
+                        <div className="col-md-12">
+                            <label className="form-label">Số điện thoại</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
                                 disabled={type === 'VIEW'}
                             />
                         </div>

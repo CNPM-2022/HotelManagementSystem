@@ -14,10 +14,12 @@ const UserSchema = new Schema(
         },
         email: {
             type: String,
-
             unique: true,
         },
         Name: {
+            type: String,
+        },
+        phoneNumber: {
             type: String,
         },
         typeUser: {
