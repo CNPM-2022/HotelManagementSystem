@@ -1,8 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { toast } from 'react-toastify';
+import { deleteUser } from '../../../../services/apiServices';
 
-function ModalDeleteUser({ show, setShow, dataUser = {} }) {
+function ModalDeleteUser({ show, setShow, dataUser = {}, fetchListUsers }) {
     const handleClose = () => setShow(false);
+
+    const handleDeleteUser = async () => {
+        const res = await deleteUser(dataUser._id);
+
+        if (res && res.data && res.data.success === true) {
+            toast.success(res.data.message);
+            fetchListUsers();
+        } else {
+            toast.error(res.message);
+        }
+
+        handleClose();
+    };
 
     return (
         <Modal show={show} onHide={handleClose} backdrop="static">
@@ -16,7 +31,7 @@ function ModalDeleteUser({ show, setShow, dataUser = {} }) {
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleDeleteUser}>
                     Confirm
                 </Button>
             </Modal.Footer>
