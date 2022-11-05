@@ -1,6 +1,9 @@
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
+const User = require('../models/User');
+
+
 // @route   POST api/auth/register
 // @desc    Register user
 // @access  Public
