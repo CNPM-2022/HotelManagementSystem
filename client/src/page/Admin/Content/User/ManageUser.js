@@ -8,32 +8,6 @@ import ModalManageUser from './ModalManageUser';
 import TableUser from './TableUser';
 
 function ManageUser() {
-    // const listUsers = [
-    //     {
-    //         id: 1,
-    //         username: 'taivan',
-    //         email: 'taivannho5a@gmail.com',
-    //         role: 'ADMIN',
-    //     },
-    //     {
-    //         id: 2,
-    //         username: 'test2',
-    //         email: 'test2@gmail.com',
-    //         role: 'USER',
-    //     },
-    //     {
-    //         id: 3,
-    //         username: 'test3',
-    //         email: 'test3@gmail.com',
-    //         role: 'USER',
-    //     },
-    //     {
-    //         id: 4,
-    //         username: 'test4',
-    //         email: 'test4@gmail.com',
-    //         role: 'ADMIN',
-    //     },
-    // ];
     const [listUsers, setListUsers] = useState([]);
 
     const [isShowModalCreateUser, setIsShowModalCreateUser] = useState(false);
@@ -125,6 +99,7 @@ function ManageUser() {
                 show={isShowModalDeleteUser}
                 setShow={setIsShowModalDeleteUser}
                 dataUser={dataUserDelete}
+                fetchListUsers={fetchListUsers}
             />
         </div>
     );
