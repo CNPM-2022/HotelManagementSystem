@@ -19,21 +19,25 @@ Content-Type: application/json
     "username": "quang127",
     "password": "test"
 }
-
+#API for Register
+#Return the API key
 ###
-POST http://localhost:5000/api/auth/login
+POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "thangdb1",
-    "password": "123456"
+    "username": "thi",
+    "email": "admin@gmail.com",
+    "Name": "Admin User",
+    "phoneNumber": "1234567890",
+    "password": "admin"
 }
 
 ###
 GET http://localhost:5000/api/rooms/allrooms
 
 ###
-GET http://localhost:5000/api/rooms/635ea234dce841597e4fa833
+GET http://localhost:5000/api/rooms/635ea16edce841597e4fa832
 
 
 

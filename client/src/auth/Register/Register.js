@@ -15,8 +15,17 @@ const Regiter = () => {
     const dispatch = useDispatch();
 
     const registerHandler = async (userInfor) => {
+        console.log(userInfor)
+        const { userName, name, email, phone, password } = userInfor;
+
         try {
-            const res = await postRegister(userInfor);
+            const res = await postRegister({
+                username: userName,
+                email: email,
+                Name: name,
+                phoneNumber: phone,
+                password,
+            });
 
             const data = res.data;
 
