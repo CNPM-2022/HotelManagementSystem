@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 // @access  Private
 
 const changeInfo = asyncHandler(async (req, res) => {
-    const { username, email, Name, CMND, address } = req.body;
+    const { username, email, Name, CMND, address, isAdmin } = req.body;
     const id = req.params.id;
 
     if (!username && !email && !Name && !CMND && !address) {
@@ -25,6 +25,7 @@ const changeInfo = asyncHandler(async (req, res) => {
             user.Name = Name;
             user.CMND = CMND;
             user.address = address;
+            user.isAdmin = isAdmin;
         }
         const updatedUser = await user.save();
 
