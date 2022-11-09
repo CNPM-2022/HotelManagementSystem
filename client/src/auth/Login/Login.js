@@ -24,7 +24,7 @@ const Login = () => {
             const data = res.data;
 
             if (res.status !== 200) {
-                throw new Error('Something went wrong');
+                throw new Error(res.message || 'Something went wrong');
             }
             if (data.success) {
                 localStorage.setItem('user', JSON.stringify(data));
