@@ -30,13 +30,16 @@ const Regiter = () => {
             const data = res.data;
 
             if (res.status !== 200) {
-                throw new Error(data.message || 'Something went wrong');
+                throw new Error('Something went wrong');
             }
 
             if (data.success) {
                 dispatch(authActions.register());
                 toast.success(data.message);
                 navigate('/login');
+            }
+            else {
+                toast.error(data.message);
             }
         } catch (err) {
             toast.error(err.message);
