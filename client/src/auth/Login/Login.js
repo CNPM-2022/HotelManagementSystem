@@ -23,8 +23,8 @@ const Login = () => {
 
             const data = res.data;
 
-            if (!res.status === 200) {
-                throw new Error(data.message || 'Something went wrong');
+            if (res.status !== 200) {
+                throw new Error(res.message || 'Something went wrong');
             }
             if (data.success) {
                 localStorage.setItem('user', JSON.stringify(data));
@@ -36,7 +36,8 @@ const Login = () => {
                 );
                 navigate('/');
                 toast.success(data.message);
-            } else {
+            }
+            else {
                 toast.error(data.message);
             }
         } catch (error) {
