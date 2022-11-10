@@ -18,8 +18,8 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "quang127",
-    "password": "test"
+    "username": "admin",
+    "password": "admin1"
 }
 #API for Register
 #Return the API key
