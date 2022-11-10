@@ -4,14 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //component
 import Home from './page/Home/Home';
-import Login from './auth/Login/Login';
-import Register from './auth/Register/Register';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import Dashboard from './user/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import RoomsScreen from './page/RoomScreen/RoomScreen';
 import DetailRoom from './page/DetailRoom/DetailRoom';
 import Booking from './page/Booking/Booking';
-import NotFound from './components/NotFound';
+import NotFound from './components/NotFound/NotFound';
 import DefaultLayout from './layouts/DefaultLayout';
 import Admin from './page/Admin/Admin';
 import AdminDashBoard from './page/Admin/Content/DashBoard';

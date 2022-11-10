@@ -1,5 +1,4 @@
-import React from 'react';
-import RegisterForm from '../../components/auth/RegisterForm';
+import RegisterForm from './RegisterForm';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/authSlice';
@@ -15,7 +14,7 @@ const Regiter = () => {
     const dispatch = useDispatch();
 
     const registerHandler = async (userInfor) => {
-        console.log(userInfor)
+        console.log(userInfor);
         const { userName, name, email, phone, password } = userInfor;
 
         try {
@@ -37,8 +36,7 @@ const Regiter = () => {
                 dispatch(authActions.register());
                 toast.success(data.message);
                 navigate('/login');
-            }
-            else {
+            } else {
                 toast.error(data.message);
             }
         } catch (err) {
