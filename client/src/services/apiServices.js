@@ -23,6 +23,10 @@ export const getAllUsers = () => {
     return axios.get('user/all');
 };
 
+export const getUsersOfPage = ({ page, perPage }) => {
+    return axios.get(`user/${page}/${perPage}`);
+};
+
 export const postCreateUser = (dataUser) => {
     return axios.post('user/add', dataUser);
 };

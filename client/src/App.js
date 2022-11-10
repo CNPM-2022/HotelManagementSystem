@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //component
-import Landing from './page/LandingPage/Landing';
+import Home from './page/Home/Home';
 import Login from './auth/Login/Login';
 import Register from './auth/Register/Register';
 import Dashboard from './user/Dashboard';
@@ -27,7 +27,7 @@ function App() {
                     path="/"
                     element={
                         <DefaultLayout>
-                            <Landing />
+                            <Home />
                         </DefaultLayout>
                     }
                 >
