@@ -106,10 +106,13 @@ GET http://localhost:5000/api/user/all
 #return list user
 #return length of list user
 #param: http://localhost:5000/api/user/:page/:limit
-#if http://localhost:5000/api/user then return all user
 
 ###
-GET http://localhost:5000/api/user/1/4
+GET http://localhost:5000/api/user/3/5
+
+
+
+
 
 
 # API for get user by id
