@@ -3,19 +3,19 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //component
-import Home from './page/Home/Home';
+import Home from './pages/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import Dashboard from './page/UserProfile/Dashboard';
+import Dashboard from './pages/UserProfile/Dashboard';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import RoomsScreen from './page/RoomScreen/RoomScreen';
-import DetailRoom from './page/DetailRoom/DetailRoom';
-import Booking from './page/Booking/Booking';
+import RoomsScreen from './pages/RoomScreen/RoomScreen';
+import DetailRoom from './pages/DetailRoom/DetailRoom';
+import Booking from './pages/Booking/Booking';
 import NotFound from './components/NotFound/NotFound';
 import DefaultLayout from './layouts/DefaultLayout';
-import Admin from './page/Admin/Admin';
-import AdminDashBoard from './page/Admin/Content/DashBoard';
-import ManageUser from './page/Admin/Content/User/ManageUser';
+import Admin from './pages/Admin/Admin';
+import AdminDashBoard from './pages/Admin/Content/DashBoard';
+import ManageUser from './pages/Admin/Content/User/ManageUser';
 
 function App() {
     return (
