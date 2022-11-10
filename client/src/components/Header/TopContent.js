@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavDropdown } from 'react-bootstrap';
@@ -6,10 +5,10 @@ import { authActions } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import '../Navbar/Nav.scss';
+import './Header.scss';
 import Swal from 'sweetalert2';
 
-const Navbar = () => {
+const TopContent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -109,4 +108,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default TopContent;

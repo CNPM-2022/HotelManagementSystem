@@ -1,8 +1,7 @@
-import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Nav1 = () => {
+const MainContent = () => {
     return (
         <Navbar style={{ backgroundColor: '#282828', fontSize: '14px' }} className="py-1 justify-content-center">
             <Nav>
@@ -57,4 +56,4 @@ const Nav1 = () => {
     );
 };
 
-export default Nav1;
+export default MainContent;
