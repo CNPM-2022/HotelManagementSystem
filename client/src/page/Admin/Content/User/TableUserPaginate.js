@@ -6,6 +6,7 @@ function TableUserPaginate({
     handleClickEditButton,
     handleClickDeleteButton,
     currentPage,
+    itemsPerPage,
     pageCount,
     handlePageClick,
 }) {
@@ -25,7 +26,7 @@ function TableUserPaginate({
                     {listUsers && listUsers.length > 0 ? (
                         listUsers.map((user, index) => (
                             <tr key={user._id}>
-                                <th scope="row">{6 * currentPage + index + 1}</th>
+                                <th scope="row">{itemsPerPage * currentPage + index + 1}</th>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
                                 <td>{user.isAdmin ? 'ADMIN' : 'USER'}</td>

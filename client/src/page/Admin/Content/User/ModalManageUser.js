@@ -37,6 +37,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
         setPassword('');
         setName('');
         setIdentity('');
+        setPhone('');
         setAddress('');
         setRole('USER');
         setShow(false);
@@ -104,6 +105,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 Name: name,
                 CMND: identity,
                 address,
+                phoneNumber: phone,
                 isAdmin: role === 'ADMIN' ? true : false,
             });
         }
