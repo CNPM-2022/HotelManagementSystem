@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
 import { toast } from 'react-toastify';
 
-function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsers }) {
+function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -112,7 +112,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
 
         if (res && res.data && res.data.success === true) {
             toast.success(res.data.message);
-            fetchListUsers();
+            setCurrentPage(1);
+            fetchListUsersOfPage(1);
         } else {
             toast.error(res.message);
         }

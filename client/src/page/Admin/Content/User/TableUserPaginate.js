@@ -26,7 +26,7 @@ function TableUserPaginate({
                     {listUsers && listUsers.length > 0 ? (
                         listUsers.map((user, index) => (
                             <tr key={user._id}>
-                                <th scope="row">{itemsPerPage * currentPage + index + 1}</th>
+                                <th scope="row">{itemsPerPage * (currentPage - 1) + index + 1}</th>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
                                 <td>{user.isAdmin ? 'ADMIN' : 'USER'}</td>
@@ -65,11 +65,12 @@ function TableUserPaginate({
                     activeClassName="active"
                     breakLabel="..."
                     nextLabel="Next >"
-                    onPageChange={(event) => handlePageClick(+event.selected)}
+                    onPageChange={(event) => handlePageClick(+event.selected + 1)}
                     pageRangeDisplayed={3}
                     pageCount={pageCount}
                     previousLabel="< Prev"
                     renderOnZeroPageCount={null}
+                    forcePage={currentPage - 1}
                 />
             </div>
         </>
