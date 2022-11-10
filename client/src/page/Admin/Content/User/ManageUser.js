@@ -25,6 +25,7 @@ function ManageUser() {
     const [dataUserDelete, setDataUserDelete] = useState({});
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
         fetchListUsersOfPage(1);
@@ -54,6 +55,7 @@ function ManageUser() {
         }
 
         setListUsers(data.results.results);
+        setPageCount(Math.floor(data.lengthOfAllUsers / ITEMS_PER_PAGE) + 1);
     };
 
     const handleClickViewButton = (user) => {
@@ -93,7 +95,7 @@ function ManageUser() {
                     itemsPerPage={ITEMS_PER_PAGE}
                     currentPage={currentPage}
                     handlePageClick={handlePageClick}
-                    pageCount={Math.floor(20 / ITEMS_PER_PAGE)}
+                    pageCount={pageCount}
                 />
             </div>
 
@@ -103,6 +105,7 @@ function ManageUser() {
                 show={isShowModalCreateUser}
                 setShow={setIsShowModalCreateUser}
                 fetchListUsersOfPage={fetchListUsersOfPage}
+                setCurrentPage={setCurrentPage}
             />
 
             <ModalManageUser
