@@ -21,9 +21,10 @@ const Login = () => {
             const res = await postLogin(options);
 
             const data = res.data;
+            console.log(res);
 
             if (res.status !== 200) {
-                throw new Error(res.message || 'Something went wrong');
+                throw new Error(res.data.message || 'Something went wrong');
             }
             if (data.success) {
                 localStorage.setItem('user', JSON.stringify(data));
