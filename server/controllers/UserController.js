@@ -122,10 +122,12 @@ const getUsersWithPagination = asyncHandler(async (req, res) => {
         }
 
         results.results = await User.find().limit(Number(limit)).skip(startIndex).exec();
+        const lengthOfAllUsers = await User.countDocuments().exec();
         res.status(200).json({
             success: true,
             message: 'Get users with pagination success',
             lenghtOfUsers: results.results.length,
+            lengthOfAllUsers: lengthOfAllUsers,
             results,
         });
     } catch (error) {

@@ -3,19 +3,19 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //component
-import Landing from './page/LandingPage/Landing';
-import Login from './auth/Login/Login';
-import Register from './auth/Register/Register';
-import Dashboard from './user/Dashboard';
-import PrivateRoute from './components/PrivateRoute';
-import RoomsScreen from './page/RoomScreen/RoomScreen';
-import DetailRoom from './page/DetailRoom/DetailRoom';
-import Booking from './page/Booking/Booking';
-import NotFound from './components/NotFound';
+import Home from './pages/Home/Home';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Dashboard from './pages/UserProfile/Dashboard';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RoomsScreen from './pages/RoomScreen/RoomScreen';
+import DetailRoom from './pages/DetailRoom/DetailRoom';
+import Booking from './pages/Booking/Booking';
+import NotFound from './components/NotFound/NotFound';
 import DefaultLayout from './layouts/DefaultLayout';
-import Admin from './page/Admin/Admin';
-import AdminDashBoard from './page/Admin/Content/DashBoard';
-import ManageUser from './page/Admin/Content/User/ManageUser';
+import Admin from './pages/Admin/Admin';
+import AdminDashBoard from './pages/Admin/Content/DashBoard';
+import ManageUser from './pages/Admin/Content/User/ManageUser';
 
 function App() {
     return (
@@ -23,32 +23,46 @@ function App() {
             <ToastContainer />
             <Routes>
                 <Route
-                    exact
                     path="/"
                     element={
                         <DefaultLayout>
-                            <Landing />
+                            <Home />
                         </DefaultLayout>
                     }
-                >
-                    <Route exact path="/rooms" element={<RoomsScreen />} />
-                    <Route exact path="/room/:id" element={<DetailRoom />} />
+                ></Route>
+
+                <Route
+                    path="/rooms"
+                    element={
+                        <DefaultLayout>
+                            <RoomsScreen />
+                        </DefaultLayout>
+                    }
+                />
+
+                <Route
+                    path="/room/:id"
+                    element={
+                        <DefaultLayout>
+                            <DetailRoom />
+                        </DefaultLayout>
+                    }
+                />
+
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
+                <Route path="/" element={<PrivateRoute />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
+
+                    <Route path="/admins" element={<Admin />}>
+                        <Route index element={<AdminDashBoard />} />
+                        <Route path="/admins/manage-users" element={<ManageUser />} />
+                    </Route>
                 </Route>
 
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Register />} />
-
-                <Route exact path="/admins" element={<Admin />}>
-                    <Route index element={<AdminDashBoard />} />
-                    <Route path="/admins/manage-users" element={<ManageUser />} />
-                </Route>
-
-                <Route exact path="/" element={<PrivateRoute />}>
-                    <Route exact path="/dashboard" element={<Dashboard />} />
-                    <Route exact path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
-                </Route>
-
-                <Route exact path="*" element={<NotFound />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );

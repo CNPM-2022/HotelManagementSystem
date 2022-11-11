@@ -43,21 +43,6 @@ GET http://localhost:5000/api/rooms/635ea16edce841597e4fa832
 
 
 
-# API for get list direction room
-#return list direction room
- 
-###
-GET http://localhost:5000/api/room-direction/all
-
-
-
-#API for get room by direction (id)
-#return room by direction
-###
-GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
-
-
-
 # API for USER CHANGE INFO
 # RETURN USER INFO
 ###
@@ -106,10 +91,10 @@ GET http://localhost:5000/api/user/all
 #return list user
 #return length of list user
 #param: http://localhost:5000/api/user/:page/:limit
-#if http://localhost:5000/api/user then return all user
 
 ###
-GET http://localhost:5000/api/user/1/4
+GET http://localhost:5000/api/user/3/5
+
 
 
 # API for get user by id
@@ -137,9 +122,55 @@ Content-Type: application/json
 }
 
 
+# API for get list direction room
+#return list direction room
+ 
+###
+GET http://localhost:5000/api/room-direction/all
 
 
 
+#API for get room by direction (id)
+#return room by direction
+###
+GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
+
+#API for create room direction
+#return room direction created
+###
+POST http://localhost:5000/api/room-direction/create
+Content-Type: application/json
+
+{
+    "name": "Phòng hướng Đông",
+    "description": "Phòng hướng Đông",
+    "typeOfRooms":"C",
+    "imageUrls" : ["https://i.imgur.com/1ZQ3Z0M.jpg"],
+    "price":"250000",
+    "listRoom": ["6364b434b446c82c12997ee0"],
+    "note" : "Phòng hướng Đông"
+}
+
+#API for update room direction
+#return room direction updated
+###
+PUT http://localhost:5000/api/room-direction/update/636cc5c568cdc75fd8a85da5
+Content-Type: application/json
+
+{
+    "name": "Phòng Loại 3 ",
+    "description": "Organizers choose Hotel Continental Saigon to hold their meetings because of hotel’s meeting rooms are well equipped and offer a wide choice of meeting functions such as workshops, seminars, product launches and video conferences",
+    "typeOfRooms":"C",
+    "imageUrls" : ["https://i.imgur.com/1ZQ3Z0M.jpg"],
+    "price":"250000",
+    "listRoom": ["515","612","758"],
+    "note" : "Phòng hướng Đông"
+}
+
+#API for delete room direction
+#return state:  success, fail
+###
+DELETE http://localhost:5000/api/room-direction/delete/636cc5db68cdc75fd8a85da8
 
 
 

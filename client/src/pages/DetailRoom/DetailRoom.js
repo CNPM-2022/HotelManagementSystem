@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../store/roomSlice';
 import { useLocation } from 'react-router-dom';
 import { Carousel, Row, Col, ListGroup } from 'react-bootstrap';
-import Loader from '../../components/Loader';
+import Loader from '../../components/Loader/Loader';
 import './DetailRoom.scss';
 import { getRoomById } from '../../services/apiServices';
 
@@ -33,7 +33,7 @@ const DetailRoom = () => {
 
     return (
         <>
-            <div>
+            <div className="detail-room-container">
                 {loading ? (
                     <Loader />
                 ) : error ? (

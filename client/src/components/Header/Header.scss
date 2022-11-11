@@ -1,0 +1,295 @@
+.header-container {
+    .top-header-area {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 50px;
+        background-color: #0e2737;
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .contact-list {
+                .contact {
+                    color: #ffffff;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 50px;
+                    text-decoration: none;
+                    display: inline-block;
+
+                    ~ .contact {
+                        margin-left: 50px;
+                    }
+
+                    .icon {
+                        position: relative;
+                        top: -2px;
+                        color: #1cc3b2;
+                    }
+
+                    span {
+                        margin-left: 6px;
+                    }
+
+                    &:hover {
+                        color: #afb4bf;
+                    }
+                }
+            }
+
+            .actions {
+                .btn {
+                    padding: 4px 20px;
+                }
+
+                .user {
+                    color: #fff;
+                    cursor: pointer;
+
+                    .username {
+                        font-size: 16px;
+                        font-weight: 400;
+                        margin-right: 8px;
+                    }
+
+                    .avatar {
+                        width: 36px;
+                        height: 36px;
+                    }
+
+                    .caret-down {
+                        margin-left: 2px;
+                        font-size: 14px;
+                    }
+                }
+
+                .menu {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    width: 140px;
+                    min-height: 100px;
+                    max-height: min(100vh - 96px - 60px, 734px);
+                    padding-top: 8px;
+                    border-radius: 8px;
+                    background-color: #fff;
+                    box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top: -10px;
+                        width: 100%;
+                        height: 10px;
+                        background-color: transparent;
+                    }
+
+                    .item {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 6px;
+                        border-radius: 0;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding: 10px 16px;
+                        cursor: pointer;
+
+                        .icon {
+                            font-size: 18px;
+                        }
+
+                        &:hover {
+                            background-color: rgba(22, 24, 35, 0.03);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-header-area {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+
+        .container {
+            height: 100%;
+
+            .main-navbar {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .main-navbar-nav {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+
+                    .item {
+                        font-size: 17px;
+                        text-transform: capitalize;
+                        color: #2a303b;
+                        font-weight: 500;
+                        padding: 0 20px;
+
+                        &:hover {
+                            color: #afb4bf;
+                        }
+                    }
+                }
+
+                .book-now {
+                    margin-left: auto;
+                    a {
+                        display: block;
+                        padding: 0 30px;
+                        height: 80px;
+                        line-height: 80px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #ffffff;
+                        text-align: center;
+                        text-decoration: none;
+                        outline: none;
+                        background-color: #1cc3b2;
+                        transition: background 0.5s;
+
+                        &:hover {
+                            background-color: #2a303b;
+                        }
+                    }
+                }
+
+                .sidebar-toggle {
+                    display: none;
+                    margin-left: auto;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .nav-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 9;
+
+        .pro-sidebar {
+            width: 320px;
+            &.collapsed {
+                transform: translateX(-100%);
+                width: 320px;
+            }
+
+            .pro-sidebar-inner {
+                background-color: #fff;
+
+                .pro-sidebar-header {
+                    height: 80px;
+                    padding: 16px;
+                    text-align: right !important;
+
+                    .close-btn {
+                        font-size: 26px;
+                        margin-left: auto;
+                        cursor: pointer;
+                    }
+                }
+
+                .pro-sidebar-content {
+                    .pro-menu {
+                        .pro-menu-item {
+                            height: 45px;
+                            background-color: #f2f4f8;
+                            margin: 1px 0;
+                            color: #2a303b;
+                            font-weight: 500;
+
+                            .pro-inner-item {
+                                transition: color 0.5s;
+                                &:hover {
+                                    color: #afb4bf;
+                                }
+                            }
+                        }
+                    }
+
+                    .book-now {
+                        a {
+                            display: inline-block;
+                            height: 50px;
+                            line-height: 50px;
+                            margin-left: 16px;
+                            margin-top: 12px;
+                            padding: 0 30px;
+                            background-color: #1cc3b2;
+                            text-align: center;
+                            color: #ffffff;
+                            font-size: 16px;
+                            font-weight: 500;
+                            border-radius: 30px;
+                            transition: background 0.5s;
+
+                            &:hover {
+                                background-color: #2a303b;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .header-container {
+        .top-header-area {
+            .content {
+                .contact-list {
+                    .contact {
+                        span {
+                            display: none;
+                        }
+
+                        &.contact {
+                            margin-left: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .header-container {
+        .main-header-area {
+            height: 70px;
+            .container {
+                .main-navbar {
+                    .main-navbar-nav {
+                        display: none;
+                    }
+
+                    .book-now {
+                        display: none;
+                    }
+
+                    .sidebar-toggle {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

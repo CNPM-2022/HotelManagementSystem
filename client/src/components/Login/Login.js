@@ -1,5 +1,4 @@
-import React from 'react';
-import LoginForm from '../../components/auth/LoginForm';
+import LoginForm from './LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/authSlice';
@@ -37,8 +36,7 @@ const Login = () => {
                 );
                 navigate('/');
                 toast.success(data.message);
-            }
-            else {
+            } else {
                 toast.error(data.message);
             }
         } catch (error) {

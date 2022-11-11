@@ -6,13 +6,13 @@ const roomDirectorySchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        type: {
+        typeOfRooms: {
             type: String,
             required: true,
             default: 'A',
             enum: ['A', 'B', 'C'],
         },
-        imageurls: [],
+        imageUrls: [],
         description: {
             type: String,
             required: true,
