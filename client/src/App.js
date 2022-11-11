@@ -11,7 +11,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import Dashboard from './pages/UserProfile/Dashboard';
+import Profile from './pages/UserProfile/Profile';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import RoomsScreen from './pages/RoomScreen/RoomScreen';
 import DetailRoom from './pages/DetailRoom/DetailRoom';
