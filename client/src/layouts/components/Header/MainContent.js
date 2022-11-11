@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaBars } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
-import images from '../../assets/images';
+import images from '../../../assets/images';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 

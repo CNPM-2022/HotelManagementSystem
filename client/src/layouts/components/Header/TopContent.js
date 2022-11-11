@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../store/authSlice';
+import { authActions } from '../../../store/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { FaPhoneAlt } from 'react-icons/fa';
@@ -7,8 +7,8 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { HiMail } from 'react-icons/hi';
 import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
-import images from '../../assets/images';
 
+import images from '../../../assets/images';
 import './Header.scss';
 import Swal from 'sweetalert2';
 
@@ -17,13 +17,12 @@ const TopContent = () => {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.auth.user);
-
-    console.log(user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         dispatch(authActions.logout());
-        Swal.fire('Successful', 'Successfully Logged Out ', 'success').then((result) => {
+        Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
             navigate('/login');
         });
     };
@@ -45,7 +44,7 @@ const TopContent = () => {
                         </div>
 
                         <div className="actions">
-                            {user ? (
+                            {isAuthenticated ? (
                                 <Tippy
                                     interactive
                                     render={(attrs) => (
