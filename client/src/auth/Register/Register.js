@@ -15,7 +15,7 @@ const Regiter = () => {
     const dispatch = useDispatch();
 
     const registerHandler = async (userInfor) => {
-        console.log(userInfor)
+
         const { userName, name, email, phone, password } = userInfor;
 
         try {
