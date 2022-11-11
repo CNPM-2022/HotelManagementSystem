@@ -33,7 +33,7 @@ const DetailRoom = () => {
 
     return (
         <>
-            <div>
+            <div className="detail-room-container">
                 {loading ? (
                     <Loader />
                 ) : error ? (

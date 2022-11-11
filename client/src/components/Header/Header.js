@@ -3,7 +3,7 @@ import TopContent from './TopContent';
 
 function Header() {
     return (
-        <header>
+        <header className="header-container">
             <TopContent />
             <MainContent />
         </header>

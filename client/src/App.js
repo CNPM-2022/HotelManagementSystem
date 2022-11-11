@@ -23,32 +23,46 @@ function App() {
             <ToastContainer />
             <Routes>
                 <Route
-                    exact
                     path="/"
                     element={
                         <DefaultLayout>
                             <Home />
                         </DefaultLayout>
                     }
-                >
-                    <Route exact path="/rooms" element={<RoomsScreen />} />
-                    <Route exact path="/room/:id" element={<DetailRoom />} />
-                </Route>
+                ></Route>
 
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Register />} />
+                <Route
+                    path="/rooms"
+                    element={
+                        <DefaultLayout>
+                            <RoomsScreen />
+                        </DefaultLayout>
+                    }
+                />
 
-                <Route exact path="/" element={<PrivateRoute />}>
-                    <Route exact path="/dashboard" element={<Dashboard />} />
-                    <Route exact path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
+                <Route
+                    path="/room/:id"
+                    element={
+                        <DefaultLayout>
+                            <DetailRoom />
+                        </DefaultLayout>
+                    }
+                />
 
-                    <Route exact path="/admins" element={<Admin />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
+                <Route path="/" element={<PrivateRoute />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
+
+                    <Route path="/admins" element={<Admin />}>
                         <Route index element={<AdminDashBoard />} />
                         <Route path="/admins/manage-users" element={<ManageUser />} />
                     </Route>
                 </Route>
 
-                <Route exact path="*" element={<NotFound />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
