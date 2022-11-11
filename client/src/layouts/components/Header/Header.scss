@@ -178,14 +178,15 @@
     }
 
     .nav-sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        z-index: 9;
-
         .pro-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 9;
             width: 320px;
+            box-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+
             &.collapsed {
                 transform: translateX(-100%);
                 width: 320px;
