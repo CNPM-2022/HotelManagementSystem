@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+
 import './Edit_profile.scss'
+import Change_password from './Change_password';
 
 function Edit_profile() {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <div className="container-xl px-4">
 
@@ -59,11 +68,21 @@ function Edit_profile() {
                                     <input className="form-control" id="inputAddress" type="text" placeholder="Enter your address" />
                                 </div>
 
+                                <div className="row gx-3 mb-3 mx-0 d-flex justify-content-center">
+
+                                    <Button variant="light" style={{ width: '50%' }} onClick={handleShow}>
+                                        <span className='mr-5 fw-bold'>Change my password
+                                            <i class="fa-solid fa-key ml-2"></i>
+                                        </span><i className="bi bi-chevron-right ml-5"></i>
+                                    </Button>
+                                </div>
+
                                 <button className="btn btn-primary" type="button">Save changes</button>
                             </form>
                         </div>
                     </div>
                 </div>
+                <Change_password handleClose={handleClose} show={show} />
             </div>
         </div>
     )

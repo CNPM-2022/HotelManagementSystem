@@ -1,12 +1,12 @@
 /* :: 7.0 Header Area CSS */
-@import 'css/bootstrap.min.css';
-@import 'css/animate.css';
-@import 'css/default-assets/classy-nav.css';
+@import '../../css/bootstrap.min.css';
+@import '../../css/animate.css';
+@import '../../css/default-assets/classy-nav.css';
 
 // Mixins
 
-@import 'mixins/flex';
-@import 'mixins/miscellaneous';
+@import '../../mixins/flex';
+@import '../../mixins/miscellaneous';
 
 // Xtra Large Breakpoint
 $breakpoint-xl: 'only screen and (min-width:1200px)';
