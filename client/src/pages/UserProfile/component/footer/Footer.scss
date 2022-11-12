@@ -1,11 +1,10 @@
 /* :: 9.0 Footer Area CSS */
 @import 'bootstrap/dist/css/bootstrap.css';
-@import '../../../pages/UserProfile/css/animate.css';
 
 // Mixins
 
-@import '../../../pages/UserProfile/mixins/flex';
-@import '../../../pages/UserProfile/mixins/miscellaneous';
+@import '../../mixins/flex';
+@import '../../mixins/miscellaneous';
 
 // Xtra Large Breakpoint
 $breakpoint-xl: 'only screen and (min-width:1200px)';
@@ -155,7 +154,7 @@ $dark2: #0e2737;
             height: 40px;
             border-radius: 50%;
             border: none;
-            top: 3px;
+            top: 0px;
             right: 3px;
             color: $white;
             background-color: $primary;

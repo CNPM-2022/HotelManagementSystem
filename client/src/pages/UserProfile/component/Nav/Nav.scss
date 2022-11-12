@@ -1,0 +1,321 @@
+/* :: 7.0 Header Area CSS */
+@import '../../css/bootstrap.min.css';
+@import '../../css/animate.css';
+@import '../../css/default-assets/classy-nav.css';
+
+// Mixins
+
+@import '../../mixins/flex';
+@import '../../mixins/miscellaneous';
+
+// Xtra Large Breakpoint
+$breakpoint-xl: 'only screen and (min-width:1200px)';
+// Large Breakpoint
+$breakpoint-lg: 'only screen and (min-width:992px) and (max-width:1199px)';
+// Medium Breakpoint
+$breakpoint-md: 'only screen and (min-width:768px) and (max-width:991px)';
+// Small Breakpoint
+$breakpoint-sm: 'only screen and (min-width:576px) and (max-width:767px)';
+// Xtra Small Breakpoint
+$breakpoint-xs: 'only screen and (max-width:767px)';
+
+$breakpoint-xm: 'only screen and (max-width:535px)';
+// Xtra Small Landscape Breakpoint
+$breakpoint-xs-landscape: 'only screen and (min-width:480px) and (max-width:767px)';
+
+$box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+
+// Heading Color
+$heading: #2a303b;
+
+// Text Color
+$text: #636a76;
+
+// Gray Background
+$bg-gray: #e8f1f8;
+
+// Primary Color
+$primary: #1cc3b2;
+
+// White Color
+$white: #ffffff;
+
+// Dark Color
+$dark: #000000;
+
+// Border Color
+$border: #ebebeb;
+
+// Hover Color
+$hover: #1cc3b2;
+
+// Secondary Color
+$secondary: #afb4bf;
+
+// Dark 2 Color
+$dark2: #0e2737;
+
+.header-area {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    @include transition-duration(500ms);
+    background-color: $primary;
+
+    .search-form {
+        @include transition-duration(350ms);
+        transition-timing-function: ease-in;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 0;
+        background-color: $hover;
+
+        &.search-form-active {
+            height: 80px;
+            z-index: 99999999;
+        }
+
+        form {
+            position: relative;
+            z-index: 1;
+
+            input {
+                background-color: transparent;
+                width: 100%;
+                height: 60px;
+                border: none;
+                font-size: 14px;
+                color: $white;
+            }
+
+            button {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                top: 0;
+                right: 0;
+                z-index: 10;
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+                font-size: 18px;
+                color: $white;
+                text-align: right;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
+.search-btn {
+    padding: 0px;
+    margin: 0;
+    height: 0px;
+}
+
+.classy-nav-container {
+    background-color: transparent;
+    padding: 0;
+
+    .classy-navbar {
+        @include transition-duration(500ms);
+        height: 80px;
+        padding: 0;
+
+        @media #{$breakpoint-md} {
+            height: 70px;
+        }
+
+        @media #{$breakpoint-xs} {
+            height: 70px;
+        }
+
+        .nav-brand {
+            @media #{$breakpoint-xs} {
+                max-width: 90px;
+                margin-right: 15px;
+            }
+        }
+
+        .classynav ul li {
+            a {
+                font-size: 16px;
+                text-transform: capitalize;
+                color: $heading;
+                font-weight: 500;
+                padding: 0 20px;
+
+                @media #{$breakpoint-lg} {
+                    font-size: 14px;
+                    padding: 0 10px;
+                }
+
+                @media #{$breakpoint-md} {
+                    font-size: 14px;
+                    margin-bottom: 15px;
+                    color: $heading;
+
+                    &:hover,
+                    &:focus {
+                        color: $hover;
+                    }
+                }
+
+                @media #{$breakpoint-xs} {
+                    font-size: 14px;
+                    color: $heading;
+
+                    &:hover,
+                    &:focus {
+                        color: $hover;
+                    }
+                }
+
+                &:focus,
+                &:hover {
+                    color: $secondary;
+                    font-weight: 500;
+                }
+            }
+        }
+        .classynav ul {
+            margin: 0;
+        }
+        .classynav {
+            height: 100px;
+        }
+
+        .book-now-btn {
+            @media #{$breakpoint-md} {
+                color: $heading;
+            }
+            @media #{$breakpoint-xs-landscape} {
+                margin-top: 0px;
+            }
+            i {
+                @media #{$breakpoint-xs} {
+                    display: none;
+                }
+            }
+            span {
+                @media #{$breakpoint-xs} {
+                    display: none;
+                }
+            }
+        }
+        .bi-search {
+            @media #{$breakpoint-md} {
+                font-size: 14px;
+                position: relative;
+                color: $heading;
+            }
+        }
+        .search-btn {
+            @media #{$breakpoint-md} {
+                font-size: 14px;
+                margin-top: 5px;
+                color: $heading;
+            }
+        }
+        ul li {
+            @media #{$breakpoint-md} {
+                font-size: 14px;
+                margin-top: 15px;
+                color: $heading;
+            }
+        }
+        ul li:nth-child(4) a {
+            @media #{$breakpoint-xm} {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.classynav ul li.has-down > a::after,
+.classynav ul li.has-down.active > a::after,
+.classynav ul li.megamenu-item > a::after {
+    color: $heading;
+}
+
+.breakpoint-off .classynav ul li .dropdown,
+.breakpoint-off .classynav ul li .megamenu {
+    width: 210px;
+    @include box-shadow($box-shadow);
+    border-radius: 6px;
+}
+
+.breakpoint-off .classynav ul li .megamenu {
+    width: 100%;
+}
+
+.classy-navbar-toggler .navbarToggler span {
+    background-color: $heading;
+}
+
+.main-header-area2 {
+    position: relative;
+    z-index: 1;
+    background-color: $white;
+
+    .book-now-btn {
+        a {
+            padding: 0 30px;
+            background-color: $primary;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            color: $white;
+            font-size: 16px;
+
+            i {
+                padding-left: 5px;
+            }
+
+            @media #{$breakpoint-md} {
+                height: 50px;
+                line-height: 50px;
+                border-radius: 30px;
+            }
+
+            @media #{$breakpoint-xs} {
+                height: 50px;
+                line-height: 50px;
+                border-radius: 30px;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: $heading;
+                color: $white;
+            }
+        }
+    }
+
+    .search-btn {
+        cursor: pointer;
+        @include transition-duration(500ms);
+
+        @media #{$breakpoint-md} {
+            padding: 30px 0;
+        }
+
+        @media #{$breakpoint-xs} {
+            padding: 30px 0;
+        }
+
+        &:hover,
+        &:focus {
+            color: $hover;
+        }
+    }
+}
+
+.nav-brand img {
+    height: 70px;
+    width: auto;
+}
