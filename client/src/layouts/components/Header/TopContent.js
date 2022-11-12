@@ -51,7 +51,7 @@ const TopContent = () => {
                                         <div {...attrs} className="menu">
                                             <div className="item" onClick={() => navigate('/User')}>
                                                 <RiUserFill className="icon" />
-                                                <span>View Profile</span>
+                                                <span>Account</span>
                                             </div>
                                             <div className="item" onClick={() => navigate('/admins')}>
                                                 <RiAdminFill className="icon" />

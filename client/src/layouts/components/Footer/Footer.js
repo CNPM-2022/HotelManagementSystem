@@ -1,100 +1,89 @@
-import React from 'react';
-import './Footer.scss';
+import React from "react";
+import './Footer.scss'
 
-const Footer = () => {
+function Footer() {
     return (
-        <>
-            <footer className="footer-container mt-4">
-                <div className="container">
-                    <div className="sec aboutus">
-                        <h4>About Us</h4>
-                        <p>
-                            In terms of harmony in the city's architectural ensemble, along with the Municipal theatre
-                            (1898), Notre Dame Cathedral (1880), City Post Office (1891), People's Committee of Ho Chi
-                            Minh City (1898), ReunificationPalace (1966) and Ben Thanh Market (1914) the Hotel
-                            Continental Saigon is a focal point in the architecture of the downtown area, maintaining
-                            the past historical pe
-                        </p>
+        <footer className="footer-area section-padding-80-0">
 
-                        <ul className="sci">
-                            <li>
-                                <a href="#">
-                                    <i className="fab fa-facebook" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i className="fab fa-twitter" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i className="fab fa-instagram" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i className="fab fa-youtube" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="sec quickLinks">
-                        <h4>USEFUL LINKS</h4>
-                        <ul>
-                            <li>
-                                <a href="#">Rooms & suites</a>
-                            </li>
-                            <li>
-                                <a href="#">Restaurants & Bars</a>
-                            </li>
-                            <li>
-                                <a href="#">Facilities</a>
-                            </li>
-                            <li>
-                                <a href="#">Discover hotel</a>
-                            </li>
-                            <li>
-                                <a href="#">City Highlight</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="sec contact">
-                        <h4>CONTACT INFO</h4>
-                        <ul className="info">
-                            <li>
-                                <span>
-                                    <i className="fas fa-map-marker-alt"></i>
-                                </span>
-                                <span>
-                                    132 - 134 Dong Khoi St., Dist 1,
-                                    <br></br> Ho Chi Minh City, Vietnam
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i className="fas fa-phone-alt"></i>
-                                </span>
-                                <span>Phone: (84.28) 38 299 201</span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i className="fas fa-envelope"></i>
-                                </span>
-                                <span>Email: continentalhotel@vnn.vn</span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i className="fas fa-envelope"></i>
-                                </span>
-                                <span> Web: www.continentalsaigon.com</span>
-                            </li>
-                        </ul>
+            <div className="main-footer-area">
+                <div className="container">
+                    <div className="row align-items-baseline justify-content-between">
+
+                        <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="single-footer-widget mb-80">
+
+                                <a href="#" className="footer-logo"><img src="img/core-img/logo2.png" alt="" /></a>
+
+                                <h4>+12 345-678-9999</h4>
+                                <span>Info.colorlib@gmail.com</span>
+                                <span>856 Cordia Extension Apt. 356, Lake Deangeloburgh, South Africa</span>
+                            </div>
+                        </div>
+
+
+                        <div className="col-12 col-sm-6 col-lg-3 mt-4">
+                            <div className="single-footer-widget mb-80">
+
+                                <h5 className="widget-title">Blogs</h5>
+
+
+                                <div className="latest-blog-area">
+                                    <a href="#" className="post-title">Freelance Design Tricks How</a>
+                                    <span className="post-date"><i className="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
+                                </div>
+
+
+                                <div className="latest-blog-area">
+                                    <a href="#" className="post-title">Free Advertising For Your Online</a>
+                                    <span className="post-date"><i className="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-12 col-sm-8 col-lg-4">
+                            <div className="single-footer-widget mb-80">
+
+                                <h5 className="widget-title">Subscribe Newsletter</h5>
+                                <span>Subscribe our newsletter gor get notification about new updates.</span>
+
+
+                                <form action="index.html" className="nl-form">
+                                    <input type="email" className="form-control" placeholder="Enter your email..." />
+                                    <button type="submit"><i className="bi bi-send-fill"></i></button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-        </>
-    );
-};
+            </div>
 
-export default Footer;
+
+            <div className="container">
+                <div className="copywrite-content">
+                    <div className="row align-items-center">
+                        <div className="col-12 col-md-8">
+
+                            <div className="copywrite-text">
+                                <p>
+                                    Copyright &copy; 2022 All rights reserved | This website is made by team 16
+                                </p>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-4">
+
+                            <div className="social-info">
+                                <a href="#"><i className="bi bi-facebook"></i></a>
+                                <a href="#"><i className="bi bi-twitter"></i></a>
+                                <a href="#"><i className="bi bi-instagram"></i></a>
+                                <a href="#"><i className="bi bi-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    )
+}
+
+export default Footer

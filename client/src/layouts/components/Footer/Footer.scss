@@ -1,150 +1,255 @@
-// .footer-container {
-//     position: relative;
-//     width: 100%;
-//     height: 80% !important;
-//     padding: 50px 100px;
-//     background: #222;
-//     display: flex;
-//     justify-content: space-between;
-//     flex-wrap: wrap;
+/* :: 9.0 Footer Area CSS */
+@import 'bootstrap/dist/css/bootstrap.css';
+@import '../../../pages/UserProfile/css/animate.css';
 
-//     .container {
-//         display: flex;
-//         justify-content: space-between;
-//         flex-wrap: wrap;
-//         flex-direction: row;
+// Mixins
 
-//         .sec {
-//             margin-right: 30px;
-//             margin-top: -55px;
-//             &.aboutus {
-//                 width: 40%;
-//             }
-//         }
+@import '../../../pages/UserProfile/mixins/flex';
+@import '../../../pages/UserProfile/mixins/miscellaneous';
 
-//         h4 {
-//             position: relative;
-//             color: #fff;
-//             font-weight: 500;
-//             margin-bottom: 15px;
+// Xtra Large Breakpoint
+$breakpoint-xl: 'only screen and (min-width:1200px)';
+// Large Breakpoint
+$breakpoint-lg: 'only screen and (min-width:992px) and (max-width:1199px)';
+// Medium Breakpoint
+$breakpoint-md: 'only screen and (min-width:768px) and (max-width:991px)';
+// Small Breakpoint
+$breakpoint-sm: 'only screen and (min-width:576px) and (max-width:767px)';
+// Xtra Small Breakpoint
+$breakpoint-xs: 'only screen and (max-width:767px)';
 
-//             &::before {
-//                 content: '';
-//                 position: absolute;
-//                 bottom: -5px;
-//                 left: 0;
-//                 width: 50px;
-//                 height: 2px;
-//                 background: gold;
-//             }
-//         }
-//     }
+$breakpoint-xm: 'only screen and (max-width:535px)';
+// Xtra Small Landscape Breakpoint
+$breakpoint-xs-landscape: 'only screen and (min-width:480px) and (max-width:767px)';
 
-//     p {
-//         color: #999;
-//     }
+$box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
 
-//     .sci {
-//         margin-top: 20px;
-//         display: flex;
-//         margin-left: -36px;
-//     }
-//     .sci li {
-//         list-style: none;
-//     }
+// Heading Color
+$heading: #2a303b;
 
-//     .sci li a {
-//         display: inline-block;
-//         width: 40px;
-//         height: 40px;
-//         background: #222;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         margin-left: 10px;
-//         text-decoration: none;
-//         border-radius: 50px;
-//     }
+// Text Color
+$text: #636a76;
 
-//     .sci li a:hover {
-//         background: #ffd700;
-//     }
+// Gray Background
+$bg-gray: #e8f1f8;
 
-//     .sci li a .fab {
-//         color: #fff;
-//         font-size: 17px;
-//     }
+// Primary Color
+$primary: #1cc3b2;
 
-//     .quickLinks {
-//         position: relative;
-//         width: 25%;
-//     }
+// White Color
+$white: #ffffff;
 
-//     .quickLinks ul li {
-//         list-style: none;
-//     }
-//     .quickLinks ul li a {
-//         color: #999;
-//         text-decoration: none;
-//         margin-bottom: 10px;
-//         display: inline-block;
-//     }
+// Dark Color
+$dark: #000000;
 
-//     .info li i {
-//         color: gold;
-//     }
+// Border Color
+$border: #ebebeb;
 
-//     .quickLinks ul li a:hover {
-//         color: #fff;
-//     }
+// Hover Color
+$hover: #1cc3b2;
 
-//     .contact {
-//         width: calc(35% - 60px);
-//         margin-right: 0 !important;
-//     }
+// Secondary Color
+$secondary: #afb4bf;
 
-//     .contact .info {
-//         position: relative;
-//     }
+// Dark 2 Color
+$dark2: #0e2737;
+.footer-area {
+    position: relative;
+    z-index: 1;
+    background-color: $dark2;
+}
 
-//     .contact .info li {
-//         display: flex;
-//         margin-bottom: 16px;
-//     }
-//     .contact .info li span:nth-child(1) {
-//         color: #fff;
-//         font-size: 17px;
-//         margin-right: 10px;
-//     }
+.single-footer-widget {
+    position: relative;
+    z-index: 1;
 
-//     .contact .info li span {
-//         color: #999;
-//     }
+    .widget-title {
+        font-size: 22px;
+        color: $white;
+        margin-bottom: 25px;
+        display: block;
+        text-transform: capitalize;
 
-//     .contact .info li a {
-//         color: #999;
-//         text-decoration: none;
-//     }
+        @media #{$breakpoint-lg} {
+            font-size: 18px;
+        }
 
-//     .contact .info li a:hover {
-//         color: #fff;
-//     }
-// }
+        @media #{$breakpoint-xs} {
+            font-size: 18px;
+        }
+    }
 
-// @media (max-width: 991px) {
-//     .footer-container {
-//         padding: 40px;
-//     }
-//     footer .container {
-//         flex-direction: column;
-//     }
-//     footer .container .sec {
-//         margin-right: 0;
-//         margin-bottom: 40px;
-//     }
-//     footer .container .sec.aboutus,
-//     .quickLinks,
-//     .contact {
-//         width: 100%;
-//     }
-// }
+    .latest-blog-area {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 25px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-title {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+            color: $white;
+            font-weight: 400;
+
+            &:focus,
+            &:hover {
+                color: $hover;
+            }
+        }
+    }
+
+    .footer-nav {
+        position: relative;
+        z-index: 1;
+
+        li {
+            a {
+                display: block;
+                margin-bottom: 10px;
+                color: $text;
+                font-size: 14px;
+                font-weight: 400;
+                text-transform: capitalize;
+
+                &:focus,
+                &:hover {
+                    color: $white;
+                }
+            }
+
+            &:last-child {
+                a {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .nl-form {
+        position: relative;
+        z-index: 1;
+        margin-top: 30px;
+
+        input {
+            width: 100%;
+            height: 46px;
+            background-color: #3e525f;
+            border-radius: 30px;
+            border: none;
+            padding: 0 20px;
+            color: $white;
+            font-size: 14px;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        button {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            top: 3px;
+            right: 3px;
+            color: $white;
+            background-color: $primary;
+            cursor: pointer;
+            @include transition-duration(500ms);
+
+            &:focus,
+            &:hover {
+                background-color: $heading;
+            }
+        }
+    }
+
+    .footer-logo {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: $secondary;
+    }
+
+    h4 {
+        color: $hover;
+    }
+
+    span {
+        color: $secondary;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.copywrite-text {
+    position: relative;
+    z-index: 1;
+
+    @media #{$breakpoint-xs} {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 14px;
+        color: $secondary;
+        margin-bottom: 0;
+
+        @media #{$breakpoint-xs} {
+            font-size: 12px;
+        }
+
+        a {
+            color: $secondary;
+            font-size: 14px;
+
+            @media #{$breakpoint-xs} {
+                font-size: 12px;
+            }
+
+            &:focus,
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}
+
+.copywrite-content {
+    position: relative;
+    z-index: 1;
+    padding: 15px 0;
+    border-top: 1px solid #273d4b;
+
+    .social-info {
+        text-align: right;
+
+        @media #{$breakpoint-xs} {
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            color: $secondary;
+            padding-left: 20px;
+
+            &:focus,
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}

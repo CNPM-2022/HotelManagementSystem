@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
-
+import avt from './images/avatar1.png'
 
 
 function Sidebar() {
