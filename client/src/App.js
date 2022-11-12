@@ -1,11 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap-icons/font/bootstrap-icons.css";
-
-
-
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //component
 import Home from './pages/Home/Home';
@@ -22,9 +18,9 @@ import Admin from './pages/Admin/Admin';
 import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
 import Edit_profile from './pages/UserProfile/component/Edit_profile/Edit_profile';
-import User_infor from './pages/UserProfile/component/User_infor/User_infor'
-import My_booking from './pages/UserProfile/component/My_booking/My_booking'
-
+import User_infor from './pages/UserProfile/component/User_infor/User_infor';
+import My_booking from './pages/UserProfile/component/My_booking/My_booking';
+import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 
 function App() {
     return (
@@ -73,6 +69,7 @@ function App() {
                     <Route path="/admins" element={<Admin />}>
                         <Route index element={<AdminDashBoard />} />
                         <Route path="/admins/manage-users" element={<ManageUser />} />
+                        <Route path="/admins/manage-rooms" element={<ManageRoom />} />
                     </Route>
                 </Route>
 
