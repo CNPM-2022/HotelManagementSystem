@@ -1,6 +1,5 @@
 /* :: 7.0 Header Area CSS */
-@import '../../css/bootstrap.min.css';
-@import '../../css/animate.css';
+
 @import '../../css/default-assets/classy-nav.css';
 
 // Mixins
@@ -118,7 +117,7 @@ $dark2: #0e2737;
 }
 
 .classy-nav-container {
-    background-color: transparent;
+    //background-color: transparent;
     padding: 0;
 
     .classy-navbar {

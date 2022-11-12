@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 
-import './Edit_profile.scss'
-import Change_password from './Change_password';
+import './EditProfile.scss'
+import ChangePassword from './ChangePassword';
 
 function Edit_profile() {
 
@@ -15,7 +15,7 @@ function Edit_profile() {
         <div className="container-xl px-4">
 
             <nav className="nav nav-borders">
-                <h2 className="fs-bolder ml-3">Edit profile <i className="bi bi-pencil-square"></i></h2>
+                <h2 className="fs-bolder ms-3">Edit profile <i className="bi bi-pencil-square"></i></h2>
             </nav>
             <hr className="mt-0 mb-4" />
             <div className="row">
@@ -71,9 +71,9 @@ function Edit_profile() {
                                 <div className="row gx-3 mb-3 mx-0 d-flex justify-content-center">
 
                                     <Button variant="light" style={{ width: '50%' }} onClick={handleShow}>
-                                        <span className='mr-5 fw-bold'>Change my password
-                                            <i class="fa-solid fa-key ml-2"></i>
-                                        </span><i className="bi bi-chevron-right ml-5"></i>
+                                        <span className='me-5 fw-bold'>Change my password
+                                            <i className="fa-solid fa-key ms-2"></i>
+                                        </span><i className="bi bi-chevron-right ms-5"></i>
                                     </Button>
                                 </div>
 
@@ -82,7 +82,7 @@ function Edit_profile() {
                         </div>
                     </div>
                 </div>
-                <Change_password handleClose={handleClose} show={show} />
+                <ChangePassword handleClose={handleClose} show={show} />
             </div>
         </div>
     )

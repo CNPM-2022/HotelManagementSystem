@@ -21,9 +21,9 @@ import DefaultLayout from './layouts/DefaultLayout/DefaultLayout';
 import Admin from './pages/Admin/Admin';
 import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
-import Edit_profile from './pages/UserProfile/component/Edit_profile/Edit_profile';
-import User_infor from './pages/UserProfile/component/User_infor/User_infor'
-import My_booking from './pages/UserProfile/component/My_booking/My_booking'
+import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
+import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor'
+import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking'
 
 
 function App() {
@@ -63,9 +63,9 @@ function App() {
 
                 <Route path="/" element={<PrivateRoute />}>
                     <Route path="/User" element={<Profile />}>
-                        <Route index element={<User_infor />} />
-                        <Route path="/User/Edit-Profile" element={<Edit_profile />} />
-                        <Route path="/User/My-Booking" element={<My_booking />} />
+                        <Route index element={<UserInfor />} />
+                        <Route path="/User/Edit-Profile" element={<EditProfile />} />
+                        <Route path="/User/My-Booking" element={<MyBooking />} />
                     </Route>
 
                     <Route path="/roombook/:id/:fromdate/:todate" element={<Booking />} />

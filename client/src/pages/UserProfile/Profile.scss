@@ -3,14 +3,6 @@
 $font-primary: 'Poppins', Arial, sans-serif;
 $primary: #2f89fc;
 
-body {
-    font-family: $font-primary;
-    font-size: 14px;
-    line-height: 1.8;
-    font-weight: normal;
-    background: #fff;
-    color: lighten($black, 50%);
-}
 a {
     transition: 0.3s all ease;
     color: $primary;
