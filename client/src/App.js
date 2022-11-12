@@ -17,6 +17,7 @@ import DefaultLayout from './layouts/DefaultLayout/DefaultLayout';
 import Admin from './pages/Admin/Admin';
 import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
+import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
 import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor'
 import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking'
