@@ -12,7 +12,7 @@ function Slider() {
 
     return (
         <div className="home-slider-container">
-            <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+            <Carousel activeIndex={index} onSelect={handleSelect}>
                 <Carousel.Item>
                     <img className="d-block w-100" src={images.slide1} alt="First slide" />
                     <Carousel.Caption>

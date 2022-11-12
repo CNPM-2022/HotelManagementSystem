@@ -1,11 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap-icons/font/bootstrap-icons.css";
-
-
-
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //component
 import Home from './pages/Home/Home';
@@ -73,6 +69,7 @@ function App() {
                     <Route path="/admins" element={<Admin />}>
                         <Route index element={<AdminDashBoard />} />
                         <Route path="/admins/manage-users" element={<ManageUser />} />
+                        <Route path="/admins/manage-rooms" element={<ManageRoom />} />
                     </Route>
                 </Route>
 

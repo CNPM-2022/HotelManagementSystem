@@ -1,0 +1,82 @@
+.manage-room-container {
+    font-size: 16px;
+
+    .body {
+        margin-top: 30px;
+        .form-group {
+            .form-select {
+                width: 40%;
+            }
+        }
+
+        .manage-room {
+            .room-list {
+                .room-item {
+                    .room-action {
+                        display: flex;
+                        align-items: center;
+                        gap: 30px;
+
+                        .form-floating {
+                            width: 40%;
+                            font-size: 16px;
+                        }
+
+                        .group-upload {
+                            font-size: 16px;
+                            .label-upload {
+                                margin-right: 5px;
+                                color: #9068ff;
+                                font-size: 25px;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #4400ff;
+                                }
+                            }
+
+                            .preview-image {
+                                cursor: pointer;
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+
+                        .btn-group {
+                            .icon-add {
+                                font-size: 25px;
+                                color: #2596ff;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #0989ff;
+                                }
+                            }
+                            .icon-remove {
+                                margin-left: 15px;
+                                font-size: 25px;
+                                color: #e8771c;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #ff7608;
+                                }
+                            }
+                        }
+                    }
+
+                    .room-info {
+                        margin-left: 28px;
+
+                        .form-floating {
+                            .description {
+                                height: 140px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
