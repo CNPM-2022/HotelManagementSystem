@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import './Nav.scss'
 //import logo from "./images/LogoHotel1.png"
 import { Link } from 'react-router-dom'
@@ -7,21 +7,7 @@ function Nav() {
 
 
     return (
-        <header className="header-area">
-            <div className="search-form d-flex align-items-center">
-                <div className="container">
-                    <form action="index.html" method="get">
-                        <input
-                            type="search"
-                            name="search-form-input"
-                            id="searchFormInput"
-                            placeholder="Type your keyword ..."
-                        />
-                        <button type="submit"><i className="icon_search"></i></button>
-                    </form>
-                </div>
-            </div>
-
+        <header className="header-area1">
             <div className="main-header-area2">
                 <div className="classy-nav-container breakpoint-off">
                     <div className="container">
@@ -55,12 +41,12 @@ function Nav() {
                                     </ul>
 
 
-                                    <div className="search-btn ml-4  mb-4">
+                                    <div className="search-btn ms-4  mb-4">
                                         <i className="bi bi-search"></i>
                                     </div>
 
 
-                                    <div className="book-now-btn ml-3 ml-lg-5">
+                                    <div className="book-now-btn ms-3 ms-lg-5">
                                         <a href="#" id="bookNow">Book<span> Now</span><i className="bi bi-arrow-right-circle ml-2" aria-hidden="true"></i></a>
                                     </div>
                                 </div>

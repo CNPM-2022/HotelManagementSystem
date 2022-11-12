@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
-import avt from './images/avatar1.png'
+//import avt from './images/avatar1.png'
 
 
 function Sidebar() {
@@ -34,10 +34,10 @@ function Sidebar() {
                     onClick={handleToggle}
                 ></button>
             </div>
-            <div className="img bg-wrap text-center py-4" id='avt'>
+            <div className="img img-sidebar bg-wrap text-center py-4" id='avt'>
                 <div className="user-logo">
                     <div
-                        className="img"
+                        className="img img-sidebar"
 
                     ></div>
                     <h3>John Smith</h3>

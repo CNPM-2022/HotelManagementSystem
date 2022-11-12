@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 
-import './Edit_profile.scss'
-import Change_password from './Change_password';
+import './EditProfile.scss'
+import ChangePassword from './ChangePassword';
 
 function Edit_profile() {
 
@@ -14,18 +14,18 @@ function Edit_profile() {
     return (
         <div className="container-xl px-4">
 
-            <nav className="nav nav-borders">
-                <h2 className="fs-bolder ml-3">Edit profile <i className="bi bi-pencil-square"></i></h2>
+            <nav className="nav nav-borders nav-borders-handle">
+                <h2 className="fs-bolder ms-3">Edit profile <i className="bi bi-pencil-square"></i></h2>
             </nav>
             <hr className="mt-0 mb-4" />
             <div className="row">
                 <div className="col-xl-4">
 
-                    <div className="card mb-4 mb-xl-0">
+                    <div className="card mb-4 mb-xl-0 card-handle">
                         <div className="card-header">Profile Picture</div>
                         <div className="card-body text-center">
 
-                            <img className="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                            <img className="img-account-profile rounded-circle mb-2 img-account-profile-handle" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
 
                             <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -35,45 +35,45 @@ function Edit_profile() {
                 </div>
                 <div className="col-xl-8">
 
-                    <div className="card mb-4">
+                    <div className="card card-handle mb-4">
                         <div className="card-header">Account Details</div>
                         <div className="card-body">
                             <form>
 
                                 <div className="mb-3">
                                     <label className="small mb-1" htmlFor="inputUsername">Full name</label>
-                                    <input className="form-control" id="inputUsername" type="text" placeholder="Enter your name" />
+                                    <input className="form-control form-contro-handle" id="inputUsername" type="text" placeholder="Enter your name" />
                                 </div>
 
                                 <div className="mb-3">
                                     <label className="small mb-1" htmlFor="inputEmailAddress">Email address</label>
-                                    <input className="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" />
+                                    <input className="form-control form-contro-handle" id="inputEmailAddress" type="email" placeholder="Enter your email address" />
                                 </div>
 
                                 <div className="row gx-3 mb-3">
 
                                     <div className="col-md-6">
                                         <label className="small mb-1" htmlFor="inputPhone">Phone number</label>
-                                        <input className="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" />
+                                        <input className="form-control form-contro-handle" id="inputPhone" type="tel" placeholder="Enter your phone number" />
                                     </div>
 
                                     <div className="col-md-6">
                                         <label className="small mb-1" htmlFor="inputCMND">CMND</label>
-                                        <input className="form-control" id="inputBirthday" type="text" name="CMND" placeholder="Enter your CMND" />
+                                        <input className="form-control form-contro-handle" id="inputBirthday" type="text" name="CMND" placeholder="Enter your CMND" />
                                     </div>
                                 </div>
 
                                 <div className="mb-3">
                                     <label className="small mb-1" htmlFor="inputAddress">Address</label>
-                                    <input className="form-control" id="inputAddress" type="text" placeholder="Enter your address" />
+                                    <input className="form-control form-contro-handle" id="inputAddress" type="text" placeholder="Enter your address" />
                                 </div>
 
                                 <div className="row gx-3 mb-3 mx-0 d-flex justify-content-center">
 
                                     <Button variant="light" style={{ width: '50%' }} onClick={handleShow}>
-                                        <span className='mr-5 fw-bold'>Change my password
-                                            <i class="fa-solid fa-key ml-2"></i>
-                                        </span><i className="bi bi-chevron-right ml-5"></i>
+                                        <span className='me-5 fw-bold'>Change my password
+                                            <i className="fa-solid fa-key ms-2"></i>
+                                        </span><i className="bi bi-chevron-right ms-5"></i>
                                     </Button>
                                 </div>
 
@@ -82,7 +82,7 @@ function Edit_profile() {
                         </div>
                     </div>
                 </div>
-                <Change_password handleClose={handleClose} show={show} />
+                <ChangePassword handleClose={handleClose} show={show} />
             </div>
         </div>
     )

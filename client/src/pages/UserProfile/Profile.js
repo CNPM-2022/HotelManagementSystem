@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
 import { Fragment } from 'react';
-import { Routes, Route } from "react-router-dom";
 import { Outlet } from "react-router-dom"
 
 import Nav from './component/Nav/Nav'
@@ -16,7 +15,7 @@ function App() {
       <div className="container">
         <Nav />
       </div>
-      <div className="wrapper d-flex align-items-stretch">
+      <div className="wrapper d-flex align-items-stretch" style={{ width: '100%' }}>
         <Sidebar />
         <div id="content" className="p-4 p-md-5 pt-5" style={{ backgroundColor: "#eee" }}>
           <section className="mt-3" style={{ backgroundColor: "#eee" }}>
