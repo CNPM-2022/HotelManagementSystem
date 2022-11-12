@@ -3,17 +3,7 @@
 $font-primary: 'Poppins', Arial, sans-serif;
 $primary: #2f89fc;
 
-a {
-    transition: 0.3s all ease;
-    color: $primary;
-    &:hover,
-    &:focus {
-        text-decoration: none !important;
-        outline: none !important;
-        box-shadow: none;
-    }
-}
-button {
+#sidebarCollapse {
     transition: 0.3s all ease;
     &:hover,
     &:focus {
@@ -22,6 +12,7 @@ button {
         box-shadow: none !important;
     }
 }
+
 h1,
 h2,
 h3,
@@ -39,17 +30,13 @@ h5,
 }
 
 //COVER BG
-.img {
+.img-sidebar {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 //SIDEBAR
-.wrapper {
-    width: 100%;
-}
-
 #sidebar {
     min-width: 300px;
     max-width: 300px;
@@ -222,18 +209,6 @@ h5,
     }
 }
 
-a[data-toggle='collapse'] {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-}
-
 #sidebarCollapse {
     span {
         @include media-breakpoint-down(md) {
@@ -259,18 +234,6 @@ a[data-toggle='collapse'] {
         }
     }
 } */
-
-.footer {
-    p {
-        color: rgba(255, 255, 255, 0.5);
-    }
-}
-
-.subscribe-form {
-    .form-control {
-        background: lighten($primary, 5%);
-    }
-}
 
 #avt {
     background-image: url(./images/bg_1.jpg);

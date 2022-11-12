@@ -7,21 +7,7 @@ function Nav() {
 
 
     return (
-        <header className="header-area">
-            <div className="search-form d-flex align-items-center">
-                <div className="container">
-                    <form action="index.html" method="get">
-                        <input
-                            type="search"
-                            name="search-form-input"
-                            id="searchFormInput"
-                            placeholder="Type your keyword ..."
-                        />
-                        <button type="submit"><i className="icon_search"></i></button>
-                    </form>
-                </div>
-            </div>
-
+        <header className="header-area1">
             <div className="main-header-area2">
                 <div className="classy-nav-container breakpoint-off">
                     <div className="container">
