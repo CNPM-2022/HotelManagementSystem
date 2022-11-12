@@ -16,6 +16,7 @@ import DefaultLayout from './layouts/DefaultLayout/DefaultLayout';
 import Admin from './pages/Admin/Admin';
 import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
+import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 
 function App() {
     return (
@@ -59,6 +60,7 @@ function App() {
                     <Route path="/admins" element={<Admin />}>
                         <Route index element={<AdminDashBoard />} />
                         <Route path="/admins/manage-users" element={<ManageUser />} />
+                        <Route path="/admins/manage-rooms" element={<ManageRoom />} />
                     </Route>
                 </Route>
 

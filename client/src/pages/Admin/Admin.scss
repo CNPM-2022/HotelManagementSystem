@@ -4,6 +4,10 @@
     .sidebar {
         height: 100vh;
 
+        .pro-sidebar {
+            z-index: 990;
+        }
+
         .title {
             text-decoration: none;
             color: #adadad;
