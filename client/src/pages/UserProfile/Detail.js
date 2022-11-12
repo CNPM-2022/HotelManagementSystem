@@ -43,7 +43,7 @@ function Detail() {
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
-                            <p className="mb-0">Address</p>
+                            <p className="mb-0">CMND</p>
                         </div>
                         <div className="col-sm-9">
                             <p className="text-muted mb-0">

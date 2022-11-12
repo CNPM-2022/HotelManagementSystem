@@ -221,7 +221,7 @@ h5,
             border-radius: 50%;
             margin: 0 auto;
             margin-bottom: 10px;
-            background-image: url('./images/ava3.webp');
+            background-image: url('./images/avatar1.png');
         }
         h3 {
             color: $white;
@@ -270,36 +270,6 @@ a[data-toggle='collapse'] {
 
 .footer {
     p {
-        color: rgba(255, 255, 255, 0.5);
-    }
-}
-
-.form-control {
-    height: 40px !important;
-    background: $white;
-    color: $black;
-    font-size: 13px;
-    border-radius: 4px;
-    box-shadow: none !important;
-    border: transparent;
-    &:focus,
-    &:active {
-        border-color: $black;
-    }
-    &::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        color: rgba(255, 255, 255, 0.5);
-    }
-    &::-moz-placeholder {
-        /* Firefox 19+ */
-        color: rgba(255, 255, 255, 0.5);
-    }
-    &:-ms-input-placeholder {
-        /* IE 10+ */
-        color: rgba(255, 255, 255, 0.5);
-    }
-    &:-moz-placeholder {
-        /* Firefox 18- */
         color: rgba(255, 255, 255, 0.5);
     }
 }

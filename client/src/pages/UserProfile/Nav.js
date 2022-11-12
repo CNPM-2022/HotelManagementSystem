@@ -1,6 +1,7 @@
 import React from "react";
 import './Nav.scss'
 import logo from "./images/LogoHotel1.png"
+import { Link } from 'react-router-dom'
 
 function Nav() {
 
@@ -47,8 +48,8 @@ function Nav() {
 
                                 <div className="classynav d-flex align-items-center">
                                     <ul id="nav">
-                                        <li className="active"><a href="./index.html">Home</a></li>
-                                        <li><a href="./room.html">Rooms</a></li>
+                                        <li className="active"><Link to="/">Home</Link></li>
+                                        <li><Link to="/rooms">Rooms</Link></li>
                                         <li><a href="./about.html">About Us</a></li>
                                         <li><a href="./blog.html">News</a></li>
                                     </ul>

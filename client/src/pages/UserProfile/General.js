@@ -1,4 +1,5 @@
 import React from "react";
+import avt from './images/avatar1.png'
 
 function General() {
     return (
@@ -6,7 +7,7 @@ function General() {
             <div className="card-body text-center d-flex align-items-center justify-content-center">
                 <div>
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                        src={avt}
                         alt="avatar"
                         className="rounded-circle img-fluid"
                         style={{ width: 150 + 'px' }}
