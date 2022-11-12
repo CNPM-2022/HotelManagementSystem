@@ -3,14 +3,9 @@ import { Fragment } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Outlet } from "react-router-dom"
 
-import Nav from './Nav.js'
+import Nav from './component/Nav/Nav'
 import Sidebar from './Sidebar.js';
-import Footer from './Footer.js';
-import Edit_profile from './Edit_profile.js';
-import User_infor from './User_infor'
-/* import "bootstrap-icons/font/bootstrap-icons.css";
-import "bootstrap/dist/css/bootstrap.css"
-import 'bootstrap/dist/css/bootstrap.min.css'; */
+import Footer from './component/footer/Footer';
 import "./Profile.scss"
 
 

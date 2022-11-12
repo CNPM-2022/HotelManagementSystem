@@ -1,5 +1,5 @@
 import React from "react";
-import avt from './images/avatar1.png'
+import avt from '../../images/avatar1.png'
 
 function General() {
     return (

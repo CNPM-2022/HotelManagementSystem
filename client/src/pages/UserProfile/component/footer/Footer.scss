@@ -1,12 +1,10 @@
 /* :: 9.0 Footer Area CSS */
 @import 'bootstrap/dist/css/bootstrap.css';
-@import 'css/animate.css';
-@import 'css/default-assets/classy-nav.css';
 
 // Mixins
 
-@import 'mixins/flex';
-@import 'mixins/miscellaneous';
+@import '../../mixins/flex';
+@import '../../mixins/miscellaneous';
 
 // Xtra Large Breakpoint
 $breakpoint-xl: 'only screen and (min-width:1200px)';

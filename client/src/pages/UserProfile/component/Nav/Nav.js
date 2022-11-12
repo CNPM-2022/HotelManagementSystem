@@ -1,6 +1,6 @@
 import React from "react";
 import './Nav.scss'
-import logo from "./images/LogoHotel1.png"
+//import logo from "./images/LogoHotel1.png"
 import { Link } from 'react-router-dom'
 
 function Nav() {

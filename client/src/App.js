@@ -21,9 +21,9 @@ import DefaultLayout from './layouts/DefaultLayout/DefaultLayout';
 import Admin from './pages/Admin/Admin';
 import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
-import Edit_profile from './pages/UserProfile/Edit_profile';
-import User_infor from './pages/UserProfile/User_infor'
-import My_booking from './pages/UserProfile/My_booking'
+import Edit_profile from './pages/UserProfile/component/Edit_profile/Edit_profile';
+import User_infor from './pages/UserProfile/component/User_infor/User_infor'
+import My_booking from './pages/UserProfile/component/My_booking/My_booking'
 
 
 function App() {
