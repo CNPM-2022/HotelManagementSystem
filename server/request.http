@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "username": "admin",
-    "password": "admin1"
+    "password": "admin"
 }
 #API for Register
 #Return the API key
