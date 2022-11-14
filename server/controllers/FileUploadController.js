@@ -1,4 +1,3 @@
-'use strict';
 const SingleFile = require('../models/SingleImage');
 const MultipleFile = require('../models/MultiImage');
 

@@ -61,9 +61,9 @@ const getRoomDirectoryById = asyncHandler(async (req, res) => {
 // @route   POST /api/room-directory/create
 // @access  Private
 const createRoomDirectory = asyncHandler(async (req, res) => {
-    const { name, typeOfRooms, description, imageUrls, price, listRoom, note } = req.body;
+    const { name, typeOfRooms, description, price, listRoom, note } = req.body;
 
-    if (!name || !typeOfRooms || !description || !imageUrls || !price || !listRoom || !note) {
+    if (!name || !typeOfRooms || !description || !price || !listRoom || !note) {
         res.status(400).json({
             success: false,
             message: 'Please provide all required fields',
@@ -74,11 +74,21 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
         if (roomIsAlreadyExist) {
             throw new Error('Room Direction is already exist');
         }
+
+        let ImagesArray = [];
+        req.files.forEach((element) => {
+            const file = {
+                fileName: element.originalname,
+                filePath: element.path,
+                fileType: element.mimetype,
+            };
+            ImagesArray.push(file);
+        });
         const roomDirectory = await RoomDirectory.create({
             name,
             description,
             typeOfRooms,
-            imageUrls,
+            imageUrls: ImagesArray,
             price,
             listRoom,
             note,
@@ -106,14 +116,14 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
 // @access  Private
 const updateRoomDirectory = asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const { name, typeOfRooms, description, imageUrls, price, listRoom, note } = req.body;
+    const { name, typeOfRooms, description, price, listRoom, note } = req.body;
     if (!id) {
         res.status(400).json({
             success: false,
             message: 'No room director id provided',
         });
     }
-    if (!name || !typeOfRooms || !description || !imageUrls || !price || !listRoom || !note) {
+    if (!name || !typeOfRooms || !description || !price || !listRoom || !note) {
         res.status(400).json({
             success: false,
             message: 'Please provide all required fields',
@@ -121,11 +131,20 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
     }
     try {
         const roomDirectory = await RoomDirectory.findById(id);
+        let ImagesArray = [];
+        req.files.forEach((element) => {
+            const file = {
+                fileName: element.originalname,
+                filePath: element.path,
+                fileType: element.mimetype,
+            };
+            ImagesArray.push(file);
+        });
         if (roomDirectory) {
             roomDirectory.name = name;
             roomDirectory.description = description;
             roomDirectory.typeOfRooms = typeOfRooms;
-            roomDirectory.imageUrls = imageUrls;
+            roomDirectory.imageUrls = ImagesArray;
             roomDirectory.price = price;
             roomDirectory.listRoom = listRoom;
             roomDirectory.note = note;

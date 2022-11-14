@@ -1,6 +1,7 @@
 import express from 'express';
 
 const router = express.Router();
+const { upload } = require('../helpers/FileHelper');
 
 import {
     getAllRoomDirectory,
@@ -12,8 +13,8 @@ import {
 
 router.get('/all', getAllRoomDirectory);
 router.get('/:id', getRoomDirectoryById);
-router.post('/create', createRoomDirectory);
-router.put('/update/:id', updateRoomDirectory);
+router.post('/create', upload.array('images'), createRoomDirectory);
+router.put('/update/:id', upload.array('images'), updateRoomDirectory);
 router.delete('/delete/:id', deleteRoomDirectory);
 
 export default router;
