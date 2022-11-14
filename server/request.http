@@ -172,8 +172,8 @@ Content-Type: application/json
 ###
 DELETE http://localhost:5000/api/room-direction/delete/636cc5db68cdc75fd8a85da8
 
-
-
+###
+GET  http://localhost:5000/api/upload/
 
 
 

@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const morgan = require('morgan');
+import path from 'path';
 import cors from 'cors';
 import rooms from './routes/rooms.js';
 import auth from './routes/auth.js';
 import roomDirection from './routes/roomDirection.js';
 import user from './routes/user.js';
+import uploads from './routes/upload.js';
 
 //connect to mongodb
 const connectDB = async () => {
@@ -47,6 +49,8 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 //middleware for routes
 app.use(morgan('dev'));
 
@@ -60,5 +64,6 @@ app.use('/api/auth', auth);
 app.use('/api/rooms', rooms);
 app.use('/api/room-direction', roomDirection);
 app.use('/api/user', user);
+app.use('/api/upload', uploads);
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
