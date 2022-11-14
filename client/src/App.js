@@ -19,9 +19,8 @@ import AdminDashBoard from './pages/Admin/Content/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
 import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
-import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor'
-import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking'
-
+import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor';
+import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking';
 
 function App() {
     return (
@@ -59,7 +58,14 @@ function App() {
                 <Route path="/register" element={<Register />} />
 
                 <Route path="/" element={<PrivateRoute />}>
-                    <Route path="/User" element={<Profile />}>
+                    <Route
+                        path="/User"
+                        element={
+                            <DefaultLayout>
+                                <Profile />
+                            </DefaultLayout>
+                        }
+                    >
                         <Route index element={<UserInfor />} />
                         <Route path="/User/Edit-Profile" element={<EditProfile />} />
                         <Route path="/User/My-Booking" element={<MyBooking />} />
