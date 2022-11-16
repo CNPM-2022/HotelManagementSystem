@@ -20,14 +20,6 @@ export const initState = [
         price: 0,
         note: '',
     },
-    {
-        id: uuidv4(),
-        name: '',
-        description: '',
-        imageFile: '',
-        price: 0,
-        note: '',
-    },
 ];
 
 const reducer = (state, action) => {
