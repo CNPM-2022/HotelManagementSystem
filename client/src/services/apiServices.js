@@ -38,3 +38,7 @@ export const putUpdateUser = (dataUser) => {
 export const deleteUser = (userId) => {
     return axios.delete(`user/${userId}/delete`);
 };
+
+export const getUser = (userID) => {
+    return axios.get(`user/${userID}`);
+}
