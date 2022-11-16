@@ -40,9 +40,7 @@ function ManageUser() {
             throw new Error(data.message);
         }
 
-        const chunkedUsers = _.chunk(data.users, ITEMS_PER_PAGE);
-
-        setListUsers(chunkedUsers);
+        setListUsers(data.users);
     };
 
     const fetchListUsersOfPage = async (currentPage) => {
