@@ -10,6 +10,11 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+a {
+    text-decoration: none;
+    transition: color 0.4s;
+}
+
 // Custom bootstrap
 
 @media (min-width: 992px) {
