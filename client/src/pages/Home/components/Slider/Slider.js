@@ -1,51 +1,66 @@
 import { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import images from '../../../../assets/images';
+import SlickSlider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss';
+import images from '../../../../assets/images';
+import SlideNextArrow from './SlideNextArrow';
+import SlidePrevArrow from './SlidePrevArrow';
 
 function Slider() {
-    const [index, setIndex] = useState(0);
+    const [prevSlideImageSrc, setPrevSlideImageSrc] = useState(images.slide3);
+    const [nextSlideImageSrc, setNextSlideImageSrc] = useState(images.slide2);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
+    const listSlides = [
+        {
+            image: images.room1,
+        },
+        {
+            image: images.room2,
+        },
+        {
+            image: images.room3,
+        },
+    ];
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        arrows: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <SlideNextArrow imageSrc={nextSlideImageSrc} />,
+        prevArrow: <SlidePrevArrow imageSrc={prevSlideImageSrc} />,
+        afterChange: (current) => {
+            const listSlidesLength = listSlides.length;
+            if (current === 0) {
+                setNextSlideImageSrc(listSlides[current + 1].image);
+                setPrevSlideImageSrc(listSlides[listSlidesLength - 1].image);
+            } else if (current === listSlidesLength - 1) {
+                setNextSlideImageSrc(listSlides[0].image);
+                setPrevSlideImageSrc(listSlides[current - 1].image);
+            } else {
+                setNextSlideImageSrc(listSlides[current + 1].image);
+                setPrevSlideImageSrc(listSlides[current - 1].image);
+            }
+        },
     };
-
     return (
         <div className="home-slider-container">
-            <Carousel activeIndex={index} onSelect={handleSelect}>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={images.slide1} alt="First slide" />
-                    <Carousel.Caption>
-                        <div className="welcome">
-                            <p>Hotel & Resort</p>
-                            <h3>Welcome To Roberto</h3>
-                            <button className="discover-btn">Discover Now</button>
-                        </div>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={images.slide2} alt="Second slide" />
+            <SlickSlider {...settings}>
+                {listSlides.map((slide, index) => (
+                    <div key={index} className="slide-item">
+                        <img src={slide.image} alt={`Slide ${index + 1}`} />
 
-                    <Carousel.Caption>
                         <div className="welcome">
                             <p>Hotel & Resort</p>
                             <h3>Welcome To Roberto</h3>
                             <button className="discover-btn">Discover Now</button>
                         </div>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={images.slide3} alt="Third slide" />
-
-                    <Carousel.Caption>
-                        <div className="welcome">
-                            <p>Hotel & Resort</p>
-                            <h3>Welcome To Roberto</h3>
-                            <button className="discover-btn">Discover Now</button>
-                        </div>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+                    </div>
+                ))}
+            </SlickSlider>
         </div>
     );
 }

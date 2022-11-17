@@ -1,5 +1,4 @@
 import './GlobalStyles.scss';
-import 'antd/dist/antd.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
 

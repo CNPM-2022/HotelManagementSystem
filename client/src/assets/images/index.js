@@ -1,9 +1,9 @@
 const images = {
     logo: require('./logo.png'),
     defaultUser: require('./user.png'),
-    slide1: require('./homeSlides/slide1.jpg'),
-    slide2: require('./homeSlides/slide2.jpg'),
-    slide3: require('./homeSlides/slide3.jpg'),
+    room1: require('./rooms/room1.jpg'),
+    room2: require('./rooms/room2.jpg'),
+    room3: require('./rooms/room3.jpg'),
     thumb1: require('./homeThumbs/thumb1.jpg'),
     thumb2: require('./homeThumbs/thumb2.jpg'),
     thumb3: require('./homeThumbs/thumb3.jpg'),
