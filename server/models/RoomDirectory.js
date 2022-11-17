@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 
 const roomDirectorySchema = mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: true,
-        },
         typeOfRooms: {
             type: String,
             required: true,
@@ -23,10 +19,6 @@ const roomDirectorySchema = mongoose.Schema(
         },
         listRoom: {
             type: Array,
-            required: true,
-        },
-        note: {
-            type: String,
             required: true,
         },
     },
