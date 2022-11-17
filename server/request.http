@@ -133,7 +133,7 @@ GET http://localhost:5000/api/room-direction/all
 #API for get room by direction (id)
 #return room by direction
 ###
-GET http://localhost:5000/api/room-direction/63647857fbca5704cd29197f
+GET http://localhost:5000/api/room-direction/637600d5635ea1b71d200719
 
 #API for create room direction
 #return room direction created
@@ -142,13 +142,11 @@ POST http://localhost:5000/api/room-direction/create
 Content-Type: application/json
 
 {
-    "name": "Phòng hướng Đông",
-    "description": "Phòng hướng Đông",
-    "typeOfRooms":"C",
+    "description": "For those travellers on the go or business visitors our Superior Rooms offers the perfect haven. They have restricted or no views yet offer a quiet and private refuge and access to all the facilities, including breakfast in the frangipani courtyard, that our historic hotel has to offer.",
+    "typeOfRooms":"A",
     "imageUrls" : ["https://i.imgur.com/1ZQ3Z0M.jpg"],
     "price":"250000",
-    "listRoom": ["6364b434b446c82c12997ee0"],
-    "note" : "Phòng hướng Đông"
+    "listRoom": ["515","612","758"],
 }
 
 #API for update room direction
@@ -158,19 +156,17 @@ PUT http://localhost:5000/api/room-direction/update/636cc5c568cdc75fd8a85da5
 Content-Type: application/json
 
 {
-    "name": "Phòng Loại 3 ",
     "description": "Organizers choose Hotel Continental Saigon to hold their meetings because of hotel’s meeting rooms are well equipped and offer a wide choice of meeting functions such as workshops, seminars, product launches and video conferences",
     "typeOfRooms":"C",
     "imageUrls" : ["https://i.imgur.com/1ZQ3Z0M.jpg"],
     "price":"250000",
     "listRoom": ["515","612","758"],
-    "note" : "Phòng hướng Đông"
 }
 
 #API for delete room direction
 #return state:  success, fail
 ###
-DELETE http://localhost:5000/api/room-direction/delete/636cc5db68cdc75fd8a85da8
+DELETE http://localhost:5000/api/room-direction/delete/63721b5f29fe4a26af2f724e
 
 ###
 GET  http://localhost:5000/api/upload/
