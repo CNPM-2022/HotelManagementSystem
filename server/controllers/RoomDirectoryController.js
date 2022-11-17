@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import RoomDirectory from '../models/RoomDirectory.js';
+import fs from 'fs';
 
 // @desc    Fetch room directory
 // @route   GET /api/room-directory/all
@@ -121,14 +122,18 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
             message: 'No room director id provided',
         });
     }
-    if (!typeOfRooms || !description || !price || !listRoom) {
-        res.status(400).json({
-            success: false,
-            message: 'Please provide all required fields',
-        });
-    }
+    // if (!typeOfRooms || !description || !price || !listRoom) {
+    //     res.status(400).json({
+    //         success: false,
+    //         message: 'Please provide all required fields',
+    //     });
+    // }
     try {
         const roomDirectory = await RoomDirectory.findById(id);
+        roomDirectory.imageUrls.map((image) => {
+            console.log(image);
+        });
+
         let ImagesArray = [];
         req.files.forEach((element) => {
             const file = {
