@@ -29,12 +29,34 @@ function Rooms() {
     return (
         <div className="home-rooms-container">
             <SlickSlider {...settings}>
-                <div className="single-room">
-                    <div className="thumbnail">
-                        <img src={images.room1} alt={`Room `} />
-                    </div>
+                <div>
+                    <div className="single-room">
+                        <div className="thumbnail">
+                            <img src={images.room1} alt={`Room `} />
+                        </div>
 
-                    <div className="content"></div>
+                        <div className="content">
+                            <h2>Best King Room</h2>
+                            <h3>
+                                125$
+                                <span> / Day</span>
+                            </h3>
+                            <ul className="features">
+                                <li>
+                                    <span> Size</span>
+                                    <span>: 30 ft</span>
+                                </li>
+                                <li>
+                                    <span> Size</span>
+                                    <span>: 30 ft</span>
+                                </li>
+                                <li>
+                                    <span> Size</span>
+                                    <span>: 30 ft</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </SlickSlider>
         </div>

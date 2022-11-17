@@ -8,8 +8,8 @@ import SlideNextArrow from './SlideNextArrow';
 import SlidePrevArrow from './SlidePrevArrow';
 
 function Slider() {
-    const [prevSlideImageSrc, setPrevSlideImageSrc] = useState(images.slide3);
-    const [nextSlideImageSrc, setNextSlideImageSrc] = useState(images.slide2);
+    const [prevSlideImageSrc, setPrevSlideImageSrc] = useState(images.room3);
+    const [nextSlideImageSrc, setNextSlideImageSrc] = useState(images.room2);
 
     const listSlides = [
         {
