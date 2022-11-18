@@ -1,46 +1,46 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const roomSchema = mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
+    {
+        roomNumber: {
+            type: String,
+            required: true,
+        },
+        maxCount: {
+            type: Number,
+            required: true,
+            max: 3,
+        },
+        imageUrls: [],
+        status: {
+            type: String,
+            required: true,
+            default: 'Available',
+            enum: ['Available', 'Unavailable'],
+        },
+        type: {
+            type: String,
+            required: true,
+            enum: ['A', 'B', 'C'],
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        price: {
+            type: Number,
+            required: true,
+        },
+        note: {
+            type: String,
+            required: true,
+        },
     },
-    maxcount: {
-      type: Number,
-      required: true,
-      max: 3,
+    {
+        timestamps: true,
     },
-    phonenumber: {
-      type: Number,
-      required: true,
-    },
-    rentperday: {
-      type: Number,
-      required: true,
-    },
-    imageurls: [],
-    currentBookings: [],
-    type: {
-      type: String,
-      required: true,
-      default: "A",
-      enum: ["A", "B", "C"],
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
 );
 
-const Rooms = mongoose.model("rooms", roomSchema);
+const Rooms = mongoose.model('rooms', roomSchema);
 
 export default Rooms;

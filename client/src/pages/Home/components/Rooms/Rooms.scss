@@ -1,0 +1,25 @@
+.home-rooms-container {
+    .slick-slider {
+        .slick-list {
+            .slick-track {
+                .slick-slide {
+                    .single-room {
+                        display: flex;
+
+                        .thumbnail {
+                            flex: 1;
+
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        .content {
+                            flex: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

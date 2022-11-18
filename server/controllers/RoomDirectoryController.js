@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import RoomDirectory from '../models/RoomDirectory.js';
+import fs from 'fs';
 
 // @desc    Fetch room directory
 // @route   GET /api/room-directory/all
@@ -31,6 +32,7 @@ const getAllRoomDirectory = asyncHandler(async (req, res) => {
 // @access  Public
 const getRoomDirectoryById = asyncHandler(async (req, res) => {
     const id = req.params.id;
+
     if (!id) {
         res.status(400).json({
             success: false,
@@ -61,16 +63,16 @@ const getRoomDirectoryById = asyncHandler(async (req, res) => {
 // @route   POST /api/room-directory/create
 // @access  Private
 const createRoomDirectory = asyncHandler(async (req, res) => {
-    const { name, typeOfRooms, description, price, listRoom, note } = req.body;
+    const { typeOfRooms, description, price, listRoom } = req.body;
 
-    if (!name || !typeOfRooms || !description || !price || !listRoom || !note) {
+    if (!typeOfRooms || !description || !price || !listRoom) {
         res.status(400).json({
             success: false,
             message: 'Please provide all required fields',
         });
     }
     try {
-        const roomIsAlreadyExist = await RoomDirectory.findOne({ name });
+        const roomIsAlreadyExist = await RoomDirectory.findOne({ typeOfRooms });
         if (roomIsAlreadyExist) {
             throw new Error('Room Direction is already exist');
         }
@@ -85,13 +87,11 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
             ImagesArray.push(file);
         });
         const roomDirectory = await RoomDirectory.create({
-            name,
             description,
             typeOfRooms,
             imageUrls: ImagesArray,
             price,
             listRoom,
-            note,
         });
         if (roomDirectory) {
             res.status(201).json({
@@ -116,21 +116,29 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
 // @access  Private
 const updateRoomDirectory = asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const { name, typeOfRooms, description, price, listRoom, note } = req.body;
+    const { typeOfRooms, description, price, listRoom } = req.body;
     if (!id) {
         res.status(400).json({
             success: false,
             message: 'No room director id provided',
         });
     }
-    if (!name || !typeOfRooms || !description || !price || !listRoom || !note) {
-        res.status(400).json({
-            success: false,
-            message: 'Please provide all required fields',
-        });
-    }
     try {
         const roomDirectory = await RoomDirectory.findById(id);
+
+        if (!roomDirectory) {
+            throw new Error('Room director not found');
+        }
+
+        const ImagesArrayTemp = roomDirectory.imageUrls;
+        ImagesArrayTemp.map((item) => {
+            fs.unlink(item.filePath, (err) => {
+                if (err) {
+                    throw new Error('File not found');
+                }
+            });
+        });
+
         let ImagesArray = [];
         req.files.forEach((element) => {
             const file = {
@@ -141,15 +149,11 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
             ImagesArray.push(file);
         });
         if (roomDirectory) {
-            roomDirectory.name = name;
             roomDirectory.description = description;
             roomDirectory.typeOfRooms = typeOfRooms;
             roomDirectory.imageUrls = ImagesArray;
             roomDirectory.price = price;
             roomDirectory.listRoom = listRoom;
-            roomDirectory.note = note;
-        } else {
-            throw new Error('Room director not found');
         }
         const updatedRoomDirectory = await roomDirectory.save();
         if (updatedRoomDirectory) {
@@ -183,6 +187,15 @@ const deleteRoomDirectory = asyncHandler(async (req, res) => {
     try {
         const roomDirectory = await RoomDirectory.findById(id);
         if (roomDirectory) {
+            const ImagesArrayTemp = roomDirectory.imageUrls;
+            ImagesArrayTemp.map((item) => {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            });
+
             await roomDirectory.remove();
             res.status(200).json({
                 success: true,

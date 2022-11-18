@@ -5,11 +5,8 @@ import './RoomScreen.scss';
 import { LinkContainer } from 'react-router-bootstrap';
 import { DatePicker, Space } from 'antd';
 // import Loader from '../../components/Loader';
-import 'antd/dist/antd.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+
 import { getAllRooms } from '../../services/apiServices';
-AOS.init();
 const { RangePicker } = DatePicker;
 
 const RoomsScreen = () => {
