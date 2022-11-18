@@ -1,7 +1,10 @@
 import './Button.scss';
 
-function Button({ className, onClick, children }) {
-    const classes = `btn-wrapper ${className}`;
+function Button({ className, onClick, children, primary }) {
+    let classes = `btn-wrapper`;
+
+    if (primary) classes += ' btn-primary';
+    if (className) classes += ` ${className}`;
 
     return (
         <button className={classes} onClick={onClick}>

@@ -81,7 +81,9 @@ function Rooms() {
                                     </li>
                                 </ul>
                                 <div>
-                                    <Button className="view-btn">View Details</Button>
+                                    <Button primary className="view-btn">
+                                        View Details
+                                    </Button>
                                 </div>
                             </div>
                         </div>

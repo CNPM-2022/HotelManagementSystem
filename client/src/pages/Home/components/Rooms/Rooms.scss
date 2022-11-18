@@ -136,17 +136,8 @@
                             }
 
                             .view-btn {
-                                font-size: 16px;
-                                background-color: #1cc3b2;
-                                transition: color 0.4s, background 0.4s, box-shadow 0.4s;
                                 opacity: 0;
                                 animation-delay: 900ms;
-
-                                &:hover {
-                                    box-shadow: 0 2px 40px 8px rgb(15 15 15 / 15%);
-                                    background-color: #ffffff;
-                                    color: #1cc3b2;
-                                }
                             }
                         }
                     }
