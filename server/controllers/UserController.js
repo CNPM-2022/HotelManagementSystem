@@ -45,6 +45,52 @@ const changeInfo = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Change information of user by user
+// @route   PUT /api/user/change-info/all
+// @access  Private
+
+const changeInfoAll = asyncHandler(async (req, res) => {
+    const { username, email, Name, phoneNumber, CMND, address, isAdmin, password, newPassword } = req.body;
+    const id = req.params.id;
+
+    try {
+        const user = await User.findById(id);
+        const isMatch = await argon2.verify(user.password, password);
+        const newHashedPassword = await argon2.hash(newPassword);
+
+        if (!isMatch) {
+            res.status(400);
+            throw new Error('Password is incorrect');
+        }
+
+        if (user) {
+            user.username = username;
+            user.email = email;
+            user.Name = Name;
+            user.phoneNumber = phoneNumber;
+            user.CMND = CMND;
+            user.address = address;
+            user.isAdmin = isAdmin;
+            user.password = newHashedPassword;
+        }
+        const updatedUser = await user.save();
+        const accessToken = jwt.sign({ userId: updatedUser._id }, process.env.ACCESS_TOKEN_SECRET);
+        if (updatedUser) {
+            res.status(200).json({
+                success: true,
+                message: 'User updated successfully',
+                updatedUser,
+                accessToken,
+            });
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+});
+
 // @desc    Change password of user
 // @route   PUT /api/user/change-password
 // @access  Private
@@ -211,4 +257,13 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 });
 
-export { changeInfo, changePassword, getUsers, getUsersWithPagination, addUser, getUserById, deleteUser };
+export {
+    changeInfo,
+    changeInfoAll,
+    changePassword,
+    getUsers,
+    getUsersWithPagination,
+    addUser,
+    getUserById,
+    deleteUser,
+};
