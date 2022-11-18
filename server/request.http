@@ -43,7 +43,7 @@ GET http://localhost:5000/api/rooms/635ea16edce841597e4fa832
 
 
 
-# API for USER CHANGE INFO
+# API for USER CHANGE INFO BY ADMIN
 # RETURN USER INFO
 ###
 PUT http://localhost:5000/api/user/63652199299739c3475974fa/change-info
@@ -52,13 +52,32 @@ Content-Type: application/json
 {
     "username": "nghia123",
     "email": "khanhtruc123@gmail.com",
-    "password": "080902",
     "Name": "Nguyen Quang Huynh",
     "phoneNumber": "1234567890",
     "CMND": "0123456789",
     "address": "Ha Noi",
     "isAdmin": true
 }
+
+
+# API for USER CHANGE INFO BY ADMIN
+# RETURN USER INFO
+###
+PUT http://localhost:5000/api/user/6376e4fdda1b6ac096e9e52b/change-info-all
+Content-Type: application/json
+
+{
+    "username": "nghia123",
+    "email": "khanhtruc123@gmail.com",
+    "password": "080902",
+    "newPassword": "123456",
+    "Name": "Nguyen Quang Huynh",
+    "phoneNumber": "1234567890",
+    "CMND": "0123456789",
+    "address": "Ha Noi",
+    "isAdmin": true
+}
+
 
 
 #API for change password
@@ -77,7 +96,7 @@ Content-Type: application/json
 # API for delete user
 #return state:  success, fail
 ###
-DELETE http://localhost:5000/api/user/6364b434b446c82c12997ee0/delete
+DELETE http://localhost:5000/api/user/63652199299739c3475974fa/delete
 
 
 # API for get all user
