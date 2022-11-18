@@ -12,6 +12,8 @@ const images = {
     icon3: require('./homeServices/icon3.png'),
     icon4: require('./homeServices/icon4.png'),
     icon5: require('./homeServices/icon5.png'),
+    ratorThumb1: require('./rated/thumbnail1.jpg'),
+    ratorThumb2: require('./rated/thumbnail2.jpg'),
 };
 
 export default images;

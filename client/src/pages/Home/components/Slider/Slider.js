@@ -28,9 +28,11 @@ function Slider() {
         dots: false,
         infinite: true,
         arrows: true,
-        speed: 1000,
+        speed: 1800,
         slidesToShow: 1,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
         nextArrow: <SlideNextArrow imageSrc={nextSlideImageSrc} />,
         prevArrow: <SlidePrevArrow imageSrc={prevSlideImageSrc} />,
         afterChange: (current) => {

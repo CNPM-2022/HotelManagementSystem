@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../../store/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,12 +8,13 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { HiMail } from 'react-icons/hi';
 import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
+import Swal from 'sweetalert2';
 
 import images from '../../../assets/images';
 import './Header.scss';
-import Swal from 'sweetalert2';
 
 const TopContent = () => {
+    const [visible, setVisible] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -46,7 +48,9 @@ const TopContent = () => {
                         <div className="actions">
                             {isAuthenticated ? (
                                 <Tippy
+                                    visible={visible}
                                     interactive
+                                    onClickOutside={() => setVisible(false)}
                                     render={(attrs) => (
                                         <div {...attrs} className="menu">
                                             <div className="item" onClick={() => navigate('/User')}>
@@ -64,7 +68,7 @@ const TopContent = () => {
                                         </div>
                                     )}
                                 >
-                                    <div className="user">
+                                    <div className="user" onClick={() => setVisible((prevState) => !prevState)}>
                                         <span className="username">{user.username}</span>
                                         <img className="avatar" src={images.defaultUser} alt="avatar" />
                                         <AiFillCaretDown className="caret-down" />
