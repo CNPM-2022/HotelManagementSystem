@@ -1,0 +1,26 @@
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    height: 50px;
+    padding: 0 40px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #1cc3b2;
+    color: #ffffff;
+    transition: box-shadow 0.4s, background 0.4s, color 0.4s;
+
+    &:hover {
+        box-shadow: 0 2px 40px 8px rgb(15 15 15 / 15%);
+        background-color: #ffffff;
+        color: #1cc3b2;
+    }
+}

@@ -53,6 +53,10 @@ $dark2: #0e2737;
     position: relative;
     z-index: 1;
     background-color: $dark2;
+
+    .main-footer-area {
+        padding: 60px 0;
+    }
 }
 
 .single-footer-widget {
