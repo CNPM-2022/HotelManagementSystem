@@ -6,6 +6,7 @@ import './Slider.scss';
 import images from '../../../../assets/images';
 import SlideNextArrow from './SlideNextArrow';
 import SlidePrevArrow from './SlidePrevArrow';
+import Button from '../../../../components/Button/Button';
 
 function Slider() {
     const [prevSlideImageSrc, setPrevSlideImageSrc] = useState(images.room3);
@@ -27,9 +28,11 @@ function Slider() {
         dots: false,
         infinite: true,
         arrows: true,
-        speed: 1000,
+        speed: 1800,
         slidesToShow: 1,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
         nextArrow: <SlideNextArrow imageSrc={nextSlideImageSrc} />,
         prevArrow: <SlidePrevArrow imageSrc={prevSlideImageSrc} />,
         afterChange: (current) => {
@@ -56,7 +59,7 @@ function Slider() {
                         <div className="welcome">
                             <p>Hotel & Resort</p>
                             <h3>Welcome To Roberto</h3>
-                            <button className="discover-btn">Discover Now</button>
+                            <Button className="discover-btn">Discover Now</Button>
                         </div>
                     </div>
                 ))}
