@@ -1,91 +1,44 @@
-import React, { useState } from "react";
-import Button from 'react-bootstrap/Button';
+import React, { useState, useEffect } from "react";
 
 import './EditProfile.scss'
-import ChangePassword from './ChangePassword';
+import { getUser } from '../../../../services/apiServices';
+import ChangeInfor from './ChangeInfor'
+
 
 function Edit_profile() {
 
-    const [show, setShow] = useState(false);
+    const [infor, setInfor] = useState({});
+    const [loading, setLoading] = useState(true);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    useEffect(() => {
+        setLoading(true)
+        const getInforUser = async () => {
+            const res = await getUser(JSON.parse(window.localStorage.getItem('user')).user.id)
+            setInfor(res.data)
+        }
+        getInforUser()
+        setLoading(false)
 
-    return (
-        <div className="container-xl px-4">
+    }, []);
 
-            <nav className="nav nav-borders nav-borders-handle">
-                <h2 className="fs-bolder ms-3">Edit profile <i className="bi bi-pencil-square"></i></h2>
-            </nav>
-            <hr className="mt-0 mb-4" />
-            <div className="row">
-                <div className="col-xl-4">
 
-                    <div className="card mb-4 mb-xl-0 card-handle">
-                        <div className="card-header">Profile Picture</div>
-                        <div className="card-body text-center">
 
-                            <img className="img-account-profile rounded-circle mb-2 img-account-profile-handle" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
 
-                            <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-
-                            <button className="btn btn-primary" type="button">Upload new image</button>
-                        </div>
-                    </div>
+    if (loading || infor.user === undefined) {
+        return (
+            <div className="d-flex justify-content-center align-items-center " style={{ minHeight: "300px" }}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Loading...</span>
                 </div>
-                <div className="col-xl-8">
-
-                    <div className="card card-handle mb-4">
-                        <div className="card-header">Account Details</div>
-                        <div className="card-body">
-                            <form>
-
-                                <div className="mb-3">
-                                    <label className="small mb-1" htmlFor="inputUsername">Full name</label>
-                                    <input className="form-control form-contro-handle" id="inputUsername" type="text" placeholder="Enter your name" />
-                                </div>
-
-                                <div className="mb-3">
-                                    <label className="small mb-1" htmlFor="inputEmailAddress">Email address</label>
-                                    <input className="form-control form-contro-handle" id="inputEmailAddress" type="email" placeholder="Enter your email address" />
-                                </div>
-
-                                <div className="row gx-3 mb-3">
-
-                                    <div className="col-md-6">
-                                        <label className="small mb-1" htmlFor="inputPhone">Phone number</label>
-                                        <input className="form-control form-contro-handle" id="inputPhone" type="tel" placeholder="Enter your phone number" />
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <label className="small mb-1" htmlFor="inputCMND">CMND</label>
-                                        <input className="form-control form-contro-handle" id="inputBirthday" type="text" name="CMND" placeholder="Enter your CMND" />
-                                    </div>
-                                </div>
-
-                                <div className="mb-3">
-                                    <label className="small mb-1" htmlFor="inputAddress">Address</label>
-                                    <input className="form-control form-contro-handle" id="inputAddress" type="text" placeholder="Enter your address" />
-                                </div>
-
-                                <div className="row gx-3 mb-3 mx-0 d-flex justify-content-center">
-
-                                    <Button variant="light" style={{ width: '50%' }} onClick={handleShow}>
-                                        <span className='me-5 fw-bold'>Change my password
-                                            <i className="fa-solid fa-key ms-2"></i>
-                                        </span><i className="bi bi-chevron-right ms-5"></i>
-                                    </Button>
-                                </div>
-
-                                <button className="btn btn-primary" type="button">Save changes</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <ChangePassword handleClose={handleClose} show={show} />
             </div>
-        </div>
-    )
+        )
+    }
+
+    else {
+        return (
+            <ChangeInfor userInfor={infor.user} />
+        )
+    }
 }
 
 export default Edit_profile
