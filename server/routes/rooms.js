@@ -1,15 +1,27 @@
-import express from "express";
+import express from 'express';
 
 const router = express.Router();
+const { upload } = require('../helpers/FileHelper');
 
 import {
-  getAllRooms,
-  getRoomsById,
-  roomById,
-} from "../controllers/RoomsController.js";
+    getAllRooms,
+    getAllRoomsByType,
+    getRoomById,
+    createRoom,
+    updateRoom,
+    deleteRoom,
+} from '../controllers/RoomsController.js';
 
-router.get("/allrooms", getAllRooms);
-router.get("/:id", getRoomsById);
-router.post("/roombyid", roomById);
+router.get('/all', getAllRooms);
+
+router.get('/all/type/:id', getAllRoomsByType);
+
+router.get('/:id', getRoomById);
+
+router.post('/createRoom', upload.array('images'), createRoom);
+
+router.put('/updateRoom/:id', upload.array('images'), updateRoom);
+
+router.delete('/deleteRoom/:id', deleteRoom);
 
 export default router;

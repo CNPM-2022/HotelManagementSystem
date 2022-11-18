@@ -32,6 +32,7 @@ const getAllRoomDirectory = asyncHandler(async (req, res) => {
 // @access  Public
 const getRoomDirectoryById = asyncHandler(async (req, res) => {
     const id = req.params.id;
+
     if (!id) {
         res.status(400).json({
             success: false,
@@ -122,16 +123,20 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
             message: 'No room director id provided',
         });
     }
-    // if (!typeOfRooms || !description || !price || !listRoom) {
-    //     res.status(400).json({
-    //         success: false,
-    //         message: 'Please provide all required fields',
-    //     });
-    // }
     try {
         const roomDirectory = await RoomDirectory.findById(id);
-        roomDirectory.imageUrls.map((image) => {
-            console.log(image);
+
+        if (!roomDirectory) {
+            throw new Error('Room director not found');
+        }
+
+        const ImagesArrayTemp = roomDirectory.imageUrls;
+        ImagesArrayTemp.map((item) => {
+            fs.unlink(item.filePath, (err) => {
+                if (err) {
+                    throw new Error('File not found');
+                }
+            });
         });
 
         let ImagesArray = [];
@@ -149,8 +154,6 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
             roomDirectory.imageUrls = ImagesArray;
             roomDirectory.price = price;
             roomDirectory.listRoom = listRoom;
-        } else {
-            throw new Error('Room director not found');
         }
         const updatedRoomDirectory = await roomDirectory.save();
         if (updatedRoomDirectory) {
@@ -184,6 +187,15 @@ const deleteRoomDirectory = asyncHandler(async (req, res) => {
     try {
         const roomDirectory = await RoomDirectory.findById(id);
         if (roomDirectory) {
+            const ImagesArrayTemp = roomDirectory.imageUrls;
+            ImagesArrayTemp.map((item) => {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            });
+
             await roomDirectory.remove();
             res.status(200).json({
                 success: true,
