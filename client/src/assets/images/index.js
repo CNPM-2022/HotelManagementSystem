@@ -1,5 +1,6 @@
 const images = {
     logo: require('./logo.png'),
+    logoLight: require('./logo-light.png'),
     defaultUser: require('./user.png'),
     room1: require('./rooms/room1.jpg'),
     room2: require('./rooms/room2.jpg'),
@@ -14,6 +15,12 @@ const images = {
     icon5: require('./homeServices/icon5.png'),
     ratorThumb1: require('./rated/thumbnail1.jpg'),
     ratorThumb2: require('./rated/thumbnail2.jpg'),
+    contactBg: require('./contact-bg.jpg'),
+    partner1: require('./homePartners/p1.png'),
+    partner2: require('./homePartners/p2.png'),
+    partner3: require('./homePartners/p3.png'),
+    partner4: require('./homePartners/p4.png'),
+    partner5: require('./homePartners/p5.png'),
 };
 
 export default images;

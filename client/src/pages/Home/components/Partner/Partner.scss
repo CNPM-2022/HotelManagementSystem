@@ -1,0 +1,27 @@
+.home-partner-container {
+    .list {
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .item {
+            img {
+                max-height: 50px;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 739px) {
+    .home-partner-container {
+        .list {
+            .item {
+                img {
+                    max-height: 30px;
+                }
+            }
+        }
+    }
+}

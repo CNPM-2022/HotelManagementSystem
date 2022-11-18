@@ -78,7 +78,7 @@ function Rated() {
 
     return (
         <div className="home-rated-container container">
-            <div className="row">
+            <div className="row align-items-center">
                 <div className="col-12 col-md-6">
                     <div className="thumbnail">
                         <SlickSlider {...thumbSettings}>
