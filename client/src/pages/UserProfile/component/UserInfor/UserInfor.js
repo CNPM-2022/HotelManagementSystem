@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
-import { useEffect, useState, useLayoutEffect, memo } from "react";
+import { useEffect, useState } from "react";
 
-import General from './General.js';
-import Detail from './Detail.js';
 import avt from '../../images/avatar1.png'
 import { getUser } from '../../../../services/apiServices';
 
@@ -10,7 +8,7 @@ function User_infor() {
 
     const [infor, setInfor] = useState({});
     const [loading, setLoading] = useState(true);
-    useLayoutEffect(() => {
+    useEffect(() => {
         setLoading(true)
         const getInforUser = async () => {
             const res = await getUser(JSON.parse(window.localStorage.getItem('user')).user.id)
@@ -21,7 +19,7 @@ function User_infor() {
 
     }, []);
 
-    console.log(infor.user)
+    //console.log(infor.user.CMND)
     if (loading || infor.user === undefined) {
         return (
             <div className="d-flex justify-content-center align-items-center " style={{ minHeight: "300px" }}>
@@ -50,7 +48,9 @@ function User_infor() {
                             />
                             <h5 className="my-3">{infor.user.Name}</h5>
                             <p className="text-muted mb-1">Type of user: {infor.user.typeUser}</p>
-                            <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            <p className="text-muted mb-4">
+                                {(infor.user.address === undefined) ? '' : infor.user.address}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ function User_infor() {
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">
-                                        {/* {infor.user.CMND} */}
+                                        {(infor.user.CMND === undefined) ? 'No Information' : infor.user.CMND}
                                     </p>
                                 </div>
                             </div>
@@ -111,15 +111,14 @@ function User_infor() {
                                     <p className="mb-0">Address</p>
                                 </div>
                                 <div className="col-sm-9">
-                                    <p className="text-muted mb-0">(098) 765-4321</p>
+                                    <p className="text-muted mb-0">
+                                        {(infor.user.address === undefined) ? 'No Information' : infor.user.address}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* <General userInfor={infor.user} /> */}
-                {/*  <Detail userInfor={infor.user} /> */}
-                {/* <div>{getInforUser()}</div> */}
             </Fragment>
 
         )
