@@ -14,8 +14,8 @@ a {
 
 // Custom bootstrap
 
-@media (min-width: 992px) {
-    .col-lg-2-4 {
+@media (min-width: 768px) {
+    .col-md-2-4 {
         flex: 0 0 auto;
         width: 20%;
     }

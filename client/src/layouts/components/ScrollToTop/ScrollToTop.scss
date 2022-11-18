@@ -1,0 +1,19 @@
+#scrollUp {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 40px;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    bottom: 40px;
+    background-color: #1cc3b2;
+    color: #ffffff;
+    transition-duration: 500ms;
+    border-radius: 50%;
+    box-shadow: 0 2px 40px 8px rgb(15 15 15 / 15%);
+    z-index: 1000;
+    border: none;
+    outline: none;
+}

@@ -48,32 +48,32 @@ function About() {
                     </div>
                     <div className="col-12">
                         <div className="services">
-                            <div className="row g-5">
-                                <div className="col-lg-2-4 col-6">
+                            <div className="row">
+                                <div className="col-md-2-4 col-6">
                                     <div className="service" data-aos="fade-up" data-aos-duration="800">
                                         <img src={images.icon1} alt="service-1" />
                                         <h5>Transportion</h5>
                                     </div>
                                 </div>
-                                <div className="col-lg-2-4 col-6">
+                                <div className="col-md-2-4 col-6">
                                     <div className="service" data-aos="fade-up" data-aos-duration="1000">
                                         <img src={images.icon2} alt="service-2" />
                                         <h5>Reiseservice</h5>
                                     </div>
                                 </div>
-                                <div className="col-lg-2-4 col-6">
+                                <div className="col-md-2-4 col-6">
                                     <div className="service" data-aos="fade-up" data-aos-duration="1200">
                                         <img src={images.icon3} alt="service-3" />
                                         <h5>Spa Relaxtion</h5>
                                     </div>
                                 </div>
-                                <div className="col-lg-2-4 col-6">
+                                <div className="col-md-2-4 col-6">
                                     <div className="service" data-aos="fade-up" data-aos-duration="1400">
                                         <img src={images.icon4} alt="service-4" />
                                         <h5>Restaurant</h5>
                                     </div>
                                 </div>
-                                <div className="col-lg-2-4 col-6">
+                                <div className="col-md-2-4 col-6">
                                     <div className="service" data-aos="fade-up" data-aos-duration="1600">
                                         <img src={images.icon5} alt="service-5" />
                                         <h5>Bar & Drink</h5>

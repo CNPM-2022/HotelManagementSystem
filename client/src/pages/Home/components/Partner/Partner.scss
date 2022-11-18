@@ -12,3 +12,16 @@
         }
     }
 }
+
+// Mobile
+@media (max-width: 739px) {
+    .home-partner-container {
+        .list {
+            .item {
+                img {
+                    max-height: 30px;
+                }
+            }
+        }
+    }
+}

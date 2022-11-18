@@ -56,7 +56,7 @@ function Slider() {
                     <div key={index} className="slide-item">
                         <img src={slide.image} alt={`Slide ${index + 1}`} />
 
-                        <div className="welcome">
+                        <div className="welcome col-12">
                             <p>Hotel & Resort</p>
                             <h3>Welcome To Roberto</h3>
                             <Button className="discover-btn">Discover Now</Button>

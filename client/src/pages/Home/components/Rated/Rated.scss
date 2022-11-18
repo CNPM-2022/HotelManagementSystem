@@ -51,7 +51,7 @@
             position: initial;
 
             .slick-dots {
-                bottom: 0;
+                top: 100%;
                 text-align: left;
 
                 li {
@@ -91,6 +91,38 @@
                                     font-weight: 400;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+// Mobile + Tablet
+@media (max-width: 1023px) {
+}
+
+// Tablet
+@media (min-width: 740px) and (max-width: 1023px) {
+}
+
+// Mobile
+@media (max-width: 739px) {
+    .home-rated-container {
+        .content {
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        .thumbnail {
+            .slick-slider {
+                .slick-track {
+                    .slick-slide {
+                        .single-thumb {
+                            margin-bottom: 100px;
                         }
                     }
                 }

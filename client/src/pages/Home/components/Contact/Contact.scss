@@ -23,6 +23,7 @@
         }
 
         .info {
+            width: 60%;
             position: relative;
             z-index: 1;
             h2 {
@@ -42,6 +43,38 @@
         .contact {
             position: relative;
             z-index: 1;
+        }
+    }
+}
+
+// Responsive
+// Mobile + Tablet
+@media (max-width: 1023px) {
+}
+
+// Tablet
+@media (min-width: 740px) and (max-width: 1023px) {
+}
+
+// Mobile
+@media (max-width: 739px) {
+    .home-contact-container {
+        .content {
+            height: 340px;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            .info {
+                width: 100%;
+            }
+
+            .contact {
+                width: 100%;
+
+                .contact-btn {
+                    margin-left: auto;
+                }
+            }
         }
     }
 }
