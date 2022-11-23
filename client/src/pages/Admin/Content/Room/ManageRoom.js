@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { RiImageAddFill } from 'react-icons/ri';
 import { BsFillPatchPlusFill, BsPatchMinusFill } from 'react-icons/bs';
@@ -34,12 +34,14 @@ function ManageRoom() {
         { value: 'Available', label: 'Available' },
         { value: 'Unavailable', label: 'Unavailable' },
     ];
+    const statusSelectRef = useRef();
 
     const typeOptions = [
         { value: 'A', label: 'A' },
         { value: 'B', label: 'B' },
         { value: 'C', label: 'C' },
     ];
+    const typeSelectRef = useRef();
 
     const [roomsState, dispatch] = useReducer(logger(reducer), initState);
     const [roomOptions, setRoomOptions] = useState([]);
@@ -145,6 +147,12 @@ function ManageRoom() {
                 toast.error(`Not empty status for Room ${i + 1}!`);
                 isValidRoom = false;
             }
+
+            if (!roomsState[i].note) {
+                toast.error(`Not empty note for Room ${i + 1}!`);
+                isValidRoom = false;
+            }
+
             if (isValidRoom) {
                 const formData = new FormData();
 
@@ -171,6 +179,30 @@ function ManageRoom() {
 
         dispatch(setRooms(initState));
         fetchAllRooms();
+        typeSelectRef.current.clearValue();
+        statusSelectRef.current.clearValue();
+    };
+
+    const handleChangeType = (selected, roomId) => {
+        if (selected && selected.value) {
+            dispatch(
+                setRoomType({
+                    id: roomId,
+                    type: selected.value,
+                }),
+            );
+        }
+    };
+
+    const handleChangeStatus = (selected, roomId) => {
+        if (selected && selected.value) {
+            dispatch(
+                setRoomStatus({
+                    id: roomId,
+                    status: selected.value,
+                }),
+            );
+        }
     };
 
     return (
@@ -260,31 +292,23 @@ function ManageRoom() {
                                                         <div className="row">
                                                             <div className="col-6">
                                                                 <Select
+                                                                    ref={typeSelectRef}
                                                                     className="room-type"
                                                                     placeholder="Room type..."
                                                                     options={typeOptions}
                                                                     onChange={(selected) =>
-                                                                        dispatch(
-                                                                            setRoomType({
-                                                                                id: room.id,
-                                                                                type: selected.value,
-                                                                            }),
-                                                                        )
+                                                                        handleChangeType(selected, room.id)
                                                                     }
                                                                 />
                                                             </div>
                                                             <div className="col-6">
                                                                 <Select
+                                                                    ref={statusSelectRef}
                                                                     className="room-status"
                                                                     options={statusOptions}
                                                                     placeholder="Status..."
                                                                     onChange={(selected) =>
-                                                                        dispatch(
-                                                                            setRoomStatus({
-                                                                                id: room.id,
-                                                                                status: selected.value,
-                                                                            }),
-                                                                        )
+                                                                        handleChangeStatus(selected, room.id)
                                                                     }
                                                                 />
                                                             </div>

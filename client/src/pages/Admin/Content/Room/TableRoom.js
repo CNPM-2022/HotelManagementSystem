@@ -46,7 +46,9 @@ function TableRoom({
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="5">No data</td>
+                        <td colSpan="5" className="text-center">
+                            No data
+                        </td>
                     </tr>
                 )}
             </tbody>

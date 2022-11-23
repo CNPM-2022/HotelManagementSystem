@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
+import { IoMdCloseCircle } from 'react-icons/io';
 
 function ModalUpdateRoom({ show, setShow, dataRoomUpdate, fetchAllRooms }) {
     const statusOptions = [
@@ -17,9 +18,9 @@ function ModalUpdateRoom({ show, setShow, dataRoomUpdate, fetchAllRooms }) {
     ];
 
     const [roomNumber, setRoomNumber] = useState('');
-    const [capacity, setCapacity] = useState();
-    const [type, setType] = useState({});
-    const [status, setStatus] = useState({});
+    const [capacity, setCapacity] = useState(0);
+    const [type, setType] = useState(null);
+    const [status, setStatus] = useState(null);
     const [description, setDescription] = useState('');
     const [note, setNote] = useState('');
     const [images, setImages] = useState([]);
@@ -32,10 +33,25 @@ function ModalUpdateRoom({ show, setShow, dataRoomUpdate, fetchAllRooms }) {
             setStatus(() => statusOptions.find((status) => status.value === dataRoomUpdate.status));
             setDescription(dataRoomUpdate.description);
             setNote(dataRoomUpdate.note);
+            setImages(dataRoomUpdate.imageUrls);
         }
     }, [show]);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+    };
+
+    const setImageSource = (filePath) => {
+        return `${process.env.REACT_APP_SERVER_URL}${filePath}`;
+    };
+
+    const handleDeleteImage = (image) => {
+        setImages((prevImages) => prevImages.filter((x) => x.filePath !== image.filePath));
+    };
+
+    const handleChangeImageFiles = (event) => {
+        console.log(event.target.files);
+    };
 
     return (
         <Modal show={show} onHide={handleClose} backdrop="static" size="xl" className="modal-update-room">
@@ -58,18 +74,28 @@ function ModalUpdateRoom({ show, setShow, dataRoomUpdate, fetchAllRooms }) {
                             <label className="form-label">Capacity</label>
                             <input
                                 value={capacity}
-                                onChange={(event) => setCapacity(event.target.value)}
+                                onChange={(event) => setCapacity(+event.target.value)}
                                 type="text"
                                 className="form-control"
                             />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Type</label>
-                            <Select value={type} options={typeOptions} placeholder="Choose room type..." />
+                            <Select
+                                value={type}
+                                onChange={(selected) => setType(selected)}
+                                options={typeOptions}
+                                placeholder="Choose room type..."
+                            />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Status</label>
-                            <Select value={status} options={statusOptions} placeholder="Choose room status..." />
+                            <Select
+                                value={status}
+                                onChange={(selected) => setStatus(selected)}
+                                options={statusOptions}
+                                placeholder="Choose room status..."
+                            />
                         </div>
                         <div className="col-md-12">
                             <label className="form-label">Description</label>
@@ -98,14 +124,34 @@ function ModalUpdateRoom({ show, setShow, dataRoomUpdate, fetchAllRooms }) {
                                 Upload file images
                             </label>
 
-                            <input type="file" id={`upload-images-input-${dataRoomUpdate._id}`} multiple hidden />
+                            <input
+                                onChange={handleChangeImageFiles}
+                                type="file"
+                                id={`upload-images-input-${dataRoomUpdate._id}`}
+                                multiple
+                                hidden
+                            />
 
                             <div className="preview-images">
-                                {dataRoomUpdate.imageUrls && dataRoomUpdate.imageUrls.length > 0 ? (
-                                    <></>
-                                ) : (
-                                    <span>Preview Image</span>
-                                )}
+                                <div className="row">
+                                    {images && images.length > 0 ? (
+                                        images.map((image) => (
+                                            <div key={image.filePath} className="col-3">
+                                                <div className="preview-item">
+                                                    <img src={setImageSource(image.filePath)} alt="Room preview" />
+                                                    <span
+                                                        className="delete-image-btn"
+                                                        onClick={() => handleDeleteImage(image)}
+                                                    >
+                                                        <IoMdCloseCircle />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <span>Preview Image</span>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

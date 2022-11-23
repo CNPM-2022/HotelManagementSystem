@@ -116,15 +116,41 @@
     }
 
     .preview-images {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         margin-top: 12px;
         border: 1px dashed #ccc;
-        height: 200px;
+        min-height: 200px;
+
+        .row {
+            justify-content: center;
+        }
 
         span {
             opacity: 0.4;
+        }
+
+        .preview-item {
+            position: relative;
+            margin: 8px 0;
+
+            img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .delete-image-btn {
+                position: absolute;
+                top: 0;
+                right: 6px;
+                padding: 0 4px;
+                font-size: 22px;
+                color: #000;
+                cursor: pointer;
+                transition: opacity 0.2s;
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
         }
     }
 }
