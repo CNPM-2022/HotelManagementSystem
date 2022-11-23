@@ -39,7 +39,6 @@ const RegisterForm = (props) => {
         }),
 
         onSubmit: (userInfor) => {
-            /* window.alert("Form submitted"); */
             props.onRegister(userInfor);
         },
     });

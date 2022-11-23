@@ -19,9 +19,7 @@ const Login = () => {
             };
 
             const res = await postLogin(options);
-
             const data = res.data;
-            console.log(res);
 
             if (res.status !== 200) {
                 throw new Error(res.data.message || 'Something went wrong');
