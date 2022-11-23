@@ -149,10 +149,9 @@ function ManageRoom() {
                 const formData = new FormData();
 
                 formData.append('roomNumber', roomsState[i].number);
-                // for (let j = 0; j < roomsState[i].imageFiles.length; j++) {
-                //     formData.append('images', roomsState[i].imageFiles[j]);
-                // }
-                formData.append('images', roomsState[i].imageFiles);
+                for (let j = 0; j < roomsState[i].imageFiles.length; j++) {
+                    formData.append('images', roomsState[i].imageFiles[j]);
+                }
 
                 formData.append('status', roomsState[i].status);
                 formData.append('description', roomsState[i].description);
@@ -235,6 +234,7 @@ function ManageRoom() {
                                                         <input
                                                             onChange={(event) => handleChangeImageFiles(event, room.id)}
                                                             type="file"
+                                                            name="images"
                                                             hidden
                                                             id={`upload-room-image-${room.id}`}
                                                             multiple
