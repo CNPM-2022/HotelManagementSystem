@@ -6,7 +6,7 @@ import path from 'path';
 import cors from 'cors';
 import rooms from './routes/rooms.js';
 import auth from './routes/auth.js';
-import roomDirection from './routes/roomDirection.js';
+import roomTypes from './routes/roomTypes.js';
 import user from './routes/user.js';
 import uploads from './routes/upload.js';
 
@@ -62,7 +62,7 @@ app.use(cors());
 //routes
 app.use('/api/auth', auth);
 app.use('/api/rooms', rooms);
-app.use('/api/room-direction', roomDirection);
+app.use('/api/room-type', roomTypes);
 app.use('/api/user', user);
 app.use('/api/upload', uploads);
 

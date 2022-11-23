@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Rooms from '../models/Room';
-import RoomDirectory from '../models/RoomDirectory';
+import RoomType from '../models/RoomType';
 import fs from 'fs';
 
 // @desc    Fetch all rooms
@@ -32,7 +32,7 @@ const getAllRooms = asyncHandler(async (req, res) => {
 // @access  Public
 const getAllRoomsByType = asyncHandler(async (req, res) => {
     try {
-        const Type = await RoomDirectory.findById(req.params.id);
+        const Type = await RoomType.findById(req.params.id);
         if (Type) {
             const rooms = await Rooms.find({ type: Type.typeOfRooms });
             if (rooms.length > 0) {
@@ -94,7 +94,7 @@ const createRoom = asyncHandler(async (req, res) => {
     }
 
     try {
-        const typeIsTrue = await RoomDirectory.findOne({ typeOfRooms: type });
+        const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
 
         if (!typeIsTrue) {
             res.status(400);
@@ -122,7 +122,7 @@ const createRoom = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
-        const Price = type === 'A' ? 150000 : type === 'B' ? 170000 : 200000;
+        const Price = typeIsTrue.price;
 
         const room = await Rooms.create({
             roomNumber,
@@ -165,7 +165,7 @@ const updateRoom = asyncHandler(async (req, res) => {
     }
 
     try {
-        const typeIsTrue = type === 'A' || type === 'B' || type === 'C';
+        const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
 
         if (!typeIsTrue) {
             res.status(400);
@@ -198,9 +198,7 @@ const updateRoom = asyncHandler(async (req, res) => {
             ImagesArray.push(file);
         });
 
-        console.log(ImagesArray);
-
-        const Price = type === 'A' ? 150000 : type === 'B' ? 170000 : 200000;
+        const Price = typeIsTrue.price;
 
         const room = await Rooms.findByIdAndUpdate(
             req.params.id,
@@ -260,7 +258,7 @@ const deleteRoom = asyncHandler(async (req, res) => {
                 }
             });
         });
-        const type = await RoomDirectory.findOne({ typeOfRooms: room.type });
+        const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
             const index = type.listRoom.indexOf(room.roomNumber);
             if (index > -1) {
