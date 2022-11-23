@@ -111,6 +111,8 @@ const createRoom = asyncHandler(async (req, res) => {
             throw new Error('Room already exists');
         }
 
+        console.log(req);
+
         let ImagesArray = [];
         req.files.forEach((element) => {
             const file = {
