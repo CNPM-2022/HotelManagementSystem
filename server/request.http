@@ -145,19 +145,19 @@ Content-Type: application/json
 #return list direction room
  
 ###
-GET http://localhost:5000/api/room-direction/all
+GET http://localhost:5000/api/room-type/all
 
 
 
 #API for get room by direction (id)
 #return room by direction
 ###
-GET http://localhost:5000/api/room-direction/637600d5635ea1b71d200719
+GET http://localhost:5000/api/room-type/637600d5635ea1b71d200719
 
 #API for create room direction
 #return room direction created
 ###
-POST http://localhost:5000/api/room-direction/create
+POST http://localhost:5000/api/room-type/create
 Content-Type: application/json
 
 {
@@ -171,7 +171,7 @@ Content-Type: application/json
 #API for update room direction
 #return room direction updated
 ###
-PUT http://localhost:5000/api/room-direction/update/636cc5c568cdc75fd8a85da5
+PUT http://localhost:5000/api/room-type/update/636cc5c568cdc75fd8a85da5
 Content-Type: application/json
 
 {
@@ -185,7 +185,7 @@ Content-Type: application/json
 #API for delete room direction
 #return state:  success, fail
 ###
-DELETE http://localhost:5000/api/room-direction/delete/63721b5f29fe4a26af2f724e
+DELETE http://localhost:5000/api/room-type/delete/63721b5f29fe4a26af2f724e
 
 ###
 GET  http://localhost:5000/api/upload/

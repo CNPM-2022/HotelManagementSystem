@@ -1,23 +1,23 @@
 import asyncHandler from 'express-async-handler';
-import RoomDirectory from '../models/RoomDirectory.js';
+import RoomType from '../models/RoomType.js';
 import fs from 'fs';
 
-// @desc    Fetch room directory
-// @route   GET /api/room-directory/all
+// @desc    Fetch room type
+// @route   GET /api/room-type/all
 // @access  Public
 
-const getAllRoomDirectory = asyncHandler(async (req, res) => {
+const getAllRoomType = asyncHandler(async (req, res) => {
     try {
-        const roomDirectory = await RoomDirectory.find({});
-        if (roomDirectory.length > 0) {
+        const roomTypes = await RoomType.find({});
+        if (roomTypes.length > 0) {
             res.status(200).json({
                 success: true,
-                message: 'Room directory fetched successfully',
-                lengthOfList: roomDirectory.length,
-                data: roomDirectory,
+                message: 'Room types fetched successfully',
+                lengthOfList: roomTypes.length,
+                data: roomTypes,
             });
         } else {
-            throw new Error('No room directory found');
+            throw new Error('No room types found');
         }
     } catch (error) {
         res.status(404).json({
@@ -27,29 +27,29 @@ const getAllRoomDirectory = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    Fetch room directory by id
-// @route   GET /api/room-directory/:id
+// @desc    Fetch room type by id
+// @route   GET /api/room-type/:id
 // @access  Public
-const getRoomDirectoryById = asyncHandler(async (req, res) => {
+const getRoomTypeById = asyncHandler(async (req, res) => {
     const id = req.params.id;
 
     if (!id) {
         res.status(400).json({
             success: false,
-            message: 'No room director id provided',
+            message: 'No room type id provided',
         });
     }
     try {
-        const roomDirectory = await RoomDirectory.findById(req.params.id);
+        const roomType = await RoomType.findById(req.params.id);
 
-        if (roomDirectory) {
+        if (roomType) {
             res.status(200).json({
                 success: true,
-                message: 'Room directory fetched successfully',
-                data: roomDirectory,
+                message: 'Room type fetched successfully',
+                data: roomType,
             });
         } else {
-            throw new Error('Room director not found');
+            throw new Error('Room type not found');
         }
     } catch (error) {
         res.status(404).json({
@@ -59,10 +59,10 @@ const getRoomDirectoryById = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    create room directory
-// @route   POST /api/room-directory/create
+// @desc    create room type
+// @route   POST /api/room-type/create
 // @access  Private
-const createRoomDirectory = asyncHandler(async (req, res) => {
+const createRoomType = asyncHandler(async (req, res) => {
     const { typeOfRooms, description, price, listRoom } = req.body;
 
     if (!typeOfRooms || !description || !price || !listRoom) {
@@ -72,9 +72,9 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
         });
     }
     try {
-        const roomIsAlreadyExist = await RoomDirectory.findOne({ typeOfRooms });
-        if (roomIsAlreadyExist) {
-            throw new Error('Room Direction is already exist');
+        const roomTypeIsAlreadyExist = await RoomType.findOne({ typeOfRooms });
+        if (roomTypeIsAlreadyExist) {
+            throw new Error('Room type is already exist');
         }
 
         let ImagesArray = [];
@@ -86,22 +86,22 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
-        const roomDirectory = await RoomDirectory.create({
+        const roomType = await RoomType.create({
             description,
             typeOfRooms,
             imageUrls: ImagesArray,
             price,
             listRoom,
         });
-        if (roomDirectory) {
+        if (roomType) {
             res.status(201).json({
                 success: true,
-                message: 'Room directory created successfully',
-                id: roomDirectory._id,
-                data: roomDirectory,
+                message: 'Room type created successfully',
+                id: roomType._id,
+                data: roomType,
             });
         } else {
-            throw new Error('Room directory not created');
+            throw new Error('Room type not created');
         }
     } catch (error) {
         res.status(400).json({
@@ -111,26 +111,26 @@ const createRoomDirectory = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    update room directory
-// @route   PUT /api/room-directory/update/:id
+// @desc    update room type
+// @route   PUT /api/room-type/update/:id
 // @access  Private
-const updateRoomDirectory = asyncHandler(async (req, res) => {
+const updateRoomType = asyncHandler(async (req, res) => {
     const id = req.params.id;
     const { typeOfRooms, description, price, listRoom } = req.body;
     if (!id) {
         res.status(400).json({
             success: false,
-            message: 'No room director id provided',
+            message: 'No room type id provided',
         });
     }
     try {
-        const roomDirectory = await RoomDirectory.findById(id);
+        const roomType = await RoomType.findById(id);
 
-        if (!roomDirectory) {
-            throw new Error('Room director not found');
+        if (!roomType) {
+            throw new Error('Room type not found');
         }
 
-        const ImagesArrayTemp = roomDirectory.imageUrls;
+        const ImagesArrayTemp = roomType.imageUrls;
         ImagesArrayTemp.map((item) => {
             fs.unlink(item.filePath, (err) => {
                 if (err) {
@@ -148,22 +148,22 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
-        if (roomDirectory) {
-            roomDirectory.description = description;
-            roomDirectory.typeOfRooms = typeOfRooms;
-            roomDirectory.imageUrls = ImagesArray;
-            roomDirectory.price = price;
-            roomDirectory.listRoom = listRoom;
+        if (roomType) {
+            roomType.description = description;
+            roomType.typeOfRooms = typeOfRooms;
+            roomType.imageUrls = ImagesArray;
+            roomType.price = price;
+            roomType.listRoom = listRoom;
         }
-        const updatedRoomDirectory = await roomDirectory.save();
-        if (updatedRoomDirectory) {
+        const updatedRoomType = await roomType.save();
+        if (updatedRoomType) {
             res.status(200).json({
                 success: true,
-                message: 'Room directory updated successfully',
-                data: updatedRoomDirectory,
+                message: 'Room type updated successfully',
+                data: updatedRoomType,
             });
         } else {
-            throw new Error('Room directory not updated');
+            throw new Error('Room type not updated');
         }
     } catch (error) {
         res.status(400).json({
@@ -173,21 +173,21 @@ const updateRoomDirectory = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    delete room directory
-// @route   DELETE /api/room-directory/delete/:id
+// @desc    delete room type
+// @route   DELETE /api/room-type/delete/:id
 // @access  Private
-const deleteRoomDirectory = asyncHandler(async (req, res) => {
+const deleteRoomType = asyncHandler(async (req, res) => {
     const id = req.params.id;
     if (!id) {
         res.status(400).json({
             success: false,
-            message: 'No room director id provided',
+            message: 'No room type id provided',
         });
     }
     try {
-        const roomDirectory = await RoomDirectory.findById(id);
-        if (roomDirectory) {
-            const ImagesArrayTemp = roomDirectory.imageUrls;
+        const roomType = await RoomType.findById(id);
+        if (roomType) {
+            const ImagesArrayTemp = roomType.imageUrls;
             ImagesArrayTemp.map((item) => {
                 fs.unlink(item.filePath, (err) => {
                     if (err) {
@@ -196,13 +196,13 @@ const deleteRoomDirectory = asyncHandler(async (req, res) => {
                 });
             });
 
-            await roomDirectory.remove();
+            await roomType.remove();
             res.status(200).json({
                 success: true,
-                message: 'Room directory deleted successfully',
+                message: 'Room type deleted successfully',
             });
         } else {
-            throw new Error('Room director not found');
+            throw new Error('Room type not found');
         }
     } catch (error) {
         res.status(400).json({
@@ -212,4 +212,4 @@ const deleteRoomDirectory = asyncHandler(async (req, res) => {
     }
 });
 
-export { getAllRoomDirectory, getRoomDirectoryById, createRoomDirectory, updateRoomDirectory, deleteRoomDirectory };
+export { getAllRoomType, getRoomTypeById, createRoomType, updateRoomType, deleteRoomType };

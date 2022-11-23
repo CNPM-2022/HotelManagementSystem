@@ -1,12 +1,11 @@
 import mongoose from 'mongoose';
 
-const roomDirectorySchema = mongoose.Schema(
+const roomTypeSchema = mongoose.Schema(
     {
         typeOfRooms: {
             type: String,
             required: true,
             default: 'A',
-            enum: ['A', 'B', 'C'],
         },
         imageUrls: [],
         description: {
@@ -27,6 +26,6 @@ const roomDirectorySchema = mongoose.Schema(
     },
 );
 
-const RoomDirectory = mongoose.model('roomtype', roomDirectorySchema);
+const RoomType = mongoose.model('roomtype', roomTypeSchema);
 
-export default RoomDirectory;
+export default RoomType;

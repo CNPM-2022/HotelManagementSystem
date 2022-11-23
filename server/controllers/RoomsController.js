@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Rooms from '../models/Room';
-import RoomDirectory from '../models/RoomDirectory';
+import RoomType from '../models/RoomType';
 import fs from 'fs';
 
 // @desc    Fetch all rooms
@@ -32,7 +32,7 @@ const getAllRooms = asyncHandler(async (req, res) => {
 // @access  Public
 const getAllRoomsByType = asyncHandler(async (req, res) => {
     try {
-        const Type = await RoomDirectory.findById(req.params.id);
+        const Type = await RoomType.findById(req.params.id);
         if (Type) {
             const rooms = await Rooms.find({ type: Type.typeOfRooms });
             if (rooms.length > 0) {
@@ -94,7 +94,7 @@ const createRoom = asyncHandler(async (req, res) => {
     }
 
     try {
-        const typeIsTrue = await RoomDirectory.findOne({ typeOfRooms: type });
+        const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
 
         if (!typeIsTrue) {
             res.status(400);
@@ -197,8 +197,6 @@ const updateRoom = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
-
-        console.log(ImagesArray);
 
         const Price = type === 'A' ? 150000 : type === 'B' ? 170000 : 200000;
 
