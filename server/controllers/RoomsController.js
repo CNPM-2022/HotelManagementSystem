@@ -122,7 +122,7 @@ const createRoom = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
-        const Price = type === 'A' ? 150000 : type === 'B' ? 170000 : 200000;
+        const Price = typeIsTrue.price;
 
         const room = await Rooms.create({
             roomNumber,
@@ -165,7 +165,7 @@ const updateRoom = asyncHandler(async (req, res) => {
     }
 
     try {
-        const typeIsTrue = type === 'A' || type === 'B' || type === 'C';
+        const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
 
         if (!typeIsTrue) {
             res.status(400);
@@ -198,7 +198,7 @@ const updateRoom = asyncHandler(async (req, res) => {
             ImagesArray.push(file);
         });
 
-        const Price = type === 'A' ? 150000 : type === 'B' ? 170000 : 200000;
+        const Price = typeIsTrue.price;
 
         const room = await Rooms.findByIdAndUpdate(
             req.params.id,
@@ -258,7 +258,7 @@ const deleteRoom = asyncHandler(async (req, res) => {
                 }
             });
         });
-        const type = await RoomDirectory.findOne({ typeOfRooms: room.type });
+        const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
             const index = type.listRoom.indexOf(room.roomNumber);
             if (index > -1) {
