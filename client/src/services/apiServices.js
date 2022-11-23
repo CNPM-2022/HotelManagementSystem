@@ -11,14 +11,6 @@ export const postRegister = (userInfor) => {
     return axios.post('auth/register', userInfor);
 };
 
-export const getAllRooms = () => {
-    return axios.get('rooms/allrooms');
-};
-
-export const getRoomById = (id) => {
-    return axios.get(`rooms/${id}`);
-};
-
 export const getAllUsers = () => {
     return axios.get('user/all');
 };
@@ -37,4 +29,24 @@ export const putUpdateUser = (dataUser) => {
 
 export const deleteUser = (userId) => {
     return axios.delete(`user/${userId}/delete`);
+};
+
+export const getAllRooms = () => {
+    return axios.get('rooms/all');
+};
+
+export const getRoomById = (id) => {
+    return axios.get(`rooms/${id}`);
+};
+
+export const getAllRoomTypes = () => {
+    return axios.get('room-direction/all');
+};
+
+export const postCreateRoom = (data) => {
+    return axios.post('rooms/createRoom', data);
+};
+
+export const deleteRoom = (id) => {
+    return axios.delete(`rooms/deleteRoom/${id}`);
 };

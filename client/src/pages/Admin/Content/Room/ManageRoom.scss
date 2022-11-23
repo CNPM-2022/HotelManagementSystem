@@ -23,27 +23,6 @@
                                     font-size: 16px;
                                 }
 
-                                .group-upload {
-                                    font-size: 16px;
-                                    .label-upload {
-                                        margin-right: 5px;
-                                        color: #9068ff;
-                                        font-size: 25px;
-                                        cursor: pointer;
-
-                                        &:hover {
-                                            color: #4400ff;
-                                        }
-                                    }
-
-                                    .preview-image {
-                                        cursor: pointer;
-                                        &:hover {
-                                            text-decoration: underline;
-                                        }
-                                    }
-                                }
-
                                 .btn-group {
                                     .icon-add {
                                         font-size: 25px;
@@ -67,6 +46,37 @@
                                 }
                             }
 
+                            .group-upload {
+                                font-size: 16px;
+                                margin-bottom: 16px;
+                                margin-left: 30px;
+                                .label-upload {
+                                    margin-right: 5px;
+                                    color: #9068ff;
+                                    font-size: 25px;
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        color: #4400ff;
+                                    }
+                                }
+
+                                .preview-image {
+                                    cursor: pointer;
+                                    + & {
+                                        margin-right: 4px;
+                                    }
+
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+
+                                    &:not(:last-child)::after {
+                                        content: ', ';
+                                    }
+                                }
+                            }
+
                             .room-info {
                                 margin-left: 28px;
 
@@ -75,11 +85,46 @@
                                         height: 140px;
                                     }
                                 }
+
+                                .room-status,
+                                .room-type {
+                                    padding-bottom: 8px;
+
+                                    .css-1s2u09g-control,
+                                    .css-1pahdxg-control {
+                                        height: 66px;
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+.modal-update-room {
+    .description {
+        height: 120px;
+    }
+
+    .upload-images-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .preview-images {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 12px;
+        border: 1px dashed #ccc;
+        height: 200px;
+
+        span {
+            opacity: 0.4;
         }
     }
 }
