@@ -63,9 +63,9 @@ const getRoomTypeById = asyncHandler(async (req, res) => {
 // @route   POST /api/room-type/create
 // @access  Private
 const createRoomType = asyncHandler(async (req, res) => {
-    const { typeOfRooms, description, price, listRoom } = req.body;
+    const { typeOfRooms, description, price } = req.body;
 
-    if (!typeOfRooms || !description || !price || !listRoom) {
+    if (!typeOfRooms || !description || !price) {
         res.status(400).json({
             success: false,
             message: 'Please provide all required fields',
@@ -86,6 +86,8 @@ const createRoomType = asyncHandler(async (req, res) => {
             };
             ImagesArray.push(file);
         });
+
+        const listRoom = [];
         const roomType = await RoomType.create({
             description,
             typeOfRooms,
@@ -116,7 +118,7 @@ const createRoomType = asyncHandler(async (req, res) => {
 // @access  Private
 const updateRoomType = asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const { typeOfRooms, description, price, listRoom } = req.body;
+    const { typeOfRooms, description, price } = req.body;
     if (!id) {
         res.status(400).json({
             success: false,
@@ -132,11 +134,13 @@ const updateRoomType = asyncHandler(async (req, res) => {
 
         const ImagesArrayTemp = roomType.imageUrls;
         ImagesArrayTemp.map((item) => {
-            fs.unlink(item.filePath, (err) => {
-                if (err) {
-                    throw new Error('File not found');
-                }
-            });
+            if (existsSync(item.filePath)) {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            }
         });
 
         let ImagesArray = [];
@@ -153,7 +157,6 @@ const updateRoomType = asyncHandler(async (req, res) => {
             roomType.typeOfRooms = typeOfRooms;
             roomType.imageUrls = ImagesArray;
             roomType.price = price;
-            roomType.listRoom = listRoom;
         }
         const updatedRoomType = await roomType.save();
         if (updatedRoomType) {
@@ -189,11 +192,13 @@ const deleteRoomType = asyncHandler(async (req, res) => {
         if (roomType) {
             const ImagesArrayTemp = roomType.imageUrls;
             ImagesArrayTemp.map((item) => {
-                fs.unlink(item.filePath, (err) => {
-                    if (err) {
-                        throw new Error('File not found');
-                    }
-                });
+                if (fs.existsSync(item.filePath)) {
+                    fs.unlink(item.filePath, (err) => {
+                        if (err) {
+                            throw new Error('File not found');
+                        }
+                    });
+                }
             });
 
             await roomType.remove();
