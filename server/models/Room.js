@@ -9,23 +9,25 @@ const roomSchema = mongoose.Schema(
         maxCount: {
             type: Number,
             required: true,
-            max: 3,
         },
         imageUrls: [],
-        status: {
-            type: String,
-            required: true,
-            default: 'Available',
-            enum: ['Available', 'Unavailable'],
-        },
         type: {
             type: String,
             required: true,
-            enum: ['A', 'B', 'C'],
         },
         description: {
             type: String,
             required: true,
+        },
+        rentperDate: {
+            type: String,
+        },
+        checkOutDate: {
+            type: String,
+        },
+        currentBookings: {
+            type: Array,
+            default: [],
         },
         price: {
             type: Number,
