@@ -31,7 +31,6 @@ export const deleteUser = (userId) => {
     return axios.delete(`user/${userId}/delete`);
 };
 
-
 export const getAllRooms = () => {
     return axios.get('rooms/all');
 };
@@ -52,11 +51,14 @@ export const deleteRoom = (id) => {
     return axios.delete(`rooms/deleteRoom/${id}`);
 };
 
+export const putUpdateRoom = (id, data) => {
+    return axios.put(`rooms/updateRoom/${id}`, data);
+};
+
 export const getUser = (userID) => {
     return axios.get(`user/${userID}`);
-}
+};
 
 export const putChangePassword = (userID, newPassword) => {
     return axios.put(`user/${userID}/change-password`, newPassword);
-}
-
+};

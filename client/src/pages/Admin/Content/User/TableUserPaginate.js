@@ -34,10 +34,13 @@ function TableUserPaginate({
                                     <button className="btn btn-success" onClick={() => handleClickViewButton(user)}>
                                         View
                                     </button>
-                                    <button className="btn btn-danger mx-3" onClick={() => handleClickEditButton(user)}>
+                                    <button
+                                        className="btn btn-warning mx-3"
+                                        onClick={() => handleClickEditButton(user)}
+                                    >
                                         Edit
                                     </button>
-                                    <button className="btn btn-warning" onClick={() => handleClickDeleteButton(user)}>
+                                    <button className="btn btn-danger" onClick={() => handleClickDeleteButton(user)}>
                                         Delete
                                     </button>
                                 </td>
