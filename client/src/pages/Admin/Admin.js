@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import './Admin.scss';
 import Sidebar from './Sidebar';
-import { MenuOutlined } from '@ant-design/icons';
+import { GrMenu } from 'react-icons/gr';
 
 function Admin() {
     const [collapsed, setCollapsed] = useState(false);
@@ -15,7 +15,7 @@ function Admin() {
             </div>
             <div className="content">
                 <header className="header">
-                    <MenuOutlined onClick={() => setCollapsed((prev) => !prev)} />
+                    <GrMenu onClick={() => setCollapsed((prev) => !prev)} />
                 </header>
                 <div className="main">
                     <Outlet />

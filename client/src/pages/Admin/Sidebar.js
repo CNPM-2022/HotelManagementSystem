@@ -40,6 +40,10 @@ function Sidebar({ collapsed }) {
                             Quản Lý Rooms
                             <Link to="/admins/manage-rooms" />
                         </MenuItem>
+                        <MenuItem>
+                            Quản Lý Room Types
+                            <Link to="/admins/manage-room-types" />
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </SidebarContent>

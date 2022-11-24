@@ -22,7 +22,7 @@ import {
     setRooms,
 } from './roomReducer/actions';
 import AssignRoom from './AssignRoom';
-import { getAllRooms, getAllUsers, postCreateRoom } from '../../../../services/apiServices';
+import { getAllRooms, getAllRoomTypes, getAllUsers, postCreateRoom } from '../../../../services/apiServices';
 import RemoveRoom from './RemoveRoom';
 import TableRoom from './TableRoom';
 import _ from 'lodash';
@@ -35,17 +35,12 @@ function ManageRoom() {
         { value: 'Unavailable', label: 'Unavailable' },
     ];
     const statusSelectRef = useRef();
-
-    const typeOptions = [
-        { value: 'A', label: 'A' },
-        { value: 'B', label: 'B' },
-        { value: 'C', label: 'C' },
-    ];
     const typeSelectRef = useRef();
 
     const [roomsState, dispatch] = useReducer(logger(reducer), initState);
     const [roomOptions, setRoomOptions] = useState([]);
     const [userOptions, setUserOptions] = useState([]);
+    const [typeOptions, setTypeOptions] = useState([]);
     const [listRooms, setListRooms] = useState([]);
     const [listUsers, setListUsers] = useState([]);
     const [isPreviewImage, setIsPreviewImage] = useState(false);
@@ -60,8 +55,9 @@ function ManageRoom() {
     const [dataRoomView, setDataRoomView] = useState({});
 
     useEffect(() => {
-        fetchAllUsers();
+        // fetchAllUsers();
         fetchAllRooms();
+        fetchAllRoomTypes();
     }, []);
 
     const fetchAllUsers = async () => {
@@ -85,13 +81,24 @@ function ManageRoom() {
         if (res.status !== 200) return;
         if (res.data.success === false) return;
 
-        const data = res.data.data.map((room) => ({
+        const data = _.orderBy(res.data.data, ['roomNumber'], ['asc']);
+
+        const roomOptions = data.map((room) => ({
             value: room._id,
             label: `${room.roomNumber} - type ${room.type}`,
         }));
 
-        setRoomOptions(data);
-        setListRooms(res.data.data);
+        setRoomOptions(roomOptions);
+        setListRooms(data);
+    };
+
+    const fetchAllRoomTypes = async () => {
+        const res = await getAllRoomTypes();
+
+        if (res.status !== 200) return;
+        if (res.data.success === false) return;
+
+        setTypeOptions(res.data.data.map((item) => ({ label: item.typeOfRooms, value: item.typeOfRooms })));
     };
 
     const handleChangeImageFiles = (event, roomId) => {
@@ -122,42 +129,43 @@ function ManageRoom() {
 
     const handleAddRoom = async () => {
         // Validate
+        let isValidRooms = true;
         for (let i = 0; i < roomsState.length; i++) {
-            let isValidRoom = true;
-
             if (!roomsState[i].number) {
                 toast.error(`Not empty number for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
 
             if (_.isEmpty(roomsState[i].imageFiles)) {
                 toast.error(`Not empty images for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
 
             if (!roomsState[i].description) {
                 toast.error(`Not empty description for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
 
             if (!roomsState[i].type) {
                 toast.error(`Not empty type for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
 
             if (!roomsState[i].status) {
                 toast.error(`Not empty status for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
 
             if (!roomsState[i].note) {
                 toast.error(`Not empty note for Room ${i + 1}!`);
-                isValidRoom = false;
+                isValidRooms = false;
             }
+        }
 
-            if (isValidRoom) {
+        if (isValidRooms) {
+            // Add rooms
+            for (let i = 0; i < roomsState.length; i++) {
                 const formData = new FormData();
-
                 formData.append('roomNumber', roomsState[i].number);
                 for (let j = 0; j < roomsState[i].imageFiles.length; j++) {
                     formData.append('images', roomsState[i].imageFiles[j]);
@@ -177,16 +185,18 @@ function ManageRoom() {
                     toast.error(res.message);
                 }
             }
-        }
 
-        if (images.length > 0) {
-            images.forEach((image) => URL.revokeObjectURL(image.url));
-        }
+            // Revoke image preview
+            if (images.length > 0) {
+                images.forEach((image) => URL.revokeObjectURL(image.url));
+            }
 
-        dispatch(setRooms(initState));
-        fetchAllRooms();
-        typeSelectRef.current.clearValue();
-        statusSelectRef.current.clearValue();
+            // Clear state
+            dispatch(setRooms(initState));
+            fetchAllRooms();
+            typeSelectRef.current.clearValue();
+            statusSelectRef.current.clearValue();
+        }
     };
 
     const handleChangeType = (selected, roomId) => {

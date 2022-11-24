@@ -1,6 +1,6 @@
 import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
@@ -199,7 +199,7 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                                 htmlFor={`upload-images-input-${dataRoom._id}`}
                                 className="btn btn-success upload-images-btn"
                             >
-                                <AiOutlinePlusCircle />
+                                <BsFillPlusCircleFill />
                                 Upload file images
                             </label>
 
