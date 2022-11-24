@@ -104,7 +104,7 @@
     }
 }
 
-.modal-update-room {
+.modal-manage-room {
     .description {
         height: 120px;
     }
@@ -117,14 +117,20 @@
 
     .preview-images {
         margin-top: 12px;
-        border: 1px dashed #ccc;
+        padding: 0 12px;
+        border: 1px dotted #ccc;
         min-height: 200px;
 
         .row {
             justify-content: center;
         }
 
-        span {
+        .no-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0.4;
         }
 
@@ -135,21 +141,6 @@
             img {
                 width: 100%;
                 height: 200px;
-            }
-
-            .delete-image-btn {
-                position: absolute;
-                top: 0;
-                right: 6px;
-                padding: 0 4px;
-                font-size: 22px;
-                color: #000;
-                cursor: pointer;
-                transition: opacity 0.2s;
-
-                &:hover {
-                    opacity: 0.6;
-                }
             }
         }
     }

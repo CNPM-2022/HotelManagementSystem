@@ -4,6 +4,8 @@ function TableRoom({
     setDataRoomDelete,
     setIsShowModalUpdateRoom,
     setDataRoomUpdate,
+    setIsShowModalViewRoom,
+    setDataRoomView,
 }) {
     const handleClickDeleteButton = (room) => {
         setDataRoomDelete(room);
@@ -13,6 +15,11 @@ function TableRoom({
     const handleClickEditButton = (room) => {
         setDataRoomUpdate(room);
         setIsShowModalUpdateRoom(true);
+    };
+
+    const handleClickViewButton = (room) => {
+        setDataRoomView(room);
+        setIsShowModalViewRoom(true);
     };
 
     return (
@@ -35,10 +42,13 @@ function TableRoom({
                             <td>{room.type}</td>
                             <td>{room.status}</td>
                             <td>
-                                <button className="btn btn-secondary" onClick={() => handleClickEditButton(room)}>
+                                <button className="btn btn-success" onClick={() => handleClickViewButton(room)}>
+                                    View
+                                </button>
+                                <button className="btn btn-warning mx-3" onClick={() => handleClickEditButton(room)}>
                                     Edit
                                 </button>
-                                <button className="btn btn-danger mx-3" onClick={() => handleClickDeleteButton(room)}>
+                                <button className="btn btn-danger" onClick={() => handleClickDeleteButton(room)}>
                                     Delete
                                 </button>
                             </td>

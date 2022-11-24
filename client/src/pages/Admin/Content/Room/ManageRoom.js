@@ -27,7 +27,7 @@ import RemoveRoom from './RemoveRoom';
 import TableRoom from './TableRoom';
 import _ from 'lodash';
 import ModalDeleteRoom from './ModalDeleteRoom';
-import ModalUpdateRoom from './ModalUpdateRoom';
+import ModalManageRoom from './ModalManageRoom';
 
 function ManageRoom() {
     const statusOptions = [
@@ -56,6 +56,8 @@ function ManageRoom() {
     const [dataRoomDelete, setDataRoomDelete] = useState({});
     const [isShowModalUpdateRoom, setIsShowModalUpdateRoom] = useState(false);
     const [dataRoomUpdate, setDataRoomUpdate] = useState({});
+    const [isShowModalViewRoom, setIsShowModalViewRoom] = useState(false);
+    const [dataRoomView, setDataRoomView] = useState({});
 
     useEffect(() => {
         fetchAllUsers();
@@ -175,6 +177,10 @@ function ManageRoom() {
                     toast.error(res.message);
                 }
             }
+        }
+
+        if (images.length > 0) {
+            images.forEach((image) => URL.revokeObjectURL(image.url));
         }
 
         dispatch(setRooms(initState));
@@ -398,6 +404,8 @@ function ManageRoom() {
                         setDataRoomDelete={setDataRoomDelete}
                         setIsShowModalUpdateRoom={setIsShowModalUpdateRoom}
                         setDataRoomUpdate={setDataRoomUpdate}
+                        setIsShowModalViewRoom={setIsShowModalViewRoom}
+                        setDataRoomView={setDataRoomView}
                     />
                 </div>
             </div>
@@ -409,10 +417,19 @@ function ManageRoom() {
                 fetchAllRooms={fetchAllRooms}
             />
 
-            <ModalUpdateRoom
+            <ModalManageRoom
+                modalType="UPDATE"
                 show={isShowModalUpdateRoom}
                 setShow={setIsShowModalUpdateRoom}
-                dataRoomUpdate={dataRoomUpdate}
+                dataRoom={dataRoomUpdate}
+                fetchAllRooms={fetchAllRooms}
+            />
+
+            <ModalManageRoom
+                modalType="VIEW"
+                show={isShowModalViewRoom}
+                setShow={setIsShowModalViewRoom}
+                dataRoom={dataRoomView}
                 fetchAllRooms={fetchAllRooms}
             />
         </>
