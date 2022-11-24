@@ -181,11 +181,13 @@ const updateRoom = asyncHandler(async (req, res) => {
 
         const ImagesArrayTemp = roomIsAlreadyExist.imageUrls;
         ImagesArrayTemp.map((item) => {
-            fs.unlink(item.filePath, (err) => {
-                if (err) {
-                    throw new Error('File not found');
-                }
-            });
+            if (fs.existsSync(item.filePath)) {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            }
         });
 
         let ImagesArray = [];
@@ -252,11 +254,13 @@ const deleteRoom = asyncHandler(async (req, res) => {
         }
         const ImagesArrayTemp = room.imageUrls;
         ImagesArrayTemp.map((item) => {
-            fs.unlink(item.filePath, (err) => {
-                if (err) {
-                    throw new Error('File not found');
-                }
-            });
+            if (fs.existsSync(item.filePath)) {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            }
         });
         const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
