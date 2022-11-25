@@ -69,7 +69,6 @@ const getRoomById = asyncHandler(async (req, res) => {
             roomNumber: rooms.roomNumber,
             maxCount: rooms.maxcount,
             imageUrls: rooms.imageUrls,
-            status: rooms.status,
             type: rooms.type,
             description: rooms.description,
             price: rooms.price,
@@ -86,9 +85,9 @@ const getRoomById = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 const createRoom = asyncHandler(async (req, res) => {
-    const { roomNumber, maxCount, status, type, description, note } = req.body;
+    const { roomNumber, maxCount, type, description, note } = req.body;
 
-    if (!roomNumber || !maxCount || !status || !type || !description || !note) {
+    if (!roomNumber || !maxCount || !type || !description || !note) {
         res.status(400);
         throw new Error('Please fill out all required fields');
     }
@@ -111,8 +110,6 @@ const createRoom = asyncHandler(async (req, res) => {
             throw new Error('Room already exists');
         }
 
-        console.log(req);
-
         let ImagesArray = [];
         req.files.forEach((element) => {
             const file = {
@@ -128,7 +125,6 @@ const createRoom = asyncHandler(async (req, res) => {
             roomNumber,
             maxCount,
             imageUrls: ImagesArray,
-            status,
             type,
             description,
             price: Price,
@@ -156,13 +152,13 @@ const createRoom = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 const updateRoom = asyncHandler(async (req, res) => {
-    const { roomNumber, maxCount, status, type, description, note } = req.body;
+    const { roomNumber, maxCount, type, description, note } = req.body;
     const id = req.params.id;
 
-    if (!roomNumber || !maxCount || !status || !type || !description || !note) {
-        res.status(400);
-        throw new Error('Please fill out all required fields');
-    }
+    // if (!roomNumber || !maxCount || !type || !description || !note) {
+    //     res.status(400);
+    //     throw new Error('Please fill out all required fields');
+    // }
 
     try {
         const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
@@ -208,7 +204,6 @@ const updateRoom = asyncHandler(async (req, res) => {
                 roomNumber,
                 maxCount,
                 imageUrls: ImagesArray,
-                status,
                 type,
                 description,
                 price: Price,
@@ -285,4 +280,97 @@ const deleteRoom = asyncHandler(async (req, res) => {
         });
     }
 });
-export { getAllRooms, getAllRoomsByType, getRoomById, createRoom, updateRoom, deleteRoom };
+
+// @desc    update room booking details
+// @route   PUT /api/rooms/updateRoomBookingDetails/:id
+// @access  Private/Admin
+
+const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
+    const { roomNumber, maxCount, type, description, rentperDate, checkOutDate, note } = req.body;
+    const id = req.params.id;
+
+    // if (!roomNumber || !maxCount || !type || !description || !note || !rentperDate || !checkOutDate) {
+    //     res.status(400);
+    //     throw new Error('Please fill out all required fields');
+    // }
+
+    try {
+        const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
+
+        if (!typeIsTrue) {
+            res.status(400);
+            throw new Error('Type of room is not exist');
+        }
+
+        const roomIsAlreadyExist = await Rooms.findOne({ id });
+
+        if (!roomIsAlreadyExist) {
+            res.status(400);
+            throw new Error('Room not exists');
+        }
+
+        const ImagesArrayTemp = roomIsAlreadyExist.imageUrls;
+        ImagesArrayTemp.map((item) => {
+            if (fs.existsSync(item.filePath)) {
+                fs.unlink(item.filePath, (err) => {
+                    if (err) {
+                        throw new Error('File not found');
+                    }
+                });
+            }
+        });
+
+        let ImagesArray = [];
+        req.files.forEach((element) => {
+            const file = {
+                fileName: element.originalname,
+                filePath: element.path,
+                fileType: element.mimetype,
+            };
+            ImagesArray.push(file);
+        });
+
+        const Price = typeIsTrue.price;
+
+        const room = await Rooms.findByIdAndUpdate(
+            req.params.id,
+            {
+                roomNumber,
+                maxCount,
+                imageUrls: ImagesArray,
+                type,
+                description,
+                price: Price,
+                rentperDate,
+                checkOutDate,
+                note,
+            },
+            { new: true },
+        );
+
+        if (room) {
+            res.status(201).json({
+                success: true,
+                message: 'Room updated successfully',
+                data: room,
+            });
+        } else {
+            throw new Error('Room not updated');
+        }
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
+export {
+    getAllRooms,
+    getAllRoomsByType,
+    getRoomById,
+    createRoom,
+    updateRoom,
+    updateRoomWithBookingDetails,
+    deleteRoom,
+};
