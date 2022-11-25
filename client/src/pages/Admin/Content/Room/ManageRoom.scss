@@ -80,13 +80,21 @@
                             .room-info {
                                 margin-left: 28px;
 
-                                .form-floating {
-                                    .description {
-                                        height: 140px;
-                                    }
+                                .description {
+                                    height: 140px;
                                 }
 
-                                .room-status,
+                                .date-range {
+                                    position: relative;
+                                    padding: 0 20px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    height: calc(100% - 8px);
+                                    border: 1px solid hsl(0, 0%, 80%);
+                                    border-radius: 6px;
+                                }
+
                                 .room-type {
                                     padding-bottom: 8px;
 

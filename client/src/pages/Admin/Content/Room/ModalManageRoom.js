@@ -6,22 +6,10 @@ import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { putUpdateRoom } from '../../../../services/apiServices';
 
-function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) {
-    const statusOptions = [
-        { value: 'Available', label: 'Available' },
-        { value: 'Unavailable', label: 'Unavailable' },
-    ];
-
-    const typeOptions = [
-        { value: 'A', label: 'A' },
-        { value: 'B', label: 'B' },
-        { value: 'C', label: 'C' },
-    ];
-
+function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms }) {
     const [roomNumber, setRoomNumber] = useState('');
     const [capacity, setCapacity] = useState(0);
     const [type, setType] = useState(null);
-    const [status, setStatus] = useState(null);
     const [description, setDescription] = useState('');
     const [note, setNote] = useState('');
     const [images, setImages] = useState(null);
@@ -32,7 +20,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
             setRoomNumber(dataRoom.roomNumber);
             setCapacity(dataRoom.maxCount);
             setType(() => typeOptions.find((type) => type.value === dataRoom.type));
-            setStatus(() => statusOptions.find((status) => status.value === dataRoom.status));
             setDescription(dataRoom.description);
             setNote(dataRoom.note);
 
@@ -89,11 +76,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
             isValidRoom = false;
         }
 
-        if (!status) {
-            toast.error(`Not empty status!`);
-            isValidRoom = false;
-        }
-
         if (!note) {
             toast.error(`Not empty note!`);
             isValidRoom = false;
@@ -107,7 +89,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                 formData.append('images', images[i]);
             }
 
-            formData.append('status', status.value);
             formData.append('description', description);
             formData.append('type', type.value);
             formData.append('note', note);
@@ -161,16 +142,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                                 onChange={(selected) => setType(selected)}
                                 options={typeOptions}
                                 placeholder="Choose room type..."
-                                isDisabled={modalType === 'VIEW'}
-                            />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Status</label>
-                            <Select
-                                value={status}
-                                onChange={(selected) => setStatus(selected)}
-                                options={statusOptions}
-                                placeholder="Choose room status..."
                                 isDisabled={modalType === 'VIEW'}
                             />
                         </div>

@@ -6,6 +6,9 @@ import Lightbox from 'react-18-image-lightbox';
 import Select from 'react-select';
 import 'react-18-image-lightbox/style.css';
 import { toast } from 'react-toastify';
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import './ManageRoom.scss';
 import reducer, { initState } from './roomReducer/reducer';
@@ -16,7 +19,6 @@ import {
     setRoomDescription,
     setRoomNumber,
     setRoomNote,
-    setRoomStatus,
     setRoomType,
     setRoomFiles,
     setRooms,
@@ -30,10 +32,6 @@ import ModalDeleteRoom from './ModalDeleteRoom';
 import ModalManageRoom from './ModalManageRoom';
 
 function ManageRoom() {
-    const statusOptions = [
-        { value: 'Available', label: 'Available' },
-        { value: 'Unavailable', label: 'Unavailable' },
-    ];
     const statusSelectRef = useRef();
     const typeSelectRef = useRef();
 
@@ -46,6 +44,14 @@ function ManageRoom() {
     const [isPreviewImage, setIsPreviewImage] = useState(false);
     const [previewIndex, setPreviewIndex] = useState(0);
     const [images, setImages] = useState('');
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: null,
+            endDate: null,
+            key: 'selection',
+        },
+    ]);
+    const [isShowDateRange, setIsShowDateRange] = useState(false);
 
     const [isShowModalDeleteRoom, setIsShowModalDeleteRoom] = useState(false);
     const [dataRoomDelete, setDataRoomDelete] = useState({});
@@ -151,11 +157,6 @@ function ManageRoom() {
                 isValidRooms = false;
             }
 
-            if (!roomsState[i].status) {
-                toast.error(`Not empty status for Room ${i + 1}!`);
-                isValidRooms = false;
-            }
-
             if (!roomsState[i].note) {
                 toast.error(`Not empty note for Room ${i + 1}!`);
                 isValidRooms = false;
@@ -171,7 +172,6 @@ function ManageRoom() {
                     formData.append('images', roomsState[i].imageFiles[j]);
                 }
 
-                formData.append('status', roomsState[i].status);
                 formData.append('description', roomsState[i].description);
                 formData.append('type', roomsState[i].type);
                 formData.append('note', roomsState[i].note);
@@ -210,15 +210,8 @@ function ManageRoom() {
         }
     };
 
-    const handleChangeStatus = (selected, roomId) => {
-        if (selected && selected.value) {
-            dispatch(
-                setRoomStatus({
-                    id: roomId,
-                    status: selected.value,
-                }),
-            );
-        }
+    const handleSelectDateRange = (ranges) => {
+        console.log(ranges);
     };
 
     return (
@@ -318,15 +311,24 @@ function ManageRoom() {
                                                                 />
                                                             </div>
                                                             <div className="col-6">
-                                                                <Select
-                                                                    ref={statusSelectRef}
-                                                                    className="room-status"
-                                                                    options={statusOptions}
-                                                                    placeholder="Status..."
-                                                                    onChange={(selected) =>
-                                                                        handleChangeStatus(selected, room.id)
-                                                                    }
-                                                                />
+                                                                <div className="date-range">
+                                                                    <label className="form-label">
+                                                                        Select Date range
+                                                                    </label>
+                                                                    {isShowDateRange && (
+                                                                        <DateRange
+                                                                            editableDateInputs={true}
+                                                                            onChange={(item) =>
+                                                                                setDateRange([item.selection])
+                                                                            }
+                                                                            moveRangeOnFirstSelection={false}
+                                                                            ranges={dateRange}
+                                                                            minDate={new Date()}
+                                                                            startDatePlaceholder="Start date"
+                                                                            endDatePlaceholder="End date"
+                                                                        />
+                                                                    )}
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -433,6 +435,7 @@ function ManageRoom() {
                 setShow={setIsShowModalUpdateRoom}
                 dataRoom={dataRoomUpdate}
                 fetchAllRooms={fetchAllRooms}
+                typeOptions={typeOptions}
             />
 
             <ModalManageRoom
@@ -441,6 +444,7 @@ function ManageRoom() {
                 setShow={setIsShowModalViewRoom}
                 dataRoom={dataRoomView}
                 fetchAllRooms={fetchAllRooms}
+                typeOptions={typeOptions}
             />
         </>
     );

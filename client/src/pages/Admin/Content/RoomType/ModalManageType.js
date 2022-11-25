@@ -23,6 +23,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         const files = event.target.files;
 
         if (files && files.length > 0) {
+            setImages(files);
             setImagesSource(Array.from(files).map((file) => URL.createObjectURL(file)));
         }
     };
