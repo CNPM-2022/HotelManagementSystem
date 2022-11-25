@@ -14,6 +14,13 @@ import { putUpdateRoom } from '../../../../services/apiServices';
 import useClickOutside from '../../../../hooks/useClickOutside';
 
 function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms }) {
+    const initalDateRange = [
+        {
+            startDate: null,
+            endDate: null,
+            key: 'selection',
+        },
+    ];
     const [roomNumber, setRoomNumber] = useState('');
     const [capacity, setCapacity] = useState(0);
     const [type, setType] = useState(null);
@@ -21,13 +28,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
     const [note, setNote] = useState('');
     const [images, setImages] = useState(null);
     const [imagesSource, setImagesSource] = useState([]);
-    const [dateRange, setDateRange] = useState([
-        {
-            startDate: null,
-            endDate: null,
-            key: 'selection',
-        },
-    ]);
+    const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
 
     const dateRangeRef = useRef(null);
@@ -61,6 +62,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
         if (imagesSource.length > 0) {
             imagesSource.forEach((imageSource) => URL.revokeObjectURL(imageSource));
         }
+        setDateRange(initalDateRange);
         setImagesSource([]);
         setImages(null);
         setShow(false);
@@ -188,7 +190,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                                             {formatDate(dateRange[0].startDate)} - {formatDate(dateRange[0].endDate)}
                                         </span>
                                     ) : (
-                                        <span>span</span>
+                                        <span>Select Date Range...</span>
                                     )}
                                 </div>
                                 {isShowDateRange && (
