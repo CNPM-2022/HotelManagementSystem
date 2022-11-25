@@ -41,9 +41,8 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             setType(() => typeOptions.find((type) => type.value === dataRoom.type));
             setDescription(dataRoom.description);
             setNote(dataRoom.note);
-
-            if (modalType === 'VIEW') {
-                setImages(() =>
+            if (dataRoom.imageUrls.length > 0) {
+                setImagesSource(
                     dataRoom.imageUrls.map((image) => `${process.env.REACT_APP_SERVER_URL}${image.filePath}`),
                 );
             }
@@ -76,12 +75,12 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             isValidRoom = false;
         }
 
-        if (!capacity) {
-            toast.error(`Not empty capacity!`);
+        if (capacity < 0 || isNaN(capacity)) {
+            toast.error(`Invalid capacity!`);
             isValidRoom = false;
         }
 
-        if (_.isEmpty(images)) {
+        if (_.isEmpty(imagesSource)) {
             toast.error(`Not empty images!`);
             isValidRoom = false;
         }
@@ -190,7 +189,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                                             {formatDate(dateRange[0].startDate)} - {formatDate(dateRange[0].endDate)}
                                         </span>
                                     ) : (
-                                        <span>Select Date Range...</span>
+                                        <span>Pick Date Range...</span>
                                     )}
                                 </div>
                                 {isShowDateRange && (
@@ -228,32 +227,29 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                         </div>
                         <div className="col-md-12">
                             <label
-                                htmlFor={`upload-images-input-${dataRoom._id}`}
+                                htmlFor={`upload-room-images-${dataRoom._id}`}
                                 className="btn btn-success upload-images-btn"
                             >
                                 <BsFillPlusCircleFill />
-                                Upload file images
+                                Upload new file images
                             </label>
 
                             <input
                                 onChange={handleChangeImageFiles}
                                 type="file"
-                                id={`upload-images-input-${dataRoom._id}`}
+                                id={`upload-room-images-${dataRoom._id}`}
                                 multiple
                                 hidden
                                 disabled={modalType === 'VIEW'}
                             />
 
                             <div className="preview-images">
-                                {images ? (
+                                {imagesSource && imagesSource.length > 0 ? (
                                     <div className="row">
-                                        {Array.from(images).map((image, index) => (
-                                            <div key={index} className="col-3">
+                                        {imagesSource.map((imageSource) => (
+                                            <div key={imageSource} className="col-3">
                                                 <div className="preview-item">
-                                                    <img
-                                                        src={modalType === 'UPDATE' ? imagesSource[index] : image}
-                                                        alt="Room preview"
-                                                    />
+                                                    <img src={imageSource} alt="Preview room type" />
                                                 </div>
                                             </div>
                                         ))}
@@ -273,7 +269,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                     Close
                 </Button>
                 {modalType === 'UPDATE' && (
-                    <Button variant="primary" onClick={handleUpdateRoom}>
+                    <Button disabled variant="primary" onClick={handleUpdateRoom}>
                         Save
                     </Button>
                 )}

@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import _ from 'lodash';
+import { toast } from 'react-toastify';
+import { postCreateRoomType, putUpdateRoomType } from '../../../../services/apiServices';
 
 function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetchAllRoomTypes }) {
     const [type, setType] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
+    const [listRoom, setListRoom] = useState([]);
     const [images, setImages] = useState(null);
     const [imagesSource, setImagesSource] = useState([]);
 
@@ -16,6 +19,12 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
             setPrice(dataType.price);
             setDescription(dataType.description);
             setType(dataType.typeOfRooms);
+            setListRoom(dataType.listRoom);
+            if (dataType.imageUrls.length > 0) {
+                setImagesSource(
+                    dataType.imageUrls.map((image) => `${process.env.REACT_APP_SERVER_URL}${image.filePath}`),
+                );
+            }
         }
     }, [show]);
 
@@ -30,14 +39,76 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
 
     const handleClose = () => {
         // Xoa cac file preview
-        imagesSource.forEach((imageSource) => URL.revokeObjectURL(imageSource));
+        if (imagesSource.length > 0) {
+            imagesSource.forEach((imageSource) => URL.revokeObjectURL(imageSource));
+        }
 
         setType('');
-        setPrice();
+        setPrice(0);
         setDescription('');
         setImages(null);
         setImagesSource([]);
         setShow(false);
+    };
+
+    const handleSubmit = async () => {
+        let isValidRoomType = true;
+
+        if (!type) {
+            toast.error('Not empty type!');
+            isValidRoomType = false;
+        }
+
+        if (price < 0 || isNaN(price)) {
+            toast.error('Invalid price!');
+            isValidRoomType = false;
+        }
+
+        if (!description) {
+            toast.error('Not empty description!');
+            isValidRoomType = false;
+        }
+
+        if (_.isEmpty(imagesSource)) {
+            toast.error('Not empty images!');
+            isValidRoomType = false;
+        }
+
+        if (isValidRoomType === false) return;
+
+        const formData = new FormData();
+
+        formData.append('typeOfRooms', type);
+        formData.append('price', price);
+        formData.append('description', description);
+        if (modalType === 'CREATE') {
+            formData.append('listRoom', []);
+        } else if (modalType === 'EDIT') {
+            formData.append('listRoom', listRoom);
+        }
+
+        if (images && images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                formData.append('images', images[i]);
+            }
+        } else {
+            formData.append('images', []);
+        }
+
+        let res;
+        if (modalType === 'CREATE') {
+            res = await postCreateRoomType(formData);
+        } else if (modalType === 'EDIT') {
+            res = await putUpdateRoomType(dataType._id, formData);
+        }
+
+        if (res && res.data && res.data.success === true) {
+            toast.success(res.data.message);
+            fetchAllRoomTypes();
+            handleClose();
+        } else {
+            toast.error(res.message);
+        }
     };
 
     return (
@@ -85,7 +156,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                     className="btn btn-success upload-images-btn"
                                 >
                                     <BsFillPlusCircleFill />
-                                    Upload file images
+                                    Upload new file images
                                 </label>
 
                                 <input
@@ -123,7 +194,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                         Close
                     </Button>
                     {modalType !== 'VIEW' && (
-                        <Button variant="primary" onClick={handleClose}>
+                        <Button disabled={modalType === 'EDIT'} variant="primary" onClick={handleSubmit}>
                             Save
                         </Button>
                     )}
