@@ -365,8 +365,49 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Get all rooms with pagination
+// @route   GET /api/rooms/getAllRooms/:pageNumber
+// @access  Private/Admin
+
+const getAllRoomsWithPagination = asyncHandler(async (req, res) => {
+    const { page } = req.params;
+    const limit = 5;
+    try {
+        const startIndex = (Number(page) - 1) * Number(limit);
+        const endIndex = Number(page) * Number(limit);
+        const results = {};
+
+        if (endIndex < (await Rooms.countDocuments().exec())) {
+            results.next = {
+                page: Number(page) + 1,
+                limit: Number(limit),
+            };
+        }
+
+        if (startIndex > 0) {
+            results.previous = {
+                page: Number(page) - 1,
+                limit: Number(limit),
+            };
+        }
+
+        results.results = await Rooms.find().limit(Number(limit)).skip(startIndex).exec();
+        const lengthOfRooms = await Rooms.countDocuments().exec();
+        res.status(200).json({
+            success: true,
+            message: 'Get Rooms with pagination success',
+            lenghtOfPage: results.results.length,
+            lengthOfList: lengthOfRooms,
+            results,
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 export {
     getAllRooms,
+    getAllRoomsWithPagination,
     getAllRoomsByType,
     getRoomById,
     createRoom,
