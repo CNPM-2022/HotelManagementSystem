@@ -55,6 +55,18 @@ export const putUpdateRoom = (id, data) => {
     return axios.put(`rooms/updateRoom/${id}`, data);
 };
 
+export const postCreateRoomType = (data) => {
+    return axios.post('room-type/create', data);
+};
+
+export const deleteRoomType = (id) => {
+    return axios.delete(`room-type/delete/${id}`);
+};
+
+export const putUpdateRoomType = (id, data) => {
+    return axios.put(`room-type/update/${id}`, data);
+};
+
 export const getUser = (userID) => {
     return axios.get(`user/${userID}`);
 };

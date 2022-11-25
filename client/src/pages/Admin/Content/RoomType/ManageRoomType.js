@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import { getAllRoomTypes } from '../../../../services/apiServices';
+import _ from 'lodash';
 
+import { getAllRoomTypes } from '../../../../services/apiServices';
 import './ManageRoomType.scss';
 import ModalManageType from './ModalManageType';
 import TableType from './TableType';
+import ModalDeleteType from './ModalDeleteType';
 
 function ManageRoomType() {
     const [listTypes, setListTypes] = useState([]);
@@ -30,7 +32,9 @@ function ManageRoomType() {
         if (res.status !== 200) return;
         if (res.data.success === false) return;
 
-        setListTypes(res.data.data);
+        const data = _.orderBy(res.data.data, ['typeOfRooms'], ['asc']);
+
+        setListTypes(data);
     };
 
     const handleClickViewButton = (type) => {
@@ -92,12 +96,12 @@ function ManageRoomType() {
                 fetchAllRoomTypes={fetchAllRoomTypes}
             />
 
-            {/* <ModalDeleteType
+            <ModalDeleteType
                 show={isShowModalDeleteType}
                 setShow={setIsShowModalDeleteType}
-                dataType={dataTypeDelete}
+                dataTypeDelete={dataTypeDelete}
                 fetchAllRoomTypes={fetchAllRoomTypes}
-            /> */}
+            />
         </div>
     );
 }
