@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import './RoomScreen.scss';
+import { LinkContainer } from 'react-router-bootstrap';
+import { getAllRooms } from '../../services/apiServices';
+import AllRoom from './AllRoom';
+
 // import { roomsActions } from '../../store/roomsSlice';
 // import { useDispatch, useSelector } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap';
-import { DatePicker, Space } from 'antd';
+
+//import { DatePicker, Space } from 'antd';
 // import Loader from '../../components/Loader';
 
-import { getAllRooms } from '../../services/apiServices';
-const { RangePicker } = DatePicker;
+
+/* const { RangePicker } = DatePicker; */
 
 const RoomsScreen = () => {
     // const dispatch = useDispatch();
@@ -38,32 +42,67 @@ const RoomsScreen = () => {
 
     return (
         <>
-            <div className="container">
-                <div className="row bs p-3 m-5 dark" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-                    <div className="col-md-4">
-                        <RangePicker style={{ height: '38px' }} format="DD-MM-YYYY" className="m-2" />
-                    </div>
-
-                    <div className="col-md-4">
-                        <input
-                            type="text"
-                            className="form-control i2 m-2"
-                            placeholder="Search Rooms"
-                            // value={searchkey}
-                            // onKeyUp={filterBySearch}
-                            // onChange={(e) => { setsearchkey(e.target.value) }}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <select className="form-control m-2">
-                            <option value="all">All</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                        </select>
+            <div className="breadcrumb-area bg-img bg-overlay jarallax">
+                <div className="container h-100">
+                    <div className="row h-100 align-items-center">
+                        <div className="col-12">
+                            <div className="breadcrumb-content text-center">
+                                <h2 className="page-title">Our Room</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol className="breadcrumb justify-content-center">
+                                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Room</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <section className="roberto-about-area section-padding-100-0">
+                <div className="hotel-search-form-area" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+                    <div className="container-fluid">
+                        <div className="hotel-search-form">
+                            <form action="#" method="post">
+                                <div className="row justify-content-between align-items-end">
+                                    <div className="col-6 col-md-2 col-lg-3">
+                                        <label htmlFor="checkIn">Check In</label>
+                                        <input type="date" className="form-control" id="checkIn" name="checkin-date" />
+                                    </div>
+                                    <div className="col-6 col-md-2 col-lg-3">
+                                        <label htmlFor="checkOut">Check Out</label>
+                                        <input type="date" className="form-control" id="checkOut" name="checkout-date" />
+                                    </div>
+                                    <div className="col-4 col-md-1">
+                                        <label htmlFor="room">Type</label>
+                                        <select name="room" id="room" className="form-control form-select">
+                                            <option value="all">All</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-4 col-md-1">
+                                        <label htmlFor="number">Number</label>
+                                        <input
+                                            type="text"
+                                            className="form-control i2"
+                                            placeholder="Ex: 123"
+                                            name="number"
+                                        />
+                                    </div>
+                                    <div className="col-12 col-md-3">
+                                        <button type="submit" className="form-control btn roberto-btn w-100">Check Availability</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <AllRoom />
 
             <div className="row justify-content-center mt-5">
                 <div className="col-md-9 mt-2">
