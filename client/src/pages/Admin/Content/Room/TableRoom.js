@@ -30,7 +30,6 @@ function TableRoom({
                     <th scope="col">Number</th>
                     <th scope="col">Type</th>
                     <th scope="col">Capacity</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -42,7 +41,6 @@ function TableRoom({
                             <td>{room.roomNumber}</td>
                             <td>{room.type}</td>
                             <td>{room.maxCount}</td>
-                            <td>{room.status}</td>
                             <td>
                                 <button className="btn btn-success" onClick={() => handleClickViewButton(room)}>
                                     View

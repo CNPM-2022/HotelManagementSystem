@@ -6,9 +6,6 @@ import Lightbox from 'react-18-image-lightbox';
 import Select from 'react-select';
 import 'react-18-image-lightbox/style.css';
 import { toast } from 'react-toastify';
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import './ManageRoom.scss';
 import reducer, { initState } from './roomReducer/reducer';
@@ -44,14 +41,6 @@ function ManageRoom() {
     const [isPreviewImage, setIsPreviewImage] = useState(false);
     const [previewIndex, setPreviewIndex] = useState(0);
     const [images, setImages] = useState('');
-    const [dateRange, setDateRange] = useState([
-        {
-            startDate: null,
-            endDate: null,
-            key: 'selection',
-        },
-    ]);
-    const [isShowDateRange, setIsShowDateRange] = useState(false);
 
     const [isShowModalDeleteRoom, setIsShowModalDeleteRoom] = useState(false);
     const [dataRoomDelete, setDataRoomDelete] = useState({});
@@ -298,38 +287,16 @@ function ManageRoom() {
                                                     </div>
 
                                                     <div className="room-info">
-                                                        <div className="row">
-                                                            <div className="col-6">
-                                                                <Select
-                                                                    ref={typeSelectRef}
-                                                                    className="room-type"
-                                                                    placeholder="Room type..."
-                                                                    options={typeOptions}
-                                                                    onChange={(selected) =>
-                                                                        handleChangeType(selected, room.id)
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div className="col-6">
-                                                                <div className="date-range">
-                                                                    <label className="form-label">
-                                                                        Select Date range
-                                                                    </label>
-                                                                    {isShowDateRange && (
-                                                                        <DateRange
-                                                                            editableDateInputs={true}
-                                                                            onChange={(item) =>
-                                                                                setDateRange([item.selection])
-                                                                            }
-                                                                            moveRangeOnFirstSelection={false}
-                                                                            ranges={dateRange}
-                                                                            minDate={new Date()}
-                                                                            startDatePlaceholder="Start date"
-                                                                            endDatePlaceholder="End date"
-                                                                        />
-                                                                    )}
-                                                                </div>
-                                                            </div>
+                                                        <div className="col-6">
+                                                            <Select
+                                                                ref={typeSelectRef}
+                                                                className="room-type"
+                                                                placeholder="Room type..."
+                                                                options={typeOptions}
+                                                                onChange={(selected) =>
+                                                                    handleChangeType(selected, room.id)
+                                                                }
+                                                            />
                                                         </div>
 
                                                         <div className="form-floating">

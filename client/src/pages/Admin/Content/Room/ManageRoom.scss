@@ -84,17 +84,6 @@
                                     height: 140px;
                                 }
 
-                                .date-range {
-                                    position: relative;
-                                    padding: 0 20px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: flex-start;
-                                    height: calc(100% - 8px);
-                                    border: 1px solid hsl(0, 0%, 80%);
-                                    border-radius: 6px;
-                                }
-
                                 .room-type {
                                     padding-bottom: 8px;
 
@@ -121,6 +110,38 @@
         display: inline-flex;
         align-items: center;
         gap: 5px;
+    }
+
+    .date-range {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        .date-content {
+            user-select: none;
+            cursor: pointer;
+            transition: filter 0.4s;
+
+            &:hover {
+                filter: brightness(0.9);
+            }
+
+            .calendar {
+                position: relative;
+                top: -1px;
+                font-size: 18px;
+                color: #9068ff;
+                margin-right: 6px;
+            }
+        }
+
+        .rdrDateRangeWrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            border: 1px solid #ccc;
+        }
     }
 
     .preview-images {
