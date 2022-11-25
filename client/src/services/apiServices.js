@@ -40,7 +40,7 @@ export const getRoomById = (id) => {
 };
 
 export const getAllRoomTypes = () => {
-    return axios.get('room-direction/all');
+    return axios.get('room-type/all');
 };
 
 export const postCreateRoom = (data) => {

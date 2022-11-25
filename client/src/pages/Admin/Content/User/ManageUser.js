@@ -1,5 +1,5 @@
-import { PlusCircleFilled } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { getAllUsers, getUsersOfPage } from '../../../../services/apiServices';
 import _ from 'lodash';
 
@@ -80,7 +80,7 @@ function ManageUser() {
         <div className="manage-user-container">
             <h3>Manage User</h3>
             <button className="btn btn-primary add-user-btn" onClick={() => setIsShowModalCreateUser(true)}>
-                <PlusCircleFilled />
+                <BsFillPlusCircleFill />
                 Add new user
             </button>
 

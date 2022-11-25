@@ -1,38 +1,43 @@
 import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { AiFillCalendar } from 'react-icons/ai';
+import { useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
 import { putUpdateRoom } from '../../../../services/apiServices';
+import useClickOutside from '../../../../hooks/useClickOutside';
 
-function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) {
-    const statusOptions = [
-        { value: 'Available', label: 'Available' },
-        { value: 'Unavailable', label: 'Unavailable' },
-    ];
-
-    const typeOptions = [
-        { value: 'A', label: 'A' },
-        { value: 'B', label: 'B' },
-        { value: 'C', label: 'C' },
-    ];
-
+function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms }) {
     const [roomNumber, setRoomNumber] = useState('');
     const [capacity, setCapacity] = useState(0);
     const [type, setType] = useState(null);
-    const [status, setStatus] = useState(null);
     const [description, setDescription] = useState('');
     const [note, setNote] = useState('');
     const [images, setImages] = useState(null);
     const [imagesSource, setImagesSource] = useState([]);
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: null,
+            endDate: null,
+            key: 'selection',
+        },
+    ]);
+    const [isShowDateRange, setIsShowDateRange] = useState(false);
+
+    const dateRangeRef = useRef(null);
+    useClickOutside(dateRangeRef, () => setIsShowDateRange(false));
 
     useEffect(() => {
         if (show && !_.isEmpty(dataRoom)) {
             setRoomNumber(dataRoom.roomNumber);
             setCapacity(dataRoom.maxCount);
             setType(() => typeOptions.find((type) => type.value === dataRoom.type));
-            setStatus(() => statusOptions.find((status) => status.value === dataRoom.status));
             setDescription(dataRoom.description);
             setNote(dataRoom.note);
 
@@ -89,11 +94,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
             isValidRoom = false;
         }
 
-        if (!status) {
-            toast.error(`Not empty status!`);
-            isValidRoom = false;
-        }
-
         if (!note) {
             toast.error(`Not empty note!`);
             isValidRoom = false;
@@ -107,7 +107,6 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                 formData.append('images', images[i]);
             }
 
-            formData.append('status', status.value);
             formData.append('description', description);
             formData.append('type', type.value);
             formData.append('note', note);
@@ -124,6 +123,15 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
             fetchAllRooms();
             handleClose();
         }
+    };
+
+    // Format date
+    const padTo2Digits = (num) => {
+        return num.toString().padStart(2, '0');
+    };
+
+    const formatDate = (date) => {
+        return [padTo2Digits(date.getDate()), padTo2Digits(date.getMonth() + 1), date.getFullYear()].join('/');
     };
 
     return (
@@ -164,15 +172,37 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                                 isDisabled={modalType === 'VIEW'}
                             />
                         </div>
+
                         <div className="col-md-6">
-                            <label className="form-label">Status</label>
-                            <Select
-                                value={status}
-                                onChange={(selected) => setStatus(selected)}
-                                options={statusOptions}
-                                placeholder="Choose room status..."
-                                isDisabled={modalType === 'VIEW'}
-                            />
+                            <div className="date-range" ref={dateRangeRef}>
+                                <label className="form-label">Date range</label>
+                                <div
+                                    className="form-control date-content"
+                                    onClick={() => setIsShowDateRange((prev) => !prev)}
+                                >
+                                    <span className="calendar">
+                                        <AiFillCalendar />
+                                    </span>
+                                    {dateRange[0]?.startDate && dateRange[0]?.endDate ? (
+                                        <span className="text">
+                                            {formatDate(dateRange[0].startDate)} - {formatDate(dateRange[0].endDate)}
+                                        </span>
+                                    ) : (
+                                        <span>span</span>
+                                    )}
+                                </div>
+                                {isShowDateRange && (
+                                    <DateRange
+                                        editableDateInputs={true}
+                                        onChange={(item) => setDateRange([item.selection])}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={dateRange}
+                                        minDate={new Date()}
+                                        startDatePlaceholder="Check-in date"
+                                        endDatePlaceholder="Check-out date"
+                                    />
+                                )}
+                            </div>
                         </div>
                         <div className="col-md-12">
                             <label className="form-label">Description</label>
@@ -199,7 +229,7 @@ function ModalManageRoom({ show, setShow, modalType, dataRoom, fetchAllRooms }) 
                                 htmlFor={`upload-images-input-${dataRoom._id}`}
                                 className="btn btn-success upload-images-btn"
                             >
-                                <AiOutlinePlusCircle />
+                                <BsFillPlusCircleFill />
                                 Upload file images
                             </label>
 

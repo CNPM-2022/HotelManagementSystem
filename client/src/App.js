@@ -21,6 +21,7 @@ import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
 import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor';
 import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking';
+import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
 
 function App() {
     return (
@@ -77,6 +78,7 @@ function App() {
                         <Route index element={<AdminDashBoard />} />
                         <Route path="/admins/manage-users" element={<ManageUser />} />
                         <Route path="/admins/manage-rooms" element={<ManageRoom />} />
+                        <Route path="/admins/manage-room-types" element={<ManageRoomType />} />
                     </Route>
                 </Route>
 
