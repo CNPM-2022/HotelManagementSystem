@@ -20,10 +20,10 @@ const roomSchema = mongoose.Schema(
             required: true,
         },
         rentperDate: {
-            type: String,
+            type: Date,
         },
         checkOutDate: {
-            type: String,
+            type: Date,
         },
         currentBookings: {
             type: Array,
