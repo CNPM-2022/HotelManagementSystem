@@ -240,6 +240,7 @@ h1 {
         img {
             border-radius: 4px;
             width: 500px;
+            height: 361px;
             @media only screen and (max-width: 500px) {
                 width: 400px;
             }
@@ -259,6 +260,7 @@ h1 {
         position: relative;
         z-index: 1;
         padding-left: 35px;
+        width: 450px;
 
         @media #{$breakpoint-xs} {
             @include flex(0 0 100%);
@@ -619,23 +621,23 @@ h1 {
 }
 
 //pagination
-.pagination {
+.pagination-allroom {
     position: relative;
     z-index: 1;
 }
 
-.pagination .page-item:last-child .page-link {
+.pagination-allroom .page-item:last-child .page-link {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 
-.pagination .page-item:first-child .page-link {
+.pagination-allroom .page-item:first-child .page-link {
     margin-left: 0;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
-.pagination .page-link {
+.pagination-allroom .page-link {
     padding: 12px 15px;
     color: #2a303b;
     border: none;
@@ -644,13 +646,27 @@ h1 {
     border-radius: 3px;
 }
 
-.pagination .page-link:hover,
-.pagination .page-link:focus {
+.pagination-allroom .page-link:hover,
+.pagination-allroom .page-link:focus {
     background-color: #1cc3b2;
     color: #ffffff;
     border-color: #1cc3b2;
+    cursor: pointer;
+}
+.pagination-allroom .disabled {
+    .page-link {
+        background-color: #a0a6ab;
+    }
+}
+.pagination-allroom .active {
+    .page-link {
+        background-color: #1cc3b2;
+        color: #ffffff;
+        border-color: #1cc3b2;
+        cursor: pointer;
+    }
 }
 
-.pagination .page-link:focus {
+.pagination-allroom .page-link:focus {
     box-shadow: none;
 }

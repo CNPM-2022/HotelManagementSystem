@@ -1,32 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './RoomScreen.scss';
-import { LinkContainer } from 'react-router-bootstrap';
-import { getAllRooms } from '../../services/apiServices';
+import { getRoomsByPage } from '../../services/apiServices';
 import AllRoom from './AllRoom';
 
-// import { roomsActions } from '../../store/roomsSlice';
-// import { useDispatch, useSelector } from 'react-redux';
-
-//import { DatePicker, Space } from 'antd';
-// import Loader from '../../components/Loader';
-
-
-/* const { RangePicker } = DatePicker; */
-
 const RoomsScreen = () => {
-    // const dispatch = useDispatch();
-    // const { loading, rooms, error } = useSelector((state) => state.rooms);
 
     const [rooms, setRooms] = useState([]);
+    const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getRooms();
-    }, []);
+        setLoading(true)
+        getRooms(page);
+        setLoading(false)
 
-    const getRooms = async () => {
+    }, [page]);
+
+    const getRooms = async (page) => {
         try {
-            // dispatch(roomsActions.allRoomsRequest());
-            const res = await getAllRooms();
+            const res = await getRoomsByPage(page);
             const data = res.data;
 
             if (res.status !== 200) {
@@ -34,11 +26,14 @@ const RoomsScreen = () => {
             }
 
             setRooms(data);
-            // dispatch(roomsActions.allRoomsSuccess(data));
         } catch (error) {
-            // dispatch(roomsActions.allRoomsFail(error.message));
+            console.log(error)
         }
     };
+
+    const handleChangePage = (page) => {
+        setPage(page)
+    }
 
     return (
         <>
@@ -101,41 +96,16 @@ const RoomsScreen = () => {
                     </div>
                 </div>
             </section>
+            {(loading || rooms.results === undefined) ?
+                (
+                    <div className="d-flex justify-content-center align-items-center " style={{ minHeight: "300px" }}>
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                ) : (<AllRoom roomData={rooms} curPage={page} handleChangePage={handleChangePage} />)}
 
-            <AllRoom />
 
-            <div className="row justify-content-center mt-5">
-                <div className="col-md-9 mt-2">
-                    {rooms &&
-                        rooms.length > 0 &&
-                        rooms.map((room) => (
-                            <div className="row bs" key={room._id}>
-                                <div className="col-md-4">
-                                    <img src={room.imageurls[0]} className="smallimg" alt="room"></img>
-                                </div>
-                                <div className="col-md-7">
-                                    <h1>{room.name}</h1>
-                                    <b>
-                                        <p>Max Count: {room.maxcount}</p>
-                                        <p>Phone Number: {room.phonenumber}</p>
-                                        <p>Type of Room: {room.type}</p>
-                                    </b>
-
-                                    <div style={{ float: 'right' }} className="vb">
-                                        <LinkContainer to={`/roombook/${room._id}`}>
-                                            <button className="btn btn-outline-warning">Book Now</button>
-                                        </LinkContainer>
-                                    </div>
-                                    <div style={{ float: 'right' }} className="vb px-2">
-                                        <LinkContainer to={`/room/${room._id}`}>
-                                            <button className="btn btn-outline-warning">View Details</button>
-                                        </LinkContainer>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                </div>
-            </div>
         </>
     );
 };
