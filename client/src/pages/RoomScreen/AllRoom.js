@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './RoomScreen.scss';
 
