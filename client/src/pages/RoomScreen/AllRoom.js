@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useState, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './RoomScreen.scss';
 
 
@@ -25,7 +26,7 @@ function AllRoom(props) {
         else {
             document.getElementById("pre-btn").classList.remove('disabled')
         }
-        document.documentElement.scrollTop = 500
+        //document.documentElement.scrollTop = 500
     }, [props.curPage])
 
 
@@ -36,6 +37,7 @@ function AllRoom(props) {
     }
     const handleChangePage = (e) => {
         props.handleChangePage(parseInt(e.target.innerText));
+        document.documentElement.scrollTop = 500
         //console.log(document.getElementById("cc").scrollTop = 10);
     }
 
@@ -43,12 +45,14 @@ function AllRoom(props) {
         if (props.curPage < numberOfPage) {
             props.handleChangePage(props.curPage + 1);
         }
+        document.documentElement.scrollTop = 500
     }
 
     const handlePrePage = (e) => {
         if (props.curPage > 1) {
             props.handleChangePage(props.curPage - 1);
         }
+        document.documentElement.scrollTop = 500
     }
     return (
         <div className="roberto-rooms-area mt-4" id='cc'>
@@ -72,10 +76,10 @@ function AllRoom(props) {
                                             <h6>Status: <span>{room.status}</span></h6>
                                             <h6>Services: <span>{room.note}</span></h6>
                                         </div>
-                                        <a href="123" className="btn view-detail-btn"
+                                        <Link to={`/room/${room._id}`} className="btn view-detail-btn"
                                         >View Details
                                             <i className="fa fa-long-arrow-right" aria-hidden="true"></i
-                                            ></a>
+                                            ></Link>
                                     </div>
                                 </div>
                                 <hr className="mt-0 mb-4" />
