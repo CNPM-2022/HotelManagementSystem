@@ -35,6 +35,10 @@ export const getAllRooms = () => {
     return axios.get('rooms/all');
 };
 
+export const getRoomsByPage = (page) => {
+    return axios.get(`rooms/all/${page}`);
+};
+
 export const getRoomById = (id) => {
     return axios.get(`rooms/${id}`);
 };

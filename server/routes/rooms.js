@@ -5,6 +5,8 @@ const { upload } = require('../helpers/FileHelper');
 
 import {
     getAllRooms,
+    getAllRoomsWithPagination,
+    getRoomsFilter,
     getAllRoomsByType,
     getRoomById,
     createRoom,
@@ -13,6 +15,10 @@ import {
 } from '../controllers/RoomsController.js';
 
 router.get('/all', getAllRooms);
+
+router.get('/all/:page', getAllRoomsWithPagination);
+
+router.get('/filter/:page', getRoomsFilter);
 
 router.get('/all/type/:id', getAllRoomsByType);
 

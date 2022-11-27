@@ -1,18 +1,672 @@
+@import '../UserProfile/css/animate.css';
+
+// Heading Color
+$heading: #2a303b;
+
+// Text Color
+$text: #636a76;
+
+// Gray Background
+$bg-gray: #e8f1f8;
+
+// Primary Color
+$primary: #1cc3b2;
+
+// White Color
+$white: #ffffff;
+
+// Dark Color
+$dark: #000000;
+
+// Border Color
+$border: #ebebeb;
+
+// Hover Color
+$hover: #1cc3b2;
+
+// Secondary Color
+$secondary: #afb4bf;
+
+// Dark 2 Color
+$dark2: #0e2737;
+
+// Xtra Large Breakpoint
+$breakpoint-xl: 'only screen and (min-width:1200px)';
+// Large Breakpoint
+$breakpoint-lg: 'only screen and (min-width:992px) and (max-width:1199px)';
+// Medium Breakpoint
+$breakpoint-md: 'only screen and (min-width:768px) and (max-width:991px)';
+// Small Breakpoint
+$breakpoint-sm: 'only screen and (min-width:576px) and (max-width:767px)';
+// Xtra Small Breakpoint
+$breakpoint-xs: 'only screen and (max-width:767px)';
+// Xtra Small Landscape Breakpoint
+$breakpoint-xs-landscape: 'only screen and (min-width:480px) and (max-width:767px)';
+
+$box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+
+//flex-wrap
+@mixin display-flex($value) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: $value;
+}
+
+@mixin flex($value) {
+    -webkit-box-flex: 0;
+    -ms-flex: $value;
+    flex: $value;
+}
+
+@mixin flex-wrap($value) {
+    -ms-flex-wrap: $value;
+    flex-wrap: $value;
+}
+
+@mixin order($value) {
+    -webkit-box-ordinal-group: $value + 1;
+    -ms-flex-order: $value;
+    order: $value;
+}
+
+@mixin flex-direction-row($value) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: $value;
+    flex-direction: $value;
+}
+
+@mixin flex-direction-row-reverse($value) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: $value;
+    flex-direction: $value;
+}
+
+@mixin flex-direction-column($value) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: $value;
+    flex-direction: $value;
+}
+
+@mixin flex-direction-column-reverse($value) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: $value;
+    flex-direction: $value;
+}
+
+@mixin justify-content-start {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+@mixin justify-content-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@mixin justify-content-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+@mixin justify-content-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+@mixin justify-content-around {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+@mixin align-items-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+@mixin align-items-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+@mixin align-items-end {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+@mixin transition($value) {
+    -webkit-transition: $value;
+    -o-transition: $value;
+    transition: $value;
+}
+
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -ms-transform: $value;
+    transform: $value;
+}
+
+@mixin animation($value) {
+    -webkit-animation: $value;
+    animation: $value;
+}
+
+@mixin transition-duration($time) {
+    -webkit-transition-duration: $time;
+    -o-transition-duration: $time;
+    transition-duration: $time;
+}
+
+@mixin box-shadow($content) {
+    -webkit-box-shadow: $content;
+    box-shadow: $content;
+}
 .smallimg {
-  height: 200px;
-  width: 100% !important;
-  border-radius: 5px !important;
+    height: 200px;
+    width: 100% !important;
+    border-radius: 5px !important;
 }
 h1 {
-  font-size: 20px !important;
+    font-size: 20px !important;
 }
 .bs {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-top: 20px !important;
-  border-radius: 5px !important;
-  padding: 20px !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 20px !important;
+    border-radius: 5px !important;
+    padding: 20px !important;
 }
 
 .vb {
-  padding-left: 14px;
+    padding-left: 14px;
+}
+
+.breadcrumb-area {
+    background-image: url(../../assets/images/rooms/room2.jpg);
+    background-size: auto 250px;
+    background-repeat: no-repeat;
+}
+
+/* :: 14.0 Room Area CSS */
+
+/* .roberto-rooms-area {
+    @media only screen and (max-width: 767px) {
+        margin-left: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+} */
+
+.single-room-area {
+    position: relative;
+    z-index: 1;
+
+    @media #{$breakpoint-xs} {
+        @include flex-wrap(wrap);
+    }
+    @media only screen and (max-width: 500px) {
+        margin-left: 30px;
+    }
+    @media only screen and (max-width: 767px) and (min-width: 572px) {
+        margin-left: 9%;
+    }
+    @media only screen and (max-width: 571px) and (min-width: 501px) {
+        margin-left: 5%;
+    }
+
+    .room-thumbnail {
+        position: relative;
+        z-index: 1;
+        @include flex(0 0 50%);
+        max-width: 50%;
+        width: 50%;
+
+        @media #{$breakpoint-xs} {
+            @include flex(0 0 100%);
+            max-width: 100%;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        img {
+            border-radius: 4px;
+            width: 500px;
+            height: 361px;
+            @media only screen and (max-width: 500px) {
+                width: 400px;
+            }
+            @media only screen and (max-width: 767px) and (min-width: 501px) {
+                width: 450px;
+            }
+            @media #{$breakpoint-md} {
+                width: 345px;
+            }
+            @media #{$breakpoint-lg} {
+                width: 400px;
+            }
+        }
+    }
+
+    .room-content {
+        position: relative;
+        z-index: 1;
+        padding-left: 35px;
+        width: 450px;
+
+        @media #{$breakpoint-xs} {
+            @include flex(0 0 100%);
+            max-width: 100%;
+            width: 100%;
+            padding-left: 0;
+        }
+        @media #{$breakpoint-lg} {
+            margin-left: -20px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            margin: 0;
+        }
+        h2 {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 5px;
+
+            @media #{$breakpoint-lg} {
+                font-size: 24px;
+            }
+
+            @media #{$breakpoint-xs} {
+                font-size: 24px;
+            }
+        }
+
+        h4 {
+            color: $hover;
+            margin-bottom: 20px;
+
+            span {
+                color: $secondary;
+                font-size: 14px;
+            }
+        }
+
+        .room-feature {
+            @include display-flex(flex);
+            @include flex-wrap(wrap);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+
+            h6 {
+                @include flex(0 0 50%);
+                max-width: 50%;
+                width: 50%;
+                font-weight: 400;
+                color: $secondary;
+                margin-bottom: 10px;
+
+                @media #{$breakpoint-lg} {
+                    font-size: 14px;
+                }
+
+                span {
+                    color: $heading;
+                    display: block;
+                }
+            }
+        }
+
+        .view-detail-btn {
+            padding: 0;
+            font-size: 16px;
+            color: $hover;
+            font-weight: 500;
+
+            &:hover,
+            &:focus {
+                color: $dark;
+            }
+        }
+    }
+}
+
+//Breadcrumb Area Start
+.breadcrumb-area {
+    position: relative;
+    z-index: 1;
+    height: 300px;
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area {
+        height: 200px;
+    }
+}
+.breadcrumb-area .page-title {
+    color: #ffffff;
+    font-size: 48px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .breadcrumb-area .page-title {
+        font-size: 36px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .breadcrumb-area .page-title {
+        font-size: 36px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area .page-title {
+        font-size: 24px;
+    }
+}
+.breadcrumb-area.contact-breadcrumb {
+    height: 400px;
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area.contact-breadcrumb {
+        height: 300px;
+    }
+}
+.breadcrumb-area .room-title {
+    font-size: 48px;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .breadcrumb-area .room-title {
+        font-size: 42px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .breadcrumb-area .room-title {
+        font-size: 30px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area .room-title {
+        font-size: 24px;
+    }
+}
+.breadcrumb-area .room-price {
+    font-size: 36px;
+    color: #1cc3b2;
+    margin-bottom: 0;
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area .room-price {
+        font-size: 14px;
+    }
+}
+.breadcrumb-area .room-price span {
+    font-size: 18px;
+    color: #ffffff;
+}
+@media only screen and (max-width: 767px) {
+    .breadcrumb-area .room-price span {
+        font-size: 12px;
+    }
+}
+.bg-overlay {
+    position: relative;
+    z-index: 1;
+}
+.bg-overlay::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(14, 39, 55, 0.7);
+}
+.bg-img {
+    background-position: center center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.jarallax {
+    position: relative;
+    z-index: 0;
+}
+.breadcrumb-content {
+    position: relative;
+    z-index: 1;
+}
+.breadcrumb-content .breadcrumb {
+    padding: 0;
+    background-color: transparent;
+    margin-bottom: 0;
+}
+.breadcrumb-content .breadcrumb .breadcrumb-item {
+    color: #ffffff;
+}
+.breadcrumb-content .breadcrumb .breadcrumb-item a {
+    color: #ffffff;
+}
+.breadcrumb-content .breadcrumb .breadcrumb-item a:hover,
+.breadcrumb-content .breadcrumb .breadcrumb-item a:focus {
+    color: #1cc3b2;
+}
+.breadcrumb-content .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: '\f105';
+    font-family: 'FontAwesome';
+    color: #ffffff;
+}
+
+//search form
+.hotel-search-form-area {
+    position: relative;
+    z-index: 10;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .hotel-search-form-area {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .hotel-search-form-area {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .hotel-search-form-area {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+.hotel-search-form-area .hotel-search-form {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0 2px 15px 1px rgba(0, 0, 0, 0.15);
+    padding: 40px 40px 0 40px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+@media only screen and (max-width: 767px) {
+    .hotel-search-form-area .hotel-search-form {
+        padding: 30px 30px 0 30px;
+    }
+}
+.hotel-search-form-area .hotel-search-form label {
+    font-size: 16px;
+    font-weight: 500;
+}
+@media only screen and (max-width: 767px) {
+    .hotel-search-form-area .hotel-search-form label {
+        font-size: 13px;
+    }
+}
+.hotel-search-form-area .hotel-search-form .form-control {
+    width: 100%;
+    margin-bottom: 40px;
+    height: 50px;
+    border: 1px solid #ebebeb;
+    font-size: 13px;
+}
+@media only screen and (max-width: 767px) {
+    .hotel-search-form-area .hotel-search-form .form-control {
+        margin-bottom: 30px;
+    }
+}
+.hotel-search-form-area .hotel-search-form .form-control:focus {
+    box-shadow: none;
+    border-color: #1cc3b2;
+}
+
+.roberto-about-area {
+    position: relative;
+    z-index: 1;
+}
+.roberto-about-area .hotel-search-form-area {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.roberto-about-area .hotel-search-form-area .nice-select {
+    line-height: 35px;
+}
+
+//button check available
+.roberto-btn {
+    position: relative;
+    z-index: 1;
+    min-width: 150px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0 40px;
+    text-align: center;
+    text-transform: capitalize;
+    background-color: #1cc3b2;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+.roberto-btn:focus,
+.roberto-btn:hover {
+    font-weight: 500;
+    -webkit-box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+    box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+    background-color: #ffffff;
+    color: #1cc3b2;
+}
+.roberto-btn.btn-2 {
+    min-width: 180px;
+    height: 50px;
+    line-height: 46px;
+    border: 2px solid #1cc3b2;
+    background-color: transparent;
+    color: #ffffff;
+}
+.roberto-btn.btn-2:focus,
+.roberto-btn.btn-2:hover {
+    color: #ffffff;
+    background-color: #1cc3b2;
+}
+
+.roberto-about-area {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 0;
+    /* @media only screen and (max-width: 767px) {
+        padding-bottom: 100px;
+    } */
+}
+.roberto-about-area .hotel-search-form-area {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    top: -70px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    @media only screen and (max-width: 767px) {
+        position: relative;
+        padding-bottom: 0;
+        margin-bottom: -40px;
+    }
+}
+.roberto-about-area .hotel-search-form-area .nice-select {
+    line-height: 35px;
+}
+.section-padding-100-0 {
+    padding-top: 100px;
+    padding-bottom: 0;
+}
+
+//pagination
+.pagination-allroom {
+    position: relative;
+    z-index: 1;
+}
+
+.pagination-allroom .page-item:last-child .page-link {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.pagination-allroom .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.pagination-allroom .page-link {
+    padding: 12px 15px;
+    color: #2a303b;
+    border: none;
+    background-color: #e8f1f8;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.pagination-allroom .page-link:hover,
+.pagination-allroom .page-link:focus {
+    background-color: #1cc3b2;
+    color: #ffffff;
+    border-color: #1cc3b2;
+    cursor: pointer;
+}
+.pagination-allroom .disabled {
+    .page-link {
+        background-color: #a0a6ab;
+    }
+}
+.pagination-allroom .active {
+    .page-link {
+        background-color: #1cc3b2;
+        color: #ffffff;
+        border-color: #1cc3b2;
+        cursor: pointer;
+    }
+}
+
+.pagination-allroom .page-link:focus {
+    box-shadow: none;
 }

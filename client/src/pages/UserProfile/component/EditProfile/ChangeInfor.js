@@ -138,7 +138,7 @@ function ChangeInfor(props) {
                                     <Button variant="light" style={{ width: '50%' }} onClick={handleShow}>
                                         <span className='me-5 fw-bold'>Change my password
                                             <i className="fa-solid fa-key ms-2"></i>
-                                        </span><i className="bi bi-chevron-right ms-5"></i>
+                                        </span><i className="bi bi-chevron-right ms-4"></i>
                                     </Button>
                                 </div>
 
