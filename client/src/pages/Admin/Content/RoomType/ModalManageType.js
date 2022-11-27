@@ -52,6 +52,11 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
     };
 
     const handleSubmit = async () => {
+        if (modalType === 'UPDATE') {
+            toast.error('Chua lam update');
+            return;
+        }
+
         let isValidRoomType = true;
 
         if (!type) {
@@ -83,7 +88,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         formData.append('description', description);
         if (modalType === 'CREATE') {
             formData.append('listRoom', []);
-        } else if (modalType === 'EDIT') {
+        } else if (modalType === 'UPDATE') {
             formData.append('listRoom', listRoom);
         }
 
@@ -98,7 +103,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         let res;
         if (modalType === 'CREATE') {
             res = await postCreateRoomType(formData);
-        } else if (modalType === 'EDIT') {
+        } else if (modalType === 'UPDATE') {
             res = await putUpdateRoomType(dataType._id, formData);
         }
 
@@ -194,7 +199,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                         Close
                     </Button>
                     {modalType !== 'VIEW' && (
-                        <Button disabled={modalType === 'EDIT'} variant="primary" onClick={handleSubmit}>
+                        <Button variant="primary" onClick={handleSubmit}>
                             Save
                         </Button>
                     )}
