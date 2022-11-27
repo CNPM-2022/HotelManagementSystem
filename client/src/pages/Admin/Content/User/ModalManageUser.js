@@ -98,7 +98,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 isAdmin: role === 'ADMIN' ? true : false,
             });
         } else if (type === 'EDIT') {
-            res = await putUpdateUser({
+            res = await putUpdateUser(dataUser._id, {
                 id: dataUser._id,
                 username,
                 email,

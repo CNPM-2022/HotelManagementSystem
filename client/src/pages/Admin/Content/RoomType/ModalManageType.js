@@ -194,7 +194,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                         Close
                     </Button>
                     {modalType !== 'VIEW' && (
-                        <Button disabled={modalType === 'EDIT'} variant="primary" onClick={handleSubmit}>
+                        <Button variant="primary" onClick={handleSubmit}>
                             Save
                         </Button>
                     )}
