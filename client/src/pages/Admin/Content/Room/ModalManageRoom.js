@@ -68,6 +68,11 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
     };
 
     const handleUpdateRoom = async () => {
+        if (modalType === 'UPDATE') {
+            toast.error('Chua lam update');
+            return;
+        }
+
         let isValidRoom = true;
 
         if (!roomNumber) {
@@ -269,7 +274,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                     Close
                 </Button>
                 {modalType === 'UPDATE' && (
-                    <Button disabled variant="primary" onClick={handleUpdateRoom}>
+                    <Button variant="primary" onClick={handleUpdateRoom}>
                         Save
                     </Button>
                 )}

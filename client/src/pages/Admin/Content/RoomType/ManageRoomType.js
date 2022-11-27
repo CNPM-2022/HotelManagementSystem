@@ -16,8 +16,8 @@ function ManageRoomType() {
     const [isShowModalViewType, setIsShowModalViewType] = useState(false);
     const [dataTypeView, setDataTypeView] = useState({});
 
-    const [isShowModalEditType, setIsShowModalEditType] = useState(false);
-    const [dataTypeEdit, setDataTypeEdit] = useState({});
+    const [isShowModalUpdateType, setIsShowModalUpdateType] = useState(false);
+    const [dataTypeUpdate, setDataTypeUpdate] = useState({});
 
     const [isShowModalDeleteType, setIsShowModalDeleteType] = useState(false);
     const [dataTypeDelete, setDataTypeDelete] = useState({});
@@ -43,8 +43,8 @@ function ManageRoomType() {
     };
 
     const handleClickEditButton = (type) => {
-        setDataTypeEdit(type);
-        setIsShowModalEditType(true);
+        setDataTypeUpdate(type);
+        setIsShowModalUpdateType(true);
     };
 
     const handleClickDeleteButton = (type) => {
@@ -88,11 +88,11 @@ function ManageRoomType() {
             />
 
             <ModalManageType
-                modalType="EDIT"
+                modalType="UPDATE"
                 title="Edit Room Type"
-                show={isShowModalEditType}
-                setShow={setIsShowModalEditType}
-                dataType={dataTypeEdit}
+                show={isShowModalUpdateType}
+                setShow={setIsShowModalUpdateType}
+                dataType={dataTypeUpdate}
                 fetchAllRoomTypes={fetchAllRoomTypes}
             />
 
