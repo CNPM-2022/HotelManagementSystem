@@ -192,3 +192,33 @@ GET  http://localhost:5000/api/upload/
 
 
 
+###
+
+POST http://localhost:5000/api/booking/create
+Content-Type: application/json
+
+{
+    "roomNumber": "101",
+    "rentperDate": "2022-11-27T13:59:10.068Z",
+    "checkOutDate": "2022-11-27T13:59:10.068Z",
+    "totalAmount": "1000000",
+    "status": "da thue"
+}
+
+###
+POST http://localhost:5000/api/booking/
+Content-Type: application/json
+
+{
+    "roomNumber": "101",
+    "rentperDate": "2022-11-27T13:59:10.068Z",
+    "checkOutDate": "2022-11-27T13:59:10.068Z",
+    "totalAmount": "1000000",
+    "status": "da thue"
+}
+
+###
+GET http://localhost:5000/api/booking/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0YzJlMDQ3YWNjYmYyNmIzMDQ3YjUiLCJpYXQiOjE2Njk1NTgwMTR9.dGDJYajsQSVR6qjxqtxy7idbuvuXFTGqMzxFahwZv1Y
+
+

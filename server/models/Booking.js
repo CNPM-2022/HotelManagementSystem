@@ -1,36 +1,28 @@
-import mongoose from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 
 const bookingSchema = mongoose.Schema(
     {
-        room: {
+        roomId: {
+            type: SchemaTypes.ObjectId,
+            ref: 'Room',
+        },
+        userId: {
+            type: SchemaTypes.ObjectId,
+            ref: 'User',
+        },
+        customerList: {
+            type: Array,
+            default: [],
+        },
+        checkInDate: {
             type: String,
             required: true,
         },
-        roomid: {
-            type: String,
-            required: true,
-        },
-        userid: {
-            type: String,
-            required: true,
-        },
-        fromdate: {
-            type: String,
-            required: true,
-        },
-        todate: {
-            type: String,
-            required: true,
-        },
-        totalDays: {
+        checkOutDate: {
             type: String,
             required: true,
         },
         totalAmount: {
-            type: String,
-            required: true,
-        },
-        transactionId: {
             type: String,
             required: true,
         },
@@ -45,3 +37,5 @@ const bookingSchema = mongoose.Schema(
 );
 
 const Booking = mongoose.model('booking', bookingSchema);
+
+export default Booking;

@@ -7,6 +7,7 @@ import cors from 'cors';
 import rooms from './routes/rooms.js';
 import auth from './routes/auth.js';
 import roomTypes from './routes/roomTypes.js';
+import booking from './routes/booking.js';
 import user from './routes/user.js';
 import uploads from './routes/upload.js';
 
@@ -29,6 +30,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
@@ -60,6 +62,7 @@ app.use(cors());
 //auto load routes
 
 //routes
+app.use('/api/booking', booking);
 app.use('/api/auth', auth);
 app.use('/api/rooms', rooms);
 app.use('/api/room-type', roomTypes);
