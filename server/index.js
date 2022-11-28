@@ -10,6 +10,7 @@ import roomTypes from './routes/roomTypes.js';
 import booking from './routes/booking.js';
 import user from './routes/user.js';
 import uploads from './routes/upload.js';
+import quiDinh from './routes/quiDinh.js';
 
 //connect to mongodb
 const connectDB = async () => {
@@ -68,5 +69,6 @@ app.use('/api/rooms', rooms);
 app.use('/api/room-type', roomTypes);
 app.use('/api/user', user);
 app.use('/api/upload', uploads);
+app.use('/api/quidinh', quiDinh);
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
