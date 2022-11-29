@@ -1,7 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 require('dotenv').config();
 const morgan = require('morgan');
+import connectDB from './config/connectDB.js';
+
+//import routes
 import path from 'path';
 import cors from 'cors';
 import rooms from './routes/rooms.js';
@@ -11,22 +13,9 @@ import booking from './routes/booking.js';
 import user from './routes/user.js';
 import uploads from './routes/upload.js';
 import quiDinh from './routes/quiDinh.js';
+import bill from './routes/bill.js';
 
-//connect to mongodb
-const connectDB = async () => {
-    try {
-        const con = await mongoose.connect(
-            `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@project1.hodrtv1.mongodb.net/?retryWrites=true&w=majority`,
-            {
-                useUnifiedTopology: true,
-            },
-        );
-        console.log('MongoDB connected');
-    } catch (error) {
-        console.log(error);
-        process.exit(1);
-    }
-};
+//connect to database
 connectDB();
 
 const app = express();
@@ -70,5 +59,6 @@ app.use('/api/room-type', roomTypes);
 app.use('/api/user', user);
 app.use('/api/upload', uploads);
 app.use('/api/quidinh', quiDinh);
+app.use('/api/bill', bill);
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));

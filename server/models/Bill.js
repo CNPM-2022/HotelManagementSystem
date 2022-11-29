@@ -1,11 +1,11 @@
 import mongoose, { SchemaTypes } from 'mongoose';
 
 const billSchema = mongoose.Schema({
-    bookingId: {
+    booking: {
         type: SchemaTypes.ObjectId,
-        ref: 'bookings',
+        ref: 'booking',
     },
-    userId: {
+    user: {
         type: SchemaTypes.ObjectId,
         ref: 'users',
     },
