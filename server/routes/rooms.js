@@ -1,7 +1,7 @@
 import express from 'express';
 
 const router = express.Router();
-const { upload } = require('../helpers/FileHelper');
+const { upload } = require('../helpers/fileHelper');
 
 import {
     getAllRooms,

@@ -2,18 +2,20 @@ import mongoose, { SchemaTypes } from 'mongoose';
 
 const bookingSchema = mongoose.Schema(
     {
-        roomId: {
+        room: {
             type: SchemaTypes.ObjectId,
-            ref: 'Room',
+            ref: 'rooms',
         },
-        userId: {
+        user: {
             type: SchemaTypes.ObjectId,
-            ref: 'User',
+            ref: 'users',
         },
-        customerList: {
-            type: Array,
-            default: [],
-        },
+        customerList: [
+            {
+                type: SchemaTypes.ObjectId,
+                ref: 'customers',
+            },
+        ],
         checkInDate: {
             type: String,
             required: true,

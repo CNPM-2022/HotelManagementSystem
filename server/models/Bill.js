@@ -1,13 +1,13 @@
 import mongoose, { SchemaTypes } from 'mongoose';
 
 const billSchema = mongoose.Schema({
-    bookingId: {
+    booking: {
         type: SchemaTypes.ObjectId,
-        ref: 'Booking',
+        ref: 'booking',
     },
-    userId: {
+    user: {
         type: SchemaTypes.ObjectId,
-        ref: 'User',
+        ref: 'users',
     },
     dateOfPayment: {
         type: String,
