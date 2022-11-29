@@ -27,8 +27,8 @@ const createBooking = async (req, res) => {
         }
 
         const NewBooking = await Booking.create({
-            roomId,
-            userId: req.userId,
+            room: roomId,
+            user: req.userId,
             customerList: customerListId,
             checkInDate,
             checkOutDate,
@@ -61,7 +61,10 @@ const createBooking = async (req, res) => {
 
 const getBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find();
+        const bookings = await Booking.find()
+            .populate('room', ['roomNumber'])
+            .populate('user', ['Name'])
+            .populate('customerList');
         return res.status(200).json({
             success: true,
             message: 'Bookings fetched successfully',
@@ -82,7 +85,10 @@ const getBookings = async (req, res) => {
 
 const getBookingById = async (req, res) => {
     try {
-        const booking = await Booking.findById(req.params.id);
+        const booking = await Booking.findById(req.params.id)
+            .populate('room', ['roomNumber'])
+            .populate('user', ['Name'])
+            .populate('customerList');
         if (booking) {
             return res.status(200).json({
                 success: true,
@@ -130,7 +136,7 @@ const updateBooking = async (req, res) => {
 
         const booking = await Booking.findById(req.params.id);
         if (booking) {
-            booking.roomId = roomId;
+            booking.room = roomId;
             booking.customerList = customerListId;
             booking.checkInDate = checkInDate;
             booking.checkOutDate = checkOutDate;
