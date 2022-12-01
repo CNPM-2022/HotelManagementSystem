@@ -21,11 +21,8 @@ const Login = () => {
             const res = await postLogin(options);
             const data = res.data;
 
-            if (res.status !== 200) {
-                throw new Error(res.data.message || 'Something went wrong');
-            }
-            if (data.success) {
-                localStorage.setItem('user', JSON.stringify(data));
+            if (res && data && data.success === true) {
+                localStorage.setItem('user', JSON.stringify(data.user));
                 dispatch(
                     authActions.login({
                         token: data.accessToken,
@@ -35,7 +32,7 @@ const Login = () => {
                 navigate('/');
                 toast.success(data.message);
             } else {
-                toast.error(data.message);
+                toast.error(res.message);
             }
         } catch (error) {
             toast.error(error.message);
