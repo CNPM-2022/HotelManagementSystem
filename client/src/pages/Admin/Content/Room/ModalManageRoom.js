@@ -19,6 +19,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             startDate: null,
             endDate: null,
             key: 'selection',
+            disabled: modalType === 'VIEW',
         },
     ];
     const [roomNumber, setRoomNumber] = useState('');
@@ -46,6 +47,16 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                     dataRoom.imageUrls.map((image) => `${process.env.REACT_APP_SERVER_URL}${image.filePath}`),
                 );
             }
+            if (dataRoom.rentperDate && dataRoom.checkOutDate) {
+                setDateRange([
+                    {
+                        startDate: new Date(dataRoom.rentperDate),
+                        endDate: new Date(dataRoom.checkOutDate),
+                        key: 'selection',
+                        disabled: modalType === 'VIEW',
+                    },
+                ]);
+            }
         }
     }, [show]);
 
@@ -68,16 +79,16 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
     };
 
     const handleUpdateRoom = async () => {
-        if (modalType === 'UPDATE') {
-            toast.error('Chua lam update');
-            return;
-        }
-
         let isValidRoom = true;
 
         if (!roomNumber) {
             toast.error(`Not empty number!`);
             isValidRoom = false;
+        } else {
+            if (isNaN(parseInt(roomNumber))) {
+                toast.error(`Invalid room number!`);
+                isValidRoom = false;
+            }
         }
 
         if (capacity < 0 || isNaN(capacity)) {
@@ -109,14 +120,22 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             const formData = new FormData();
 
             formData.append('roomNumber', roomNumber);
-            for (let i = 0; i < images.length; i++) {
-                formData.append('images', images[i]);
+
+            if (images) {
+                for (let i = 0; i < images.length; i++) {
+                    formData.append('images', images[i]);
+                }
             }
 
             formData.append('description', description);
             formData.append('type', type.value);
             formData.append('note', note);
             formData.append('maxCount', capacity);
+
+            if (dateRange[0].startDate && dateRange[0].endDate) {
+                formData.append('rentperDate', dateRange[0].startDate);
+                formData.append('checkOutDate', dateRange[0].endDate);
+            }
 
             const res = await putUpdateRoom(dataRoom._id, formData);
 

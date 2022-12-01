@@ -3,13 +3,19 @@ import { Button, Modal } from 'react-bootstrap';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 import { postCreateRoomType, putUpdateRoomType } from '../../../../services/apiServices';
+
+const animatedComponents = makeAnimated();
 
 function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetchAllRoomTypes }) {
     const [type, setType] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
     const [listRoom, setListRoom] = useState([]);
+    const [listRoomOptions, setListRoomOptions] = useState([]);
     const [images, setImages] = useState(null);
     const [imagesSource, setImagesSource] = useState([]);
 
@@ -19,7 +25,10 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
             setPrice(dataType.price);
             setDescription(dataType.description);
             setType(dataType.typeOfRooms);
-            setListRoom(dataType.listRoom);
+            if (dataType.listRoom && dataType.listRoom.length > 0) {
+                setListRoom(dataType.listRoom);
+                setListRoomOptions(dataType.listRoom.map((room) => ({ label: room, value: room })));
+            }
             if (dataType.imageUrls.length > 0) {
                 setImagesSource(
                     dataType.imageUrls.map((image) => `${process.env.REACT_APP_SERVER_URL}${image.filePath}`),
@@ -37,6 +46,10 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         }
     };
 
+    const handleChangeListRoom = (selected) => {
+        setListRoom(selected.map((room) => room.value));
+    };
+
     const handleClose = () => {
         // Xoa cac file preview
         if (imagesSource.length > 0) {
@@ -51,12 +64,9 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         setShow(false);
     };
 
-    const handleSubmit = async () => {
-        if (modalType === 'UPDATE') {
-            toast.error('Chua lam update');
-            return;
-        }
+    console.log(listRoom);
 
+    const handleSubmit = async () => {
         let isValidRoomType = true;
 
         if (!type) {
@@ -86,6 +96,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         formData.append('typeOfRooms', type);
         formData.append('price', price);
         formData.append('description', description);
+
         if (modalType === 'CREATE') {
             formData.append('listRoom', []);
         } else if (modalType === 'UPDATE') {
@@ -145,6 +156,21 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                     disabled={modalType === 'VIEW'}
                                 />
                             </div>
+                            {modalType !== 'CREATE' && (
+                                <div className="col-md-12">
+                                    <label className="form-label">List Room</label>
+                                    <Select
+                                        value={listRoom.map((room) => ({ label: room, value: room }))}
+                                        onChange={handleChangeListRoom}
+                                        closeMenuOnSelect={false}
+                                        components={animatedComponents}
+                                        isMulti
+                                        name="colors"
+                                        options={listRoomOptions}
+                                        isDisabled={modalType === 'VIEW'}
+                                    />
+                                </div>
+                            )}
                             <div className="col-md-12">
                                 <label className="form-label">Description</label>
                                 <textarea

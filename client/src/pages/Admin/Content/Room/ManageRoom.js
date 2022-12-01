@@ -129,6 +129,11 @@ function ManageRoom() {
             if (!roomsState[i].number) {
                 toast.error(`Not empty number for Room ${i + 1}!`);
                 isValidRooms = false;
+            } else {
+                if (isNaN(parseInt(roomsState[i].number))) {
+                    toast.error(`Invalid room number for Room ${i + 1}!`);
+                    isValidRooms = false;
+                }
             }
 
             if (_.isEmpty(roomsState[i].imageFiles)) {
@@ -183,8 +188,8 @@ function ManageRoom() {
             // Clear state
             dispatch(setRooms(initState));
             fetchAllRooms();
-            typeSelectRef.current.clearValue();
-            statusSelectRef.current.clearValue();
+            if (typeSelectRef.current) typeSelectRef.current.clearValue();
+            if (statusSelectRef.current) statusSelectRef.current.clearValue();
         }
     };
 

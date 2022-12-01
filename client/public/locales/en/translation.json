@@ -1,0 +1,44 @@
+{
+    "admin": {
+        "sidebar": {
+            "title": "Home",
+            "dashboard": "Dashboard",
+            "features": {
+                "title": "Features",
+                "manageUsers": "Manage Users",
+                "manageRooms": "Manage Rooms",
+                "manageRoomTypes": "Manage Room Types"
+            }
+        },
+        "manageUsers": {
+            "title": "Manage Users",
+            "addNew": "Add new User"
+        }
+    },
+    "homepage": {
+        "header": {
+            "userMenu": {
+                "account": "Account",
+                "admin": "Admin",
+                "language": {
+                    "title": "English",
+                    "subTitle": "Language",
+                    "english": "English",
+                    "vietnamese": "Vietnamese"
+                },
+                "logout": "Log out"
+            }
+        }
+    },
+    "username": "Username",
+    "email": "Email",
+    "role": "Role",
+    "action": "Action",
+    "ADMIN": "ADMIN",
+    "USER": "USER",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "prev": "Prev",
+    "next": "Next"
+}

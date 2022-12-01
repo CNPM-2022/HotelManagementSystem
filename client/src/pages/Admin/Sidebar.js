@@ -1,8 +1,11 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarContent, SidebarFooter } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Sidebar({ collapsed }) {
+    const { t } = useTranslation();
+
     return (
         <ProSidebar collapsed={collapsed}>
             <SidebarHeader className="text-center">
@@ -19,29 +22,29 @@ function Sidebar({ collapsed }) {
                     }}
                 >
                     <Link to="/" className="title d-block w-100 h-100">
-                        Hotel
+                        {t('admin.sidebar.title')}
                     </Link>
                 </div>
             </SidebarHeader>
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem>
-                        Dashboard
+                        {t('admin.sidebar.dashboard')}
                         <Link to="/admins" />
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <SubMenu title="Features">
+                    <SubMenu title={t('admin.sidebar.features.title')}>
                         <MenuItem>
-                            Quản Lý Users
+                            {t('admin.sidebar.features.manageUsers')}
                             <Link to="/admins/manage-users" />
                         </MenuItem>
                         <MenuItem>
-                            Quản Lý Rooms
+                            {t('admin.sidebar.features.manageRooms')}
                             <Link to="/admins/manage-rooms" />
                         </MenuItem>
                         <MenuItem>
-                            Quản Lý Room Types
+                            {t('admin.sidebar.features.manageRoomTypes')}
                             <Link to="/admins/manage-room-types" />
                         </MenuItem>
                     </SubMenu>
@@ -49,7 +52,12 @@ function Sidebar({ collapsed }) {
             </SidebarContent>
             <SidebarFooter style={{ textAlign: 'center' }}>
                 <div className="sidebar-btn-wrapper">
-                    <a href="https://www.github.com" target="_blank" className="sidebar-btn" rel="noopener noreferrer">
+                    <a
+                        href="https://github.com/CNPM-2022/HotelManager"
+                        target="_blank"
+                        className="sidebar-btn"
+                        rel="noopener noreferrer"
+                    >
                         <span>Github</span>
                     </a>
                 </div>

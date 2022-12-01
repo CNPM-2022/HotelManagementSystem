@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash';
 import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
     const [username, setUsername] = useState('');
@@ -14,6 +15,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
     const [identity, setIdentity] = useState('');
     const [address, setAddress] = useState('');
     const [role, setRole] = useState('USER');
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (show && !_.isEmpty(dataUser) && type !== 'CREATE') {
@@ -140,7 +143,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Password</label>
+                            <label className="form-label">Mật khẩu</label>
                             <input
                                 type="password"
                                 className="form-control"
@@ -150,7 +153,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Username</label>
+                            <label className="form-label">Tên người dùng</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -160,7 +163,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Role</label>
+                            <label className="form-label">Vai trò</label>
 
                             <select
                                 className="form-select"
@@ -168,8 +171,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 onChange={(event) => setRole(event.target.value)}
                                 disabled={type === 'VIEW'}
                             >
-                                <option value="USER">USER</option>
-                                <option value="ADMIN">ADMIN</option>
+                                <option value="USER">Người dùng</option>
+                                <option value="ADMIN">Quản trị</option>
                             </select>
                         </div>
 
