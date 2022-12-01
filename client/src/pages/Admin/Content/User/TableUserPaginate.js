@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 
 function TableUserPaginate({
@@ -10,16 +11,18 @@ function TableUserPaginate({
     pageCount,
     handlePageClick,
 }) {
+    const { t } = useTranslation();
+
     return (
         <>
             <table className="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">{t('username')}</th>
+                        <th scope="col">{t('email')}</th>
+                        <th scope="col">{t('role')}</th>
+                        <th scope="col">{t('action')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,19 +32,19 @@ function TableUserPaginate({
                                 <th scope="row">{itemsPerPage * (currentPage - 1) + index + 1}</th>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
-                                <td>{user.isAdmin ? 'ADMIN' : 'USER'}</td>
+                                <td>{user.isAdmin ? t('ADMIN') : t('USER')}</td>
                                 <td>
                                     <button className="btn btn-success" onClick={() => handleClickViewButton(user)}>
-                                        View
+                                        {t('view')}
                                     </button>
                                     <button
                                         className="btn btn-warning mx-3"
                                         onClick={() => handleClickEditButton(user)}
                                     >
-                                        Edit
+                                        {t('edit')}
                                     </button>
                                     <button className="btn btn-danger" onClick={() => handleClickDeleteButton(user)}>
-                                        Delete
+                                        {t('delete')}
                                     </button>
                                 </td>
                             </tr>
@@ -67,11 +70,11 @@ function TableUserPaginate({
                     nextLinkClassName="page-link"
                     activeClassName="active"
                     breakLabel="..."
-                    nextLabel="Next >"
+                    nextLabel={`${t('next')} >`}
                     onPageChange={(event) => handlePageClick(+event.selected + 1)}
                     pageRangeDisplayed={3}
                     pageCount={pageCount}
-                    previousLabel="< Prev"
+                    previousLabel={`< ${t('prev')}`}
                     renderOnZeroPageCount={null}
                     forcePage={currentPage - 1}
                 />

@@ -29,8 +29,6 @@ const TopContent = () => {
         });
     };
 
-    console.log(localStorage.getItem('user'));
-    console.log(user);
     return (
         <>
             <div className="top-header-area">
@@ -49,8 +47,7 @@ const TopContent = () => {
 
                         <div className="actions">
                             {isAuthenticated ? (
-                                // <Menu user={user} handleLogout={handleLogout} />
-                                <></>
+                                <Menu user={user} handleLogout={handleLogout} />
                             ) : (
                                 <Link to="/login" className="btn btn-danger">
                                     Log in

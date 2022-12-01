@@ -1,7 +1,44 @@
 {
     "admin": {
         "sidebar": {
-            "title": "Home"
+            "title": "Trang chủ",
+            "dashboard": "Bảng điều khiển",
+            "features": {
+                "title": "Tính năng",
+                "manageUsers": "Quản lý Người dùng",
+                "manageRooms": "Quản lý Phòng",
+                "manageRoomTypes": "Quản lý Loại Phòng"
+            }
+        },
+        "manageUsers": {
+            "title": "Quản lý Người dùng",
+            "addNew": "Thêm Người dùng"
         }
-    }
+    },
+    "homepage": {
+        "header": {
+            "userMenu": {
+                "account": "Tài khoản",
+                "admin": "Quản trị viên",
+                "language": {
+                    "title": "Tiếng Việt",
+                    "subTitle": "Ngôn ngữ",
+                    "english": "Tiếng Anh",
+                    "vietnamese": "Tiếng Việt"
+                },
+                "logout": "Đăng xuất"
+            }
+        }
+    },
+    "username": "Tên người dùng",
+    "email": "Email",
+    "role": "Vai trò",
+    "action": "Hành động",
+    "ADMIN": "Quản trị",
+    "USER": "Người dùng",
+    "view": "Xem",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "prev": "Trước",
+    "next": "Sau"
 }

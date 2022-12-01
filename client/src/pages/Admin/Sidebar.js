@@ -29,22 +29,22 @@ function Sidebar({ collapsed }) {
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem>
-                        Dashboard
+                        {t('admin.sidebar.dashboard')}
                         <Link to="/admins" />
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <SubMenu title="Features">
+                    <SubMenu title={t('admin.sidebar.features.title')}>
                         <MenuItem>
-                            Quản Lý Users
+                            {t('admin.sidebar.features.manageUsers')}
                             <Link to="/admins/manage-users" />
                         </MenuItem>
                         <MenuItem>
-                            Quản Lý Rooms
+                            {t('admin.sidebar.features.manageRooms')}
                             <Link to="/admins/manage-rooms" />
                         </MenuItem>
                         <MenuItem>
-                            Quản Lý Room Types
+                            {t('admin.sidebar.features.manageRoomTypes')}
                             <Link to="/admins/manage-room-types" />
                         </MenuItem>
                     </SubMenu>

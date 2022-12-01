@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap';
 // import 'bootstrap-icons/font/bootstrap-icons.css';
-import './utils/i18n';
 
 //component
 import Home from './pages/Home/Home';
