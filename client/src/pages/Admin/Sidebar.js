@@ -1,6 +1,6 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarContent, SidebarFooter } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 function Sidebar({ collapsed }) {
@@ -8,44 +8,31 @@ function Sidebar({ collapsed }) {
 
     return (
         <ProSidebar collapsed={collapsed}>
-            <SidebarHeader className="text-center">
-                <div
-                    style={{
-                        padding: '20px',
-                        textTransform: 'uppercase',
-                        fontWeight: 'bold',
-                        fontSize: 14,
-                        letterSpacing: '1px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                    }}
-                >
-                    <Link to="/" className="title d-block w-100 h-100">
-                        {t('admin.sidebar.title')}
-                    </Link>
-                </div>
-            </SidebarHeader>
+            <SidebarHeader className="text-center">Giao diện</SidebarHeader>
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem>
-                        {t('admin.sidebar.dashboard')}
-                        <Link to="/admins" />
+                        <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/dashboard">
+                            {t('admin.sidebar.dashboard')}
+                        </NavLink>
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <SubMenu title={t('admin.sidebar.features.title')}>
                         <MenuItem>
-                            {t('admin.sidebar.features.manageUsers')}
-                            <Link to="/admins/manage-users" />
+                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-users">
+                                {t('admin.sidebar.features.manageUsers')}
+                            </NavLink>
                         </MenuItem>
                         <MenuItem>
-                            {t('admin.sidebar.features.manageRooms')}
-                            <Link to="/admins/manage-rooms" />
+                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-rooms">
+                                {t('admin.sidebar.features.manageRooms')}{' '}
+                            </NavLink>
                         </MenuItem>
                         <MenuItem>
-                            {t('admin.sidebar.features.manageRoomTypes')}
-                            <Link to="/admins/manage-room-types" />
+                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-room-types">
+                                {t('admin.sidebar.features.manageRoomTypes')}
+                            </NavLink>
                         </MenuItem>
                     </SubMenu>
                 </Menu>

@@ -1,33 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../../store/authSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { FaPhoneAlt } from 'react-icons/fa';
-import { AiFillCaretDown } from 'react-icons/ai';
 import { HiMail } from 'react-icons/hi';
-import { BiWorld } from 'react-icons/bi';
-import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
-import Tippy from '@tippyjs/react/headless';
-import Swal from 'sweetalert2';
 
-import images from '../../../assets/images';
 import './Header.scss';
-import Menu from './Menu';
+import UserMenu from '../../../components/UserMenu/UserMenu';
 
 const TopContent = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        dispatch(authActions.logout());
-        Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
-            navigate('/login');
-        });
-    };
 
     return (
         <>
@@ -47,7 +28,7 @@ const TopContent = () => {
 
                         <div className="actions">
                             {isAuthenticated ? (
-                                <Menu user={user} handleLogout={handleLogout} />
+                                <UserMenu />
                             ) : (
                                 <Link to="/login" className="btn btn-danger">
                                     Log in
