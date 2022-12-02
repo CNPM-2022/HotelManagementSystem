@@ -12,7 +12,7 @@ function Sidebar({ collapsed }) {
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem>
-                        <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/dashboard">
+                        <NavLink className={({ isActive }) => (isActive ? 'active' : undefined)} to="/admins/dashboard">
                             {t('admin.sidebar.dashboard')}
                         </NavLink>
                     </MenuItem>
@@ -20,17 +20,26 @@ function Sidebar({ collapsed }) {
                 <Menu iconShape="circle">
                     <SubMenu title={t('admin.sidebar.features.title')}>
                         <MenuItem>
-                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-users">
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-users"
+                            >
                                 {t('admin.sidebar.features.manageUsers')}
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
-                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-rooms">
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-rooms"
+                            >
                                 {t('admin.sidebar.features.manageRooms')}{' '}
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
-                            <NavLink className={({ isActive }) => isActive && 'active'} to="/admins/manage-room-types">
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-room-types"
+                            >
                                 {t('admin.sidebar.features.manageRoomTypes')}
                             </NavLink>
                         </MenuItem>

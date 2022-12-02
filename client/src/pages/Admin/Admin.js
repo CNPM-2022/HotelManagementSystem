@@ -1,12 +1,17 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import './Admin.scss';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 function Admin() {
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
+
+    useEffect(() => {
+        navigate('/admins/dashboard');
+    }, []);
 
     const handleToggleSidebar = () => setCollapsed((prev) => !prev);
     return (
