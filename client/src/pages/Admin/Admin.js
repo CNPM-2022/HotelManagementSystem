@@ -3,20 +3,20 @@ import { Outlet } from 'react-router-dom';
 
 import './Admin.scss';
 import Sidebar from './Sidebar';
-import { GrMenu } from 'react-icons/gr';
+import Header from './Header';
 
 function Admin() {
     const [collapsed, setCollapsed] = useState(false);
 
+    const handleToggleSidebar = () => setCollapsed((prev) => !prev);
     return (
         <div className="admin-container">
-            <div className="sidebar">
-                <Sidebar collapsed={collapsed} />
-            </div>
+            <Header handleToggleSidebar={handleToggleSidebar} />
             <div className="content">
-                <header className="header">
-                    <GrMenu onClick={() => setCollapsed((prev) => !prev)} />
-                </header>
+                <div className="sidebar">
+                    <Sidebar collapsed={collapsed} />
+                </div>
+
                 <div className="main">
                     <Outlet />
                 </div>

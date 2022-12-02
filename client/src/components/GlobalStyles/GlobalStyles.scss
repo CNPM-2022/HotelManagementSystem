@@ -10,6 +10,12 @@ body {
 a {
     text-decoration: none;
     transition: color 0.4s;
+    color: #fff;
+
+    &:hover,
+    &:focus {
+        color: rgba(255, 255, 255, 0.75);
+    }
 }
 
 // Custom bootstrap

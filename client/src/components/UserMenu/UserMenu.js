@@ -6,14 +6,31 @@ import { IoMdArrowBack } from 'react-icons/io';
 import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
-import images from '../../../assets/images';
+import './UserMenu.scss';
+import images from '../../assets/images';
+import { authActions } from '../../store/authSlice';
 
-function Menu({ user, handleLogout }) {
+function UserMenu() {
     const { i18n, t } = useTranslation();
+
+    const navigate = useNavigate();
+
+    const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
 
     const handleChangeLanguage = (language) => {
         i18n.changeLanguage(language);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        dispatch(authActions.logout());
+        Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
+            navigate('/login');
+        });
     };
 
     const userMenu = [
@@ -25,7 +42,7 @@ function Menu({ user, handleLogout }) {
         {
             icon: <RiAdminFill />,
             title: t('homepage.header.userMenu.admin'),
-            onClick: () => navigate('/admins'),
+            onClick: () => navigate('/admins/dashboard'),
         },
         {
             icon: <BiWorld />,
@@ -56,7 +73,6 @@ function Menu({ user, handleLogout }) {
 
     const [history, setHistory] = useState([{ data: userMenu }]);
     const [visible, setVisible] = useState(false);
-    const navigate = useNavigate();
 
     const current = history[history.length - 1];
 
@@ -76,7 +92,7 @@ function Menu({ user, handleLogout }) {
             onClickOutside={() => setVisible(false)}
             onHide={handleBack}
             render={(attrs) => (
-                <div {...attrs} className="menu">
+                <div {...attrs} className="user-menu-container">
                     {current.title && (
                         <div className="header" onClick={handleBack}>
                             <i className="icon">
@@ -90,7 +106,7 @@ function Menu({ user, handleLogout }) {
                             return (
                                 <div
                                     key={item.title}
-                                    className={item.separate ? 'item separate' : 'item'}
+                                    className={item.separate ? 'menu-item separate' : 'menu-item'}
                                     onClick={() => {
                                         if (item.children) {
                                             setHistory((prevState) => [...prevState, item.children]);
@@ -122,4 +138,4 @@ function Menu({ user, handleLogout }) {
     );
 }
 
-export default Menu;
+export default UserMenu;
