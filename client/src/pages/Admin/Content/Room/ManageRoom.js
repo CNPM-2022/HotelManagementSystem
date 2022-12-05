@@ -6,6 +6,7 @@ import Lightbox from 'react-18-image-lightbox';
 import Select from 'react-select';
 import 'react-18-image-lightbox/style.css';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
 
 import './ManageRoom.scss';
 import reducer, { initState } from './roomReducer/reducer';
@@ -24,7 +25,6 @@ import AssignRoom from './AssignRoom';
 import { getAllRooms, getAllRoomTypes, getAllUsers, postCreateRoom } from '../../../../services/apiServices';
 import RemoveRoom from './RemoveRoom';
 import TableRoom from './TableRoom';
-import _ from 'lodash';
 import ModalDeleteRoom from './ModalDeleteRoom';
 import ModalManageRoom from './ModalManageRoom';
 

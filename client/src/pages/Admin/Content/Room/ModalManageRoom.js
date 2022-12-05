@@ -1,17 +1,12 @@
 import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import { AiFillCalendar } from 'react-icons/ai';
-import { useEffect, useRef, useState } from 'react';
-import _ from 'lodash';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
 
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-
+import DateRange from '../../../../components/DateRange/DateRange';
 import { putUpdateRoom } from '../../../../services/apiServices';
-import useClickOutside from '../../../../hooks/useClickOutside';
 
 function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms }) {
     const initalDateRange = [
@@ -31,9 +26,6 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
     const [imagesSource, setImagesSource] = useState([]);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
-
-    const dateRangeRef = useRef(null);
-    useClickOutside(dateRangeRef, () => setIsShowDateRange(false));
 
     useEffect(() => {
         if (show && !_.isEmpty(dataRoom)) {
@@ -68,6 +60,8 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
         }
     };
 
+    const handleChangeDateRange = (item) => setDateRange([item.selection]);
+
     const handleClose = () => {
         if (imagesSource.length > 0) {
             imagesSource.forEach((imageSource) => URL.revokeObjectURL(imageSource));
@@ -76,6 +70,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
         setImagesSource([]);
         setImages(null);
         setShow(false);
+        setIsShowDateRange(false);
     };
 
     const handleUpdateRoom = async () => {
@@ -150,15 +145,6 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
         }
     };
 
-    // Format date
-    const padTo2Digits = (num) => {
-        return num.toString().padStart(2, '0');
-    };
-
-    const formatDate = (date) => {
-        return [padTo2Digits(date.getDate()), padTo2Digits(date.getMonth() + 1), date.getFullYear()].join('/');
-    };
-
     return (
         <Modal show={show} onHide={handleClose} backdrop="static" size="xl" className="modal-manage-room">
             <Modal.Header closeButton>
@@ -199,34 +185,14 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                         </div>
 
                         <div className="col-md-6">
-                            <div className="date-range" ref={dateRangeRef}>
+                            <div className="form-group">
                                 <label className="form-label">Date range</label>
-                                <div
-                                    className="form-control date-content"
-                                    onClick={() => setIsShowDateRange((prev) => !prev)}
-                                >
-                                    <span className="calendar">
-                                        <AiFillCalendar />
-                                    </span>
-                                    {dateRange[0]?.startDate && dateRange[0]?.endDate ? (
-                                        <span className="text">
-                                            {formatDate(dateRange[0].startDate)} - {formatDate(dateRange[0].endDate)}
-                                        </span>
-                                    ) : (
-                                        <span>Pick Date Range...</span>
-                                    )}
-                                </div>
-                                {isShowDateRange && (
-                                    <DateRange
-                                        editableDateInputs={true}
-                                        onChange={(item) => setDateRange([item.selection])}
-                                        moveRangeOnFirstSelection={false}
-                                        ranges={dateRange}
-                                        minDate={new Date()}
-                                        startDatePlaceholder="Check-in date"
-                                        endDatePlaceholder="Check-out date"
-                                    />
-                                )}
+                                <DateRange
+                                    handleChangeDateRange={handleChangeDateRange}
+                                    dateRange={dateRange}
+                                    isShowDateRange={isShowDateRange}
+                                    setIsShowDateRange={setIsShowDateRange}
+                                />
                             </div>
                         </div>
                         <div className="col-md-12">

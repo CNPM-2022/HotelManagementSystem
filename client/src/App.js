@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //component
 import Home from './pages/Home/Home';
@@ -23,6 +23,7 @@ import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
 import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor';
 import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking';
 import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
+import AdminBooking from './pages/Admin/Content/Booking/Booking';
 
 function App() {
     return (
@@ -80,6 +81,7 @@ function App() {
                         <Route path="/admins/manage-users" element={<ManageUser />} />
                         <Route path="/admins/manage-rooms" element={<ManageRoom />} />
                         <Route path="/admins/manage-room-types" element={<ManageRoomType />} />
+                        <Route path="/admins/manage-booking" element={<AdminBooking />} />
                     </Route>
                 </Route>
 

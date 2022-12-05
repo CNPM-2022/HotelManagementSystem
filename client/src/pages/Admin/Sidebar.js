@@ -43,6 +43,14 @@ function Sidebar({ collapsed }) {
                                 {t('admin.sidebar.features.manageRoomTypes')}
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-booking"
+                            >
+                                Quản lý Đặt phòng
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </SidebarContent>
