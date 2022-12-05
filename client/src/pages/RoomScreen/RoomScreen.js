@@ -4,16 +4,14 @@ import { getRoomsByPage } from '../../services/apiServices';
 import AllRoom from './AllRoom';
 
 const RoomsScreen = () => {
-
     const [rooms, setRooms] = useState([]);
-    const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(true)
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         getRooms(page);
-        setLoading(false)
-
+        setLoading(false);
     }, [page]);
 
     const getRooms = async (page) => {
@@ -27,13 +25,13 @@ const RoomsScreen = () => {
 
             setRooms(data);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 
     const handleChangePage = (page) => {
-        setPage(page)
-    }
+        setPage(page);
+    };
 
     return (
         <>
@@ -45,8 +43,12 @@ const RoomsScreen = () => {
                                 <h2 className="page-title">Our Room</h2>
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb justify-content-center">
-                                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Room</li>
+                                        <li className="breadcrumb-item">
+                                            <a href="/">Home</a>
+                                        </li>
+                                        <li className="breadcrumb-item active" aria-current="page">
+                                            Room
+                                        </li>
                                     </ol>
                                 </nav>
                             </div>
@@ -67,7 +69,12 @@ const RoomsScreen = () => {
                                     </div>
                                     <div className="col-6 col-md-2 col-lg-3">
                                         <label htmlFor="checkOut">Check Out</label>
-                                        <input type="date" className="form-control" id="checkOut" name="checkout-date" />
+                                        <input
+                                            type="date"
+                                            className="form-control"
+                                            id="checkOut"
+                                            name="checkout-date"
+                                        />
                                     </div>
                                     <div className="col-4 col-md-1">
                                         <label htmlFor="room">Type</label>
@@ -88,7 +95,9 @@ const RoomsScreen = () => {
                                         />
                                     </div>
                                     <div className="col-12 col-md-3">
-                                        <button type="submit" className="form-control btn roberto-btn w-100">Check Availability</button>
+                                        <button type="submit" className="form-control btn roberto-btn w-100">
+                                            Check Availability
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -96,16 +105,15 @@ const RoomsScreen = () => {
                     </div>
                 </div>
             </section>
-            {(loading || rooms.results === undefined) ?
-                (
-                    <div className="d-flex justify-content-center align-items-center " style={{ minHeight: "300px" }}>
-                        <div className="spinner-border text-primary" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
+            {loading || rooms.results === undefined ? (
+                <div className="d-flex justify-content-center align-items-center " style={{ minHeight: '300px' }}>
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
-                ) : (<AllRoom roomData={rooms} curPage={page} handleChangePage={handleChangePage} />)}
-
-
+                </div>
+            ) : (
+                <AllRoom roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
+            )}
         </>
     );
 };
