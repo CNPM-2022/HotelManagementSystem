@@ -64,8 +64,6 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
         setShow(false);
     };
 
-    console.log(listRoom);
-
     const handleSubmit = async () => {
         let isValidRoomType = true;
 
