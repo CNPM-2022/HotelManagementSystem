@@ -56,35 +56,6 @@ const getAllRoomsByType = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    Fetch all rooms by type
-// @route   GET /api/rooms/:id
-// @access  Public
-const getAllRoomsByTypeName = asyncHandler(async (req, res) => {
-    try {
-        const Type = await RoomType.findOne({ typeOfRooms: req.params.name });
-        if (Type) {
-            const rooms = await Rooms.find({ type: Type.typeOfRooms });
-            if (rooms.length > 0) {
-                res.status(200).json({
-                    success: true,
-                    message: 'Rooms fetched successfully',
-                    lengthOfList: rooms.length,
-                    data: rooms,
-                });
-            } else {
-                throw new Error('No rooms found');
-            }
-        } else {
-            throw new Error('No room type found');
-        }
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-        });
-    }
-});
-
 // @desc    Fetch single room
 // @route   GET /api/rooms/:id
 // @access  Public
@@ -517,7 +488,6 @@ export {
     getAllRoomsWithPagination,
     getRoomsFilter,
     getAllRoomsByType,
-    getAllRoomsByTypeName,
     getRoomById,
     createRoom,
     updateRoom,

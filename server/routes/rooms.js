@@ -8,7 +8,6 @@ import {
     getAllRoomsWithPagination,
     getRoomsFilter,
     getAllRoomsByType,
-    getAllRoomsByTypeName,
     getRoomById,
     createRoom,
     updateRoomWithBookingDetails,
@@ -22,8 +21,6 @@ router.get('/all/:page', getAllRoomsWithPagination);
 router.get('/filter/:page', getRoomsFilter);
 
 router.get('/all/type/:id', getAllRoomsByType);
-
-router.get('/all/type/name/:name', getAllRoomsByTypeName);
 
 router.get('/:id', getRoomById);
 
