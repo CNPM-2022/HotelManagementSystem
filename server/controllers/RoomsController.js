@@ -288,14 +288,11 @@ const deleteRoom = asyncHandler(async (req, res) => {
                 });
             }
         });
-
         const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
             const index = type.listRoom.indexOf(room.roomNumber);
-            console.log(index);
             if (index > -1) {
                 type.listRoom.splice(index, 1);
-                console.log(type.listRoom);
             }
             await type.save();
         }
