@@ -69,7 +69,7 @@ function AllRoom(props) {
 
                                     <div className="room-content">
                                         <h2>Room #{room.roomNumber}</h2>
-                                        <h4>{room.price}$ <span>/ Day</span></h4>
+                                        <h4>{room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} VNĐ <span>/ Day</span></h4>
                                         <div className="room-feature">
                                             <h6>Type: <span>{room.type}</span></h6>
                                             <h6>Capacity: <span>Max persion {room.maxCount}</span></h6>
