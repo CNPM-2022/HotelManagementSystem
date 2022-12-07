@@ -6,8 +6,8 @@ import Customer from '../models/Customer';
 //@access Private
 
 const createBooking = async (req, res) => {
-    const { roomId, checkInDate, checkOutDate, customerList, totalAmount, status } = req.body;
-    if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount || !status) {
+    const { roomId, checkInDate, checkOutDate, customerList, totalAmount } = req.body;
+    if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount) {
         return res.status(400).json({
             success: false,
             message: 'All fields are required',
@@ -33,7 +33,6 @@ const createBooking = async (req, res) => {
             checkInDate,
             checkOutDate,
             totalAmount,
-            status,
         });
         if (NewBooking) {
             return res.status(201).json({
@@ -63,7 +62,7 @@ const getBookings = async (req, res) => {
     try {
         const bookings = await Booking.find()
             .populate('room', ['roomNumber'])
-            .populate('user', ['Name'])
+            .populate('user', ['Name', 'isAdmin'])
             .populate('customerList');
         return res.status(200).json({
             success: true,
@@ -87,7 +86,7 @@ const getBookingById = async (req, res) => {
     try {
         const booking = await Booking.findById(req.params.id)
             .populate('room', ['roomNumber'])
-            .populate('user', ['Name'])
+            .populate('user', ['Name', 'isAdmin'])
             .populate('customerList');
         if (booking) {
             return res.status(200).json({
@@ -114,8 +113,8 @@ const getBookingById = async (req, res) => {
 //@access Private
 
 const updateBooking = async (req, res) => {
-    const { roomId, checkInDate, checkOutDate, customerList, totalAmount, status } = req.body;
-    if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount || !status) {
+    const { roomId, checkInDate, checkOutDate, customerList, totalAmount } = req.body;
+    if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount) {
         return res.status(400).json({
             success: false,
             message: 'All fields are required',
@@ -141,7 +140,6 @@ const updateBooking = async (req, res) => {
             booking.checkInDate = checkInDate;
             booking.checkOutDate = checkOutDate;
             booking.totalAmount = totalAmount;
-            booking.status = status;
         }
         const updatedBooking = await booking.save();
         if (updatedBooking) {
