@@ -21,9 +21,7 @@ import {
     setRoomFiles,
     setRooms,
 } from './roomReducer/actions';
-import AssignRoom from './AssignRoom';
-import { getAllRooms, getAllRoomTypes, getAllUsers, postCreateRoom } from '../../../../services/apiServices';
-import RemoveRoom from './RemoveRoom';
+import { getAllRooms, getAllRoomTypes, postCreateRoom } from '../../../../services/apiServices';
 import TableRoom from './TableRoom';
 import ModalDeleteRoom from './ModalDeleteRoom';
 import ModalManageRoom from './ModalManageRoom';
@@ -33,11 +31,8 @@ function ManageRoom() {
     const typeSelectRef = useRef();
 
     const [roomsState, dispatch] = useReducer(logger(reducer), initState);
-    const [roomOptions, setRoomOptions] = useState([]);
-    const [userOptions, setUserOptions] = useState([]);
     const [typeOptions, setTypeOptions] = useState([]);
     const [listRooms, setListRooms] = useState([]);
-    const [listUsers, setListUsers] = useState([]);
     const [isPreviewImage, setIsPreviewImage] = useState(false);
     const [previewIndex, setPreviewIndex] = useState(0);
     const [images, setImages] = useState('');
@@ -50,25 +45,9 @@ function ManageRoom() {
     const [dataRoomView, setDataRoomView] = useState({});
 
     useEffect(() => {
-        // fetchAllUsers();
         fetchAllRooms();
         fetchAllRoomTypes();
     }, []);
-
-    const fetchAllUsers = async () => {
-        const res = await getAllUsers();
-
-        if (res.status !== 200) return;
-        if (res.data.success === false) return;
-
-        const data = res.data.users.map((user, index) => ({
-            value: user._id,
-            label: `${index + 1} - ${user.Name} - ${user.email}`,
-        }));
-
-        setUserOptions(data);
-        setListUsers(res.data.users);
-    };
 
     const fetchAllRooms = async () => {
         const res = await getAllRooms();
@@ -78,12 +57,6 @@ function ManageRoom() {
 
         const data = _.orderBy(res.data.data, ['roomNumber'], ['asc']);
 
-        const roomOptions = data.map((room) => ({
-            value: room._id,
-            label: `${room.roomNumber} - type ${room.type}`,
-        }));
-
-        setRoomOptions(roomOptions);
         setListRooms(data);
     };
 
@@ -202,10 +175,6 @@ function ManageRoom() {
                 }),
             );
         }
-    };
-
-    const handleSelectDateRange = (ranges) => {
-        console.log(ranges);
     };
 
     return (
@@ -363,20 +332,6 @@ function ManageRoom() {
                                     onMoveNextRequest={() => setPreviewIndex((previewIndex + 1) % images.length)}
                                 />
                             )}
-                        </Accordion.Body>
-                    </Accordion.Item>
-
-                    <Accordion.Item eventKey="1">
-                        <Accordion.Header>Assign Room to User</Accordion.Header>
-                        <Accordion.Body>
-                            <AssignRoom userOptions={userOptions} roomOptions={roomOptions} />
-                        </Accordion.Body>
-                    </Accordion.Item>
-
-                    <Accordion.Item eventKey="2">
-                        <Accordion.Header>Remove Room from User</Accordion.Header>
-                        <Accordion.Body>
-                            <RemoveRoom userOptions={userOptions} />
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>

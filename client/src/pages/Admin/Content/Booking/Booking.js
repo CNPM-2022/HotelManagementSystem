@@ -10,10 +10,8 @@ function Booking() {
             <div className="admin-booking-content mt-4">
                 <h3>Quản lý Đặt phòng</h3>
 
-                <Tabs defaultActiveKey="list-booking" className="mb-3" fill>
-                    <Tab eventKey="list-booking" title="Danh sách Đặt phòng">
-                        lorem
-                    </Tab>
+                <Tabs defaultActiveKey="booking" className="mb-3" fill>
+                    <Tab eventKey="list-booking" title="Danh sách Đặt phòng"></Tab>
                     <Tab eventKey="booking" title="Đặt phòng">
                         <ManageBooking />
                     </Tab>
