@@ -78,3 +78,7 @@ export const getUser = (userID) => {
 export const putChangePassword = (userID, newPassword) => {
     return axios.put(`user/${userID}/change-password`, newPassword);
 };
+
+export const postCreateBooking = (data) => {
+    return axios.post('booking/create', data);
+};
