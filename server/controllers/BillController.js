@@ -2,7 +2,7 @@ import Bill from '../models/Bill.js';
 
 const getBills = async (req, res) => {
     try {
-        const bills = await Bill.find().populate('booking', ['room']).populate('user', ['Name', 'isAdmin']);
+        const bills = await Bill.find().populate('booking').populate('user');
         res.status(200).json({
             success: true,
             message: 'Get all bills successfully',
@@ -21,7 +21,7 @@ const getBillById = async (req, res) => {
     try {
         const { id } = req.params;
         console.log(id);
-        const bill = await Bill.findById(id).populate('booking', ['room']).populate('user', ['Name', 'isAdmin']);
+        const bill = await Bill.findById(id).populate('booking').populate('user');
         if (!bill) {
             return res.status(404).json({
                 success: false,
