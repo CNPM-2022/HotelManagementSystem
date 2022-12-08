@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function Bill({ billData, room, dateDiff, customer }) {
+function Bill({ billData }) {
     const ref = useRef();
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function Bill({ billData, room, dateDiff, customer }) {
                     <tr>
                         <th scope="col" colSpan="5">
                             <div className="d-flex table-row-header-custom">
-                                <div className="w-50">Khách hàng/Cơ quan: {customer.name}</div>
+                                <div className="w-50">Khách hàng/Cơ quan: {billData.customerList[0].name}</div>
                                 <div className="w-50">Địa chỉ: {billData.address}</div>
                             </div>
                         </th>
@@ -65,9 +65,9 @@ function Bill({ billData, room, dateDiff, customer }) {
                         <th className="text-center" scope="row">
                             1
                         </th>
-                        <th className="text-center">{room.roomNumber}</th>
-                        <th className="text-center">{dateDiff}</th>
-                        <th className="text-center">{room.price}</th>
+                        <th className="text-center">{billData.roomNumber}</th>
+                        <th className="text-center">{billData.dateDiff}</th>
+                        <th className="text-center">{billData.roomPrice}</th>
                         <th className="text-center">{billData.totalAmount}</th>
                     </tr>
                 </tbody>

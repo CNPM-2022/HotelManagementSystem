@@ -2,6 +2,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import './Booking.scss';
+import ManageBill from './ManageBill';
 import ManageBooking from './ManageBooking';
 
 function Booking() {
@@ -10,8 +11,10 @@ function Booking() {
             <div className="admin-booking-content mt-4">
                 <h3>Quản lý Đặt phòng</h3>
 
-                <Tabs defaultActiveKey="booking" className="mb-3" fill>
-                    <Tab eventKey="list-booking" title="Danh sách Đặt phòng"></Tab>
+                <Tabs defaultActiveKey="bills" className="mb-3" fill>
+                    <Tab eventKey="bills" title="Danh sách Đặt phòng">
+                        <ManageBill />
+                    </Tab>
                     <Tab eventKey="booking" title="Đặt phòng">
                         <ManageBooking />
                     </Tab>
