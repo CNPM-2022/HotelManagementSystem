@@ -92,7 +92,7 @@ export const putUpdateRegulations = (data) => {
 };
 
 export const postCreateBill = (data) => {
-    return axios.post('bill/create', data);
+    return axios.post('booking/create/bill', data);
 };
 
 export const getAllBills = () => {
