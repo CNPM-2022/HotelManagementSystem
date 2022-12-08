@@ -23,6 +23,7 @@ const Login = () => {
 
             if (res && data && data.success === true) {
                 localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('accessToken', data.accessToken);
                 dispatch(
                     authActions.login({
                         token: data.accessToken,
