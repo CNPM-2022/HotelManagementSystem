@@ -7,11 +7,12 @@ const initialAuthState = {
 };
 
 const localStorageUser = JSON.parse(localStorage.getItem('user'));
+const localStorageToken = localStorage.getItem('accessToken');
 
 if (localStorageUser !== null) {
     initialAuthState.isAuthenticated = true;
     initialAuthState.user = localStorageUser.user;
-    initialAuthState.token = localStorageUser.accessToken;
+    initialAuthState.token = localStorageToken;
 } else {
     initialAuthState.isAuthenticated = false;
     initialAuthState.user = null;
