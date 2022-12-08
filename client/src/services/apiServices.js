@@ -94,3 +94,7 @@ export const putUpdateRegulations = (data) => {
 export const postCreateBill = (data) => {
     return axios.post('bill/create', data);
 };
+
+export const getAllBills = () => {
+    return axios.get('bill/all');
+};

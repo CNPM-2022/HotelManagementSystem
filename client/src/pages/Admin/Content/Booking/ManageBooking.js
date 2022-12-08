@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { BiPlusCircle, BiMinusCircle, BiRefresh } from 'react-icons/bi';
 import { HiChevronDoubleDown } from 'react-icons/hi';
-import { getAllRooms, getRegulations, postCreateBill, postCreateBooking } from '../../../../services/apiServices';
+import { getAllRooms, getRegulations, postCreateBill } from '../../../../services/apiServices';
 
 import DateRange from '../../../../components/DateRange/DateRange';
 import reducer, { initState } from './customerReducer/reducer';
@@ -40,21 +40,9 @@ function ManageBooking() {
         },
     ];
 
-    const statusOptions = [
-        {
-            label: 'Đã thanh toán',
-            value: 'Paid',
-        },
-        {
-            label: 'Chưa thanh toán',
-            value: 'Pending',
-        },
-    ];
-
     const [room, setRoom] = useState({});
     const [roomOptions, setRoomOptions] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [status, setStatus] = useState('');
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
 
@@ -92,7 +80,6 @@ function ManageBooking() {
 
     const dateDiff = useMemo(() => {
         if (dateRange[0].endDate && dateRange[0].startDate) {
-            // dateDiff = (dateRange[0].endDate.getTime() - dateRange[0].startDate.getTime()) / (1000 * 3600 * 24) + 1;
             return calcDateDiff(dateRange[0].startDate, dateRange[0].endDate);
         }
 
@@ -132,12 +119,6 @@ function ManageBooking() {
         }
     };
 
-    const handleSelectStatus = (selected) => {
-        if (status !== selected.value) {
-            setStatus(selected.value);
-        }
-    };
-
     const handleBooking = async () => {
         // Validate
         let isValid = true;
@@ -148,11 +129,6 @@ function ManageBooking() {
 
         if (!dateRange[0]?.startDate || !dateRange[0]?.endDate) {
             toast.error('Chọn ngày nhận/trả phòng!');
-            isValid = false;
-        }
-
-        if (status === '') {
-            toast.error('Chọn tình trạng phòng!');
             isValid = false;
         }
 
@@ -187,30 +163,19 @@ function ManageBooking() {
             roomId: room._id,
             checkInDate: dateRange[0].startDate,
             checkOutDate: dateRange[0].endDate,
-            status,
             totalAmount,
             customerList,
+            dateOfPayment: new Date(),
+            address: customerList[0].address,
         };
-        const res = await postCreateBooking(data);
+        const res = await postCreateBill(data);
 
         if (res && res.data && res.data.success === true) {
+            data.roomNumber = room.roomNumber;
+            data.roomPrice = room.price;
+            data.dateDiff = dateDiff;
+            setBillData(data);
             toast.success(res.data.message);
-
-            const billData = {
-                bookingId: res.data.NewBooking._id,
-                userId: res.data.NewBooking.user,
-                dateOfPayment: new Date(),
-                totalAmount: res.data.NewBooking.totalAmount,
-                address: customersState[0].address,
-            };
-
-            const billRes = await postCreateBill(billData);
-            if (billRes && billRes.data && billRes.data.success === true) {
-                setBillData(billRes.data.bill);
-                toast.success(billRes.data.message);
-            } else {
-                toast.error(billRes.message);
-            }
         } else {
             toast.error(res.message);
         }
@@ -219,7 +184,6 @@ function ManageBooking() {
     const handleReset = () => {
         setBillData({});
         setRoom({});
-        setStatus('');
         setTotalAmount(0);
         setDateRange(initalDateRange);
         dispatch(setCustomers(initState));
@@ -255,22 +219,6 @@ function ManageBooking() {
                                 dateRange={dateRange}
                                 isShowDateRange={isShowDateRange}
                                 setIsShowDateRange={setIsShowDateRange}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="col-6 mb-3">
-                        <div className="form-group mb-3">
-                            <label className="form-label">
-                                <b>Tình trạng:</b>
-                            </label>
-                            <Select
-                                value={
-                                    (status && statusOptions.find((statusOption) => statusOption.value === status)) ||
-                                    {}
-                                }
-                                options={statusOptions}
-                                onChange={handleSelectStatus}
                             />
                         </div>
                     </div>
@@ -411,7 +359,7 @@ function ManageBooking() {
                         </i>
                     </div>
 
-                    <Bill billData={billData} dateDiff={dateDiff} room={room} customer={customersState[0]} />
+                    <Bill billData={billData} />
                 </>
             )}
         </>
