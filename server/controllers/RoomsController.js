@@ -364,6 +364,22 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
             ImagesArray = roomIsAlreadyExist.imageUrls;
         }
 
+        if (!type) {
+            const oldType = await RoomType.findOne({ typeOfRooms: roomIsAlreadyExist.type });
+            if (type) {
+                const index = oldType.listRoom.indexOf(roomIsAlreadyExist.roomNumber);
+                if (index > -1) {
+                    oldType.listRoom.splice(index, 1);
+                }
+                await oldType.save();
+            }
+            const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
+            if (typeIsTrue) {
+                typeIsTrue.listRoom.push(roomIsAlreadyExist.roomNumber);
+                await typeIsTrue.save();
+            }
+        }
+
         const Price = typeIsTrue.price;
 
         roomIsAlreadyExist.roomNumber = roomNumber;
