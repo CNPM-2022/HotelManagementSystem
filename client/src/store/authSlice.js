@@ -11,7 +11,7 @@ const localStorageToken = localStorage.getItem('accessToken');
 
 if (localStorageUser !== null) {
     initialAuthState.isAuthenticated = true;
-    initialAuthState.user = localStorageUser.user;
+    initialAuthState.user = localStorageUser;
     initialAuthState.token = localStorageToken;
 } else {
     initialAuthState.isAuthenticated = false;
