@@ -8,10 +8,12 @@ import {
     deleteBooking,
     updateBooking,
     setSatatusBooking,
+    createBookingWithBill,
 } from '../controllers/BookingController.js';
 import verifyToken from '../middleware/auth.js';
 
 router.post('/create', verifyToken, createBooking);
+router.post('/create/bill', verifyToken, createBookingWithBill);
 router.get('/all', getBookings);
 router.get('/:id', verifyToken, getBookingById);
 router.put('/update/:id', verifyToken, updateBooking);
