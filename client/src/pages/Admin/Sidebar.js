@@ -22,6 +22,14 @@ function Sidebar({ collapsed }) {
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-booking"
+                            >
+                                Quản lý Đặt phòng
+                            </NavLink>
+                        </MenuItem>
+                        <MenuItem>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/manage-users"
                             >
                                 {t('admin.sidebar.features.manageUsers')}
@@ -43,20 +51,13 @@ function Sidebar({ collapsed }) {
                                 {t('admin.sidebar.features.manageRoomTypes')}
                             </NavLink>
                         </MenuItem>
-                        <MenuItem>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? 'active' : undefined)}
-                                to="/admins/manage-booking"
-                            >
-                                Quản lý Đặt phòng
-                            </NavLink>
-                        </MenuItem>
+
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/change-regulations"
                             >
-                                Thay đổi quy định
+                                Thay đổi Quy định
                             </NavLink>
                         </MenuItem>
                     </SubMenu>

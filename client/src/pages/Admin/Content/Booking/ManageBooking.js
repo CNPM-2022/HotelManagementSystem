@@ -18,7 +18,7 @@ import {
     setCustomerType,
     setCustomers,
 } from './customerReducer/actions';
-import Bill from './Bill';
+import Bill from '../../../../components/Bill/Bill';
 
 function ManageBooking() {
     const initalDateRange = [
@@ -174,6 +174,7 @@ function ManageBooking() {
             data.roomNumber = room.roomNumber;
             data.roomPrice = room.price;
             data.dateDiff = dateDiff;
+            data.customer = customerList[0];
             setBillData(data);
             toast.success(res.data.message);
         } else {

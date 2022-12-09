@@ -12,6 +12,7 @@ function ManageBill() {
 
     const fetchAllBills = async () => {
         const res = await getAllBills();
+        const data = [];
 
         if (res && res.data && res.data.success === true) {
             setListBills(res.data.bills);

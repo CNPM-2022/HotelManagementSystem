@@ -1,0 +1,22 @@
+.booking-bill-container {
+    .table {
+        thead {
+            tr:nth-child(2),
+            tr:nth-child(3) {
+                th {
+                    padding: 0;
+
+                    .table-row-header-custom {
+                        div {
+                            padding: 0.5rem 0.5rem;
+
+                            & ~ div {
+                                border-left: 1px solid var(--bs-table-border-color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

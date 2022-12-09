@@ -364,7 +364,7 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
             ImagesArray = roomIsAlreadyExist.imageUrls;
         }
 
-        if (!type) {
+        if (type) {
             const oldType = await RoomType.findOne({ typeOfRooms: roomIsAlreadyExist.type });
             if (type) {
                 const index = oldType.listRoom.indexOf(roomIsAlreadyExist.roomNumber);
