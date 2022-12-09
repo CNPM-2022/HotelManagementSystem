@@ -31,7 +31,10 @@ function Bill({ billData }) {
                     <tr>
                         <th scope="col" colSpan="5">
                             <div className="d-flex table-row-header-custom">
-                                <div className="w-50">Khách hàng/Cơ quan: {billData?.customer?.name}</div>
+                                <div className="w-50">
+                                    Khách hàng/Cơ quan:{' '}
+                                    {billData?.customer?.name ? billData.customer.name : billData?.customer?.Name}
+                                </div>
                                 <div className="w-50">Địa chỉ: {billData?.address}</div>
                             </div>
                         </th>
@@ -43,8 +46,7 @@ function Bill({ billData }) {
                                     Ngày thanh toán: {formatDate(new Date(billData?.dateOfPayment))}
                                 </div>
                                 <div className="w-50">
-                                    Trị giá:
-                                    <FormatPrice>{billData?.totalAmount}</FormatPrice>
+                                    Trị giá: <FormatPrice>{billData?.totalAmount}</FormatPrice> VND
                                 </div>
                             </div>
                         </th>
