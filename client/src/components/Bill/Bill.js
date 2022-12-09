@@ -3,7 +3,6 @@ import './Bill.scss';
 
 function Bill({ billData }) {
     const ref = useRef();
-    console.log(billData);
 
     useEffect(() => {
         ref.current.scrollIntoView({ behavior: 'smooth' });
