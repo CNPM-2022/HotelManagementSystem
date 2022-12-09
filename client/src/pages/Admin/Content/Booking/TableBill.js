@@ -1,4 +1,5 @@
 function TableBill({ listBills }) {
+    console.log(listBills);
     return (
         <>
             <table className="table table-hover">
@@ -21,6 +22,24 @@ function TableBill({ listBills }) {
                         <td>@mdo</td>
                         <td>@mdo</td>
                     </tr>
+                    {listBills && listBills.length > 0 ? (
+                        listBills.map((bill, index) => (
+                            <tr key={bill._id}>
+                                <th scope="row">{index + 1}</th>
+                                <td>''</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="6" className="text-center">
+                                NO DATA
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </>
