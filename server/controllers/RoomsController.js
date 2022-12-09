@@ -292,10 +292,8 @@ const deleteRoom = asyncHandler(async (req, res) => {
         const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
             const index = type.listRoom.indexOf(room.roomNumber);
-            console.log(index);
             if (index > -1) {
                 type.listRoom.splice(index, 1);
-                console.log(type.listRoom);
             }
             await type.save();
         }
@@ -372,8 +370,10 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
                     oldType.listRoom.splice(index, 1);
                 }
                 await oldType.save();
+                console.log(oldType.listRoom);
             }
             const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
+            console.log(typeIsTrue);
             if (typeIsTrue) {
                 typeIsTrue.listRoom.push(roomIsAlreadyExist.roomNumber);
                 await typeIsTrue.save();
