@@ -10,7 +10,6 @@ import _ from 'lodash';
 
 import './ManageRoom.scss';
 import reducer, { initState } from './roomReducer/reducer';
-import logger from './roomReducer/logger';
 import {
     addRoom,
     deleteRoom,
@@ -30,7 +29,7 @@ function ManageRoom() {
     const statusSelectRef = useRef();
     const typeSelectRef = useRef();
 
-    const [roomsState, dispatch] = useReducer(logger(reducer), initState);
+    const [roomsState, dispatch] = useReducer(reducer, initState);
     const [typeOptions, setTypeOptions] = useState([]);
     const [listRooms, setListRooms] = useState([]);
     const [isPreviewImage, setIsPreviewImage] = useState(false);

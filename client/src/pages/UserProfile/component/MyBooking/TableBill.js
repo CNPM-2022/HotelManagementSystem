@@ -17,7 +17,7 @@ function TableBill({ listBills, setIsShowModalViewBill, setDataBillView }) {
                         <th scope="col">Số Ngày Thuê</th>
                         <th scope="col">Đơn Giá</th>
                         <th scope="col">Thành Tiền</th>
-                        <th scope="col"></th>
+                        <th scope="col">Hành Động</th>
                     </tr>
                 </thead>
                 <tbody>
