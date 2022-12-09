@@ -19,8 +19,9 @@ import {
     setCustomers,
 } from './customerReducer/actions';
 import Bill from '../../../../components/Bill/Bill';
+import FormatPrice from '../../../../components/FormatPrice/FormatPrice';
 
-function ManageBooking() {
+function ManageBooking({ fetchAllBills }) {
     const initalDateRange = [
         {
             startDate: null,
@@ -176,6 +177,7 @@ function ManageBooking() {
             data.dateDiff = dateDiff;
             data.customer = customerList[0];
             setBillData(data);
+            fetchAllBills();
             toast.success(res.data.message);
         } else {
             toast.error(res.message);
@@ -327,7 +329,9 @@ function ManageBooking() {
                                             <td colSpan="5">
                                                 <div className="total-price">
                                                     <b>Tổng tiền:</b>
-                                                    <b>{totalAmount}</b>
+                                                    <b>
+                                                        <FormatPrice>{totalAmount}</FormatPrice> VND
+                                                    </b>
                                                 </div>
                                             </td>
                                         </tr>
