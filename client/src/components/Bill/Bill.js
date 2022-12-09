@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import FormatPrice from '../FormatPrice/FormatPrice';
+import './Bill.scss';
 
 function Bill({ billData }) {
     const ref = useRef();
@@ -15,6 +17,8 @@ function Bill({ billData }) {
         return [padTo2Digits(date.getDate()), padTo2Digits(date.getMonth() + 1), date.getFullYear()].join('/');
     };
 
+    const calcDateDiff = (startDate, endDate) => (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) + 1;
+
     return (
         <div ref={ref} className="booking-bill-container">
             <table className="table table-bordered table-hover">
@@ -27,8 +31,11 @@ function Bill({ billData }) {
                     <tr>
                         <th scope="col" colSpan="5">
                             <div className="d-flex table-row-header-custom">
-                                <div className="w-50">Khách hàng/Cơ quan: {billData.customerList[0].name}</div>
-                                <div className="w-50">Địa chỉ: {billData.address}</div>
+                                <div className="w-50">
+                                    Khách hàng/Cơ quan:{' '}
+                                    {billData?.customer?.name ? billData.customer.name : billData?.customer?.Name}
+                                </div>
+                                <div className="w-50">Địa chỉ: {billData?.address}</div>
                             </div>
                         </th>
                     </tr>
@@ -36,9 +43,11 @@ function Bill({ billData }) {
                         <th scope="col" colSpan="5">
                             <div className="d-flex table-row-header-custom">
                                 <div className="w-50">
-                                    Ngày thanh toán: {formatDate(new Date(billData.dateOfPayment))}
+                                    Ngày thanh toán: {formatDate(new Date(billData?.dateOfPayment))}
                                 </div>
-                                <div className="w-50">Trị giá: {billData.totalAmount}</div>
+                                <div className="w-50">
+                                    Trị giá: <FormatPrice>{billData?.totalAmount}</FormatPrice> VND
+                                </div>
                             </div>
                         </th>
                     </tr>
@@ -65,10 +74,18 @@ function Bill({ billData }) {
                         <th className="text-center" scope="row">
                             1
                         </th>
-                        <th className="text-center">{billData.roomNumber}</th>
-                        <th className="text-center">{billData.dateDiff}</th>
-                        <th className="text-center">{billData.roomPrice}</th>
-                        <th className="text-center">{billData.totalAmount}</th>
+                        <th className="text-center">{billData?.roomNumber}</th>
+                        <th className="text-center">
+                            {billData?.checkInDate && billData?.checkOutDate
+                                ? calcDateDiff(new Date(billData.checkInDate), new Date(billData.checkOutDate))
+                                : ''}
+                        </th>
+                        <th className="text-center">
+                            <FormatPrice>{billData?.roomPrice}</FormatPrice>
+                        </th>
+                        <th className="text-center">
+                            <FormatPrice>{billData?.totalAmount}</FormatPrice>
+                        </th>
                     </tr>
                 </tbody>
             </table>

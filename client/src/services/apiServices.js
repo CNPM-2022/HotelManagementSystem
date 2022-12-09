@@ -92,9 +92,13 @@ export const putUpdateRegulations = (data) => {
 };
 
 export const postCreateBill = (data) => {
-    return axios.post('bill/create', data);
+    return axios.post('booking/create/bill', data);
 };
 
 export const getAllBills = () => {
     return axios.get('bill/all');
+};
+
+export const getBookingById = (id) => {
+    return axios.get(`booking/${id}`);
 };

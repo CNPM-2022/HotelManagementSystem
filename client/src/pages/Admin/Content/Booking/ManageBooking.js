@@ -8,7 +8,6 @@ import { getAllRooms, getRegulations, postCreateBill } from '../../../../service
 
 import DateRange from '../../../../components/DateRange/DateRange';
 import reducer, { initState } from './customerReducer/reducer';
-import logger from './customerReducer/logger';
 import {
     addCustomer,
     deleteCustomer,
@@ -18,9 +17,10 @@ import {
     setCustomerType,
     setCustomers,
 } from './customerReducer/actions';
-import Bill from './Bill';
+import Bill from '../../../../components/Bill/Bill';
+import FormatPrice from '../../../../components/FormatPrice/FormatPrice';
 
-function ManageBooking() {
+function ManageBooking({ fetchAllBills }) {
     const initalDateRange = [
         {
             startDate: null,
@@ -46,7 +46,7 @@ function ManageBooking() {
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
 
-    const [customersState, dispatch] = useReducer(logger(reducer), initState);
+    const [customersState, dispatch] = useReducer(reducer, initState);
     const [regulations, setRegulations] = useState({});
     const [billData, setBillData] = useState({});
 
@@ -174,7 +174,9 @@ function ManageBooking() {
             data.roomNumber = room.roomNumber;
             data.roomPrice = room.price;
             data.dateDiff = dateDiff;
+            data.customer = customerList[0];
             setBillData(data);
+            fetchAllBills();
             toast.success(res.data.message);
         } else {
             toast.error(res.message);
@@ -326,7 +328,9 @@ function ManageBooking() {
                                             <td colSpan="5">
                                                 <div className="total-price">
                                                     <b>Tổng tiền:</b>
-                                                    <b>{totalAmount}</b>
+                                                    <b>
+                                                        <FormatPrice>{totalAmount}</FormatPrice> VND
+                                                    </b>
                                                 </div>
                                             </td>
                                         </tr>

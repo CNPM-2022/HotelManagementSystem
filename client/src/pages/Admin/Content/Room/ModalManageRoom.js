@@ -146,7 +146,13 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
     };
 
     return (
-        <Modal show={show} onHide={handleClose} backdrop="static" size="xl" className="modal-manage-room">
+        <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop={modalType === 'VIEW' ? true : 'static'}
+            size="xl"
+            className="modal-manage-room"
+        >
             <Modal.Header closeButton>
                 <Modal.Title>Update Room Information</Modal.Title>
             </Modal.Header>
