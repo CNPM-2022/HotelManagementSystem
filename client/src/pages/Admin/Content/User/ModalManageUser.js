@@ -125,7 +125,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
     };
 
     return (
-        <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
+        <Modal show={show} onHide={handleClose} size="xl" backdrop={type === 'VIEW' ? true : 'static'}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>

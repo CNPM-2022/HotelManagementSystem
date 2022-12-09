@@ -98,3 +98,7 @@ export const postCreateBill = (data) => {
 export const getAllBills = () => {
     return axios.get('bill/all');
 };
+
+export const getBookingById = (id) => {
+    return axios.get(`booking/${id}`);
+};

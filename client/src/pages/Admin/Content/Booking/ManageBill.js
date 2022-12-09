@@ -1,31 +1,25 @@
-import { useEffect, useState } from 'react';
-import { getAllBills } from '../../../../services/apiServices';
+import { useState } from 'react';
+import ModalViewBill from './ModalViewBill';
 
 import TableBill from './TableBill';
 
-function ManageBill() {
-    const [listBills, setListBills] = useState([]);
-
-    useEffect(() => {
-        fetchAllBills();
-    }, []);
-
-    const fetchAllBills = async () => {
-        const res = await getAllBills();
-        const data = [];
-
-        if (res && res.data && res.data.success === true) {
-            setListBills(res.data.bills);
-        }
-    };
+function ManageBill({ listBills }) {
+    const [isShowModalViewBill, setIsShowModalViewBill] = useState(false);
+    const [dataBillView, setDataBillView] = useState({});
 
     return (
         <div className="manage-bill-container">
-            <h5>Danh sách Đặt phòng</h5>
+            <h4 className="text-center mt-5">Danh sách Đặt phòng</h4>
             <hr />
             <div className="content-table">
-                <TableBill listBills={listBills} />
+                <TableBill
+                    listBills={listBills}
+                    setIsShowModalViewBill={setIsShowModalViewBill}
+                    setDataBillView={setDataBillView}
+                />
             </div>
+
+            <ModalViewBill dataBill={dataBillView} show={isShowModalViewBill} setShow={setIsShowModalViewBill} />
         </div>
     );
 }

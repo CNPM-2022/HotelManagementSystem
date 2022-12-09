@@ -1,5 +1,12 @@
-function TableBill({ listBills }) {
-    console.log(listBills);
+import FormatPrice from '../../../../components/FormatPrice/FormatPrice';
+
+function TableBill({ listBills, setIsShowModalViewBill, setDataBillView }) {
+    const calcDateDiff = (startDate, endDate) => (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) + 1;
+
+    const handleClickViewButton = (bill) => {
+        setIsShowModalViewBill(true);
+        setDataBillView(bill);
+    };
     return (
         <>
             <table className="table table-hover">
@@ -14,23 +21,23 @@ function TableBill({ listBills }) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
                     {listBills && listBills.length > 0 ? (
                         listBills.map((bill, index) => (
                             <tr key={bill._id}>
                                 <th scope="row">{index + 1}</th>
-                                <td>''</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
+                                <td>{bill.roomNumber}</td>
+                                <td>{calcDateDiff(new Date(bill.checkInDate), new Date(bill.checkOutDate))}</td>
+                                <td>
+                                    <FormatPrice>{bill.roomPrice}</FormatPrice>
+                                </td>
+                                <td>
+                                    <FormatPrice>{bill.totalAmount}</FormatPrice>
+                                </td>
+                                <td>
+                                    <button className="btn btn-success" onClick={() => handleClickViewButton(bill)}>
+                                        Xem chi tiết
+                                    </button>
+                                </td>
                             </tr>
                         ))
                     ) : (

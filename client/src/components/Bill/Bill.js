@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
+import FormatPrice from '../FormatPrice/FormatPrice';
 import './Bill.scss';
 
 function Bill({ billData }) {
     const ref = useRef();
-    console.log(billData);
 
     useEffect(() => {
         ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -42,7 +42,10 @@ function Bill({ billData }) {
                                 <div className="w-50">
                                     Ngày thanh toán: {formatDate(new Date(billData?.dateOfPayment))}
                                 </div>
-                                <div className="w-50">Trị giá: {billData?.totalAmount}</div>
+                                <div className="w-50">
+                                    Trị giá:
+                                    <FormatPrice>{billData?.totalAmount}</FormatPrice>
+                                </div>
                             </div>
                         </th>
                     </tr>
@@ -72,11 +75,15 @@ function Bill({ billData }) {
                         <th className="text-center">{billData?.roomNumber}</th>
                         <th className="text-center">
                             {billData?.checkInDate && billData?.checkOutDate
-                                ? calcDateDiff(billData.checkInDate, billData.checkOutDate)
+                                ? calcDateDiff(new Date(billData.checkInDate), new Date(billData.checkOutDate))
                                 : ''}
                         </th>
-                        <th className="text-center">{billData?.roomPrice}</th>
-                        <th className="text-center">{billData?.totalAmount}</th>
+                        <th className="text-center">
+                            <FormatPrice>{billData?.roomPrice}</FormatPrice>
+                        </th>
+                        <th className="text-center">
+                            <FormatPrice>{billData?.totalAmount}</FormatPrice>
+                        </th>
                     </tr>
                 </tbody>
             </table>
