@@ -82,3 +82,23 @@ export const putChangePassword = (userID, newPassword) => {
 export const postCreateBooking = (data) => {
     return axios.post('booking/create', data);
 };
+
+export const getRegulations = () => {
+    return axios.get('quidinh/get');
+};
+
+export const putUpdateRegulations = (data) => {
+    return axios.put('quidinh/update', data);
+};
+
+export const postCreateBill = (data) => {
+    return axios.post('booking/create/bill', data);
+};
+
+export const getAllBills = () => {
+    return axios.get('bill/all');
+};
+
+export const getBookingById = (id) => {
+    return axios.get(`booking/${id}`);
+};

@@ -130,7 +130,7 @@ function UserMenu() {
             )}
         >
             <div className="user" onClick={() => setVisible((prevState) => !prevState)}>
-                <span className="username">{user.username}</span>
+                <span className="username">{user?.username || ''}</span>
                 <img className="avatar" src={images.defaultUser} alt="avatar" />
                 <AiFillCaretDown className="caret-down" />
             </div>

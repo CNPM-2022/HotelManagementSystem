@@ -127,7 +127,13 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
 
     return (
         <>
-            <Modal className="modal-manage-type" show={show} onHide={handleClose} backdrop="static" size="xl">
+            <Modal
+                className="modal-manage-type"
+                show={show}
+                onHide={handleClose}
+                backdrop={modalType === 'VIEW' ? true : 'static'}
+                size="xl"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>

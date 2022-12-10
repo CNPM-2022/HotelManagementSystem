@@ -24,6 +24,7 @@ import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor';
 import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking';
 import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
 import AdminBooking from './pages/Admin/Content/Booking/Booking';
+import Regulation from './pages/Admin/Content/Regulation/Regulation';
 
 function App() {
     return (
@@ -86,6 +87,7 @@ function App() {
                         <Route path="/admins/manage-rooms" element={<ManageRoom />} />
                         <Route path="/admins/manage-room-types" element={<ManageRoomType />} />
                         <Route path="/admins/manage-booking" element={<AdminBooking />} />
+                        <Route path="/admins/change-regulations" element={<Regulation />} />
                     </Route>
                 </Route>
 

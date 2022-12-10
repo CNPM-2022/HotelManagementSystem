@@ -131,27 +131,31 @@ const updateRoomType = asyncHandler(async (req, res) => {
         if (!roomType) {
             throw new Error('Room type not found');
         }
-
-        const ImagesArrayTemp = roomType.imageUrls;
-        ImagesArrayTemp.map((item) => {
-            if (existsSync(item.filePath)) {
-                fs.unlink(item.filePath, (err) => {
-                    if (err) {
-                        throw new Error('File not found');
-                    }
-                });
-            }
-        });
-
         let ImagesArray = [];
-        req.files.forEach((element) => {
-            const file = {
-                fileName: element.originalname,
-                filePath: element.path,
-                fileType: element.mimetype,
-            };
-            ImagesArray.push(file);
-        });
+        if (req.files.length > 0) {
+            const ImagesArrayTemp = roomType.imageUrls;
+            ImagesArrayTemp.map((item) => {
+                if (existsSync(item.filePath)) {
+                    fs.unlink(item.filePath, (err) => {
+                        if (err) {
+                            throw new Error('File not found');
+                        }
+                    });
+                }
+            });
+
+            req.files.forEach((element) => {
+                const file = {
+                    fileName: element.originalname,
+                    filePath: element.path,
+                    fileType: element.mimetype,
+                };
+                ImagesArray.push(file);
+            });
+        } else {
+            ImagesArray = roomType.imageUrls;
+        }
+
         if (roomType) {
             roomType.description = description;
             roomType.typeOfRooms = typeOfRooms;

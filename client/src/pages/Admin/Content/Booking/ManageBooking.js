@@ -1,13 +1,13 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import Select from 'react-select';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
-import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi';
-import { getAllRooms, postCreateBooking } from '../../../../services/apiServices';
+import { BiPlusCircle, BiMinusCircle, BiRefresh } from 'react-icons/bi';
+import { HiChevronDoubleDown } from 'react-icons/hi';
+import { getAllRooms, getRegulations, postCreateBill } from '../../../../services/apiServices';
 
 import DateRange from '../../../../components/DateRange/DateRange';
 import reducer, { initState } from './customerReducer/reducer';
-import logger from './customerReducer/logger';
 import {
     addCustomer,
     deleteCustomer,
@@ -17,8 +17,10 @@ import {
     setCustomerType,
     setCustomers,
 } from './customerReducer/actions';
+import Bill from '../../../../components/Bill/Bill';
+import FormatPrice from '../../../../components/FormatPrice/FormatPrice';
 
-function ManageBooking() {
+function ManageBooking({ fetchAllBills }) {
     const initalDateRange = [
         {
             startDate: null,
@@ -38,28 +40,19 @@ function ManageBooking() {
         },
     ];
 
-    const statusOptions = [
-        {
-            label: 'Đã thanh toán',
-            value: 'Paid',
-        },
-        {
-            label: 'Chưa thanh toán',
-            value: 'Pending',
-        },
-    ];
-
     const [room, setRoom] = useState({});
     const [roomOptions, setRoomOptions] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [status, setStatus] = useState(statusOptions[0].value);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
 
-    const [customersState, dispatch] = useReducer(logger(reducer), initState);
+    const [customersState, dispatch] = useReducer(reducer, initState);
+    const [regulations, setRegulations] = useState({});
+    const [billData, setBillData] = useState({});
 
     useEffect(() => {
         fetchAllRooms();
+        fetchRegulations();
     }, []);
 
     const fetchAllRooms = async () => {
@@ -75,7 +68,44 @@ function ManageBooking() {
         }
     };
 
-    const handleChangeDateRange = (item) => setDateRange([item.selection]);
+    const fetchRegulations = async () => {
+        const res = await getRegulations();
+
+        if (res && res.data && res.data.success === true) {
+            setRegulations(res.data.law[0]);
+        }
+    };
+
+    const calcDateDiff = (startDate, endDate) => (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) + 1;
+
+    const dateDiff = useMemo(() => {
+        if (dateRange[0].endDate && dateRange[0].startDate) {
+            return calcDateDiff(dateRange[0].startDate, dateRange[0].endDate);
+        }
+
+        return 1;
+    }, [dateRange]);
+
+    useEffect(() => {
+        if (_.isEmpty(room)) {
+            setTotalAmount(0);
+            return;
+        }
+
+        let total = 0;
+
+        total = dateDiff * room.price;
+
+        if (customersState.length >= 3) total += total * regulations.phuThu;
+
+        if (customersState.find((customer) => customer.type === 'Foreign')) total *= regulations.heSo;
+
+        setTotalAmount(total);
+    }, [room, dateDiff, customersState]);
+
+    const handleChangeDateRange = (item) => {
+        setDateRange([item.selection]);
+    };
 
     const handleSelectCustomerType = (customer, selected) => {
         if (selected.value !== customer.type) {
@@ -84,21 +114,12 @@ function ManageBooking() {
     };
 
     const handleSelectRoom = (selected) => {
-        if (room && room._id !== selected.value._id) {
+        if (room._id !== selected.value._id) {
             setRoom(selected.value);
         }
     };
 
-    const handleSelectStatus = (selected) => {
-        if (status && status !== selected.value) {
-            setStatus(selected.value);
-        }
-    };
-
     const handleBooking = async () => {
-        console.log('room: ', room);
-        console.log('dateRange: ', dateRange);
-        console.log('customersState: ', customersState);
         // Validate
         let isValid = true;
         if (_.isEmpty(room)) {
@@ -108,16 +129,6 @@ function ManageBooking() {
 
         if (!dateRange[0]?.startDate || !dateRange[0]?.endDate) {
             toast.error('Chọn ngày nhận/trả phòng!');
-            isValid = false;
-        }
-
-        if (isNaN(+totalAmount) || +totalAmount < 0) {
-            toast.error('Giá tiền không hợp lệ!');
-            isValid = false;
-        }
-
-        if (!status) {
-            toast.error('Chọn trạng thái phòng!');
             isValid = false;
         }
 
@@ -152,22 +163,33 @@ function ManageBooking() {
             roomId: room._id,
             checkInDate: dateRange[0].startDate,
             checkOutDate: dateRange[0].endDate,
-            status,
-            totalAmount: +totalAmount,
+            totalAmount,
             customerList,
+            dateOfPayment: new Date(),
+            address: customerList[0].address,
         };
-        const res = await postCreateBooking(data);
+        const res = await postCreateBill(data);
 
         if (res && res.data && res.data.success === true) {
-            setRoom({});
-            setTotalAmount(0);
-            setDateRange(initalDateRange);
-            dispatch(setCustomers(initState));
-
+            data.roomNumber = room.roomNumber;
+            data.roomPrice = room.price;
+            data.dateDiff = dateDiff;
+            data.customer = customerList[0];
+            setBillData(data);
+            fetchAllBills();
             toast.success(res.data.message);
         } else {
             toast.error(res.message);
         }
+    };
+
+    const handleReset = () => {
+        setBillData({});
+        setRoom({});
+        setTotalAmount(0);
+        setDateRange(initalDateRange);
+        dispatch(setCustomers(initState));
+        toast.success('Làm mới thành công!');
     };
 
     return (
@@ -180,7 +202,13 @@ function ManageBooking() {
                             <label className="form-label">
                                 <b>Chọn phòng:</b>
                             </label>
-                            <Select options={roomOptions} onChange={handleSelectRoom} />
+                            <Select
+                                value={
+                                    (room && roomOptions.find((roomOption) => roomOption.value._id === room._id)) || {}
+                                }
+                                options={roomOptions}
+                                onChange={handleSelectRoom}
+                            />
                         </div>
                     </div>
                     <div className="col-6 mb-3">
@@ -196,30 +224,6 @@ function ManageBooking() {
                             />
                         </div>
                     </div>
-                    <div className="col-6 mb-3">
-                        <div className="form-group mb-3">
-                            <label className="form-label">
-                                <b>Tổng tiền:</b>
-                            </label>
-                            <input
-                                value={totalAmount}
-                                onChange={(event) => setTotalAmount(event.target.value)}
-                                className="form-control"
-                            />
-                        </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                        <div className="form-group mb-3">
-                            <label className="form-label">
-                                <b>Trạng thái:</b>
-                            </label>
-                            <Select
-                                defaultValue={statusOptions[0]}
-                                options={statusOptions}
-                                onChange={handleSelectStatus}
-                            />
-                        </div>
-                    </div>
                     <div className="col-12">
                         <div className="form-group mb-3">
                             <label className="form-label">
@@ -230,12 +234,14 @@ function ManageBooking() {
                                     <thead>
                                         <tr className="table-dark">
                                             <th scope="col">
-                                                <div
-                                                    onClick={() => dispatch(addCustomer())}
-                                                    className="manage-customer-icon add-customer-icon"
-                                                >
-                                                    <BiPlusCircle />
-                                                </div>
+                                                {room && customersState.length < room.maxCount && (
+                                                    <div
+                                                        onClick={() => dispatch(addCustomer())}
+                                                        className="manage-customer-icon add-customer-icon"
+                                                    >
+                                                        <BiPlusCircle />
+                                                    </div>
+                                                )}
                                                 STT
                                             </th>
                                             <th scope="col">Họ và tên</th>
@@ -318,6 +324,16 @@ function ManageBooking() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                        <tr>
+                                            <td colSpan="5">
+                                                <div className="total-price">
+                                                    <b>Tổng tiền:</b>
+                                                    <b>
+                                                        <FormatPrice>{totalAmount}</FormatPrice> VND
+                                                    </b>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -325,10 +341,31 @@ function ManageBooking() {
                     </div>
                 </div>
 
-                <button className="btn btn-success" onClick={handleBooking}>
-                    Đặt phòng
-                </button>
+                <div className="d-flex justify-content-between mt-3">
+                    <button className="btn btn-success" onClick={handleBooking}>
+                        Đặt phòng
+                    </button>
+
+                    <button className="btn btn-primary" onClick={handleReset}>
+                        <i>
+                            <BiRefresh />
+                        </i>
+                        Làm mới
+                    </button>
+                </div>
             </div>
+
+            {!_.isEmpty(billData) && (
+                <>
+                    <div className="down-icon">
+                        <i>
+                            <HiChevronDoubleDown />
+                        </i>
+                    </div>
+
+                    <Bill billData={billData} />
+                </>
+            )}
         </>
     );
 }

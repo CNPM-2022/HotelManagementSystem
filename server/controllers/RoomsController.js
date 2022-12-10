@@ -56,6 +56,35 @@ const getAllRoomsByType = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Fetch all rooms by type
+// @route   GET /api/rooms/:id
+// @access  Public
+const getAllRoomsByTypeName = asyncHandler(async (req, res) => {
+    try {
+        const Type = await RoomType.findOne({ typeOfRooms: req.params.name });
+        if (Type) {
+            const rooms = await Rooms.find({ type: Type.typeOfRooms });
+            if (rooms.length > 0) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Rooms fetched successfully',
+                    lengthOfList: rooms.length,
+                    data: rooms,
+                });
+            } else {
+                throw new Error('No rooms found');
+            }
+        } else {
+            throw new Error('No room type found');
+        }
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
 // @desc    Fetch single room
 // @route   GET /api/rooms/:id
 // @access  Public
@@ -259,6 +288,7 @@ const deleteRoom = asyncHandler(async (req, res) => {
                 });
             }
         });
+
         const type = await RoomType.findOne({ typeOfRooms: room.type });
         if (type) {
             const index = type.listRoom.indexOf(room.roomNumber);
@@ -330,6 +360,24 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
             });
         } else {
             ImagesArray = roomIsAlreadyExist.imageUrls;
+        }
+
+        if (type) {
+            const oldType = await RoomType.findOne({ typeOfRooms: roomIsAlreadyExist.type });
+            if (type) {
+                const index = oldType.listRoom.indexOf(roomIsAlreadyExist.roomNumber);
+                if (index > -1) {
+                    oldType.listRoom.splice(index, 1);
+                }
+                await oldType.save();
+                console.log(oldType.listRoom);
+            }
+            const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
+            console.log(typeIsTrue);
+            if (typeIsTrue) {
+                typeIsTrue.listRoom.push(roomIsAlreadyExist.roomNumber);
+                await typeIsTrue.save();
+            }
         }
 
         const Price = typeIsTrue.price;
@@ -488,6 +536,7 @@ export {
     getAllRoomsWithPagination,
     getRoomsFilter,
     getAllRoomsByType,
+    getAllRoomsByTypeName,
     getRoomById,
     createRoom,
     updateRoom,

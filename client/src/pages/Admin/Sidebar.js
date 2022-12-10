@@ -1,6 +1,6 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarContent, SidebarFooter } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 function Sidebar({ collapsed }) {
@@ -19,6 +19,14 @@ function Sidebar({ collapsed }) {
                 </Menu>
                 <Menu iconShape="circle">
                     <SubMenu title={t('admin.sidebar.features.title')}>
+                        <MenuItem>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-booking"
+                            >
+                                Quản lý Đặt phòng
+                            </NavLink>
+                        </MenuItem>
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
@@ -43,12 +51,13 @@ function Sidebar({ collapsed }) {
                                 {t('admin.sidebar.features.manageRoomTypes')}
                             </NavLink>
                         </MenuItem>
+
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
-                                to="/admins/manage-booking"
+                                to="/admins/change-regulations"
                             >
-                                Quản lý Đặt phòng
+                                Thay đổi Quy định
                             </NavLink>
                         </MenuItem>
                     </SubMenu>
