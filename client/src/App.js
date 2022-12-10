@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap';
-// import 'bootstrap-icons/font/bootstrap-icons.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //component
 import Home from './pages/Home/Home';
@@ -75,7 +75,11 @@ function App() {
                         <Route path="/User/My-Booking" element={<MyBooking />} />
                     </Route>
 
-                    <Route path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
+                    <Route path="/booking/:id" element={
+                        <DefaultLayout>
+                            <Booking />
+                        </DefaultLayout>
+                    } />
 
                     <Route path="/admins" element={<Admin />}>
                         <Route index path="/admins/dashboard" element={<AdminDashBoard />} />

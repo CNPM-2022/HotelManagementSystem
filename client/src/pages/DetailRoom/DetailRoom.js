@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'
+import bookingSlice from '../../store/bookingSlice';
 
-
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './DetailRoom.scss';
 import { getRoomById } from '../../services/apiServices';
 
@@ -17,6 +18,7 @@ import avt3 from "../../assets/images/detailRoom/55.jpg"
 
 
 const DetailRoom = () => {
+    const dispatch = useDispatch()
     const params = useParams();
     const [room, setRoom] = useState({});
     const [loading, setLoading] = useState(true)
@@ -43,6 +45,16 @@ const DetailRoom = () => {
         document.documentElement.scrollTop = 0
     }, []);
 
+    const handleBookNow = () => {
+        dispatch(
+            bookingSlice.actions.setMaxPeople(
+                {
+                    maxPeopel: room.maxCount
+                }
+            )
+        )
+    }
+
     if (loading || room._id === undefined) {
         return (
             <div className="d-flex justify-content-center align-items-center " style={{ minHeight: "300px" }}>
@@ -68,13 +80,13 @@ const DetailRoom = () => {
                     </div>
                 </div>
                 <div className="roberto-rooms-area section-padding-100-0">
-                    <div className="container">
+                    <div className="container-fluid" style={{ maxWidth: "1400px" }}>
                         <div className="row">
                             <div className="col-12 col-lg-8">
 
                                 <div className="single-room-details-area mb-50">
 
-                                    <div className="room-thumbnail-slides mb-50">
+                                    <div className="room-thumbnail-slides mb-3">
                                         <div id="room-thumbnail--slide" className="carousel slide" data-bs-ride="carousel" >
                                             <div className="carousel-inner">
                                                 <div className="carousel-item active">
@@ -103,6 +115,12 @@ const DetailRoom = () => {
                                             </ol>
                                         </div>
                                     </div>
+
+                                    <div className='mb-3 d-flex justify-content-evenly'>
+                                        <Link to={`/booking/${room._id}`} onClick={handleBookNow}><button className="button-detail-room book-btn">Book now</button></Link>
+                                        <button className="button-detail-room  favorite-btn">Add to favorite</button>
+                                    </div>
+
 
                                     <div className="room-features-area d-flex flex-wrap mb-50">
                                         <h6>Type: <span>{room.type}</span></h6>
@@ -207,9 +225,95 @@ const DetailRoom = () => {
 
                                 </div>
                             </div>
+                            <div className="col-12 col-lg-4">
+
+                                <div className="hotel-reservation--area-detail mb-100">
+
+                                    <form action="#" method="post" className='p-3'>
+                                        <div className='fw-bolder fs-5 mb-3'>Search</div>
+                                        <div className="form-group mb-30">
+
+                                            <div className="input-daterange" id="datepicker">
+                                                <div className="row no-gutters">
+                                                    <div className="col-6">
+
+                                                        <label htmlFor="checkIn">Check In</label>
+                                                        <input type="date" className="form-control" id="checkIn" name="checkin-date" />
+
+                                                    </div>
+                                                    <div className="col-6">
+
+                                                        <label htmlFor="checkOut">Check Out</label>
+                                                        <input type="date" className="form-control" id="checkOut" name="checkout-date" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="form-group mb-30">
+                                            <label htmlFor="room">Type</label>
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <select name="room" id="room" className="form-control form-select">
+                                                        <option value="all">All</option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="C">C</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-6">
+                                                    <select
+                                                        name="children"
+                                                        id="children"
+                                                        className="form-control"
+                                                    >
+                                                        <option value="children">Children</option>
+                                                        <option value="01">01</option>
+                                                        <option value="02">02</option>
+                                                        <option value="03">03</option>
+                                                        <option value="04">04</option>
+                                                        <option value="05">05</option>
+                                                        <option value="06">06</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <button type="submit" className="btn roberto-btn-detail roberto-btn w-100">
+                                                Check Available
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                {/* các phòng liên quan */}
+                                <div className="accordion mb-5" id="accordionExample" >
+                                    <div className="accordion-item" >
+                                        <h2 className="accordion-header" id="headingOne">
+                                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style={{ color: "red" }}>
+                                                <b>Similar rooms</b>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body">
+                                                chưa có gì đâu mà xem
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
                         </div>
+
                     </div>
+
+
                 </div>
+
+
             </>
         );
     }

@@ -1,15 +1,17 @@
-import counterReducer from './counterSlice';
-import authReducer from './authSlice';
-import roomsReducer from './roomsSlice';
-import roomReducer from './roomSlice';
-import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from "./counterSlice";
+import authReducer from "./authSlice";
+import roomsReducer from "./roomsSlice";
+import roomReducer from "./roomSlice";
+import bookingSlice from './bookingSlice'
+import { configureStore } from "@reduxjs/toolkit";
 const store = configureStore({
-    reducer: {
-        counter: counterReducer,
-        auth: authReducer,
-        rooms: roomsReducer,
-        room: roomReducer,
-    },
+  reducer: {
+    counter: counterReducer,
+    auth: authReducer,
+    rooms: roomsReducer,
+    room: roomReducer,
+    booking: bookingSlice.reducer,
+  },
 });
 
 export default store;
