@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
+import { useDispatch } from 'react-redux'
+import bookingSlice from '../../store/bookingSlice';
 
 import { Link, useParams } from 'react-router-dom';
 import './DetailRoom.scss';
@@ -17,6 +18,7 @@ import avt3 from "../../assets/images/detailRoom/55.jpg"
 
 
 const DetailRoom = () => {
+    const dispatch = useDispatch()
     const params = useParams();
     const [room, setRoom] = useState({});
     const [loading, setLoading] = useState(true)
@@ -42,6 +44,16 @@ const DetailRoom = () => {
         setLoading(false)
         document.documentElement.scrollTop = 0
     }, []);
+
+    const handleBookNow = () => {
+        dispatch(
+            bookingSlice.actions.setMaxPeople(
+                {
+                    maxPeopel: room.maxCount
+                }
+            )
+        )
+    }
 
     if (loading || room._id === undefined) {
         return (
@@ -105,7 +117,7 @@ const DetailRoom = () => {
                                     </div>
 
                                     <div className='mb-3 d-flex justify-content-evenly'>
-                                        <Link to={`/booking/${room._id}`}><button className="button-detail-room book-btn">Book now</button></Link>
+                                        <Link to={`/booking/${room._id}`} onClick={handleBookNow}><button className="button-detail-room book-btn">Book now</button></Link>
                                         <button className="button-detail-room  favorite-btn">Add to favorite</button>
                                     </div>
 
