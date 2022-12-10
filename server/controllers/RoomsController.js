@@ -457,7 +457,7 @@ const getAllRoomsWithPagination = asyncHandler(async (req, res) => {
 
 const getRoomsFilter = asyncHandler(async (req, res) => {
     const { page } = req.params;
-    const { type, price, rentperDate, checkOutDate } = req.query;
+    const { type, price, rentperDate, checkOutDate } = req.body;
     const limit = 5;
     try {
         const startIndex = (Number(page) - 1) * Number(limit);
