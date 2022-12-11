@@ -502,6 +502,7 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
                 checkOutDate: { $gte: checkOutDate },
             });
         }
+        console.log(results);
         const lengthOfRooms = results.results.length;
 
         if (endIndex < lengthOfRooms) {
