@@ -31,7 +31,7 @@ function BookingDateRange({ dateRange, handleChangeDateRange, isShowDateRange, s
                         {formatDate(dateRange[0].startDate)} - {formatDate(dateRange[0].endDate)}
                     </span>
                 ) : (
-                    <span>Pick Date Range...</span>
+                    <span>Chọn ngày nhận/trả phòng</span>
                 )}
             </div>
             {isShowDateRange && (

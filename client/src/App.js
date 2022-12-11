@@ -75,7 +75,14 @@ function App() {
                         <Route path="/User/My-Booking" element={<MyBooking />} />
                     </Route>
 
-                    <Route path="/roombook/:id/:fromdate/:todate" element={<Booking />} />
+                    <Route
+                        path="/booking/:id"
+                        element={
+                            <DefaultLayout>
+                                <Booking />
+                            </DefaultLayout>
+                        }
+                    />
 
                     <Route path="/admins" element={<Admin />}>
                         <Route index path="/admins/dashboard" element={<AdminDashBoard />} />

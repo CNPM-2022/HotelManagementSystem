@@ -1,7 +1,7 @@
 import Booking from '../models/Booking';
 import Customer from '../models/Customer';
 import Bill from '../models/Bill';
-
+import Room from '../models/Room';
 //@desc Get all bookings of a user
 //@route GET /api/bookings/user/:id
 //@access Private
@@ -84,6 +84,10 @@ const createBookingWithBill = async (req, res) => {
             checkOutDate,
             totalAmount,
         });
+
+        const BookingRoom = await Room.findById({ _id: roomId });
+        BookingRoom.currentBookings.push(NewBooking._id);
+        await BookingRoom.save();
 
         if (NewBooking) {
             const newBill = await Bill.create({
@@ -208,7 +212,18 @@ const updateBooking = async (req, res) => {
             booking.checkOutDate = checkOutDate;
             booking.totalAmount = totalAmount;
         }
+
         const updatedBooking = await booking.save();
+
+        if (updatedBooking.room !== roomId) {
+            const BookingRoom = await Room.findIndex({ _id: updatedBooking.room });
+            BookingRoom.currentBookings = BookingRoom.currentBookings.filter(
+                (booking) => booking._id.toString() !== updatedBooking._id.toString(),
+            );
+            await BookingRoom.save();
+        }
+
+        await BookingRoom.save();
         if (updatedBooking) {
             return res.status(200).json({
                 success: true,
@@ -237,7 +252,16 @@ const deleteBooking = async (req, res) => {
     try {
         const booking = await Booking.findById(req.params.id);
         if (booking) {
+            console.log(booking);
+            const BookingRoom = await Room.findById(booking.room);
+            console.log(BookingRoom);
+            BookingRoom.currentBookings = BookingRoom.currentBookings.filter(
+                (booking) => booking._id.toString() !== req.params.id.toString(),
+            );
+            await BookingRoom.save();
+
             await booking.remove();
+
             return res.status(200).json({
                 success: true,
                 message: 'Booking deleted successfully',

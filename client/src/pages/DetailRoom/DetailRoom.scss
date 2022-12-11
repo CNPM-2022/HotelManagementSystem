@@ -904,3 +904,111 @@ html .ui-button.ui-state-disabled:active {
         }
     }
 }
+
+.hotel-reservation--area-detail {
+    background-color: #febb02;
+    border-radius: 5px;
+}
+
+.roberto-btn-detail {
+    background-color: #0071c2;
+}
+
+.button-detail-room {
+    display: inline-block;
+    font-family: 'Montserrat', 'Trebuchet MS', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    padding: 0.8em 1.4em;
+    padding-right: 4.7em;
+    background: #009ed8;
+    border: none;
+    color: white;
+    transition: 0.2s;
+    min-width: 15em;
+    &:before,
+    &:after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        width: 2.8em;
+        content: '\00a0';
+        font-family: 'FontAwesome', sans-serif;
+        font-size: 1.2em;
+        text-align: center;
+        transition: 0.2s;
+        transform-origin: 50% 60%;
+    }
+    &:before {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    &:hover {
+        background: #0079a5;
+    }
+}
+
+.favorite-btn {
+    background: #fe5f55;
+    &:hover {
+        background: #fe2f22;
+
+        &:after {
+            -webkit-animation: bounceright 0.3s alternate ease infinite;
+            animation: bounceright 0.3s alternate ease infinite;
+        }
+    }
+
+    &:after {
+        content: '\f004';
+    }
+}
+
+.book-btn {
+    &:after {
+        content: '\f00c';
+    }
+    &:hover {
+        &:after {
+            -webkit-animation: none;
+            -webkit-transform: scale(1.4);
+            animation: none;
+            transform: scale(1.4);
+        }
+    }
+}
+
+@-webkit-keyframes bounceright {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        -webkit-transform: translateX(3px);
+    }
+}
+@-webkit-keyframes wiggle {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(30deg);
+    }
+}
+@keyframes bounceright {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(3px);
+    }
+}
+@keyframes wiggle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(30deg);
+    }
+}
