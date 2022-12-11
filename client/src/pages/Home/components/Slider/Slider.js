@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SlickSlider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -9,6 +10,8 @@ import SlidePrevArrow from './SlidePrevArrow';
 import Button from '../../../../components/Button/Button';
 
 function Slider() {
+    const navigate = useNavigate();
+
     const [prevSlideImageSrc, setPrevSlideImageSrc] = useState(images.room3);
     const [nextSlideImageSrc, setNextSlideImageSrc] = useState(images.room2);
 
@@ -59,7 +62,9 @@ function Slider() {
                         <div className="welcome col-12">
                             <p>Hotel & Resort</p>
                             <h3>Welcome To Roberto</h3>
-                            <Button className="discover-btn">Discover Now</Button>
+                            <Button onClick={() => navigate('/rooms')} className="discover-btn">
+                                Discover Now
+                            </Button>
                         </div>
                     </div>
                 ))}

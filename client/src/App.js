@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap';
-// import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //component
 import Home from './pages/Home/Home';

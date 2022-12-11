@@ -33,7 +33,7 @@ const MainContent = () => {
                             </Link>
                         </div>
                         <div className="book-now">
-                            <Link to="/book">
+                            <Link to="/rooms">
                                 Book Now <BsArrowRight />
                             </Link>
                         </div>
