@@ -1,10 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import { ReportByRoomType,getRoomUsageDensityReport } from '../controllers/ReportController.js';
+import { getReports, createReportsModal } from '../controllers/ReportController.js';
 
-router.get('/getbyroomtype', ReportByRoomType);
+router.get('/get-reports', getReports);
 
-router.get('/getroomusagedensity', getRoomUsageDensityReport);
-
+router.get('/create-reports-modal', createReportsModal);
 
 export default router;

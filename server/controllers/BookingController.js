@@ -252,9 +252,7 @@ const deleteBooking = async (req, res) => {
     try {
         const booking = await Booking.findById(req.params.id);
         if (booking) {
-            console.log(booking);
             const BookingRoom = await Room.findById(booking.room);
-            console.log(BookingRoom);
             BookingRoom.currentBookings = BookingRoom.currentBookings.filter(
                 (booking) => booking._id.toString() !== req.params.id.toString(),
             );
