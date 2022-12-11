@@ -8,11 +8,10 @@ const reportByRoomTypeSchema = mongoose.Schema({
     },
     totalRevenue: {
         type: Number,
-        required: true,
+        default: 0,
     },
     ratio: {
         type: Number,
-        required: true,
     },
 });
 
