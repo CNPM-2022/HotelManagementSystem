@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -75,11 +75,14 @@ function App() {
                         <Route path="/User/My-Booking" element={<MyBooking />} />
                     </Route>
 
-                    <Route path="/booking/:id" element={
-                        <DefaultLayout>
-                            <Booking />
-                        </DefaultLayout>
-                    } />
+                    <Route
+                        path="/booking/:id"
+                        element={
+                            <DefaultLayout>
+                                <Booking />
+                            </DefaultLayout>
+                        }
+                    />
 
                     <Route path="/admins" element={<Admin />}>
                         <Route index path="/admins/dashboard" element={<AdminDashBoard />} />
