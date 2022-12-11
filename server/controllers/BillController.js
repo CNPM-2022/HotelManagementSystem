@@ -3,7 +3,7 @@ import Bill from '../models/Bill.js';
 const getBills = async (req, res) => {
     try {
         const bills = await Bill.find()
-            .populate({ path: 'booking', populate: { path: 'customerList' } })
+            .populate({ path: 'booking', populate: { path: 'customerList' }, populate: { path: 'room' } })
             .populate('user');
         res.status(200).json({
             success: true,
@@ -23,7 +23,7 @@ const getBillById = async (req, res) => {
     try {
         const { id } = req.params;
         const bill = await Bill.findById(id)
-            .populate({ path: 'booking', populate: { path: 'customerList' } })
+            .populate({ path: 'booking', populate: { path: 'customerList' }, populate: { path: 'room' } })
             .populate('user');
         if (!bill) {
             return res.status(404).json({
