@@ -2,8 +2,9 @@ import Booking from '../models/Booking';
 import Room from '../models/Room';
 import RoomType from '../models/RoomType';
 import ReportByType from '../models/ReportByRoomType';
+import RoomUsageDensityReport from '../models/RoomUsageDensityReport';
 
-const RestartReport = async () => {
+const RestartReportByType = async () => {
     RoomType.find({}).then(async (roomTypes) => {
         for(let i = 0; i < roomTypes.length; i++) {
             await ReportByType.findOne({
@@ -60,7 +61,7 @@ const WriteReport = async () => {
 
 const ReportByRoomType = async (req, res) => {
     try {
-        await RestartReport();
+        await RestartReportByType();
         await WriteReport();
         ReportByType.find({})
             .populate('roomType', 'typeOfRooms')
@@ -76,4 +77,53 @@ const ReportByRoomType = async (req, res) => {
     }
 };
 
-export { ReportByRoomType };
+
+const RestartRoomUsageDensityReport = async (req, res) => {
+    await Room.find({}).then(async (rooms) => {
+        for(let i = 0; i < rooms.length; i++) {
+            const booking = rooms[i].currentBookings;
+            let totalRentDays = 0;
+            for(let i =0;i<booking.length;i++)
+            {
+                await Booking.find({ _id: booking[i] }).then(async (booking) => {
+                   totalRentDays += parseInt((new Date(booking[0].checkOutDate) - new Date(booking[0].checkInDate))/(1000 * 60 * 60 * 24), 10);
+                });
+            }
+            const report = await RoomUsageDensityReport.findOne({
+                room: rooms[i]._id,
+            })
+            if (report) {
+                report.totalRentDays = totalRentDays;
+                report.ratio = totalRentDays / 365;
+                await report.save();
+            } else {
+                const newReport = new RoomUsageDensityReport({
+                    room: rooms[i]._id,
+                    totalRentDays: totalRentDays,
+                    ratio: totalRentDays / 365,
+                });
+                await newReport.save();
+            }
+        }
+    }
+    )
+}
+
+const getRoomUsageDensityReport = async (req, res) => {
+    try {
+        await RestartRoomUsageDensityReport();
+        RoomUsageDensityReport.find({}).populate('room', ['roomNumber']).then(
+            (reports) => {
+                res.status(200).json({
+                    success: true,
+                    message: 'Get room usage density report successfully',
+                    data: reports,
+                });
+            }
+        )
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+}
+
+export { ReportByRoomType,getRoomUsageDensityReport };
