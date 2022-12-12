@@ -104,5 +104,9 @@ export const getBookingById = (id) => {
 };
 
 export const getRule = () => {
-    return axios.get("quidinh/get")
-}
+    return axios.get('quidinh/get');
+};
+
+export const getReportsByMonth = (month) => {
+    return axios.get('report/all', { params: { month } });
+};
