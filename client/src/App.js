@@ -18,7 +18,7 @@ import Booking from './pages/Booking/Booking';
 import NotFound from './components/NotFound/NotFound';
 import DefaultLayout from './layouts/DefaultLayout/DefaultLayout';
 import Admin from './pages/Admin/Admin';
-import AdminDashBoard from './pages/Admin/Content/DashBoard';
+import AdminDashBoard from './pages/Admin/Content/DashBoard/DashBoard';
 import ManageUser from './pages/Admin/Content/User/ManageUser';
 import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
@@ -61,8 +61,16 @@ function App() {
                         </DefaultLayout>
                     }
                 />
-                {isAuthenticated ? <Route path="/login" element={<Navigate to="/" />} /> : <Route path="/login" element={<Login />} />}
-                {isAuthenticated ? <Route path="/register" element={<Navigate to="/" />} /> : <Route path="/register" element={<Register />} />}
+                {isAuthenticated ? (
+                    <Route path="/login" element={<Navigate to="/" />} />
+                ) : (
+                    <Route path="/login" element={<Login />} />
+                )}
+                {isAuthenticated ? (
+                    <Route path="/register" element={<Navigate to="/" />} />
+                ) : (
+                    <Route path="/register" element={<Register />} />
+                )}
 
                 <Route path="/" element={<PrivateRoute />}>
                     <Route
@@ -73,7 +81,7 @@ function App() {
                             </DefaultLayout>
                         }
                     >
-                        <Route path='/user/profile' element={<UserInfor />} />
+                        <Route path="/user/profile" element={<UserInfor />} />
                         <Route path="/user/edit-profile" element={<EditProfile />} />
                         <Route path="/user/my-booking" element={<MyBooking />} />
                     </Route>

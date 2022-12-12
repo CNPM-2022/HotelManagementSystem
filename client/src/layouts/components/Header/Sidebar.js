@@ -33,7 +33,7 @@ function Sidebar({ collapsed, setCollapsed }) {
                 </Menu>
 
                 <div className="book-now">
-                    <Link to="/rooms">
+                    <Link to="/rooms/1">
                         Book Now <BsArrowRight />
                     </Link>
                 </div>

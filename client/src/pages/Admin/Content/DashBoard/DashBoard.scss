@@ -1,0 +1,17 @@
+.admin-dashboard-container .admin-dashboard-content {
+    .admin-revenue-container {
+        .revenue-month-picker {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            label {
+                margin-bottom: 0;
+            }
+
+            .react-datepicker-wrapper {
+                width: auto;
+            }
+        }
+    }
+}
