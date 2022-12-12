@@ -170,7 +170,7 @@ const BookingScreen = () => {
                                     alignSelf: 'center'
                                 }}>Step {step + 1} of 3</span>
                                 <div>
-                                    {step !== 0 && step === 3 ? <Button style={{
+                                    {step !== 0 && step !== 2 ? <Button style={{
                                         marginRight: '16px'
                                     }} onClick={onPrevClick}>
                                         Quay lại

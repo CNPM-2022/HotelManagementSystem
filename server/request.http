@@ -119,7 +119,7 @@ GET http://localhost:5000/api/user/3/5
 # API for get user by id
 #return user info
 ###
-GET http://localhost:5000/api/user/6374dc740209e8d6f595ab40
+GET http://localhost:5000/api/user/636bc941491cf68652805555
 
 
 

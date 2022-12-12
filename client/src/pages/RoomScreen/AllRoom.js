@@ -1,10 +1,14 @@
 import { Fragment, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router';
 import './RoomScreen.scss';
 
 
 function AllRoom(props) {
+    const params = useParams()
+    const navigate = useNavigate();
     const pageRef = useRef()
+
     useEffect(() => {
         document.querySelectorAll(".page").forEach(page => {
             if (parseInt(page.childNodes[0].innerText) === props.curPage) {
@@ -29,13 +33,16 @@ function AllRoom(props) {
         //document.documentElement.scrollTop = 500
     }, [props.curPage])
 
-
     const numberOfPage = Math.ceil(props.roomData.lengthOfList / 5);
     let listPage = []
     for (let i = 1; i <= numberOfPage; i++) {
         listPage.push(i);
     }
+    //console.log(page)
+    const page = params.page
     const handleChangePage = (e) => {
+        console.log(page)
+        console.log('handle', params.page)
         props.handleChangePage(parseInt(e.target.innerText));
         document.documentElement.scrollTop = 500
         //console.log(document.getElementById("cc").scrollTop = 10);
@@ -44,6 +51,7 @@ function AllRoom(props) {
     const handleNextPage = (e) => {
         if (props.curPage < numberOfPage) {
             props.handleChangePage(props.curPage + 1);
+            navigate(`/rooms/${props.curPage + 1}`)
         }
         document.documentElement.scrollTop = 500
     }
@@ -51,6 +59,7 @@ function AllRoom(props) {
     const handlePrePage = (e) => {
         if (props.curPage > 1) {
             props.handleChangePage(props.curPage - 1);
+            navigate(`/rooms/${props.curPage - 1}`)
         }
         document.documentElement.scrollTop = 500
     }
@@ -98,7 +107,7 @@ function AllRoom(props) {
                     </li>
                     {
                         listPage.map(page => (
-                            <li className="page-item page" key={page}><div className="page-link" onClick={handleChangePage}>{page}</div></li>
+                            <li className="page-item page" key={page}><NavLink to={`/rooms/${page}`} className="page-link" onClick={handleChangePage}>{page}</NavLink></li>
                         ))
                     }
                     <li className="page-item" id="next-btn">

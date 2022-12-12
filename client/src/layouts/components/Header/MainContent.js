@@ -22,7 +22,7 @@ const MainContent = () => {
                             <Link to="/" className="item">
                                 Home
                             </Link>
-                            <Link to="/rooms" className="item">
+                            <Link to="/rooms/1" className="item">
                                 Rooms
                             </Link>
                             <Link to="/about-us" className="item">

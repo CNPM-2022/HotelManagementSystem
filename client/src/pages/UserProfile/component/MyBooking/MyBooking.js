@@ -7,12 +7,11 @@ import TableBill from '../../../Admin/Content/Booking/TableBill';
 
 function MyBooking() {
     const [listBills, setListBills] = useState([]);
-
     const [isShowModalViewBill, setIsShowModalViewBill] = useState(false);
     const [dataBillView, setDataBillView] = useState({});
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
+
     useEffect(() => {
         fetchAllBills();
     }, []);

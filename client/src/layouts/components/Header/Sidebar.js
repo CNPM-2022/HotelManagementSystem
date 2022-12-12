@@ -20,7 +20,7 @@ function Sidebar({ collapsed, setCollapsed }) {
                     </MenuItem>
                     <MenuItem>
                         Rooms
-                        <Link to="/rooms" />
+                        <Link to="/rooms/1" />
                     </MenuItem>
                     <MenuItem>
                         About Us

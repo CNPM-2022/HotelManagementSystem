@@ -1,28 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-//import avt from './images/avatar1.png'
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { authActions } from '../../store/authSlice';
+import Swal from 'sweetalert2';
+
 
 function Sidebar() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
     function handleToggle() {
         document.getElementById('sidebar').classList.toggle('active');
     }
 
-    function handleChoosen(e) {
-        //console.log(typeof e.target.parentNode.dataset.ischoosen)
-        if (e.target.parentNode.dataset.ischoosen !== '1') {
-            e.target.parentNode.dataset.ischoosen = '1';
-            e.target.parentNode.classList.add('active');
-            const list = document.querySelectorAll('.list');
-            list.forEach((item) => {
-                if (item !== e.target.parentNode) {
-                    item.dataset.ischoosen = '0';
-                    item.classList.remove('active');
-                }
-            });
-        }
+    const hanldesingout = () => {
+        localStorage.removeItem('user');
+        dispatch(authActions.logout());
+        Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
+            navigate('/');
+        });
     }
 
     return (
@@ -37,25 +34,25 @@ function Sidebar() {
                 </div>
             </div>
             <ul className="list-unstyled components mb-5">
-                <li className="active list" data-ischoosen="1" onClick={handleChoosen}>
-                    <Link to="/User">
+                <li className="list" >
+                    <NavLink to="/user/profile">
                         <i className="bi bi-person-circle me-2"></i>Profile
-                    </Link>
+                    </NavLink>
                 </li>
-                <li className="list" data-ischoosen="0" onClick={handleChoosen}>
-                    <Link to="/User/My-Booking">
+                <li className="list">
+                    <NavLink to="/user/my-booking">
                         <i className="bi bi-bag me-2"></i>My booking
-                    </Link>
+                    </NavLink>
                 </li>
-                <li className="list" data-ischoosen="0" onClick={handleChoosen}>
-                    <Link to="/User/Edit-Profile">
+                <li className="list">
+                    <NavLink to="/user/edit-profile">
                         <i className="bi bi-pencil-square me-2"></i>Edit profile
-                    </Link>
+                    </NavLink>
                 </li>
-                <li className="list" data-ischoosen="0" onClick={handleChoosen}>
-                    <Link href="#">
+                <li onClick={hanldesingout}>
+                    <a >
                         <i className="bi bi-box-arrow-right me-2"></i>Sign out
-                    </Link>
+                    </a>
                 </li>
             </ul>
         </nav>

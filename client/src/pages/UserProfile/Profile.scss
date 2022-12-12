@@ -226,3 +226,19 @@ h5,
 #avt {
     background-image: url(./images/bg_1.jpg);
 }
+
+#sidebar {
+    .list {
+        .active {
+            background: #eee;
+            color: black;
+            border-radius: 50px 0 0 50px;
+            &:hover {
+                color: orange;
+                background: white;
+                border-bottom: 1px solid $primary;
+                cursor: pointer;
+            }
+        }
+    }
+}
