@@ -3,6 +3,30 @@
     background-color: #fff;
     color: #69707a;
 } */
+display-flex {
+    display: flex;
+    display: -webkit-flex;
+}
+@mixin border-radius($value) {
+    border-radius: $value;
+    -moz-border-radius: $value;
+    -webkit-border-radius: $value;
+    -o-border-radius: $value;
+    -ms-border-radius: $value;
+}
+@mixin hideInput {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+}
+@mixin align-items($value) {
+    align-items: $value;
+    -moz-align-items: $value;
+    -webkit-align-items: $value;
+    -o-align-items: $value;
+    -ms-align-items: $value;
+}
 .img-account-profile-handle {
     height: 10rem;
     border-radius: 50% !important;
@@ -288,4 +312,65 @@
 }
 .form-outline.form-white .form-control:focus ~ .form-notch .form-notch-trailing {
     border-color: #fff;
+}
+
+.form-radio-changeInfor {
+    @extend display-flex;
+    @include align-items(center);
+    margin-bottom: 30px;
+    position: relative;
+
+    margin-bottom: 40px;
+}
+
+.form-radio-changeInfor-item {
+    input {
+        @include hideInput;
+    }
+    input + label {
+        margin: 0px;
+        padding: 12px 10px;
+        width: auto;
+        height: 50px;
+        box-sizing: border-box;
+        position: relative;
+        display: inline-block;
+        // width: auto;
+        text-align: center;
+        background-color: #f8f8f8;
+        font-size: 14px;
+        font-weight: 400;
+        color: #f8f8f8;
+        text-align: center;
+        text-transform: none;
+        transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out,
+            box-shadow 0.15s ease-out;
+        @include border-radius(5px);
+    }
+    input:checked + label {
+        background-color: #1abc9c;
+        color: #fff;
+        z-index: 1;
+    }
+    input:focus + label {
+        outline: none;
+    }
+    input:hover {
+        background-color: #1abc9c;
+        color: #fff;
+    }
+}
+
+.form-radio-changeInfor-item {
+    @extend display-flex;
+    input + label {
+        &:first-of-type {
+            @include border-radius(5px 0 0 5px);
+            border-right: none;
+        }
+        &:last-of-type {
+            @include border-radius(0 5px 5px 0);
+            border-left: none;
+        }
+    }
 }

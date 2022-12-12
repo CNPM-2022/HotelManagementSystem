@@ -7,6 +7,7 @@ import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../services/apiServices';
 import Swal from 'sweetalert2';
 
 import './UserMenu.scss';
@@ -32,6 +33,15 @@ function UserMenu() {
             navigate('/');
         });
     };
+
+    useEffect(() => {
+        getUser(JSON.parse(window.localStorage.getItem('user')).id)
+            .then(data => {
+                if (!data.data.user.isAdmin) {
+                    userMenu.splice(1, 1)
+                }
+            })
+    }, [JSON.parse(window.localStorage.getItem('user')).id])
 
     const userMenu = [
         {
@@ -70,6 +80,7 @@ function UserMenu() {
             separate: true,
         },
     ];
+
 
     const [history, setHistory] = useState([{ data: userMenu }]);
     const [visible, setVisible] = useState(false);

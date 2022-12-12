@@ -15,7 +15,7 @@ const RoomsScreen = () => {
         setLoading(false);
         document.documentElement.scrollTop = 500
     }, [page]);
-    console.log("roomscreen", page)
+
 
     const getRooms = async (page) => {
         try {
