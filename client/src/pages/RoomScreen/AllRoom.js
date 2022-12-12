@@ -38,14 +38,10 @@ function AllRoom(props) {
     for (let i = 1; i <= numberOfPage; i++) {
         listPage.push(i);
     }
-    //console.log(page)
     const page = params.page
     const handleChangePage = (e) => {
-        console.log(page)
-        console.log('handle', params.page)
         props.handleChangePage(parseInt(e.target.innerText));
         document.documentElement.scrollTop = 500
-        //console.log(document.getElementById("cc").scrollTop = 10);
     }
 
     const handleNextPage = (e) => {
