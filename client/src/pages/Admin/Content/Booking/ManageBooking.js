@@ -170,6 +170,8 @@ function ManageBooking({ fetchAllBills }) {
         };
         const res = await postCreateBill(data);
 
+
+
         if (res && res.data && res.data.success === true) {
             data.roomNumber = room.roomNumber;
             data.roomPrice = room.price;
