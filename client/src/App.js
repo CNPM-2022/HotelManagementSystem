@@ -1,5 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -27,6 +29,8 @@ import AdminBooking from './pages/Admin/Content/Booking/Booking';
 import Regulation from './pages/Admin/Content/Regulation/Regulation';
 
 function App() {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
     return (
         <BrowserRouter>
             <ToastContainer />
@@ -41,7 +45,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/rooms"
+                    path="/rooms/:page"
                     element={
                         <DefaultLayout>
                             <RoomsScreen />
@@ -57,22 +61,21 @@ function App() {
                         </DefaultLayout>
                     }
                 />
-
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                {isAuthenticated ? <Route path="/login" element={<Navigate to="/" />} /> : <Route path="/login" element={<Login />} />}
+                {isAuthenticated ? <Route path="/register" element={<Navigate to="/" />} /> : <Route path="/register" element={<Register />} />}
 
                 <Route path="/" element={<PrivateRoute />}>
                     <Route
-                        path="/User"
+                        path="/user"
                         element={
                             <DefaultLayout>
                                 <Profile />
                             </DefaultLayout>
                         }
                     >
-                        <Route index element={<UserInfor />} />
-                        <Route path="/User/Edit-Profile" element={<EditProfile />} />
-                        <Route path="/User/My-Booking" element={<MyBooking />} />
+                        <Route path='/user/profile' element={<UserInfor />} />
+                        <Route path="/user/edit-profile" element={<EditProfile />} />
+                        <Route path="/user/my-booking" element={<MyBooking />} />
                     </Route>
 
                     <Route

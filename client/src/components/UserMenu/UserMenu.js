@@ -29,7 +29,7 @@ function UserMenu() {
         localStorage.removeItem('user');
         dispatch(authActions.logout());
         Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
-            navigate('/login');
+            navigate('/');
         });
     };
 
@@ -37,7 +37,7 @@ function UserMenu() {
         {
             icon: <RiUserFill />,
             title: t('homepage.header.userMenu.account'),
-            onClick: () => navigate('/User'),
+            onClick: () => navigate('/user/profile'),
         },
         {
             icon: <RiAdminFill />,

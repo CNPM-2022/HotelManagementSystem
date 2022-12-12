@@ -30,7 +30,7 @@ const Login = () => {
                         user: data.user,
                     }),
                 );
-                navigate('/');
+                navigate(-1);
                 toast.success(data.message);
             } else {
                 toast.error(res.message);

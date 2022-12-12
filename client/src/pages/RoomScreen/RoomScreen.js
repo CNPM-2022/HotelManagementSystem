@@ -1,18 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import './RoomScreen.scss';
 import { getRoomsByPage } from '../../services/apiServices';
+import { useParams } from 'react-router';
 import AllRoom from './AllRoom';
 
 const RoomsScreen = () => {
+    const params = useParams()
     const [rooms, setRooms] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(parseInt(params.page));
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         setLoading(true);
         getRooms(page);
         setLoading(false);
+        document.documentElement.scrollTop = 500
     }, [page]);
+    console.log("roomscreen", page)
 
     const getRooms = async (page) => {
         try {
