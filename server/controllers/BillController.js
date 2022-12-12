@@ -45,6 +45,34 @@ const getBillById = async (req, res) => {
     }
 };
 
+const getBillsByUserId = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const bills = await Bill.find({ user: id })
+            .populate({ path: 'booking', populate: { path: 'customerList' }, populate: { path: 'room' } })
+            .populate('user');
+
+        if (bills.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not have any bill',
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Get bills successfully',
+            bills,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server internal error',
+            error,
+        });
+    }
+};
+
 const createBill = async (req, res) => {
     try {
         const { bookingId, userId, dateOfPayment, totalAmount, address } = req.body;
@@ -75,4 +103,4 @@ const createBill = async (req, res) => {
     }
 };
 
-export { getBills, getBillById, createBill };
+export { getBills, getBillById, createBill, getBillsByUserId };
