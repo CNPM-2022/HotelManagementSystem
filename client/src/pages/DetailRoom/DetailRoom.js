@@ -73,7 +73,7 @@ const DetailRoom = () => {
                             <div className="col-12">
                                 <div className="breadcrumb-content d-flex align-items-center justify-content-between pb-5">
                                     <h2 className="room-title">Room #{room.roomNumber}</h2>
-                                    <h2 className="room-price">{room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} VNĐ <span>/ Day</span></h2>
+                                    <h2 className="room-price">{room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} VNĐ <span>/ Ngày</span></h2>
                                 </div>
                             </div>
                         </div>

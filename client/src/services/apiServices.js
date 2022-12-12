@@ -102,3 +102,7 @@ export const getAllBills = () => {
 export const getBookingById = (id) => {
     return axios.get(`booking/${id}`);
 };
+
+export const getRule = () => {
+    return axios.get("quidinh/get")
+}

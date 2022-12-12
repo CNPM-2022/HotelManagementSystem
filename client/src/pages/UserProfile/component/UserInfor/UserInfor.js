@@ -17,7 +17,6 @@ function User_infor() {
         setLoading(false);
     }, []);
 
-    //console.log(infor.user.CMND)
     if (loading || infor.user === undefined) {
         return (
             <div className="d-flex justify-content-center align-items-center " style={{ minHeight: '300px' }}>
