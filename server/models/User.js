@@ -24,7 +24,6 @@ const UserSchema = new Schema(
         },
         typeUser: {
             type: String,
-
             enum: ['Inland', 'Foreign'],
             default: 'Inland',
         },

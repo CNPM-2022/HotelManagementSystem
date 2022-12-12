@@ -1,6 +1,5 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/User.js';
-const verifyToken = require('../middleware/auth');
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 
@@ -9,10 +8,10 @@ import jwt from 'jsonwebtoken';
 // @access  Private
 
 const changeInfo = asyncHandler(async (req, res) => {
-    const { username, email, Name, phoneNumber, CMND, address, isAdmin } = req.body;
+    const { username, email, Name, phoneNumber, CMND, address, typeUser } = req.body;
     const id = req.params.id;
 
-    if (!username && !email && !Name && !CMND && !address && !isAdmin) {
+    if (!username && !email && !Name && !CMND && !address && !typeUser) {
         res.status(400);
         throw new Error('Please fill one of the fields');
     }
@@ -26,7 +25,7 @@ const changeInfo = asyncHandler(async (req, res) => {
             user.phoneNumber = phoneNumber;
             user.CMND = CMND;
             user.address = address;
-            user.isAdmin = isAdmin;
+            user.typeUser = typeUser;
         }
         const updatedUser = await user.save();
 
