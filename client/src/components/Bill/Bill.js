@@ -3,6 +3,7 @@ import FormatPrice from '../FormatPrice/FormatPrice';
 import './Bill.scss';
 
 function Bill({ billData }) {
+    console.log(billData);
     const ref = useRef();
 
     useEffect(() => {
