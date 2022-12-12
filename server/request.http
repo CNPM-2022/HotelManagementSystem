@@ -46,17 +46,17 @@ GET http://localhost:5000/api/rooms/637e284ae33d42bcff40f1d1
 # API for USER CHANGE INFO BY ADMIN
 # RETURN USER INFO
 ###
-PUT http://localhost:5000/api/user/6374dc740209e8d6f595ab40/change-info
+PUT http://localhost:5000/api/user/636fa03d49bfa2c96bc5e63c/change-info
 Content-Type: application/json
 
 {
-    "username": "nghia1234",
+    "username": "test",
     "email": "khanhtruc1234@gmail.com",
     "Name": "Nguyen Quang Huynh",
     "phoneNumber": "1234567890",
-    "CMND": ,
+    "CMND": "215605309",
     "address": "Ha Noi",
-    "isAdmin": true
+    "typeUser": "Foreign"
 }
 
 
