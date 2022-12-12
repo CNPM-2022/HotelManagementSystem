@@ -179,6 +179,40 @@ const getBookingById = async (req, res) => {
     }
 };
 
+// @desc    Get all bookings of a user
+// @route   GET /api/booking/user/:id
+// @access  Private
+
+const getBookingsByUserId = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const Bookings = await Booking.find({ user: id })
+            .populate('room', ['roomNumber'])
+            .populate('user', ['Name', 'isAdmin'])
+            .populate('customerList');
+        if (Bookings.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'User has no booking',
+                Bookings: [],
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'Bookings fetched successfully',
+            length: Bookings.length,
+            Bookings,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server internal error',
+            error,
+        });
+    }
+};
+
 //@desc Update booking info
 //@route PUT /api/bookings/update/:id
 //@access Private
@@ -320,6 +354,7 @@ export {
     createBooking,
     getBookings,
     getBookingById,
+    getBookingsByUserId,
     updateBooking,
     deleteBooking,
     setSatatusBooking,
