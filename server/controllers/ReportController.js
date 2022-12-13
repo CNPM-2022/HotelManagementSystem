@@ -26,9 +26,9 @@ const RestartReportByType = async () => {
     });
 };
 
-const WriteReportByType = async (month) => {
-    const lastdate = new Date(2022, month - 1, 30);
-    const firstdate = new Date(2022, month - 1, 1);
+const WriteReportByType = async (month, year) => {
+    const lastdate = new Date(year, month - 1, 30);
+    const firstdate = new Date(year, month - 1, 1);
     await RoomType.find({}).then(async (roomTypes) => {
         for (let i = 0; i < roomTypes.length; i++) {
             const rooms = roomTypes[i].listRoom;
@@ -70,9 +70,9 @@ const WriteReportByType = async (month) => {
     });
 };
 
-const RestartRoomUsageDensityReport = async (month) => {
-    const lastdate = new Date(2022, month - 1, 30);
-    const firstdate = new Date(2022, month - 1, 1);
+const WriteRoomUsageDensityReport = async (month, year) => {
+    const lastdate = new Date(year, month - 1, 30);
+    const firstdate = new Date(year, month - 1, 1);
     await Room.find({}).then(async (rooms) => {
         for (let i = 0; i < rooms.length; i++) {
             const booking = rooms[i].currentBookings;
@@ -108,11 +108,18 @@ const RestartRoomUsageDensityReport = async (month) => {
 };
 
 const createReportsModal = async (req, res) => {
-    const { month } = req.body;
+    const { month, year } = req.params;
     try {
+        if (!month || !year) throw new Error('Missing month or year parameter');
+
+        const ReportIsExist = await Report.findOne({
+            month: month,
+            year: year,
+        });
+
         await RestartReportByType();
-        await WriteReportByType(month);
-        await RestartRoomUsageDensityReport(month);
+        await WriteReportByType(month, year);
+        await WriteRoomUsageDensityReport(month, year);
 
         let ReportByTypeData;
         await ReportByType.find({}).then((reports) => {
@@ -123,9 +130,22 @@ const createReportsModal = async (req, res) => {
             RoomUsageDensityReportData = reports;
         });
 
+        if (ReportIsExist) {
+            ReportIsExist.reportByRoomType = ReportByTypeData;
+            ReportIsExist.roomUsageDensityReport = RoomUsageDensityReportData;
+
+            await ReportIsExist.save();
+
+            return res.status(200).json({
+                success: true,
+                message: 'Update reports successfully',
+                data: ReportIsExist,
+            });
+        }
+
         await Report.create({
             month: month,
-            year: 2022,
+            year: year,
             reportByRoomType: ReportByTypeData,
             roomUsageDensityReport: RoomUsageDensityReportData,
         }).then((report) => {
@@ -140,11 +160,31 @@ const createReportsModal = async (req, res) => {
     }
 };
 
-const getReports = async (req, res) => {
-    const { month } = req.body;
+const getReportByMonth = async (req, res) => {
+    const { month, year } = req.params;
     try {
-        await Report.find({ month: month })
-            .populate({ path: 'reportByRoomType', populate: { path: 'roomType' } })
+        if (!month || !year) throw new Error('Missing month or year parameter');
+
+        await Report.find({ month: month, year: year })
+            .populate({ path: 'reportByRoomType', populate: { path: 'roomType', select: 'typeOfRooms' } })
+            .populate({ path: 'roomUsageDensityReport', populate: { path: 'room', select: 'roomNumber' } })
+            .then((reports) => {
+                res.status(200).json({
+                    success: true,
+                    message: 'Get report by time successfully',
+                    data: reports,
+                });
+            });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
+const getReports = async (req, res) => {
+    try {
+        await Report.find({})
+            .populate({ path: 'reportByRoomType', populate: { path: 'roomType', select: 'typeOfRooms' } })
+            .populate({ path: 'roomUsageDensityReport', populate: { path: 'room', select: 'roomNumber' } })
             .then((reports) => {
                 res.status(200).json({
                     success: true,
@@ -157,4 +197,4 @@ const getReports = async (req, res) => {
     }
 };
 
-export { getReports, createReportsModal };
+export { getReports, createReportsModal, getReportByMonth };
