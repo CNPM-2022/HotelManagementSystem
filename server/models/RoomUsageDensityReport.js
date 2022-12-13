@@ -12,7 +12,6 @@ const roomUsageDensityReportSchema = mongoose.Schema({
     },
     ratio: {
         type: Number,
-        required: true,
     },
 });
 
