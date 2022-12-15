@@ -43,6 +43,10 @@ export const getRoomById = (id) => {
     return axios.get(`rooms/${id}`);
 };
 
+export const getRoomsByType = (typeId) => {
+    return axios.get(`rooms/all/type/${typeId}`);
+};
+
 export const getAllRoomTypes = () => {
     return axios.get('room-type/all');
 };
@@ -107,6 +111,6 @@ export const getRule = () => {
     return axios.get('quidinh/get');
 };
 
-export const getReportsByMonth = (month) => {
-    return axios.get('report/all', { params: { month } });
+export const createReportByMonthYear = (data) => {
+    return axios.get(`report/create/${data.month}/${data.year}`);
 };
