@@ -26,8 +26,8 @@ function MyBooking() {
                     ...bill,
                     ...bill.booking,
                     customer: bill.user,
-                    roomNumber: 123,
-                    roomPrice: 100000,
+                    roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
+                    roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
                 }));
 
             setListBills(data);
