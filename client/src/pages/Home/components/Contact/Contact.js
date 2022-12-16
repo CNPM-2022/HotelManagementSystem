@@ -8,12 +8,12 @@ function Contact() {
             <div className="container">
                 <div className="content" style={{ backgroundImage: `url(${images.contactBg})` }}>
                     <div className="info">
-                        <h2>Contact us now!</h2>
-                        <h6>Contact (+12) 345-678-9999 to book directly or for advice</h6>
+                        <h2>Liên lạc với chúng tôi ngay!</h2>
+                        <h6>Liên hệ (+12) 345-678-9999 để đặt trực tiếp hoặc để được tư vấn</h6>
                     </div>
                     <div className="contact">
                         <Button primary className="contact-btn">
-                            Contact Now
+                            Liên hệ ngay
                         </Button>
                     </div>
                 </div>

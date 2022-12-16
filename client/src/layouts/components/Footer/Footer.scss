@@ -63,6 +63,14 @@ $dark2: #0e2737;
     position: relative;
     z-index: 1;
 
+    @media #{$breakpoint-md} {
+        text-align: center;
+    }
+
+    @media #{$breakpoint-xs} {
+        text-align: center;
+    }
+
     .widget-title {
         font-size: 22px;
         color: $white;
@@ -144,6 +152,16 @@ $dark2: #0e2737;
             color: $white;
             font-size: 14px;
 
+            @media #{$breakpoint-md} {
+                width: 60%;
+                margin: 0 auto;
+            }
+
+            @media #{$breakpoint-xs} {
+                width: 60%;
+                margin: 0 auto;
+            }
+
             &:focus {
                 box-shadow: none;
             }
@@ -180,6 +198,10 @@ $dark2: #0e2737;
 
     h4 {
         color: $hover;
+    }
+
+    h3 {
+        color: $secondary;
     }
 
     span {
@@ -241,7 +263,7 @@ $dark2: #0e2737;
             text-align: center;
         }
 
-        a {
+        span {
             display: inline-block;
             color: $secondary;
             padding-left: 20px;

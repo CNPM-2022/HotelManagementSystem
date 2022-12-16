@@ -61,9 +61,9 @@ function Slider() {
 
                         <div className="welcome col-12">
                             <p>Hotel & Resort</p>
-                            <h3>Welcome To Roberto</h3>
+                            <h3>Chào mừng đến với Roberto</h3>
                             <Button onClick={() => navigate('/rooms/1')} className="discover-btn">
-                                Discover Now
+                                Khám phá ngay
                             </Button>
                         </div>
                     </div>

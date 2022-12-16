@@ -7,6 +7,9 @@ import images from '../../../../assets/images';
 import Button from '../../../../components/Button/Button';
 import SlideNextArrow from './SlideNextArrow';
 import SlidePrevArrow from './SlidePrevArrow';
+import { getAllRoomTypes } from '../../../../services/apiServices';
+import { useEffect, useState } from 'react';
+import FormatPrice from '../../../../components/FormatPrice/FormatPrice';
 
 function Rooms() {
     const settings = {
@@ -22,67 +25,64 @@ function Rooms() {
         prevArrow: <SlidePrevArrow />,
     };
 
-    const listRooms = [
-        {
-            image: images.room1,
-        },
-        {
-            image: images.room2,
-        },
-        {
-            image: images.room3,
-        },
-    ];
+    const listTypesImages = [images.room1, images.room2, images.room3];
+
+    const [listTypes, setListTypes] = useState([]);
+
+    useEffect(() => {
+        fetchAllRoomTypes();
+    }, []);
+
+    const fetchAllRoomTypes = async () => {
+        const res = await getAllRoomTypes();
+
+        if (res && res.data && res.data.success === true) {
+            setListTypes(res.data.data);
+        }
+    };
 
     return (
         <div className="home-rooms-container">
             <SlickSlider {...settings}>
-                {listRooms.map((room, index) => (
-                    <div key={index}>
+                {listTypes.map((type, index) => (
+                    <div key={type._id}>
                         <div className="single-room">
                             <div className="thumbnail">
-                                <img src={room.image} alt={`Room ${index + 1}`} />
+                                <img src={listTypesImages[index]} alt={`Phòng loại ${type.typeOfRooms}`} />
                             </div>
 
                             <div className="content">
-                                <h2>Best King Room</h2>
+                                <h2>Phòng loại {type.typeOfRooms}</h2>
                                 <h3>
-                                    125$
-                                    <span> / Day</span>
+                                    <FormatPrice>{type.price}</FormatPrice> VND
+                                    <span> / Ngày</span>
                                 </h3>
                                 <ul className="features">
                                     <li>
                                         <span>
                                             <TiTick />
-                                            Size
+                                            Sức chứa
                                         </span>
-                                        <span>: 30 ft</span>
+                                        <span>: Tối đa 3 người</span>
                                     </li>
                                     <li>
                                         <span>
                                             <TiTick />
-                                            Capacity
-                                        </span>
-                                        <span>: Max persion 5</span>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            <TiTick />
-                                            Bed
+                                            Giường
                                         </span>
                                         <span>: King Beds</span>
                                     </li>
                                     <li>
                                         <span>
                                             <TiTick />
-                                            Services
+                                            Dịch vụ
                                         </span>
-                                        <span>: Wifi, Television, Bathroom</span>
+                                        <span>: Wifi, Tivi, Điều hòa, Bồn tắm</span>
                                     </li>
                                 </ul>
                                 <div>
                                     <Button to="/rooms/1" primary className="view-btn">
-                                        View Details
+                                        Xem chi tiết
                                     </Button>
                                 </div>
                             </div>
