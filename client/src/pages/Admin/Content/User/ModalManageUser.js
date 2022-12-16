@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash';
 import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
 import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 
 function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
     const [username, setUsername] = useState('');
@@ -15,8 +14,6 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
     const [identity, setIdentity] = useState('');
     const [address, setAddress] = useState('');
     const [role, setRole] = useState('USER');
-
-    const { t } = useTranslation();
 
     useEffect(() => {
         if (show && !_.isEmpty(dataUser) && type !== 'CREATE') {

@@ -5,7 +5,6 @@ import { BiWorld } from 'react-icons/bi';
 import { IoMdArrowBack } from 'react-icons/io';
 import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../services/apiServices';
 import Swal from 'sweetalert2';
@@ -15,16 +14,10 @@ import images from '../../assets/images';
 import { authActions } from '../../store/authSlice';
 
 function UserMenu() {
-    const { i18n, t } = useTranslation();
-
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
-
-    const handleChangeLanguage = (language) => {
-        i18n.changeLanguage(language);
-    };
 
     const handleLogout = () => {
         localStorage.removeItem('user');
@@ -35,61 +28,36 @@ function UserMenu() {
     };
 
     useEffect(() => {
-        getUser(JSON.parse(window.localStorage.getItem('user')).id)
-            .then(data => {
-                if (!data.data.user.isAdmin) {
-                    userMenu.splice(1, 1)
-                }
-            })
-    }, [JSON.parse(window.localStorage.getItem('user')).id])
+        getUser(JSON.parse(window.localStorage.getItem('user')).id).then((data) => {
+            if (!data.data.user.isAdmin) {
+                userMenu.splice(1, 1);
+            }
+        });
+    }, [JSON.parse(window.localStorage.getItem('user')).id]);
 
     const userMenu = [
         {
             icon: <RiUserFill />,
-            title: t('homepage.header.userMenu.account'),
+            title: 'Tài khoản',
             onClick: () => navigate('/user/profile'),
         },
         {
             icon: <RiAdminFill />,
-            title: t('homepage.header.userMenu.admin'),
+            title: 'Quản trị',
             onClick: () => navigate('/admins/dashboard'),
         },
         {
-            icon: <BiWorld />,
-            title: t('homepage.header.userMenu.language.title'),
-            children: {
-                title: t('homepage.header.userMenu.language.subTitle'),
-                data: [
-                    {
-                        code: 'vi',
-                        title: t('homepage.header.userMenu.language.vietnamese'),
-                        type: 'language',
-                    },
-                    {
-                        code: 'en',
-                        title: t('homepage.header.userMenu.language.english'),
-                        type: 'language',
-                    },
-                ],
-            },
-        },
-        {
             icon: <RiLogoutBoxRLine />,
-            title: t('homepage.header.userMenu.logout'),
+            title: 'Đăng xuất',
             onClick: handleLogout,
             separate: true,
         },
     ];
 
-
     const [history, setHistory] = useState([{ data: userMenu }]);
     const [visible, setVisible] = useState(false);
 
     const current = history[history.length - 1];
-
-    useEffect(() => {
-        setHistory([{ data: userMenu }]);
-    }, [i18n.language]);
 
     // Back to main menu
     const handleBack = () => {
@@ -121,14 +89,7 @@ function UserMenu() {
                                     onClick={() => {
                                         if (item.children) {
                                             setHistory((prevState) => [...prevState, item.children]);
-                                        } else {
-                                            if (item.type === 'language') {
-                                                handleChangeLanguage(item.code);
-                                                setVisible(false);
-                                            } else {
-                                                item.onClick();
-                                            }
-                                        }
+                                        } else item.onClick();
                                     }}
                                 >
                                     {item.icon && <i className="icon">{item.icon}</i>}

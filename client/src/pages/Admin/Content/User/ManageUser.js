@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import { getAllUsers, getUsersOfPage } from '../../../../services/apiServices';
+import { getUsersOfPage } from '../../../../services/apiServices';
 import _ from 'lodash';
-import { useTranslation } from 'react-i18next';
 
 import './ManageUser.scss';
 import ModalDeleteUser from './ModalDeleteUser';
@@ -28,23 +27,9 @@ function ManageUser() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
 
-    const { t } = useTranslation();
-
     useEffect(() => {
         fetchListUsersOfPage(1);
     }, []);
-
-    const fetchListUsers = async () => {
-        const res = await getAllUsers();
-
-        const data = res.data;
-
-        if (res.status !== 200) {
-            throw new Error(data.message);
-        }
-
-        setListUsers(data.users);
-    };
 
     const fetchListUsersOfPage = async (currentPage) => {
         const res = await getUsersOfPage({ page: currentPage, perPage: ITEMS_PER_PAGE });
@@ -81,10 +66,10 @@ function ManageUser() {
 
     return (
         <div className="manage-user-container">
-            <h3>{t('admin.manageUsers.title')}</h3>
+            <h3>Quản lý Người dùng</h3>
             <button className="btn btn-primary add-user-btn" onClick={() => setIsShowModalCreateUser(true)}>
                 <BsFillPlusCircleFill />
-                {t('admin.manageUsers.addNew')}
+                Thêm mới Người dùng
             </button>
 
             <div className="content-table">

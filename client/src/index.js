@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import GlobalStyles from './components/GlobalStyles';
 import store from './store/store';
-import './utils/i18n';
 import 'nprogress/nprogress.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

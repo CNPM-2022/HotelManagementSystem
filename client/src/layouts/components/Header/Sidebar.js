@@ -15,26 +15,18 @@ function Sidebar({ collapsed, setCollapsed }) {
             <SidebarContent>
                 <Menu>
                     <MenuItem>
-                        Home
+                        Trang chủ
                         <Link to="/" />
                     </MenuItem>
                     <MenuItem>
-                        Rooms
+                        Phòng
                         <Link to="/rooms/1" />
-                    </MenuItem>
-                    <MenuItem>
-                        About Us
-                        <Link to="/about-us" />
-                    </MenuItem>
-                    <MenuItem>
-                        Contact
-                        <Link to="/contact" />
                     </MenuItem>
                 </Menu>
 
                 <div className="book-now">
                     <Link to="/rooms/1">
-                        Book Now <BsArrowRight />
+                        Đặt phòng ngay <BsArrowRight />
                     </Link>
                 </div>
             </SidebarContent>

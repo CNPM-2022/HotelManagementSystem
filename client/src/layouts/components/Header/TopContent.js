@@ -16,14 +16,14 @@ const TopContent = () => {
                 <div className="container">
                     <div className="content">
                         <div className="contact-list">
-                            <a className="contact" href="#">
+                            <span className="contact">
                                 <FaPhoneAlt className="icon" />
                                 <span>(123) 456-789-1230</span>
-                            </a>
-                            <a className="contact" href="#">
+                            </span>
+                            <span className="contact">
                                 <HiMail className="icon" />
                                 <span>info.colorlib@gmail.com</span>
-                            </a>
+                            </span>
                         </div>
 
                         <div className="actions">
@@ -31,7 +31,7 @@ const TopContent = () => {
                                 <UserMenu />
                             ) : (
                                 <Link to="/login" className="btn btn-danger">
-                                    Log in
+                                    Đăng nhập
                                 </Link>
                             )}
                         </div>

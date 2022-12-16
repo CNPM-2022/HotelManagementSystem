@@ -54,10 +54,10 @@ function ManageRoomType() {
 
     return (
         <div className="manage-room-type-container">
-            <h3>Manage Room Types</h3>
+            <h3>Quản lý Loại phòng</h3>
             <button className="btn btn-primary add-type-btn" onClick={() => setIsShowModalCreateType(true)}>
                 <BsFillPlusCircleFill />
-                Add new Type
+                Thêm loại mới
             </button>
 
             <div className="content-table">
@@ -72,7 +72,7 @@ function ManageRoomType() {
 
             <ModalManageType
                 modalType="CREATE"
-                title="Add new Type"
+                title="Thêm loại mới"
                 show={isShowModalCreateType}
                 setShow={setIsShowModalCreateType}
                 fetchAllRoomTypes={fetchAllRoomTypes}
@@ -80,7 +80,7 @@ function ManageRoomType() {
 
             <ModalManageType
                 modalType="VIEW"
-                title="Room Type Information"
+                title="Thông tin Loại phòng"
                 show={isShowModalViewType}
                 setShow={setIsShowModalViewType}
                 dataType={dataTypeView}
@@ -89,7 +89,7 @@ function ManageRoomType() {
 
             <ModalManageType
                 modalType="UPDATE"
-                title="Edit Room Type"
+                title="Cập nhật Loại phòng"
                 show={isShowModalUpdateType}
                 setShow={setIsShowModalUpdateType}
                 dataType={dataTypeUpdate}

@@ -19,17 +19,17 @@ function ModalDeleteType({ show, setShow, dataTypeDelete, fetchAllRoomTypes }) {
     return (
         <Modal show={show} onHide={handleClose} backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>Confirm Delete the Room Type</Modal.Title>
+                <Modal.Title>Xác nhận xóa Loại phòng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Are you sure to delete this type. Type = <b>{dataTypeDelete?.typeOfRooms}</b>?
+                Bạn có chắc chắn muốn xóa loại phòng này không. Loại <b>{dataTypeDelete?.typeOfRooms}</b>?
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    Hủy bỏ
                 </Button>
                 <Button variant="primary" onClick={handleDeleteType}>
-                    Confirm
+                    Xác nhận
                 </Button>
             </Modal.Footer>
         </Modal>
