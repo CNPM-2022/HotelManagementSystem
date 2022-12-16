@@ -61,16 +61,16 @@ function App() {
                         </DefaultLayout>
                     }
                 />
-                {isAuthenticated ? (
+                {/* {isAuthenticated ? (
                     <Route path="/login" element={<Navigate to="/" />} />
                 ) : (
-                    <Route path="/login" element={<Login />} />
-                )}
-                {isAuthenticated ? (
+                    )} */}
+                <Route path="/login" element={<Login />} />
+                {/* {isAuthenticated ? (
                     <Route path="/register" element={<Navigate to="/" />} />
                 ) : (
-                    <Route path="/register" element={<Register />} />
-                )}
+                    )} */}
+                <Route path="/register" element={<Register />} />
 
                 <Route path="/" element={<PrivateRoute />}>
                     <Route

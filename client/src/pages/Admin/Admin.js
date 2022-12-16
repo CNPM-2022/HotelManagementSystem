@@ -4,10 +4,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import './Admin.scss';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { useSelector } from 'react-redux';
 
 function Admin() {
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
+
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         navigate('/admins/dashboard');
