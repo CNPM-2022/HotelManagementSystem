@@ -8,19 +8,25 @@ function Footer() {
             <div className="main-footer-area">
                 <div className="container">
                     <div className="row align-items-baseline justify-content-between">
-                        <div className="col-12 col-sm-6 col-lg-3">
+                        <div className="col-12 col-sm-12 col-lg-6">
                             <div className="single-footer-widget mb-80">
                                 <Link href="/" className="footer-logo">
                                     <img src={images.logoLight} alt="logo" />
                                 </Link>
 
-                                <h4>+12 345-678-9999</h4>
-                                <span>Info.colorlib@gmail.com</span>
-                                <span>856 Cordia Extension Apt. 356, Lake Deangeloburgh, South Africa</span>
+                                {/* <h4>+12 345-678-9999</h4> */}
+                                <h4>Thông tin thành viên nhóm 16</h4>
+                                <span>Huỳnh Minh Quang - 20120557@student.hcmus.edu.vn</span>
+                                <span>Nguyễn Văn Tài - 20120569@student.hcmus.edu.vn</span>
+                                <span>Nguyễn Phú Tân - 20120573@student.hcmus.edu.vn</span>
+                                <span>Trần Anh Thi - 20120583@student.hcmus.edu.vn</span>
+                                <span>Môn học: Nhập môn Công nghệ Phần mềm 20-1</span>
+                                <span>Giáo viên hướng dẫn: ThS. Trần Văn Quý</span>
+                                <span>Trường Đại học Khoa học Tự nhiên TP HCM</span>
                             </div>
                         </div>
 
-                        <div className="col-12 col-sm-6 col-lg-3 mt-4">
+                        {/* <div className="col-12 col-sm-6 col-lg-3 mt-4">
                             <div className="single-footer-widget mb-80">
                                 <h5 className="widget-title">Blogs</h5>
 
@@ -42,16 +48,16 @@ function Footer() {
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="col-12 col-sm-8 col-lg-4">
+                        <div className="col-12 col-sm-12 col-lg-6">
                             <div className="single-footer-widget mb-80">
-                                <h5 className="widget-title">Subscribe Newsletter</h5>
-                                <span>Subscribe our newsletter gor get notification about new updates.</span>
+                                <h5 className="widget-title">Theo dõi bản tin</h5>
+                                <span>Theo dõi bản tin của chúng tôi để nhận thông báo về các bản cập nhật mới.</span>
 
-                                <form action="index.html" className="nl-form">
+                                <form className="nl-form">
                                     <input type="email" className="form-control" placeholder="Enter your email..." />
-                                    <button type="submit">
+                                    <button type="submit" disabled>
                                         <i className="bi bi-send-fill"></i>
                                     </button>
                                 </form>
@@ -71,18 +77,18 @@ function Footer() {
                         </div>
                         <div className="col-12 col-md-4">
                             <div className="social-info">
-                                <a href="#">
+                                <span>
                                     <i className="bi bi-facebook"></i>
-                                </a>
-                                <a href="#">
+                                </span>
+                                <span>
                                     <i className="bi bi-twitter"></i>
-                                </a>
-                                <a href="#">
+                                </span>
+                                <span>
                                     <i className="bi bi-instagram"></i>
-                                </a>
-                                <a href="#">
+                                </span>
+                                <span>
                                     <i className="bi bi-github"></i>
-                                </a>
+                                </span>
                             </div>
                         </div>
                     </div>

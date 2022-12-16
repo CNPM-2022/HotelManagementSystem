@@ -4,7 +4,7 @@ function SlidePrevArrow({ className, onClick }) {
     return (
         <button className={className} onClick={onClick}>
             <BsArrowLeft />
-            Previous
+            Trước
         </button>
     );
 }

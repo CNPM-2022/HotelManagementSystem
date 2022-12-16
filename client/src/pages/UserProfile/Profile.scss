@@ -1,6 +1,6 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-$font-primary: 'Poppins', Arial, sans-serif;
+// $font-primary: 'Poppins', Arial, sans-serif;
 $primary: #2f89fc;
 
 #sidebarCollapse {
@@ -25,7 +25,7 @@ h5,
 .h5 {
     line-height: 1.5;
     font-weight: 400;
-    font-family: $font-primary;
+    // font-family: $font-primary;
     color: $black;
 }
 
@@ -106,7 +106,7 @@ h5,
                             content: '';
                             background: red;
                             border-radius: 50%;
-                            font-family: $font-primary;
+                            // font-family: $font-primary;
                             font-size: 8px;
                         }
                     }

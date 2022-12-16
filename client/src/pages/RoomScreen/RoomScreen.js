@@ -3,9 +3,10 @@ import './RoomScreen.scss';
 import { getRoomsByPage } from '../../services/apiServices';
 import { useParams } from 'react-router';
 import AllRoom from './AllRoom';
+import { Link } from 'react-router-dom';
 
 const RoomsScreen = () => {
-    const params = useParams()
+    const params = useParams();
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(parseInt(params.page));
     const [loading, setLoading] = useState(true);
@@ -13,9 +14,8 @@ const RoomsScreen = () => {
         setLoading(true);
         getRooms(page);
         setLoading(false);
-        document.documentElement.scrollTop = 500
+        document.documentElement.scrollTop = 500;
     }, [page]);
-
 
     const getRooms = async (page) => {
         try {
@@ -47,7 +47,7 @@ const RoomsScreen = () => {
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb justify-content-center">
                                         <li className="breadcrumb-item">
-                                            <a href="/">Home</a>
+                                            <Link to="/">Home</Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
                                             Room
