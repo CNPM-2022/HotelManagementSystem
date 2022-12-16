@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiFillCaretDown } from 'react-icons/ai';
-import { BiWorld } from 'react-icons/bi';
 import { IoMdArrowBack } from 'react-icons/io';
 import { RiAdminFill, RiLogoutBoxRLine, RiUserFill } from 'react-icons/ri';
 import Tippy from '@tippyjs/react/headless';
@@ -23,7 +22,7 @@ function UserMenu() {
         localStorage.removeItem('user');
         dispatch(authActions.logout());
         Swal.fire('Successful', 'Successfully Logged Out ', 'success').then(() => {
-            navigate('/');
+            navigate('/login');
         });
     };
 

@@ -93,3 +93,7 @@ a {
 .separate {
     border-top: 1px solid #e5e5e5;
 }
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
+    overflow-y: overlay;
+}

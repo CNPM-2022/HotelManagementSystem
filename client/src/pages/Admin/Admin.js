@@ -11,7 +11,6 @@ function Admin() {
     const [collapsed, setCollapsed] = useState(false);
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
 
     useEffect(() => {
         navigate('/admins/dashboard');
