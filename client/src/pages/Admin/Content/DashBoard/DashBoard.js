@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import _ from 'lodash';
 import DateRangePicker from 'react-datepicker';
@@ -40,7 +40,6 @@ function DashBoard() {
             data.totalRevenue = totalRevenue;
             data.totalRentDays = totalRentDays;
 
-            console.log(data);
             setDataReport(data);
         }
         setIsLoading(false);
@@ -76,10 +75,6 @@ function DashBoard() {
                     <Revenue dataReport={dataReport} isLoading={isLoading} title="Báo Cáo Doanh Thu Theo Loại Phòng" />
                     <Density dataReport={dataReport} isLoading={isLoading} title="Báo Cáo Mật Độ Sử Dụng Phòng" />
                 </div>
-                {/* <Tabs defaultActiveKey="room-type" className="mb-3" fill>
-                    <Tab eventKey="room-type" title="Báo Cáo Doanh Thu Theo Loại Phòng"></Tab>
-                    <Tab eventKey="room-usage-density " title="Báo Cáo Mật Độ Sử Dụng Phòng"></Tab>
-                </Tabs> */}
             </div>
         </div>
     );

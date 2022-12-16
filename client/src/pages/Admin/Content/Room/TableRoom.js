@@ -27,10 +27,10 @@ function TableRoom({
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Capacity</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Phòng</th>
+                    <th scope="col">Loại</th>
+                    <th scope="col">Sức chứa</th>
+                    <th scope="col">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,13 +43,13 @@ function TableRoom({
                             <td>{room.maxCount}</td>
                             <td>
                                 <button className="btn btn-success" onClick={() => handleClickViewButton(room)}>
-                                    View
+                                    Xem
                                 </button>
                                 <button className="btn btn-warning mx-3" onClick={() => handleClickEditButton(room)}>
-                                    Edit
+                                    Sửa
                                 </button>
                                 <button className="btn btn-danger" onClick={() => handleClickDeleteButton(room)}>
-                                    Delete
+                                    Xóa
                                 </button>
                             </td>
                         </tr>
@@ -57,7 +57,7 @@ function TableRoom({
                 ) : (
                     <tr>
                         <td colSpan="6" className="text-center">
-                            No data
+                            Không có dữ liệu
                         </td>
                     </tr>
                 )}

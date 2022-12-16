@@ -20,21 +20,15 @@ const MainContent = () => {
 
                         <div className="main-navbar-nav">
                             <Link to="/" className="item">
-                                Home
+                                Trang chủ
                             </Link>
                             <Link to="/rooms/1" className="item">
-                                Rooms
-                            </Link>
-                            <Link to="/about-us" className="item">
-                                About Us
-                            </Link>
-                            <Link to="/contact" className="item">
-                                Contact
+                                Phòng
                             </Link>
                         </div>
                         <div className="book-now">
                             <Link to="/rooms/1">
-                                Book Now <BsArrowRight />
+                                Đặt phòng ngay <BsArrowRight />
                             </Link>
                         </div>
 

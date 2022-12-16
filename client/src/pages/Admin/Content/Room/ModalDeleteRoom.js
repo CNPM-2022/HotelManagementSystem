@@ -19,17 +19,17 @@ function ModalDeleteRoom({ show, setShow, dataRoomDelete, fetchAllRooms }) {
     return (
         <Modal show={show} onHide={handleClose} backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>Confirm Delete the Room</Modal.Title>
+                <Modal.Title>Xác nhận Xóa phòng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Are you sure to delete this room. Number = <b>{dataRoomDelete?.roomNumber}</b>?
+                Bạn có chắc chắn xóa phòng này không. Phòng <b>{dataRoomDelete?.roomNumber}</b>?
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    Hủy bỏ
                 </Button>
                 <Button variant="primary" onClick={handleDeleteRoom}>
-                    Confirm
+                    Xác nhận
                 </Button>
             </Modal.Footer>
         </Modal>

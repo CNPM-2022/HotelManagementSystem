@@ -141,7 +141,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                     <form>
                         <div className="row g-3">
                             <div className="col-md-6">
-                                <label className="form-label">Type</label>
+                                <label className="form-label">Loại</label>
                                 <input
                                     value={type}
                                     onChange={(event) => setType(event.target.value)}
@@ -151,7 +151,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                 />
                             </div>
                             <div className="col-md-6">
-                                <label className="form-label">Price</label>
+                                <label className="form-label">Giá</label>
                                 <input
                                     value={price}
                                     onChange={(event) => setPrice(+event.target.value)}
@@ -162,7 +162,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                             </div>
                             {modalType !== 'CREATE' && (
                                 <div className="col-md-12">
-                                    <label className="form-label">List Room</label>
+                                    <label className="form-label">Danh sách Phòng</label>
                                     <Select
                                         value={listRoom.map((room) => ({ label: room, value: room }))}
                                         onChange={handleChangeListRoom}
@@ -176,12 +176,12 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                 </div>
                             )}
                             <div className="col-md-12">
-                                <label className="form-label">Description</label>
+                                <label className="form-label">Mô tả</label>
                                 <textarea
                                     value={description}
                                     onChange={(event) => setDescription(event.target.value)}
                                     className="form-control description"
-                                    placeholder="Description"
+                                    placeholder="Mô tả"
                                     disabled={modalType === 'VIEW'}
                                 />
                             </div>
@@ -191,7 +191,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                     className="btn btn-success upload-images-btn"
                                 >
                                     <BsFillPlusCircleFill />
-                                    Upload new file images
+                                    Tải ảnh mới
                                 </label>
 
                                 <input
@@ -216,7 +216,7 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                                         </div>
                                     ) : (
                                         <div className="no-image">
-                                            <span>Preview Image</span>
+                                            <span>Xem trước hình ảnh</span>
                                         </div>
                                     )}
                                 </div>

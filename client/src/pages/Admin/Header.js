@@ -3,11 +3,8 @@ import { AiOutlineMail, AiFillBell } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 import UserMenu from '../../components/UserMenu/UserMenu';
-import { useTranslation } from 'react-i18next';
 
 function Header({ handleToggleSidebar }) {
-    const { t } = useTranslation();
-
     return (
         <header className="header-container container-fluid">
             <div className="left-content">
@@ -17,7 +14,7 @@ function Header({ handleToggleSidebar }) {
                     </i>
                 </div>
                 <div className="item">
-                    <Link to="/">{t('home')}</Link>
+                    <Link to="/">Trang chủ</Link>
                 </div>
             </div>
 

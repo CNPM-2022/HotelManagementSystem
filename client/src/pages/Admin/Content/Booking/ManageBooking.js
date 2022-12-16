@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { BiPlusCircle, BiMinusCircle, BiRefresh } from 'react-icons/bi';
 import { HiChevronDoubleDown } from 'react-icons/hi';
-import { getAllRooms, getRegulations, postCreateBill } from '../../../../services/apiServices';
 
+import { getAllRooms, getRegulations, postCreateBill } from '../../../../services/apiServices';
 import DateRange from '../../../../components/DateRange/DateRange';
 import reducer, { initState } from './customerReducer/reducer';
 import {
@@ -169,8 +169,6 @@ function ManageBooking({ fetchAllBills }) {
             address: customerList[0].address,
         };
         const res = await postCreateBill(data);
-
-
 
         if (res && res.data && res.data.success === true) {
             data.roomNumber = room.roomNumber;

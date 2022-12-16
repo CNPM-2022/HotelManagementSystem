@@ -181,11 +181,11 @@ function ManageRoom() {
             <div className="manage-room-container">
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header>Add rooms</Accordion.Header>
+                        <Accordion.Header>Thêm phòng</Accordion.Header>
                         <Accordion.Body>
                             <div className="body">
                                 <div className="manage-room">
-                                    <label className="form-label">Add rooms:</label>
+                                    <label className="form-label">Thêm phòng:</label>
 
                                     <div className="room-list">
                                         {roomsState &&
@@ -206,9 +206,9 @@ function ManageRoom() {
                                                                 }
                                                                 type="text"
                                                                 className="form-control"
-                                                                placeholder="Room numer"
+                                                                placeholder="Phòng"
                                                             />
-                                                            <label>Room's {index + 1} number</label>
+                                                            <label>Phòng {index + 1}</label>
                                                         </div>
 
                                                         <div className="btn-group">
@@ -255,7 +255,7 @@ function ManageRoom() {
                                                                           {image.name}
                                                                       </span>
                                                                   ))
-                                                                : '0 file is uploaded'}
+                                                                : '0 tập tin được tải lên'}
                                                         </span>
                                                     </div>
 
@@ -264,7 +264,7 @@ function ManageRoom() {
                                                             <Select
                                                                 ref={typeSelectRef}
                                                                 className="room-type"
-                                                                placeholder="Room type..."
+                                                                placeholder="Loại phòng..."
                                                                 options={typeOptions}
                                                                 onChange={(selected) =>
                                                                     handleChangeType(selected, room.id)
@@ -284,9 +284,9 @@ function ManageRoom() {
                                                                     )
                                                                 }
                                                                 className="form-control description mb-2"
-                                                                placeholder="Description"
+                                                                placeholder="Mô tả"
                                                             ></textarea>
-                                                            <label>Description</label>
+                                                            <label>Mô tả</label>
                                                         </div>
 
                                                         <div className="form-floating">
@@ -302,9 +302,9 @@ function ManageRoom() {
                                                                 }
                                                                 type="text"
                                                                 className="form-control mb-2"
-                                                                placeholder="Note"
+                                                                placeholder="Ghi chú"
                                                             />
-                                                            <label>Note</label>
+                                                            <label>Ghi chú</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,7 +313,7 @@ function ManageRoom() {
 
                                     <div className="submit-manage">
                                         <button className="btn btn-warning" onClick={handleAddRoom}>
-                                            Save
+                                            Lưu
                                         </button>
                                     </div>
                                 </div>

@@ -81,7 +81,7 @@ function Rooms() {
                                     </li>
                                 </ul>
                                 <div>
-                                    <Button primary className="view-btn">
+                                    <Button to="/rooms/1" primary className="view-btn">
                                         View Details
                                     </Button>
                                 </div>

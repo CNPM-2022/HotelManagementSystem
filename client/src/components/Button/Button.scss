@@ -1,5 +1,5 @@
 .btn-wrapper {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 180px;
@@ -11,6 +11,7 @@
     background-color: transparent;
     border-radius: 0;
     border: none;
+    text-decoration: none;
 }
 
 .btn-primary {

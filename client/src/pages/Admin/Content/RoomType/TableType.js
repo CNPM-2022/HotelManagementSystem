@@ -5,10 +5,10 @@ function TableType({ listTypes, handleClickViewButton, handleClickEditButton, ha
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">List Rooms</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Loại</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Danh sách Phòng</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,16 +21,16 @@ function TableType({ listTypes, handleClickViewButton, handleClickEditButton, ha
                                 <td>{type.listRoom.join(', ')}</td>
                                 <td>
                                     <button className="btn btn-success" onClick={() => handleClickViewButton(type)}>
-                                        View
+                                        Xem
                                     </button>
                                     <button
                                         className="btn btn-warning mx-3"
                                         onClick={() => handleClickEditButton(type)}
                                     >
-                                        Edit
+                                        Sửa
                                     </button>
                                     <button className="btn btn-danger" onClick={() => handleClickDeleteButton(type)}>
-                                        Delete
+                                        Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -38,7 +38,7 @@ function TableType({ listTypes, handleClickViewButton, handleClickEditButton, ha
                     ) : (
                         <tr>
                             <td colSpan="5" className="text-center">
-                                No data
+                                Không có dữ liệu
                             </td>
                         </tr>
                     )}

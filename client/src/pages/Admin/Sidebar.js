@@ -1,11 +1,8 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarContent, SidebarFooter } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 function Sidebar({ collapsed }) {
-    const { t } = useTranslation();
-
     return (
         <ProSidebar collapsed={collapsed}>
             <SidebarHeader className="text-center">Giao diện</SidebarHeader>
@@ -13,12 +10,12 @@ function Sidebar({ collapsed }) {
                 <Menu iconShape="circle">
                     <MenuItem>
                         <NavLink className={({ isActive }) => (isActive ? 'active' : undefined)} to="/admins/dashboard">
-                            {t('admin.sidebar.dashboard')}
+                            Bảng điều khiển
                         </NavLink>
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <SubMenu title={t('admin.sidebar.features.title')}>
+                    <SubMenu title="Tính năng">
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
@@ -32,7 +29,7 @@ function Sidebar({ collapsed }) {
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/manage-users"
                             >
-                                {t('admin.sidebar.features.manageUsers')}
+                                Quản lý Người dùng
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
@@ -40,7 +37,7 @@ function Sidebar({ collapsed }) {
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/manage-rooms"
                             >
-                                {t('admin.sidebar.features.manageRooms')}{' '}
+                                Quản lý Phòng
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
@@ -48,7 +45,7 @@ function Sidebar({ collapsed }) {
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/manage-room-types"
                             >
-                                {t('admin.sidebar.features.manageRoomTypes')}
+                                Quản lý Loại Phòng
                             </NavLink>
                         </MenuItem>
 

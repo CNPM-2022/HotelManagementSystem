@@ -154,13 +154,13 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             className="modal-manage-room"
         >
             <Modal.Header closeButton>
-                <Modal.Title>Update Room Information</Modal.Title>
+                <Modal.Title>Cập nhật thông tin Phòng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form>
                     <div className="row g-3">
                         <div className="col-md-6">
-                            <label className="form-label">Number</label>
+                            <label className="form-label">Phòng</label>
                             <input
                                 value={roomNumber}
                                 onChange={(event) => setRoomNumber(event.target.value)}
@@ -170,7 +170,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Capacity</label>
+                            <label className="form-label">Sức chứa</label>
                             <input
                                 value={capacity}
                                 onChange={(event) => setCapacity(+event.target.value)}
@@ -180,19 +180,19 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Type</label>
+                            <label className="form-label">Loại</label>
                             <Select
                                 value={type}
                                 onChange={(selected) => setType(selected)}
                                 options={typeOptions}
-                                placeholder="Choose room type..."
+                                placeholder="Chọn loại phòng..."
                                 isDisabled={modalType === 'VIEW'}
                             />
                         </div>
 
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label className="form-label">Date range</label>
+                                <label className="form-label">Ngày nhận/trả phòng</label>
                                 <DateRange
                                     handleChangeDateRange={handleChangeDateRange}
                                     dateRange={dateRange}
@@ -202,17 +202,17 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                             </div>
                         </div>
                         <div className="col-md-12">
-                            <label className="form-label">Description</label>
+                            <label className="form-label">Mô tả</label>
                             <textarea
                                 value={description}
                                 onChange={(event) => setDescription(event.target.value)}
                                 className="form-control description"
-                                placeholder="Description"
+                                placeholder="Mô tả"
                                 disabled={modalType === 'VIEW'}
                             ></textarea>
                         </div>
                         <div className="col-md-12">
-                            <label className="form-label">Note</label>
+                            <label className="form-label">Ghi chú</label>
                             <input
                                 value={note}
                                 onChange={(event) => setNote(event.target.value)}
@@ -227,7 +227,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                                 className="btn btn-success upload-images-btn"
                             >
                                 <BsFillPlusCircleFill />
-                                Upload new file images
+                                Tải ảnh mới
                             </label>
 
                             <input
@@ -252,7 +252,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
                                     </div>
                                 ) : (
                                     <div className="no-image">
-                                        <span>Preview Image</span>
+                                        <span>Xem trước hình ảnh</span>
                                     </div>
                                 )}
                             </div>
