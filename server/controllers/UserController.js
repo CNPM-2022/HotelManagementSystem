@@ -50,7 +50,7 @@ const changeInfo = asyncHandler(async (req, res) => {
 // @access  Private
 
 const changeInfoAll = asyncHandler(async (req, res) => {
-    const { username, email, Name, phoneNumber, CMND, address, isAdmin, password, newPassword } = req.body;
+    const { username, email, Name, phoneNumber, CMND, address, isAdmin, password, newPassword, typeUser } = req.body;
     const id = req.params.id;
 
     try {
@@ -72,6 +72,7 @@ const changeInfoAll = asyncHandler(async (req, res) => {
             user.address = address;
             user.isAdmin = isAdmin;
             user.password = newHashedPassword;
+            user.typeUser = typeUser;
         }
         const updatedUser = await user.save();
         const accessToken = jwt.sign({ userId: updatedUser._id }, process.env.ACCESS_TOKEN_SECRET);
@@ -185,8 +186,8 @@ const getUsersWithPagination = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Private
 const addUser = asyncHandler(async (req, res) => {
-    const { username, email, password, Name, phoneNumber, CMND, address, isAdmin } = req.body;
-    if (!username || !email || !password || !Name || !CMND || !address || !phoneNumber) {
+    const { username, email, password, Name, phoneNumber, CMND, address, isAdmin, typeUser } = req.body;
+    if (!username || !email || !password || !Name || !CMND || !address || !phoneNumber || !typeUser) {
         res.status(400);
         throw new Error('Please fill all the fields');
     }
@@ -206,6 +207,7 @@ const addUser = asyncHandler(async (req, res) => {
             CMND,
             address,
             isAdmin,
+            typeUser,
         });
         const user = await newUser.save();
         if (user) {
