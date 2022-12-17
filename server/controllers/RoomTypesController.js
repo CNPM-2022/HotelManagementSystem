@@ -135,7 +135,7 @@ const updateRoomType = asyncHandler(async (req, res) => {
         if (req.files.length > 0) {
             const ImagesArrayTemp = roomType.imageUrls;
             ImagesArrayTemp.map((item) => {
-                if (existsSync(item.filePath)) {
+                if (fs.existsSync(item.filePath)) {
                     fs.unlink(item.filePath, (err) => {
                         if (err) {
                             throw new Error('File not found');
