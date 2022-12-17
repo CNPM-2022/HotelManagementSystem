@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import _ from 'lodash';
 import DateRangePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -27,18 +26,30 @@ function DashBoard() {
             const listRooms = roomRes.data.data;
 
             let totalRevenue = 0;
+            const reportByRoomType = [];
             for (const item of data.reportByRoomType) {
-                item.roomTypeName = listTypes.find((type) => type._id === item.roomType).typeOfRooms;
-                totalRevenue += item.totalRevenue;
+                const type = listTypes.find((type) => type._id === item.roomType);
+                if (type) {
+                    item.roomTypeName = type.typeOfRooms;
+                    totalRevenue += item.totalRevenue;
+                    reportByRoomType.push(item);
+                }
             }
 
             let totalRentDays = 0;
+            const roomUsageDensityReport = [];
             for (const item of data.roomUsageDensityReport) {
-                item.roomNumber = listRooms.find((room) => room._id === item.room).roomNumber;
-                totalRentDays += item.totalRentDays;
+                const room = listRooms.find((room) => room._id === item.room);
+                if (room) {
+                    item.roomNumber = room.roomNumber;
+                    totalRentDays += item.totalRentDays;
+                    roomUsageDensityReport.push(item);
+                }
             }
             data.totalRevenue = totalRevenue;
+            data.reportByRoomType = reportByRoomType;
             data.totalRentDays = totalRentDays;
+            data.roomUsageDensityReport = roomUsageDensityReport;
 
             setDataReport(data);
         }

@@ -2,28 +2,50 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash';
-import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
 
-function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
+import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
+
+function ModalManageUser({ show, setShow, modalType, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
+    const typeOptions = [
+        {
+            label: 'Việt Nam',
+            value: 'Inland',
+        },
+        {
+            label: 'Nước ngoài',
+            value: 'Foreign',
+        },
+    ];
+
+    const roleOptions = [
+        {
+            label: 'Người dùng',
+            value: false,
+        },
+        {
+            label: 'Quản trị',
+            value: true,
+        },
+    ];
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
+    const [typeUser, setTypeUser] = useState(typeOptions[0]);
+    const [role, setRole] = useState(roleOptions[0]);
     const [identity, setIdentity] = useState('');
     const [address, setAddress] = useState('');
-    const [role, setRole] = useState('USER');
 
     useEffect(() => {
-        if (show && !_.isEmpty(dataUser) && type !== 'CREATE') {
+        if (show && !_.isEmpty(dataUser) && modalType !== 'CREATE') {
             setEmail(dataUser.email);
             setUsername(dataUser.username);
-            if (dataUser.isAdmin) {
-                setRole('ADMIN');
-            } else {
-                setRole('USER');
-            }
+            setRole(roleOptions.find((roleOption) => roleOption.value === dataUser.isAdmin));
+            setTypeUser(typeOptions.find((typeOption) => typeOption.value === dataUser.typeUser));
             setName(dataUser.Name);
             setAddress(dataUser.address);
             setIdentity(dataUser.CMND);
@@ -39,7 +61,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
         setIdentity('');
         setPhone('');
         setAddress('');
-        setRole('USER');
+        setRole(roleOptions[0]);
+        setTypeUser(typeOptions[0]);
         setShow(false);
     };
 
@@ -59,7 +82,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
 
         // Validate
         if (!username || !email || !password || !name || !address || !identity || !phone) {
-            if (!password && type === 'EDIT') {
+            if (!password && modalType === 'EDIT') {
             } else {
                 isValid = false;
                 toast.error('Please fill out all fields');
@@ -76,7 +99,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
             toast.error('Username does not include spaces and contain at least 3 character');
         }
 
-        if (!passwordRegex.test(password) && type !== 'EDIT') {
+        if (!passwordRegex.test(password) && modalType !== 'EDIT') {
             isValid = false;
             toast.error(
                 'Password must be 7-19 characters and contain at least one letter, one number and a special character',
@@ -86,7 +109,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
         if (!isValid) return;
 
         // Handle submit
-        if (type === 'CREATE') {
+        if (modalType === 'CREATE') {
             res = await postCreateUser({
                 username,
                 email,
@@ -95,9 +118,10 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 CMND: identity,
                 address,
                 phoneNumber: phone,
-                isAdmin: role === 'ADMIN' ? true : false,
+                isAdmin: role.value,
+                typeUser: typeUser.value,
             });
-        } else if (type === 'EDIT') {
+        } else if (modalType === 'EDIT') {
             res = await putUpdateUser(dataUser._id, {
                 id: dataUser._id,
                 username,
@@ -106,7 +130,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 CMND: identity,
                 address,
                 phoneNumber: phone,
-                isAdmin: role === 'ADMIN' ? true : false,
+                isAdmin: role.value,
+                typeUser: typeUser.value,
             });
         }
 
@@ -122,7 +147,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
     };
 
     return (
-        <Modal show={show} onHide={handleClose} size="xl" backdrop={type === 'VIEW' ? true : 'static'}>
+        <Modal show={show} onHide={handleClose} size="xl" backdrop={modalType === 'VIEW' ? true : 'static'}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
@@ -136,7 +161,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
                             />
                         </div>
                         <div className="col-md-6">
@@ -146,7 +171,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
-                                disabled={type !== 'CREATE'}
+                                disabled={modalType !== 'CREATE'}
                             />
                         </div>
                         <div className="col-md-6">
@@ -156,21 +181,8 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
                             />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Vai trò</label>
-
-                            <select
-                                className="form-select"
-                                value={role}
-                                onChange={(event) => setRole(event.target.value)}
-                                disabled={type === 'VIEW'}
-                            >
-                                <option value="USER">Người dùng</option>
-                                <option value="ADMIN">Quản trị</option>
-                            </select>
                         </div>
 
                         <div className="col-md-6">
@@ -180,7 +192,27 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
+                            />
+                        </div>
+
+                        <div className="col-md-6">
+                            <label className="form-label">Vai trò</label>
+                            <Select
+                                value={role}
+                                options={roleOptions}
+                                onChange={setRole}
+                                isDisabled={modalType === 'VIEW'}
+                            />
+                        </div>
+
+                        <div className="col-md-6">
+                            <label className="form-label">Loại</label>
+                            <Select
+                                value={typeUser}
+                                options={typeOptions}
+                                onChange={setTypeUser}
+                                isDisabled={modalType === 'VIEW'}
                             />
                         </div>
 
@@ -191,18 +223,18 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={identity}
                                 onChange={(event) => setIdentity(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
                             />
                         </div>
 
-                        <div className="col-md-12">
+                        <div className="col-md-6">
                             <label className="form-label">Số điện thoại</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 value={phone}
                                 onChange={(event) => setPhone(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
                             />
                         </div>
 
@@ -213,7 +245,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                                 className="form-control"
                                 value={address}
                                 onChange={(event) => setAddress(event.target.value)}
-                                disabled={type === 'VIEW'}
+                                disabled={modalType === 'VIEW'}
                             />
                         </div>
                     </div>
@@ -223,7 +255,7 @@ function ModalManageUser({ show, setShow, type, title, dataUser = {}, fetchListU
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                {type !== 'VIEW' && (
+                {modalType !== 'VIEW' && (
                     <Button variant="primary" onClick={handleSubmit}>
                         Save
                     </Button>

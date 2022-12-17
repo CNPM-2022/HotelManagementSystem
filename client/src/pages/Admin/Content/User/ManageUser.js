@@ -86,7 +86,7 @@ function ManageUser() {
             </div>
 
             <ModalManageUser
-                type="CREATE"
+                modalType="CREATE"
                 title="Add new user"
                 show={isShowModalCreateUser}
                 setShow={setIsShowModalCreateUser}
@@ -95,7 +95,7 @@ function ManageUser() {
             />
 
             <ModalManageUser
-                type="VIEW"
+                modalType="VIEW"
                 title="User Information"
                 show={isShowModalViewUser}
                 setShow={setIsShowModalViewUser}
@@ -105,7 +105,7 @@ function ManageUser() {
             />
 
             <ModalManageUser
-                type="EDIT"
+                modalType="EDIT"
                 title="Edit user"
                 show={isShowModalEditUser}
                 setShow={setIsShowModalEditUser}
