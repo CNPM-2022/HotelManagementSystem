@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import RoomType from '../models/RoomType.js';
+import Room from '../models/Room.js';
 import fs from 'fs';
 
 // @desc    Fetch room type
@@ -204,6 +205,22 @@ const deleteRoomType = asyncHandler(async (req, res) => {
                     });
                 }
             });
+
+            for (let i = 0; i < roomType.listRoom.length; i++) {
+                const room = await Room.findOne({ roomNumber: roomType.listRoom[i] });
+                const ImagesArrayTemp = room.imageUrls;
+                ImagesArrayTemp.map((item) => {
+                    if (fs.existsSync(item.filePath)) {
+                        fs.unlink(item.filePath, (err) => {
+                            if (err) {
+                                throw new Error('File not found');
+                            }
+                        });
+                    }
+                });
+
+                await room.remove();
+            }
 
             await roomType.remove();
             res.status(200).json({
