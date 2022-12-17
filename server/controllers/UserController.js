@@ -8,10 +8,10 @@ import jwt from 'jsonwebtoken';
 // @access  Private
 
 const changeInfo = asyncHandler(async (req, res) => {
-    const { username, email, Name, phoneNumber, CMND, address, typeUser } = req.body;
+    const { username, email, Name, phoneNumber, CMND, address, typeUser, isAdmin } = req.body;
     const id = req.params.id;
 
-    if (!username && !email && !Name && !CMND && !address && !typeUser) {
+    if (!username && !email && !Name && !CMND && !address && !typeUser && !isAdmin) {
         res.status(400);
         throw new Error('Please fill one of the fields');
     }
@@ -26,6 +26,7 @@ const changeInfo = asyncHandler(async (req, res) => {
             user.CMND = CMND;
             user.address = address;
             user.typeUser = typeUser;
+            user.isAdmin = isAdmin;
         }
         const updatedUser = await user.save();
 
