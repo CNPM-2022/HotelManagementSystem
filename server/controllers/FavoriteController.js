@@ -5,7 +5,7 @@ const getFavoriteRoomsByUserId = async (req, res) => {
         const favoriteRooms = await FavoriteRoom.find({
             user: req.userId,
         })
-            .populate('rooms', ['roomNumber'])
+            .populate('rooms')
             .populate('user', ['Name']);
         res.status(200).json({
             success: true,
@@ -62,4 +62,35 @@ const addFavoriteRoom = async (req, res) => {
     }
 };
 
-export { getFavoriteRoomsByUserId, addFavoriteRoom };
+const removeFavoriteRoom = async (req, res) => {
+    const { roomId } = req.params;
+    try {
+        const favoriteRoom = await FavoriteRoom.findOne({
+            user: req.userId,
+        });
+        if (favoriteRoom) {
+            const isExist = favoriteRoom.rooms.find((room) => room.toString() === roomId);
+            if (isExist) {
+                favoriteRoom.rooms = favoriteRoom.rooms.filter((room) => room.toString() !== roomId);
+                await favoriteRoom.save();
+                res.status(200).json({
+                    success: true,
+                    message: 'Remove favorite room successfully',
+                    data: favoriteRoom,
+                });
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'Room is not in your favorite list',
+                });
+            }
+        }
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export { getFavoriteRoomsByUserId, addFavoriteRoom, removeFavoriteRoom };
