@@ -3,7 +3,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { TiTick } from 'react-icons/ti';
 import './Rooms.scss';
-import images from '../../../../assets/images';
 import Button from '../../../../components/Button/Button';
 import SlideNextArrow from './SlideNextArrow';
 import SlidePrevArrow from './SlidePrevArrow';
@@ -24,8 +23,6 @@ function Rooms() {
         nextArrow: <SlideNextArrow />,
         prevArrow: <SlidePrevArrow />,
     };
-
-    const listTypesImages = [images.room1, images.room2, images.room3];
 
     const [listTypes, setListTypes] = useState([]);
 
@@ -48,7 +45,10 @@ function Rooms() {
                     <div key={type._id}>
                         <div className="single-room">
                             <div className="thumbnail">
-                                <img src={listTypesImages[index]} alt={`Phòng loại ${type.typeOfRooms}`} />
+                                <img
+                                    src={`${process.env.REACT_APP_SERVER_URL}${type.imageUrls[0].filePath}`}
+                                    alt={`Phòng loại ${type.typeOfRooms}`}
+                                />
                             </div>
 
                             <div className="content">
