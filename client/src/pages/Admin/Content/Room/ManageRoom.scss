@@ -1,97 +1,93 @@
 .manage-room-container {
     font-size: 16px;
 
-    .accordion {
-        .accordion-item {
-            .body {
-                .form-group {
-                    .form-select {
-                        width: 40%;
+    .body {
+        .form-group {
+            .form-select {
+                width: 40%;
+            }
+        }
+
+        .manage-room {
+            .room-list {
+                .room-item {
+                    .room-action {
+                        display: flex;
+                        align-items: center;
+                        gap: 30px;
+
+                        .form-floating {
+                            width: 40%;
+                            font-size: 16px;
+                        }
+
+                        .btn-group {
+                            .icon-add {
+                                font-size: 25px;
+                                color: #2596ff;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #0989ff;
+                                }
+                            }
+                            .icon-remove {
+                                margin-left: 15px;
+                                font-size: 25px;
+                                color: #e8771c;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #ff7608;
+                                }
+                            }
+                        }
                     }
-                }
 
-                .manage-room {
-                    .room-list {
-                        .room-item {
-                            .room-action {
-                                display: flex;
-                                align-items: center;
-                                gap: 30px;
+                    .group-upload {
+                        font-size: 16px;
+                        margin-bottom: 16px;
+                        margin-left: 30px;
+                        .label-upload {
+                            margin-right: 5px;
+                            color: #9068ff;
+                            font-size: 25px;
+                            cursor: pointer;
 
-                                .form-floating {
-                                    width: 40%;
-                                    font-size: 16px;
-                                }
+                            &:hover {
+                                color: #4400ff;
+                            }
+                        }
 
-                                .btn-group {
-                                    .icon-add {
-                                        font-size: 25px;
-                                        color: #2596ff;
-                                        cursor: pointer;
-
-                                        &:hover {
-                                            color: #0989ff;
-                                        }
-                                    }
-                                    .icon-remove {
-                                        margin-left: 15px;
-                                        font-size: 25px;
-                                        color: #e8771c;
-                                        cursor: pointer;
-
-                                        &:hover {
-                                            color: #ff7608;
-                                        }
-                                    }
-                                }
+                        .preview-image {
+                            cursor: pointer;
+                            + & {
+                                margin-right: 4px;
                             }
 
-                            .group-upload {
-                                font-size: 16px;
-                                margin-bottom: 16px;
-                                margin-left: 30px;
-                                .label-upload {
-                                    margin-right: 5px;
-                                    color: #9068ff;
-                                    font-size: 25px;
-                                    cursor: pointer;
-
-                                    &:hover {
-                                        color: #4400ff;
-                                    }
-                                }
-
-                                .preview-image {
-                                    cursor: pointer;
-                                    + & {
-                                        margin-right: 4px;
-                                    }
-
-                                    &:hover {
-                                        text-decoration: underline;
-                                    }
-
-                                    &:not(:last-child)::after {
-                                        content: ', ';
-                                    }
-                                }
+                            &:hover {
+                                text-decoration: underline;
                             }
 
-                            .room-info {
-                                margin-left: 28px;
+                            &:not(:last-child)::after {
+                                content: ', ';
+                            }
+                        }
+                    }
 
-                                .description {
-                                    height: 140px;
-                                }
+                    .room-info {
+                        margin-left: 28px;
 
-                                .room-type {
-                                    padding-bottom: 8px;
+                        .description {
+                            height: 140px;
+                        }
 
-                                    .css-1s2u09g-control,
-                                    .css-1pahdxg-control {
-                                        height: 66px;
-                                    }
-                                }
+                        .room-type {
+                            padding-bottom: 8px;
+
+                            .css-1s2u09g-control,
+                            .css-1pahdxg-control {
+                                height: 66px;
                             }
                         }
                     }
