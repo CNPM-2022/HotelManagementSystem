@@ -24,6 +24,7 @@ import ManageRoom from './pages/Admin/Content/Room/ManageRoom';
 import EditProfile from './pages/UserProfile/component/EditProfile/EditProfile';
 import UserInfor from './pages/UserProfile/component/UserInfor/UserInfor';
 import MyBooking from './pages/UserProfile/component/MyBooking/MyBooking';
+import Favorite from './pages/UserProfile/component/Favorite/Favorite'
 import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
 import AdminBooking from './pages/Admin/Content/Booking/Booking';
 import Regulation from './pages/Admin/Content/Regulation/Regulation';
@@ -84,6 +85,8 @@ function App() {
                         <Route path="/user/profile" element={<UserInfor />} />
                         <Route path="/user/edit-profile" element={<EditProfile />} />
                         <Route path="/user/my-booking" element={<MyBooking />} />
+                        <Route path="/user/favorite" element={<Favorite />} />
+
                     </Route>
 
                     <Route
