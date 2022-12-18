@@ -114,3 +114,15 @@ export const getRule = () => {
 export const createReportByMonthYear = (data) => {
     return axios.get(`report/create/${data.month}/${data.year}`);
 };
+
+export const addFavoriteRoom = (id) => {
+    return axios.get(`favorite-rooms/add/${id}`);
+};
+
+export const getFavoriteRooms = () => {
+    return axios.get('favorite-rooms/');
+};
+
+export const deleteFavoriteRoom = (id) => {
+    return axios.delete(`favorite-rooms/remove/${id}`);
+};
