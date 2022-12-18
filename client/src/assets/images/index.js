@@ -17,11 +17,6 @@ const images = {
     ratorThumb1: require('./rated/thumbnail1.jpg'),
     ratorThumb2: require('./rated/thumbnail2.jpg'),
     contactBg: require('./contact-bg.jpg'),
-    partner1: require('./homePartners/p1.png'),
-    partner2: require('./homePartners/p2.png'),
-    partner3: require('./homePartners/p3.png'),
-    partner4: require('./homePartners/p4.png'),
-    partner5: require('./homePartners/p5.png'),
 };
 
 export default images;
