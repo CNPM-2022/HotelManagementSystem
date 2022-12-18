@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Tab, Tabs } from 'react-bootstrap';
 import { RiImageAddFill } from 'react-icons/ri';
 import { BsFillPatchPlusFill, BsPatchMinusFill } from 'react-icons/bs';
 import Lightbox from 'react-18-image-lightbox';
@@ -26,6 +26,8 @@ import ModalDeleteRoom from './ModalDeleteRoom';
 import ModalManageRoom from './ModalManageRoom';
 
 function ManageRoom() {
+    const ITEMS_PER_PAGE = 6;
+
     const statusSelectRef = useRef();
     const typeSelectRef = useRef();
 
@@ -43,6 +45,9 @@ function ManageRoom() {
     const [isShowModalViewRoom, setIsShowModalViewRoom] = useState(false);
     const [dataRoomView, setDataRoomView] = useState({});
 
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
         fetchAllRooms();
         fetchAllRoomTypes();
@@ -56,7 +61,8 @@ function ManageRoom() {
 
         const data = _.orderBy(res.data.data, ['roomNumber'], ['asc']);
 
-        setListRooms(data);
+        setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
+        setListRooms(_.chunk(data, ITEMS_PER_PAGE));
     };
 
     const fetchAllRoomTypes = async () => {
@@ -66,6 +72,10 @@ function ManageRoom() {
         if (res.data.success === false) return;
 
         setTypeOptions(res.data.data.map((item) => ({ label: item.typeOfRooms, value: item.typeOfRooms })));
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
     const handleChangeImageFiles = (event, roomId) => {
@@ -179,173 +189,170 @@ function ManageRoom() {
     return (
         <>
             <div className="manage-room-container">
-                <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Thêm phòng</Accordion.Header>
-                        <Accordion.Body>
-                            <div className="body">
-                                <div className="manage-room">
-                                    <label className="form-label">Thêm phòng:</label>
+                <Tabs defaultActiveKey="list-rooms" className="mb-3" fill>
+                    <Tab eventKey="list-rooms" title="Danh sách phòng">
+                        <div className="content-table mt-5">
+                            <TableRoom
+                                ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+                                handlePageChange={handlePageChange}
+                                pageCount={pageCount}
+                                currentPage={currentPage}
+                                listRooms={listRooms[currentPage - 1]}
+                                setIsShowModalDeleteRoom={setIsShowModalDeleteRoom}
+                                setDataRoomDelete={setDataRoomDelete}
+                                setIsShowModalUpdateRoom={setIsShowModalUpdateRoom}
+                                setDataRoomUpdate={setDataRoomUpdate}
+                                setIsShowModalViewRoom={setIsShowModalViewRoom}
+                                setDataRoomView={setDataRoomView}
+                            />
+                        </div>
+                    </Tab>
+                    <Tab eventKey="add-room" title="Thêm phòng">
+                        <div className="body">
+                            <div className="manage-room">
+                                <h4 className="">Thêm phòng:</h4>
+                                <br />
 
-                                    <div className="room-list">
-                                        {roomsState &&
-                                            roomsState.length > 0 &&
-                                            roomsState.map((room, index) => (
-                                                <div key={room.id} className="room-item mb-3">
-                                                    <div className="room-action mb-2">
-                                                        <div className="form-floating">
-                                                            <input
-                                                                value={room.number}
-                                                                onChange={(event) =>
-                                                                    dispatch(
-                                                                        setRoomNumber({
-                                                                            id: room.id,
-                                                                            number: event.target.value,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                                type="text"
-                                                                className="form-control"
-                                                                placeholder="Phòng"
-                                                            />
-                                                            <label>Phòng {index + 1}</label>
-                                                        </div>
-
-                                                        <div className="btn-group">
-                                                            <span onClick={() => dispatch(addRoom({ id: room.id }))}>
-                                                                <BsFillPatchPlusFill className="icon-add" />
-                                                            </span>
-                                                            {roomsState.length > 1 && (
-                                                                <span
-                                                                    onClick={() =>
-                                                                        dispatch(deleteRoom({ id: room.id }))
-                                                                    }
-                                                                >
-                                                                    <BsPatchMinusFill className="icon-remove" />
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="group-upload">
-                                                        <label
-                                                            htmlFor={`upload-room-image-${room.id}`}
-                                                            className="label-upload"
-                                                        >
-                                                            <RiImageAddFill />
-                                                        </label>
+                                <div className="room-list">
+                                    {roomsState &&
+                                        roomsState.length > 0 &&
+                                        roomsState.map((room, index) => (
+                                            <div key={room.id} className="room-item mb-3">
+                                                <div className="room-action mb-2">
+                                                    <div className="form-floating">
                                                         <input
-                                                            onChange={(event) => handleChangeImageFiles(event, room.id)}
-                                                            type="file"
-                                                            name="images"
-                                                            hidden
-                                                            id={`upload-room-image-${room.id}`}
-                                                            multiple
+                                                            value={room.number}
+                                                            onChange={(event) =>
+                                                                dispatch(
+                                                                    setRoomNumber({
+                                                                        id: room.id,
+                                                                        number: event.target.value,
+                                                                    }),
+                                                                )
+                                                            }
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Phòng"
                                                         />
-                                                        <span>
-                                                            {room.imageFiles.length > 0
-                                                                ? Array.from(room.imageFiles).map((image, index) => (
-                                                                      <span
-                                                                          key={index}
-                                                                          className="preview-image"
-                                                                          onClick={() =>
-                                                                              handlePreviewImage(room.imageFiles, index)
-                                                                          }
-                                                                      >
-                                                                          {image.name}
-                                                                      </span>
-                                                                  ))
-                                                                : '0 tập tin được tải lên'}
-                                                        </span>
+                                                        <label>Phòng {index + 1}</label>
                                                     </div>
 
-                                                    <div className="room-info">
-                                                        <div className="col-6">
-                                                            <Select
-                                                                ref={typeSelectRef}
-                                                                className="room-type"
-                                                                placeholder="Loại phòng..."
-                                                                options={typeOptions}
-                                                                onChange={(selected) =>
-                                                                    handleChangeType(selected, room.id)
-                                                                }
-                                                            />
-                                                        </div>
-
-                                                        <div className="form-floating">
-                                                            <textarea
-                                                                value={room.description}
-                                                                onChange={(event) =>
-                                                                    dispatch(
-                                                                        setRoomDescription({
-                                                                            id: room.id,
-                                                                            description: event.target.value,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                                className="form-control description mb-2"
-                                                                placeholder="Mô tả"
-                                                            ></textarea>
-                                                            <label>Mô tả</label>
-                                                        </div>
-
-                                                        <div className="form-floating">
-                                                            <input
-                                                                value={room.note}
-                                                                onChange={(event) =>
-                                                                    dispatch(
-                                                                        setRoomNote({
-                                                                            id: room.id,
-                                                                            note: event.target.value,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                                type="text"
-                                                                className="form-control mb-2"
-                                                                placeholder="Ghi chú"
-                                                            />
-                                                            <label>Ghi chú</label>
-                                                        </div>
+                                                    <div className="btn-group">
+                                                        <span onClick={() => dispatch(addRoom({ id: room.id }))}>
+                                                            <BsFillPatchPlusFill className="icon-add" />
+                                                        </span>
+                                                        {roomsState.length > 1 && (
+                                                            <span onClick={() => dispatch(deleteRoom({ id: room.id }))}>
+                                                                <BsPatchMinusFill className="icon-remove" />
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </div>
-                                            ))}
-                                    </div>
 
-                                    <div className="submit-manage">
-                                        <button className="btn btn-warning" onClick={handleAddRoom}>
-                                            Lưu
-                                        </button>
-                                    </div>
+                                                <div className="group-upload">
+                                                    <label
+                                                        htmlFor={`upload-room-image-${room.id}`}
+                                                        className="label-upload"
+                                                    >
+                                                        <RiImageAddFill />
+                                                    </label>
+                                                    <input
+                                                        onChange={(event) => handleChangeImageFiles(event, room.id)}
+                                                        type="file"
+                                                        name="images"
+                                                        hidden
+                                                        id={`upload-room-image-${room.id}`}
+                                                        multiple
+                                                    />
+                                                    <span>
+                                                        {room.imageFiles.length > 0
+                                                            ? Array.from(room.imageFiles).map((image, index) => (
+                                                                  <span
+                                                                      key={index}
+                                                                      className="preview-image"
+                                                                      onClick={() =>
+                                                                          handlePreviewImage(room.imageFiles, index)
+                                                                      }
+                                                                  >
+                                                                      {image.name}
+                                                                  </span>
+                                                              ))
+                                                            : '0 tập tin được tải lên'}
+                                                    </span>
+                                                </div>
+
+                                                <div className="room-info">
+                                                    <div className="col-6">
+                                                        <Select
+                                                            ref={typeSelectRef}
+                                                            className="room-type"
+                                                            placeholder="Loại phòng..."
+                                                            options={typeOptions}
+                                                            onChange={(selected) => handleChangeType(selected, room.id)}
+                                                        />
+                                                    </div>
+
+                                                    <div className="form-floating">
+                                                        <textarea
+                                                            value={room.description}
+                                                            onChange={(event) =>
+                                                                dispatch(
+                                                                    setRoomDescription({
+                                                                        id: room.id,
+                                                                        description: event.target.value,
+                                                                    }),
+                                                                )
+                                                            }
+                                                            className="form-control description mb-2"
+                                                            placeholder="Mô tả"
+                                                        ></textarea>
+                                                        <label>Mô tả</label>
+                                                    </div>
+
+                                                    <div className="form-floating">
+                                                        <input
+                                                            value={room.note}
+                                                            onChange={(event) =>
+                                                                dispatch(
+                                                                    setRoomNote({
+                                                                        id: room.id,
+                                                                        note: event.target.value,
+                                                                    }),
+                                                                )
+                                                            }
+                                                            type="text"
+                                                            className="form-control mb-2"
+                                                            placeholder="Ghi chú"
+                                                        />
+                                                        <label>Ghi chú</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                </div>
+
+                                <div className="submit-manage">
+                                    <button className="btn btn-warning" onClick={handleAddRoom}>
+                                        Lưu
+                                    </button>
                                 </div>
                             </div>
+                        </div>
 
-                            {isPreviewImage && (
-                                <Lightbox
-                                    mainSrc={images[previewIndex].url}
-                                    nextSrc={images[(previewIndex + 1) % images.length].url}
-                                    prevSrc={images[(previewIndex + images.length - 1) % images.length].url}
-                                    onCloseRequest={() => setIsPreviewImage(false)}
-                                    onMovePrevRequest={() =>
-                                        setPreviewIndex((previewIndex + images.length - 1) % images.length)
-                                    }
-                                    onMoveNextRequest={() => setPreviewIndex((previewIndex + 1) % images.length)}
-                                />
-                            )}
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-
-                <div className="content-table mt-5">
-                    <TableRoom
-                        listRooms={listRooms}
-                        setIsShowModalDeleteRoom={setIsShowModalDeleteRoom}
-                        setDataRoomDelete={setDataRoomDelete}
-                        setIsShowModalUpdateRoom={setIsShowModalUpdateRoom}
-                        setDataRoomUpdate={setDataRoomUpdate}
-                        setIsShowModalViewRoom={setIsShowModalViewRoom}
-                        setDataRoomView={setDataRoomView}
-                    />
-                </div>
+                        {isPreviewImage && (
+                            <Lightbox
+                                mainSrc={images[previewIndex].url}
+                                nextSrc={images[(previewIndex + 1) % images.length].url}
+                                prevSrc={images[(previewIndex + images.length - 1) % images.length].url}
+                                onCloseRequest={() => setIsPreviewImage(false)}
+                                onMovePrevRequest={() =>
+                                    setPreviewIndex((previewIndex + images.length - 1) % images.length)
+                                }
+                                onMoveNextRequest={() => setPreviewIndex((previewIndex + 1) % images.length)}
+                            />
+                        )}
+                    </Tab>
+                </Tabs>
             </div>
 
             <ModalDeleteRoom
