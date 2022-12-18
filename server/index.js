@@ -15,6 +15,7 @@ import uploads from './routes/upload.js';
 import quiDinh from './routes/quiDinh.js';
 import bill from './routes/bill.js';
 import report from './routes/report.js';
+import favoriteRooms from './routes/favoriteRooms.js';
 
 //connect to database
 connectDB();
@@ -62,5 +63,6 @@ app.use('/api/upload', uploads);
 app.use('/api/quidinh', quiDinh);
 app.use('/api/bill', bill);
 app.use('/api/report', report);
+app.use('/api/favorite-rooms', favoriteRooms);
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
