@@ -20,6 +20,39 @@ const getFavoriteRoomsByUserId = async (req, res) => {
     }
 };
 
+const checkFavoriteRoomsByRoomId = async (req, res) => {
+    const { roomId } = req.params;
+    try {
+        const favoriteRoom = await FavoriteRoom.findOne({
+            user: req.userId,
+        });
+        if (favoriteRoom) {
+            const isExist = favoriteRoom.rooms.find((room) => room.toString() === roomId);
+            if (isExist) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Room is in your favorite list',
+                });
+            } else {
+                res.status(200).json({
+                    success: false,
+                    message: 'Room is not in your favorite list',
+                });
+            }
+        } else {
+            res.status(200).json({
+                success: false,
+                message: 'Room is not in your favorite list',
+            });
+        }
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 const addFavoriteRoom = async (req, res) => {
     const { roomId } = req.params;
     try {
@@ -93,4 +126,4 @@ const removeFavoriteRoom = async (req, res) => {
     }
 };
 
-export { getFavoriteRoomsByUserId, addFavoriteRoom, removeFavoriteRoom };
+export { getFavoriteRoomsByUserId, addFavoriteRoom, removeFavoriteRoom, checkFavoriteRoomsByRoomId };
