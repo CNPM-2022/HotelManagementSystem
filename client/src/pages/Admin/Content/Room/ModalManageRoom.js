@@ -8,7 +8,7 @@ import _ from 'lodash';
 import DateRange from '../../../../components/DateRange/DateRange';
 import { putUpdateRoom } from '../../../../services/apiServices';
 
-function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms }) {
+function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetchAllRooms, setCurrentPage }) {
     const initalDateRange = [
         {
             startDate: null,
@@ -141,6 +141,7 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             }
 
             fetchAllRooms();
+            setCurrentPage(1);
             handleClose();
         }
     };
@@ -262,11 +263,11 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Đóng
                 </Button>
                 {modalType === 'UPDATE' && (
                     <Button variant="primary" onClick={handleUpdateRoom}>
-                        Save
+                        Lưu
                     </Button>
                 )}
             </Modal.Footer>

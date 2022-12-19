@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { deleteUser } from '../../../../services/apiServices';
 
-function ModalDeleteUser({ show, setShow, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
+function ModalDeleteUser({ show, setShow, dataUser = {}, fetchAllUsers, setCurrentPage }) {
     const handleClose = () => setShow(false);
 
     const handleDeleteUser = async () => {
@@ -12,7 +12,7 @@ function ModalDeleteUser({ show, setShow, dataUser = {}, fetchListUsersOfPage, s
         if (res && res.data && res.data.success === true) {
             toast.success(res.data.message);
             setCurrentPage(1);
-            fetchListUsersOfPage(1);
+            fetchAllUsers();
         } else {
             toast.error(res.message);
         }

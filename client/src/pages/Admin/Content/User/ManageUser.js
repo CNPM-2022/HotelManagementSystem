@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import { getUsersOfPage } from '../../../../services/apiServices';
-import _ from 'lodash';
+import { getAllUsers } from '../../../../services/apiServices';
 
 import './ManageUser.scss';
 import ModalDeleteUser from './ModalDeleteUser';
@@ -9,8 +8,6 @@ import ModalManageUser from './ModalManageUser';
 import TableUserPaginate from './TableUserPaginate';
 
 function ManageUser() {
-    const ITEMS_PER_PAGE = 6;
-
     const [listUsers, setListUsers] = useState([]);
 
     const [isShowModalCreateUser, setIsShowModalCreateUser] = useState(false);
@@ -25,23 +22,17 @@ function ManageUser() {
     const [dataUserDelete, setDataUserDelete] = useState({});
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        fetchListUsersOfPage(1);
+        fetchAllUsers();
     }, []);
 
-    const fetchListUsersOfPage = async (currentPage) => {
-        const res = await getUsersOfPage({ page: currentPage, perPage: ITEMS_PER_PAGE });
+    const fetchAllUsers = async () => {
+        const res = await getAllUsers();
 
-        const data = res.data;
-
-        if (res.status !== 200) {
-            throw new Error(data.message);
+        if (res && res.data && res.data.success === true) {
+            setListUsers(res.data.users);
         }
-
-        setListUsers(data.results.results);
-        setPageCount(Math.floor(data.lengthOfAllUsers / ITEMS_PER_PAGE) + 1);
     };
 
     const handleClickViewButton = (user) => {
@@ -59,11 +50,6 @@ function ManageUser() {
         setIsShowModalDeleteUser(true);
     };
 
-    const handlePageClick = (currentPageClicked) => {
-        setCurrentPage(currentPageClicked);
-        fetchListUsersOfPage(currentPageClicked);
-    };
-
     return (
         <div className="manage-user-container">
             <h3>Quản lý Người dùng</h3>
@@ -78,10 +64,8 @@ function ManageUser() {
                     handleClickViewButton={handleClickViewButton}
                     handleClickEditButton={handleClickEditButton}
                     handleClickDeleteButton={handleClickDeleteButton}
-                    itemsPerPage={ITEMS_PER_PAGE}
                     currentPage={currentPage}
-                    handlePageClick={handlePageClick}
-                    pageCount={pageCount}
+                    setCurrentPage={setCurrentPage}
                 />
             </div>
 
@@ -90,7 +74,7 @@ function ManageUser() {
                 title="Add new user"
                 show={isShowModalCreateUser}
                 setShow={setIsShowModalCreateUser}
-                fetchListUsersOfPage={fetchListUsersOfPage}
+                fetchAllUsers={fetchAllUsers}
                 setCurrentPage={setCurrentPage}
             />
 
@@ -100,7 +84,7 @@ function ManageUser() {
                 show={isShowModalViewUser}
                 setShow={setIsShowModalViewUser}
                 dataUser={dataUserView}
-                fetchListUsersOfPage={fetchListUsersOfPage}
+                fetchAllUsers={fetchAllUsers}
                 setCurrentPage={setCurrentPage}
             />
 
@@ -110,7 +94,7 @@ function ManageUser() {
                 show={isShowModalEditUser}
                 setShow={setIsShowModalEditUser}
                 dataUser={dataUserEdit}
-                fetchListUsersOfPage={fetchListUsersOfPage}
+                fetchAllUsers={fetchAllUsers}
                 setCurrentPage={setCurrentPage}
             />
 
@@ -118,7 +102,7 @@ function ManageUser() {
                 show={isShowModalDeleteUser}
                 setShow={setIsShowModalDeleteUser}
                 dataUser={dataUserDelete}
-                fetchListUsersOfPage={fetchListUsersOfPage}
+                fetchAllUsers={fetchAllUsers}
                 setCurrentPage={setCurrentPage}
             />
         </div>

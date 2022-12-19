@@ -43,6 +43,8 @@ function ManageRoom() {
     const [isShowModalViewRoom, setIsShowModalViewRoom] = useState(false);
     const [dataRoomView, setDataRoomView] = useState({});
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
         fetchAllRooms();
         fetchAllRoomTypes();
@@ -166,6 +168,9 @@ function ManageRoom() {
             fetchAllRooms();
             if (typeSelectRef.current) typeSelectRef.current.clearValue();
             if (statusSelectRef.current) statusSelectRef.current.clearValue();
+
+            //
+            setCurrentPage(1);
         }
     };
 
@@ -195,6 +200,8 @@ function ManageRoom() {
                                 setDataRoomUpdate={setDataRoomUpdate}
                                 setIsShowModalViewRoom={setIsShowModalViewRoom}
                                 setDataRoomView={setDataRoomView}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
                             />
                         </div>
                     </Tab>
@@ -351,6 +358,7 @@ function ManageRoom() {
                 setShow={setIsShowModalDeleteRoom}
                 dataRoomDelete={dataRoomDelete}
                 fetchAllRooms={fetchAllRooms}
+                setCurrentPage={setCurrentPage}
             />
 
             <ModalManageRoom
@@ -359,6 +367,8 @@ function ManageRoom() {
                 setShow={setIsShowModalUpdateRoom}
                 dataRoom={dataRoomUpdate}
                 fetchAllRooms={fetchAllRooms}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
                 typeOptions={typeOptions}
             />
 
@@ -368,6 +378,8 @@ function ManageRoom() {
                 setShow={setIsShowModalViewRoom}
                 dataRoom={dataRoomView}
                 fetchAllRooms={fetchAllRooms}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
                 typeOptions={typeOptions}
             />
         </>

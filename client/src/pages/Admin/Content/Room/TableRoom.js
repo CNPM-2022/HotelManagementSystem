@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { VscGroupByRefType } from 'react-icons/vsc';
 
 function TableRoom({
     listRooms,
@@ -12,6 +13,8 @@ function TableRoom({
     setDataRoomUpdate,
     setIsShowModalViewRoom,
     setDataRoomView,
+    currentPage,
+    setCurrentPage,
 }) {
     const ITEMS_PER_PAGE = 6;
 
@@ -20,7 +23,6 @@ function TableRoom({
     const [typesChecked, setTypesChecked] = useState({});
 
     const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         if (typeOptions && typeOptions.length > 0) {
@@ -101,7 +103,13 @@ function TableRoom({
         <>
             <div className="mb-2">
                 <div className="col-md-4 mb-2">
-                    <label className="form-label">Tìm kiếm phòng</label>
+                    <label className="form-label">
+                        <b>
+                            <AiOutlineSearch />
+                            <span className="mx-1" />
+                            Tìm kiếm phòng
+                        </b>
+                    </label>
                     <input
                         value={searchValue}
                         onChange={(event) => setSearchValue(event.target.value)}
@@ -111,7 +119,11 @@ function TableRoom({
                 </div>
                 <div>
                     <label className="form-label">
-                        <b>Loại</b>
+                        <b>
+                            <VscGroupByRefType />
+                            <span className="mx-1" />
+                            Loại
+                        </b>
                     </label>
                     <div>
                         {typeOptions.map((typeOption) => (
@@ -183,7 +195,7 @@ function TableRoom({
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="6" className="text-center">
+                            <td colSpan="5" className="text-center">
                                 Không có dữ liệu
                             </td>
                         </tr>

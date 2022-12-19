@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { postCreateUser, putUpdateUser } from '../../../../services/apiServices';
 
-function ModalManageUser({ show, setShow, modalType, title, dataUser = {}, fetchListUsersOfPage, setCurrentPage }) {
+function ModalManageUser({ show, setShow, modalType, title, dataUser = {}, fetchAllUsers, setCurrentPage }) {
     const typeOptions = [
         {
             label: 'Việt Nam',
@@ -138,7 +138,7 @@ function ModalManageUser({ show, setShow, modalType, title, dataUser = {}, fetch
         if (res && res.data && res.data.success === true) {
             toast.success(res.data.message);
             setCurrentPage(1);
-            fetchListUsersOfPage(1);
+            fetchAllUsers();
         } else {
             toast.error(res.message);
         }
