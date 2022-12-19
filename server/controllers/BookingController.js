@@ -2,6 +2,7 @@ import Booking from '../models/Booking';
 import Customer from '../models/Customer';
 import Bill from '../models/Bill';
 import Room from '../models/Room';
+
 //@desc Get all bookings of a user
 //@route GET /api/bookings/user/:id
 //@access Private
@@ -57,6 +58,7 @@ const createBooking = async (req, res) => {
 
 const createBookingWithBill = async (req, res) => {
     const { roomId, checkInDate, checkOutDate, customerList, totalAmount, dateOfPayment, address } = req.body;
+    console.log(req.body);
     if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount || !dateOfPayment || !address) {
         return res.status(400).json({
             success: false,
@@ -64,57 +66,91 @@ const createBookingWithBill = async (req, res) => {
         });
     }
     try {
-        let customerListId = [];
-        for (let i = 0; i < customerList.length; i++) {
-            const newCustomer = new Customer({
-                name: customerList[i].name,
-                typeUser: customerList[i].typeUser,
-                CMND: customerList[i].CMND,
-                address: customerList[i].address,
-            });
-            await newCustomer.save();
-            customerListId.push(newCustomer._id.toString());
+        const DateNow = new Date();
+        const newCheckInDate = new Date(checkInDate);
+        const newCheckOutDate = new Date(checkOutDate);
+        const ListBooking = await Booking.find({ room: roomId });
+
+        let MinDateBooking = ListBooking.length > 0 ? ListBooking[0].checkInDate : new Date();
+        let MaxDateBooking = ListBooking.length > 0 ? ListBooking[0].checkOutDate : new Date();
+        for (let i = 0; i < ListBooking.length; i++) {
+            if (ListBooking[i].checkInDate < MinDateBooking) {
+                MinDateBooking = ListBooking[i].checkInDate;
+            }
+            if (ListBooking[i].checkOutDate > MaxDateBooking) {
+                MaxDateBooking = ListBooking[i].checkOutDate;
+            }
         }
 
-        const NewBooking = await Booking.create({
-            room: roomId,
-            user: req.userId,
-            customerList: customerListId,
-            checkInDate,
-            checkOutDate,
-            totalAmount,
-        });
+        const IsAvailable = () => {
+            if (
+                (MaxDateBooking <= newCheckInDate && newCheckInDate <= newCheckOutDate && newCheckInDate >= DateNow) ||
+                (MinDateBooking > newCheckOutDate && newCheckInDate <= newCheckOutDate && newCheckInDate >= DateNow)
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        };
 
-        const BookingRoom = await Room.findById({ _id: roomId });
-        BookingRoom.currentBookings.push(NewBooking._id);
-        await BookingRoom.save();
+        if (IsAvailable()) {
+            let customerListId = [];
+            for (let i = 0; i < customerList.length; i++) {
+                const newCustomer = new Customer({
+                    name: customerList[i].name,
+                    typeUser: customerList[i].typeUser,
+                    CMND: customerList[i].CMND,
+                    address: customerList[i].address,
+                });
+                await newCustomer.save();
+                customerListId.push(newCustomer._id.toString());
+            }
 
-        if (NewBooking) {
-            const newBill = await Bill.create({
-                booking: NewBooking._id,
+            const NewBooking = await Booking.create({
+                room: roomId,
                 user: req.userId,
-                dateOfPayment,
-                address,
+                customerList: customerListId,
+                checkInDate,
+                checkOutDate,
                 totalAmount,
             });
 
-            if (newBill) {
-                return res.status(201).json({
-                    success: true,
-                    message: 'Booking created successfully',
-                    NewBooking,
-                    newBill,
+            const BookingRoom = await Room.findById({ _id: roomId });
+            BookingRoom.currentBookings.push(NewBooking._id);
+            await BookingRoom.save();
+
+            if (NewBooking) {
+                const newBill = await Bill.create({
+                    booking: NewBooking._id,
+                    user: req.userId,
+                    dateOfPayment,
+                    address,
+                    totalAmount,
                 });
+
+                if (newBill) {
+                    return res.status(201).json({
+                        success: true,
+                        message: 'Booking created successfully',
+                        NewBooking,
+                        newBill,
+                    });
+                } else {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'Bill not created',
+                    });
+                }
             } else {
                 return res.status(400).json({
                     success: false,
-                    message: 'Bill not created',
+                    message: 'Booking not created',
                 });
             }
         } else {
             return res.status(400).json({
                 success: false,
-                message: 'Booking not created',
+                message: 'Room is not available for this time',
             });
         }
     } catch (error) {
