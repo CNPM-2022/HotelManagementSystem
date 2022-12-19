@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ModalViewBill from './ModalViewBill';
+import ModalViewBill from '../../../../components/Bill/ModalViewBill';
 
-import TableBill from './TableBill';
+import TableBill from '../../../../components/Bill/TableBill';
 
 function ManageBill({ listBills }) {
     const [isShowModalViewBill, setIsShowModalViewBill] = useState(false);
@@ -9,10 +9,9 @@ function ManageBill({ listBills }) {
 
     return (
         <div className="manage-bill-container">
-            <h4 className="text-center mt-5">Danh sách Đặt phòng</h4>
-            <hr />
             <div className="content-table">
                 <TableBill
+                    role="ADMIN"
                     listBills={listBills}
                     setIsShowModalViewBill={setIsShowModalViewBill}
                     setDataBillView={setDataBillView}

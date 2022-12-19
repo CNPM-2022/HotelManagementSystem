@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getAllBills } from '../../../../services/apiServices';
-import ModalViewBill from '../../../Admin/Content/Booking/ModalViewBill';
-import TableBill from '../../../Admin/Content/Booking/TableBill';
+import ModalViewBill from '../../../../components/Bill/ModalViewBill';
+import TableBill from '../../../../components/Bill/TableBill';
 
 function MyBooking() {
     const [listBills, setListBills] = useState([]);
@@ -26,6 +26,7 @@ function MyBooking() {
                     ...bill,
                     ...bill.booking,
                     customer: bill.user,
+                    totalAmount: +bill.totalAmount,
                     roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
                     roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
                 }));
@@ -45,6 +46,7 @@ function MyBooking() {
             <div className="manage-bill-container">
                 <div className="content-table">
                     <TableBill
+                        role="USER"
                         listBills={listBills}
                         setIsShowModalViewBill={setIsShowModalViewBill}
                         setDataBillView={setDataBillView}
