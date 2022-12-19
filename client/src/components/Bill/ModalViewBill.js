@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Bill from '../../../../components/Bill/Bill';
+import Bill from './Bill';
 
 function ModalViewBill({ show, setShow, dataBill }) {
     const handleClose = () => setShow(false);

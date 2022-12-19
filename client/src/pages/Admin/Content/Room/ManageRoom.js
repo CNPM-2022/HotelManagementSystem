@@ -26,8 +26,6 @@ import ModalDeleteRoom from './ModalDeleteRoom';
 import ModalManageRoom from './ModalManageRoom';
 
 function ManageRoom() {
-    const ITEMS_PER_PAGE = 6;
-
     const statusSelectRef = useRef();
     const typeSelectRef = useRef();
 
@@ -44,9 +42,6 @@ function ManageRoom() {
     const [dataRoomUpdate, setDataRoomUpdate] = useState({});
     const [isShowModalViewRoom, setIsShowModalViewRoom] = useState(false);
     const [dataRoomView, setDataRoomView] = useState({});
-
-    const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         fetchAllRooms();
@@ -65,7 +60,6 @@ function ManageRoom() {
         });
         const data = _.orderBy(res.data.data, ['type', 'roomNumber'], ['asc', 'asc']);
 
-        setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
         setListRooms(data);
     };
 
@@ -76,10 +70,6 @@ function ManageRoom() {
         if (res.data.success === false) return;
 
         setTypeOptions(res.data.data.map((item) => ({ label: item.typeOfRooms, value: item.typeOfRooms })));
-    };
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
     };
 
     const handleChangeImageFiles = (event, roomId) => {
@@ -197,12 +187,6 @@ function ManageRoom() {
                     <Tab eventKey="list-rooms" title="Danh sách phòng">
                         <div className="content-table mt-5">
                             <TableRoom
-                                ITEMS_PER_PAGE={ITEMS_PER_PAGE}
-                                pageCount={pageCount}
-                                setPageCount={setPageCount}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}
-                                handlePageChange={handlePageChange}
                                 listRooms={listRooms}
                                 typeOptions={typeOptions}
                                 setIsShowModalDeleteRoom={setIsShowModalDeleteRoom}

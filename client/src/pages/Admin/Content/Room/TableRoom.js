@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 function TableRoom({
-    ITEMS_PER_PAGE,
-    pageCount,
-    setPageCount,
-    currentPage,
-    setCurrentPage,
-    handlePageChange,
     listRooms,
     typeOptions,
     setIsShowModalDeleteRoom,
@@ -18,9 +13,14 @@ function TableRoom({
     setIsShowModalViewRoom,
     setDataRoomView,
 }) {
+    const ITEMS_PER_PAGE = 6;
+
     const [chunkedRooms, setChunkedRooms] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [typesChecked, setTypesChecked] = useState({});
+
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         if (typeOptions && typeOptions.length > 0) {
@@ -35,6 +35,7 @@ function TableRoom({
 
     useEffect(() => {
         if (listRooms && listRooms.length > 0) {
+            setPageCount(Math.ceil(listRooms.length / ITEMS_PER_PAGE));
             setChunkedRooms(_.chunk(listRooms, ITEMS_PER_PAGE));
         }
     }, [listRooms]);
@@ -135,6 +136,7 @@ function TableRoom({
                     </div>
                 </div>
                 <button className="btn btn-primary" onClick={handleSearchRooms}>
+                    <AiOutlineSearch />
                     Tìm kiếm
                 </button>
                 {(searchValue || Object.keys(typesChecked).some((key) => typesChecked[key] === true)) && (
@@ -202,7 +204,7 @@ function TableRoom({
                         activeClassName="active"
                         breakLabel="..."
                         nextLabel={'Sau >'}
-                        onPageChange={(event) => handlePageChange(+event.selected + 1)}
+                        onPageChange={(event) => setCurrentPage(+event.selected + 1)}
                         pageRangeDisplayed={3}
                         pageCount={pageCount}
                         previousLabel={'< Trước'}

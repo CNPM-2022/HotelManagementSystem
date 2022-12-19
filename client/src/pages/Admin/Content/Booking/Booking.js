@@ -23,6 +23,7 @@ function Booking() {
                 .map((bill) => ({
                     ...bill,
                     ...bill.booking,
+                    totalAmount: +bill.totalAmount,
                     customer: bill.user.isAdmin === true ? bill.booking.customerList[0] : bill.user,
                     roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
                     roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
