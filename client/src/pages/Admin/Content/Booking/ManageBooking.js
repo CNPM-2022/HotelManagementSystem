@@ -78,6 +78,12 @@ function ManageBooking({ fetchAllBills }) {
 
     const calcDateDiff = (startDate, endDate) => (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) + 1;
 
+    const addDays = (date, days) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
+
     const dateDiff = useMemo(() => {
         if (dateRange[0].endDate && dateRange[0].startDate) {
             return calcDateDiff(dateRange[0].startDate, dateRange[0].endDate);
@@ -161,8 +167,8 @@ function ManageBooking({ fetchAllBills }) {
 
         const data = {
             roomId: room._id,
-            checkInDate: dateRange[0].startDate,
-            checkOutDate: dateRange[0].endDate,
+            checkInDate: addDays(dateRange[0].startDate, 1),
+            checkOutDate: addDays(dateRange[0].endDate, 1),
             totalAmount,
             customerList,
             dateOfPayment: new Date(),
