@@ -966,6 +966,17 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 
+.unfavorite-btn {
+    background: #fe5f55;
+    &:hover {
+        background: #fe2f22;
+        &.heart {
+            -webkit-animation: bounceright 0.3s alternate ease infinite;
+            animation: bounceright 0.3s alternate ease infinite;
+        }
+    }
+}
+
 .book-btn {
     &:after {
         content: '\f00c';

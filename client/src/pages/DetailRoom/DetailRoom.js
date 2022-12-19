@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom';
 import './DetailRoom.scss';
 import { getRoomById } from '../../services/apiServices';
-import { addFavoriteRoom } from '../../services/apiServices';
+import { addFavoriteRoom, checkFavoriteRoom, deleteFavoriteRoom } from '../../services/apiServices';
+import { FaHeartBroken } from 'react-icons/fa';
 
 import icon1 from '../../assets/images/detailRoom/icon1.png';
 import icon2 from '../../assets/images/detailRoom/icon2.png';
@@ -23,10 +24,36 @@ const DetailRoom = () => {
     const params = useParams();
     const [room, setRoom] = useState({});
     const [loading, setLoading] = useState(true);
+    const [isFavorite, setIsFavorite] = useState(false);
     let autoIncrease = 0;
+
+    const checkFavoriteRoomFunc = async (roomId) => {
+        try {
+            const res = await checkFavoriteRoom(roomId);
+            const data = res.data;
+            if (res.status !== 200) {
+                throw new Error(data.message);
+            }
+            setIsFavorite(data.success);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleAddFavorite = async () => {
         const res = await addFavoriteRoom(params.id);
+        setIsFavorite(true);
+        const { success, message } = res.data;
+        if (success) {
+            toast.success(message);
+        } else {
+            toast.error(message);
+        }
+    };
+
+    const handleRemoveFavorite = async () => {
+        const res = await deleteFavoriteRoom(params.id);
+        setIsFavorite(false);
         const { success, message } = res.data;
         if (success) {
             toast.success(message);
@@ -52,6 +79,7 @@ const DetailRoom = () => {
         setLoading(true);
         GetDetailRoom(params.id);
         setLoading(false);
+        checkFavoriteRoomFunc(params.id);
         document.documentElement.scrollTop = 0;
     }, []);
 
@@ -152,12 +180,25 @@ const DetailRoom = () => {
                                         <Link to={`/booking/${room._id}`} onClick={handleBookNow}>
                                             <button className="button-detail-room book-btn">Book now</button>
                                         </Link>
-                                        <button
-                                            className="button-detail-room  favorite-btn"
-                                            onClick={handleAddFavorite}
-                                        >
-                                            Add to favorite
-                                        </button>
+                                        {isFavorite ? (
+                                            <button
+                                                className="button-detail-room  unfavorite-btn"
+                                                onClick={handleRemoveFavorite}
+                                            >
+                                                Remove favorite
+                                                <FaHeartBroken
+                                                    size={24}
+                                                    className="heart position-absolute me-2 end-0 "
+                                                />
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="button-detail-room  favorite-btn"
+                                                onClick={handleAddFavorite}
+                                            >
+                                                Add to favorite
+                                            </button>
+                                        )}
                                     </div>
 
                                     <div className="room-features-area d-flex flex-wrap mb-50">
