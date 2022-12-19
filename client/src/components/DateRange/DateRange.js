@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { DateRange } from 'react-date-range';
+import * as rdrLocales from 'react-date-range/dist/locale';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { AiFillCalendar } from 'react-icons/ai';
@@ -37,6 +38,7 @@ function BookingDateRange({ dateRange, handleChangeDateRange, isShowDateRange, s
             {isShowDateRange && (
                 <div>
                     <DateRange
+                        locale={rdrLocales.vi}
                         editableDateInputs={true}
                         onChange={handleChangeDateRange}
                         moveRangeOnFirstSelection={false}

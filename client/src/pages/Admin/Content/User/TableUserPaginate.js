@@ -99,7 +99,7 @@ function TableUserPaginate({
                     value={searchValue}
                     onChange={(event) => setSearchValue(event.target.value)}
                     className="form-control"
-                    placeholder="Nhập tên người dùng/ Họ và tên..."
+                    placeholder="Nhập tên người dùng/họ và tên..."
                 />
             </div>
             <div>
