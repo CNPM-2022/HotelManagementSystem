@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import _ from 'lodash';
 
 function TableRoom({
     ITEMS_PER_PAGE,
     pageCount,
+    setPageCount,
     currentPage,
+    setCurrentPage,
     handlePageChange,
     listRooms,
-    allRooms,
+    typeOptions,
     setIsShowModalDeleteRoom,
     setDataRoomDelete,
     setIsShowModalUpdateRoom,
@@ -15,15 +18,26 @@ function TableRoom({
     setIsShowModalViewRoom,
     setDataRoomView,
 }) {
+    const [chunkedRooms, setChunkedRooms] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const [filterRooms, setFilterRooms] = useState([]);
+    const [typesChecked, setTypesChecked] = useState({});
 
     useEffect(() => {
-        if (searchValue) {
-            const rooms = allRooms.filter((room) => room.roomNumber.toString().includes(searchValue));
-            setFilterRooms(rooms);
+        if (typeOptions && typeOptions.length > 0) {
+            setTypesChecked(
+                typeOptions.reduce((result, typeOption) => {
+                    result[typeOption.value] = false;
+                    return { ...result };
+                }, {}),
+            );
         }
-    }, [searchValue]);
+    }, [typeOptions]);
+
+    useEffect(() => {
+        if (listRooms && listRooms.length > 0) {
+            setChunkedRooms(_.chunk(listRooms, ITEMS_PER_PAGE));
+        }
+    }, [listRooms]);
 
     const handleClickDeleteButton = (room) => {
         setDataRoomDelete(room);
@@ -40,18 +54,97 @@ function TableRoom({
         setIsShowModalViewRoom(true);
     };
 
+    const handleSearchRooms = () => {
+        let rooms = _.clone(listRooms);
+        if (rooms.length === 0) return;
+
+        if (searchValue) {
+            rooms = listRooms.filter((room) => room.roomNumber.toString().includes(searchValue));
+        }
+
+        let allTypesCheckedOrNotChecked =
+            Object.keys(typesChecked).every((key) => typesChecked[key] === true) ||
+            Object.keys(typesChecked).every((key) => typesChecked[key] === false);
+
+        if (allTypesCheckedOrNotChecked === true) {
+            setCurrentPage(1);
+            setPageCount(Math.ceil(rooms.length / ITEMS_PER_PAGE));
+            setChunkedRooms(_.chunk(rooms, ITEMS_PER_PAGE));
+        } else {
+            const data = rooms.filter((room) => {
+                let isFiltered = true;
+                Object.keys(typesChecked).forEach((key) => {
+                    if (typesChecked[key] === false && key === room.type) isFiltered = false;
+                });
+
+                return isFiltered;
+            });
+
+            setCurrentPage(1);
+            setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
+            setChunkedRooms(_.chunk(data, ITEMS_PER_PAGE));
+        }
+    };
+
+    const handleClearFiltered = () => {
+        setSearchValue('');
+        setTypesChecked(
+            typeOptions.reduce((result, typeOption) => {
+                result[typeOption.value] = false;
+                return { ...result };
+            }, {}),
+        );
+    };
+
     return (
         <>
+            <div className="mb-2">
+                <div className="col-md-4 mb-2">
+                    <label className="form-label">Tìm kiếm phòng</label>
+                    <input
+                        value={searchValue}
+                        onChange={(event) => setSearchValue(event.target.value)}
+                        className="form-control"
+                        placeholder="Nhập số phòng..."
+                    />
+                </div>
+                <div>
+                    <label className="form-label">
+                        <b>Loại</b>
+                    </label>
+                    <div>
+                        {typeOptions.map((typeOption) => (
+                            <div key={typeOption.value}>
+                                <input
+                                    checked={typesChecked[typeOption.value]}
+                                    id={`filter-room-type-${typeOption.value}`}
+                                    type="checkbox"
+                                    onChange={(event) =>
+                                        setTypesChecked((prev) => ({
+                                            ...prev,
+                                            [typeOption.value]: event.target.checked,
+                                        }))
+                                    }
+                                />
+                                <span className="mx-1" />
+                                <label htmlFor={`filter-room-type-${typeOption.value}`} className="form-label">
+                                    {typeOption.value}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <button className="btn btn-primary" onClick={handleSearchRooms}>
+                    Tìm kiếm
+                </button>
+                {(searchValue || Object.keys(typesChecked).some((key) => typesChecked[key] === true)) && (
+                    <button className="btn btn-link" onClick={handleClearFiltered}>
+                        Xóa tất cả
+                    </button>
+                )}
+            </div>
             <h4 className="text-center">Danh sách phòng</h4>
             <br />
-            <div className="mb-2">
-                <label className="form-label">Tìm kiếm phòng</label>
-                <input
-                    value={searchValue}
-                    onChange={(event) => setSearchValue(event.target.value)}
-                    className="form-control"
-                />
-            </div>
             <table className="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
@@ -63,10 +156,8 @@ function TableRoom({
                     </tr>
                 </thead>
                 <tbody>
-                    {listRooms &&
-                        listRooms.length > 0 &&
-                        !searchValue &&
-                        listRooms.map((room, index) => (
+                    {chunkedRooms && chunkedRooms.length > 0 ? (
+                        chunkedRooms[currentPage - 1].map((room, index) => (
                             <tr key={room._id}>
                                 <th scope="row">{ITEMS_PER_PAGE * (currentPage - 1) + (index + 1)}</th>
                                 <td>{room.roomNumber}</td>
@@ -87,46 +178,19 @@ function TableRoom({
                                     </button>
                                 </td>
                             </tr>
-                        ))}
-
-                    {searchValue &&
-                        filterRooms &&
-                        filterRooms.length > 0 &&
-                        filterRooms.map((room, index) => (
-                            <tr key={room._id}>
-                                <th scope="row">{ITEMS_PER_PAGE * (currentPage - 1) + (index + 1)}</th>
-                                <td>{room.roomNumber}</td>
-                                <td>{room.type}</td>
-                                <td>{room.maxCount}</td>
-                                <td>
-                                    <button className="btn btn-success" onClick={() => handleClickViewButton(room)}>
-                                        Xem
-                                    </button>
-                                    <button
-                                        className="btn btn-warning mx-3"
-                                        onClick={() => handleClickEditButton(room)}
-                                    >
-                                        Sửa
-                                    </button>
-                                    <button className="btn btn-danger" onClick={() => handleClickDeleteButton(room)}>
-                                        Xóa
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    {(listRooms && listRooms.length === 0) ||
-                        (searchValue && filterRooms && filterRooms.length === 0 && (
-                            <tr>
-                                <td colSpan="6" className="text-center">
-                                    Không có dữ liệu
-                                </td>
-                            </tr>
-                        ))}
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="6" className="text-center">
+                                Không có dữ liệu
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
 
             <div className="d-flex justify-content-center">
-                {listRooms && listRooms.length > 0 && (
+                {chunkedRooms && chunkedRooms.length > 0 && (
                     <ReactPaginate
                         className="pagination"
                         pageClassName="page-item"

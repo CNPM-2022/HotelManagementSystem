@@ -34,7 +34,6 @@ function ManageRoom() {
     const [roomsState, dispatch] = useReducer(reducer, initState);
     const [typeOptions, setTypeOptions] = useState([]);
     const [listRooms, setListRooms] = useState([]);
-    const [allRooms, setAllRooms] = useState([]);
     const [isPreviewImage, setIsPreviewImage] = useState(false);
     const [previewIndex, setPreviewIndex] = useState(0);
     const [images, setImages] = useState('');
@@ -64,11 +63,10 @@ function ManageRoom() {
             item.roomNumber = +item.roomNumber;
             return item;
         });
-        const data = _.orderBy(res.data.data, ['roomNumber'], ['asc']);
+        const data = _.orderBy(res.data.data, ['type', 'roomNumber'], ['asc', 'asc']);
 
         setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
-        setListRooms(_.chunk(data, ITEMS_PER_PAGE));
-        setAllRooms(data);
+        setListRooms(data);
     };
 
     const fetchAllRoomTypes = async () => {
@@ -201,10 +199,12 @@ function ManageRoom() {
                             <TableRoom
                                 ITEMS_PER_PAGE={ITEMS_PER_PAGE}
                                 pageCount={pageCount}
+                                setPageCount={setPageCount}
                                 currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
                                 handlePageChange={handlePageChange}
-                                listRooms={listRooms[currentPage - 1]}
-                                allRooms={allRooms}
+                                listRooms={listRooms}
+                                typeOptions={typeOptions}
                                 setIsShowModalDeleteRoom={setIsShowModalDeleteRoom}
                                 setDataRoomDelete={setDataRoomDelete}
                                 setIsShowModalUpdateRoom={setIsShowModalUpdateRoom}
