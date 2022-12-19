@@ -25,12 +25,15 @@ const roomSchema = mongoose.Schema(
         checkOutDate: {
             type: Date,
         },
-        currentBookings: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'booking',
-            },
-        ],
+        currentBookings: {
+            type: [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'booking',
+                },
+            ],
+            default: [],
+        },
         price: {
             type: Number,
             required: true,
