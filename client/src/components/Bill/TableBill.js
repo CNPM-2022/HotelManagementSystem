@@ -3,6 +3,7 @@ import _ from 'lodash';
 import ReactPaginate from 'react-paginate';
 import FormatPrice from '../FormatPrice/FormatPrice';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { FaSort } from 'react-icons/fa';
 
 function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView }) {
     const ITEMS_PER_PAGE = 6;
@@ -59,8 +60,6 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
                     return bill.roomNumber.toLowerCase().includes(searchValue.toLowerCase());
                 }
             });
-
-            console.log(bills);
         }
 
         let allSortCheckedOrNotChecked =
@@ -93,7 +92,13 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
         <>
             <div className="mb-2">
                 <div className="col-md-4 mb-2">
-                    <label className="form-label">Tìm kiếm</label>
+                    <label className="form-label">
+                        <b>
+                            <AiOutlineSearch />
+                            <span className="mx-1" />
+                            Tìm kiếm
+                        </b>
+                    </label>
                     <input
                         value={searchValue}
                         onChange={(event) => setSearchValue(event.target.value)}
@@ -103,7 +108,11 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
                 </div>
                 <div>
                     <label className="form-label">
-                        <b>Thành tiền</b>
+                        <b>
+                            <FaSort />
+                            <span className="mx-1" />
+                            Thành tiền
+                        </b>
                     </label>
                     <div>
                         {sortOptions.map((sortOption) => (

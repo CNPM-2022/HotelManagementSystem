@@ -2,7 +2,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { deleteRoom } from '../../../../services/apiServices';
 
-function ModalDeleteRoom({ show, setShow, dataRoomDelete, fetchAllRooms }) {
+function ModalDeleteRoom({ show, setShow, dataRoomDelete, fetchAllRooms, setCurrentPage }) {
     const handleClose = () => setShow(false);
 
     const handleDeleteRoom = async () => {
@@ -10,6 +10,7 @@ function ModalDeleteRoom({ show, setShow, dataRoomDelete, fetchAllRooms }) {
         if (res && res.data && res.status === 200) {
             toast.success(res.data.message);
             fetchAllRooms();
+            setCurrentPage(1);
             handleClose();
         } else {
             toast.error(res.message);
