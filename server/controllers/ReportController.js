@@ -34,7 +34,7 @@ const WriteReportByType = async (month, year) => {
             const rooms = roomTypes[i].listRoom;
             for (let i = 0; i < rooms.length; i++) {
                 await Room.find({ roomNumber: rooms[i] }).then(async (Room) => {
-                    if (Room[0].currentBookings) {
+                    if (Room[0].currentBookings.length > 0) {
                         let totalAmount = 0;
                         for (let i = 0; i < Room[0].currentBookings.length; i++) {
                             await Booking.find({
@@ -82,11 +82,12 @@ const WriteRoomUsageDensityReport = async (month, year) => {
                     _id: booking[i],
                 }).then(async (booking) => {
                     if (booking[0].checkInDate >= firstdate && booking[0].checkOutDate <= lastdate) {
-                        totalRentDays += parseInt(
-                            (new Date(booking[0].checkOutDate) - new Date(booking[0].checkInDate)) /
-                                (1000 * 60 * 60 * 24),
-                            10,
-                        );
+                        totalRentDays +=
+                            parseInt(
+                                (new Date(booking[0].checkOutDate) - new Date(booking[0].checkInDate)) /
+                                    (1000 * 60 * 60 * 24),
+                                10,
+                            ) + 1;
                     }
                 });
             }
