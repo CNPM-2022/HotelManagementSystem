@@ -31,7 +31,6 @@ const Login = () => {
                     }),
                 );
                 navigate('/');
-                toast.success(data.message);
             } else {
                 toast.error(res.message);
             }

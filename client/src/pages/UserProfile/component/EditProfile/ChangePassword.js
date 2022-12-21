@@ -1,25 +1,21 @@
-
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { toast } from "react-toastify";
-import { putChangePassword } from '../../../../services/apiServices'
-
-
+import { toast } from 'react-toastify';
+import { putChangePassword } from '../../../../services/apiServices';
 
 function Change_password(prop) {
-
     const handleFocus = (e) => {
-        console.log(e.target.parentNode)
+        console.log(e.target.parentNode);
         //e.target.parentNode.classList.add('hhhh')
-    }
+    };
 
     const handleError = (e) => {
         document.getElementsByClassName(e.target.id)[0].classList.remove('errorMsg');
-    }
+    };
 
     /* const handleChangePassword = async (id, newPassword) => {
         try {
@@ -46,7 +42,7 @@ function Change_password(prop) {
         initialValues: {
             password: '',
             newPassword: '',
-            comfirmedNewPassword: ''
+            comfirmedNewPassword: '',
         },
 
         validationSchema: Yup.object({
@@ -62,19 +58,22 @@ function Change_password(prop) {
         }),
 
         onSubmit: async (newPassword) => {
-            const userID = JSON.parse(window.localStorage.getItem('user')).user.id
+            const userID = JSON.parse(window.localStorage.getItem('user')).user.id;
             try {
-                const res = await putChangePassword(userID, { password: newPassword.password, newPassword: newPassword.newPassword });
+                const res = await putChangePassword(userID, {
+                    password: newPassword.password,
+                    newPassword: newPassword.newPassword,
+                });
                 const data = res.data;
-                console.log(data)
+                console.log(data);
 
                 if (res.status !== 200) {
                     throw new Error(res.message || 'Something went wrong');
                 }
 
                 if (data.success) {
-                    toast.success(data.message)
-                    prop.handleClose()
+                    toast.success(data.message);
+                    prop.handleClose();
                 } else {
                     toast.error(data.message);
                 }
@@ -87,25 +86,29 @@ function Change_password(prop) {
     return (
         <Modal show={prop.show} onHide={prop.handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title className='fw-bolder'>Change password</Modal.Title>
+                <Modal.Title className="fw-bolder">Thay đổi mật khẩu</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={formik.handleSubmit} id='changepassword'>
+                <Form onSubmit={formik.handleSubmit} id="changepassword">
                     <Form.Group className="mb-4" controlId="password">
-                        <Form.Label>Current password</Form.Label>
+                        <Form.Label>Mật khẩu hiện tại</Form.Label>
                         <Form.Control
                             type="password"
-                            placeholder="Enter your password" name='password'
+                            placeholder="Nhập mật khẩu"
+                            name="password"
                             onFocus={handleFocus}
-                            value={formik.values.password} onChange={formik.handleChange}
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
                         />
                     </Form.Group>
                     <Form.Group className="mb-4" controlId="newPassword">
-                        <Form.Label>New password</Form.Label>
+                        <Form.Label>Mật khẩu mới</Form.Label>
                         <Form.Control
                             type="password"
-                            placeholder="Enter your new password" name='newPassword'
-                            value={formik.values.newPassword} onChange={formik.handleChange}
+                            placeholder="Nhập mật khẩu mới"
+                            name="newPassword"
+                            value={formik.values.newPassword}
+                            onChange={formik.handleChange}
                             onFocus={handleError}
                         />
                         <div className="errorMsg newPassword">
@@ -116,11 +119,13 @@ function Change_password(prop) {
                     </Form.Group>
 
                     <Form.Group className="mb-4 " controlId="comfirmedNewPassword">
-                        <Form.Label>Confirm password</Form.Label>
+                        <Form.Label>Xác nhận mật khẩu</Form.Label>
                         <Form.Control
                             type="password"
-                            placeholder="Confirm your new password" name='comfirmedNewPassword'
-                            value={formik.values.comfirmedNewPassword} onChange={formik.handleChange}
+                            placeholder="Xác nhận mật khẩu mới"
+                            name="comfirmedNewPassword"
+                            value={formik.values.comfirmedNewPassword}
+                            onChange={formik.handleChange}
                             onFocus={handleError}
                         />
                         <div className="errorMsg comfirmedNewPassword">
@@ -133,14 +138,14 @@ function Change_password(prop) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={prop.handleClose}>
-                    Close
+                    Đóng
                 </Button>
-                <Button variant="primary" type='submit' form='changepassword' /* onClick={prop.handleClose} */>
-                    Change password
+                <Button variant="primary" type="submit" form="changepassword" /* onClick={prop.handleClose} */>
+                    Thay đổi mật khẩu
                 </Button>
             </Modal.Footer>
         </Modal>
-    )
+    );
 }
 
-export default Change_password
+export default Change_password;
