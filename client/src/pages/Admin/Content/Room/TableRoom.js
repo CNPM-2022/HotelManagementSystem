@@ -158,7 +158,6 @@ function TableRoom({
                 )}
             </div>
             <h4 className="text-center">Danh sách phòng</h4>
-            <br />
             <table className="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
