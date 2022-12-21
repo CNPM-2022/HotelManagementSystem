@@ -43,14 +43,14 @@ const RoomsScreen = () => {
                     <div className="row h-100 align-items-center">
                         <div className="col-12">
                             <div className="breadcrumb-content text-center">
-                                <h2 className="page-title">Our Room</h2>
+                                <h2 className="page-title">Tất cả Phòng</h2>
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb justify-content-center">
                                         <li className="breadcrumb-item">
-                                            <Link to="/">Home</Link>
+                                            <Link to="/">Trang chủ</Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                            Room
+                                            Phòng
                                         </li>
                                     </ol>
                                 </nav>
@@ -67,11 +67,11 @@ const RoomsScreen = () => {
                             <form action="#" method="post">
                                 <div className="row justify-content-between align-items-end">
                                     <div className="col-6 col-md-2 col-lg-3">
-                                        <label htmlFor="checkIn">Check In</label>
+                                        <label htmlFor="checkIn">Ngày nhận phòng</label>
                                         <input type="date" className="form-control" id="checkIn" name="checkin-date" />
                                     </div>
                                     <div className="col-6 col-md-2 col-lg-3">
-                                        <label htmlFor="checkOut">Check Out</label>
+                                        <label htmlFor="checkOut">Ngày trả phòng</label>
                                         <input
                                             type="date"
                                             className="form-control"
@@ -80,26 +80,26 @@ const RoomsScreen = () => {
                                         />
                                     </div>
                                     <div className="col-4 col-md-1">
-                                        <label htmlFor="room">Type</label>
+                                        <label htmlFor="room">Loại</label>
                                         <select name="room" id="room" className="form-control form-select">
-                                            <option value="all">All</option>
+                                            <option value="all">Tất cả</option>
                                             <option value="A">A</option>
                                             <option value="B">B</option>
                                             <option value="C">C</option>
                                         </select>
                                     </div>
                                     <div className="col-4 col-md-1">
-                                        <label htmlFor="number">Number</label>
+                                        <label htmlFor="number">Phòng</label>
                                         <input
                                             type="text"
                                             className="form-control i2"
-                                            placeholder="Ex: 123"
+                                            placeholder="Vd: 123"
                                             name="number"
                                         />
                                     </div>
                                     <div className="col-12 col-md-3">
                                         <button type="submit" className="form-control btn roberto-btn w-100">
-                                            Check Availability
+                                            Tìm kiếm
                                         </button>
                                     </div>
                                 </div>

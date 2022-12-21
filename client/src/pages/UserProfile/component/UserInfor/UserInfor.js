@@ -30,7 +30,7 @@ function User_infor() {
             <Fragment>
                 <nav className="nav nav-borders">
                     <h2 className="fs-bolder ml-3">
-                        Personal profile <i className="bi bi-person-circle"></i>
+                        Thông tin cá nhân <i className="bi bi-person-circle"></i>
                     </h2>
                 </nav>
                 <hr className="mt-0 mb-4" />
@@ -44,7 +44,7 @@ function User_infor() {
                                 style={{ width: 150 + 'px' }}
                             />
                             <h5 className="my-3">{infor.user.Name}</h5>
-                            <p className="text-muted mb-1">Type of user: {infor.user.typeUser}</p>
+                            <p className="text-muted mb-1">Loại: {infor.user.typeUser}</p>
                             <p className="text-muted mb-4">
                                 {infor.user.address === undefined ? '' : infor.user.address}
                             </p>
@@ -57,7 +57,7 @@ function User_infor() {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-sm-3">
-                                    <p className="mb-0">Full Name</p>
+                                    <p className="mb-0">Tên đầy đủ</p>
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">{infor.user.Name}</p>
@@ -66,7 +66,7 @@ function User_infor() {
                             <hr />
                             <div className="row">
                                 <div className="col-sm-3">
-                                    <p className="mb-0">Username</p>
+                                    <p className="mb-0">Tên người dùng</p>
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">{infor.user.username}</p>
@@ -84,7 +84,7 @@ function User_infor() {
                             <hr />
                             <div className="row">
                                 <div className="col-sm-3">
-                                    <p className="mb-0">Phone</p>
+                                    <p className="mb-0">Số điện thoại</p>
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">{infor.user.phoneNumber}</p>
@@ -93,11 +93,11 @@ function User_infor() {
                             <hr />
                             <div className="row">
                                 <div className="col-sm-3">
-                                    <p className="mb-0">Identity card</p>
+                                    <p className="mb-0">CMND/CCCD</p>
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">
-                                        {infor.user.CMND === undefined ? 'No Information' : infor.user.CMND}
+                                        {infor.user.CMND === undefined ? 'Không có thông tin' : infor.user.CMND}
                                     </p>
                                 </div>
                             </div>
@@ -105,11 +105,11 @@ function User_infor() {
 
                             <div className="row">
                                 <div className="col-sm-3">
-                                    <p className="mb-0">Address</p>
+                                    <p className="mb-0">Địa chỉ</p>
                                 </div>
                                 <div className="col-sm-9">
                                     <p className="text-muted mb-0">
-                                        {infor.user.address === undefined ? 'No Information' : infor.user.address}
+                                        {infor.user.address === undefined ? 'Không có thông tin' : infor.user.address}
                                     </p>
                                 </div>
                             </div>

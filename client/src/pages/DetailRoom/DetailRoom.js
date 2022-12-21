@@ -107,7 +107,7 @@ const DetailRoom = () => {
                         <div className="row h-100 align-items-end">
                             <div className="col-12">
                                 <div className="breadcrumb-content d-flex align-items-center justify-content-between pb-5">
-                                    <h2 className="room-title">Room #{room.roomNumber}</h2>
+                                    <h2 className="room-title">Phòng #{room.roomNumber}</h2>
                                     <h2 className="room-price">
                                         {room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} VNĐ{' '}
                                         <span>/ Ngày</span>
@@ -178,14 +178,14 @@ const DetailRoom = () => {
 
                                     <div className="mb-3 d-flex justify-content-evenly">
                                         <Link to={`/booking/${room._id}`} onClick={handleBookNow}>
-                                            <button className="button-detail-room book-btn">Book now</button>
+                                            <button className="button-detail-room book-btn">Đặt phòng ngay</button>
                                         </Link>
                                         {isFavorite ? (
                                             <button
                                                 className="button-detail-room  unfavorite-btn"
                                                 onClick={handleRemoveFavorite}
                                             >
-                                                Remove favorite
+                                                Đã yêu thích
                                                 <FaHeartBroken
                                                     size={24}
                                                     className="heart position-absolute me-2 end-0 "
@@ -196,23 +196,20 @@ const DetailRoom = () => {
                                                 className="button-detail-room  favorite-btn"
                                                 onClick={handleAddFavorite}
                                             >
-                                                Add to favorite
+                                                Yêu thích
                                             </button>
                                         )}
                                     </div>
 
                                     <div className="room-features-area d-flex flex-wrap mb-50">
                                         <h6>
-                                            Type: <span>{room.type}</span>
+                                            Loại: <span>{room.type}</span>
                                         </h6>
                                         <h6>
-                                            Capacity: <span>Max persion {room.maxCount}</span>
+                                            Sức chứa: <span>Tối đa {room.maxCount} người</span>
                                         </h6>
                                         <h6>
-                                            Status: <span>King beds</span>
-                                        </h6>
-                                        <h6>
-                                            Services: <span>{room.note}</span>
+                                            Dịch vụ: <span>{room.note}</span>
                                         </h6>
                                     </div>
 
@@ -239,32 +236,32 @@ const DetailRoom = () => {
                                 </div>
 
                                 <div className="room-service mb-50">
-                                    <h4>Room Services</h4>
+                                    <h4>Các dịch vụ</h4>
 
                                     <ul>
                                         <li>
-                                            <img src={icon1} alt="" /> Air Conditioning
+                                            <img src={icon1} alt="" /> Điều hòa
                                         </li>
                                         <li>
-                                            <img src={icon2} alt="" /> Free drinks
+                                            <img src={icon2} alt="" /> Đồ uống
                                         </li>
                                         <li>
-                                            <img src={icon3} alt="" /> Restaurant quality
+                                            <img src={icon3} alt="" /> Nhà hàng
                                         </li>
                                         <li>
-                                            <img src={icon4} alt="" /> Cable TV
+                                            <img src={icon4} alt="" /> Ti vi
                                         </li>
                                         <li>
-                                            <img src={icon5} alt="" /> Unlimited Wifi
+                                            <img src={icon5} alt="" /> Wifi
                                         </li>
                                         <li>
-                                            <img src={icon6} alt="" /> Service 24/24
+                                            <img src={icon6} alt="" /> Phục vụ 24/24
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="room-review-area mb-100">
-                                    <h4>Room Review</h4>
+                                    <h4>Đánh giá</h4>
 
                                     <div className="single-room-review-area d-flex align-items-center">
                                         <div className="reviwer-thumbnail">
@@ -345,12 +342,12 @@ const DetailRoom = () => {
                             <div className="col-12 col-lg-4">
                                 <div className="hotel-reservation--area-detail mb-100">
                                     <form action="#" method="post" className="p-3">
-                                        <div className="fw-bolder fs-5 mb-3">Search</div>
+                                        <div className="fw-bolder fs-5 mb-3">Tìm phòng</div>
                                         <div className="form-group mb-30">
                                             <div className="input-daterange" id="datepicker">
                                                 <div className="row no-gutters">
                                                     <div className="col-6">
-                                                        <label htmlFor="checkIn">Check In</label>
+                                                        <label htmlFor="checkIn">Ngày nhận phòng</label>
                                                         <input
                                                             type="date"
                                                             className="form-control"
@@ -359,7 +356,7 @@ const DetailRoom = () => {
                                                         />
                                                     </div>
                                                     <div className="col-6">
-                                                        <label htmlFor="checkOut">Check Out</label>
+                                                        <label htmlFor="checkOut">Ngày trả phòng</label>
                                                         <input
                                                             type="date"
                                                             className="form-control"
@@ -371,11 +368,11 @@ const DetailRoom = () => {
                                             </div>
                                         </div>
                                         <div className="form-group mb-30">
-                                            <label htmlFor="room">Type</label>
+                                            <label htmlFor="room">Loại</label>
                                             <div className="row">
                                                 <div className="col-6">
                                                     <select name="room" id="room" className="form-control form-select">
-                                                        <option value="all">All</option>
+                                                        <option value="all">Tất cả</option>
                                                         <option value="A">A</option>
                                                         <option value="B">B</option>
                                                         <option value="C">C</option>
@@ -383,7 +380,7 @@ const DetailRoom = () => {
                                                 </div>
                                                 <div className="col-6">
                                                     <select name="children" id="children" className="form-control">
-                                                        <option value="children">Children</option>
+                                                        <option value="children">Trẻ em</option>
                                                         <option value="01">01</option>
                                                         <option value="02">02</option>
                                                         <option value="03">03</option>
@@ -397,7 +394,7 @@ const DetailRoom = () => {
 
                                         <div className="form-group">
                                             <button type="submit" className="btn roberto-btn-detail roberto-btn w-100">
-                                                Check Available
+                                                Tìm kiếm
                                             </button>
                                         </div>
                                     </form>
@@ -416,7 +413,7 @@ const DetailRoom = () => {
                                                 aria-controls="collapseOne"
                                                 style={{ color: 'red' }}
                                             >
-                                                <b>Similar rooms</b>
+                                                <b>Các phòng tương tự</b>
                                             </button>
                                         </h2>
                                         <div
