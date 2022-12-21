@@ -1,6 +1,7 @@
 function TableType({ listTypes, handleClickViewButton, handleClickEditButton, handleClickDeleteButton }) {
     return (
         <>
+            <h4 className="text-center mt-5">Danh sách Loại phòng</h4>
             <table className="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>

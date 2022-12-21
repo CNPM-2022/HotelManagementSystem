@@ -27,14 +27,6 @@ function Sidebar({ collapsed }) {
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}
-                                to="/admins/manage-users"
-                            >
-                                Quản lý Người dùng
-                            </NavLink>
-                        </MenuItem>
-                        <MenuItem>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? 'active' : undefined)}
                                 to="/admins/manage-rooms"
                             >
                                 Quản lý Phòng
@@ -48,7 +40,14 @@ function Sidebar({ collapsed }) {
                                 Quản lý Loại Phòng
                             </NavLink>
                         </MenuItem>
-
+                        <MenuItem>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-users"
+                            >
+                                Quản lý Người dùng
+                            </NavLink>
+                        </MenuItem>
                         <MenuItem>
                             <NavLink
                                 className={({ isActive }) => (isActive ? 'active' : undefined)}

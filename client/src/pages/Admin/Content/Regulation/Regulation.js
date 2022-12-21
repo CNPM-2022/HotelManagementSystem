@@ -52,7 +52,7 @@ function Regulation() {
             <hr />
             <div className="row">
                 <div className="col-6">
-                    <label className="form-label">Hệ số:</label>
+                    <label className="form-label">Hệ số (Người nước ngoài):</label>
                     <input
                         value={regulations?.heSo ? regulations?.heSo : ''}
                         onChange={(event) =>
@@ -65,7 +65,7 @@ function Regulation() {
                     />
                 </div>
                 <div className="col-6">
-                    <label className="form-label">Phụ thu:</label>
+                    <label className="form-label">Phụ thu (Khách thứ 3):</label>
                     <input
                         value={regulations?.phuThu ? regulations.phuThu : ''}
                         onChange={(event) =>
