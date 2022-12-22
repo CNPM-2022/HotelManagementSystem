@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import FormatPrice from '../../../../../components/FormatPrice/FormatPrice';
 
 function Revenue({ title, dataReport, isLoading }) {
     return (
@@ -40,7 +41,9 @@ function Revenue({ title, dataReport, isLoading }) {
                                         {index + 1}
                                     </th>
                                     <th className="text-center">{item.roomTypeName}</th>
-                                    <th className="text-center">{item.totalRevenue}</th>
+                                    <th className="text-center">
+                                        <FormatPrice>{item.totalRevenue}</FormatPrice>
+                                    </th>
                                     <th className="text-center">
                                         {dataReport.totalRevenue !== 0
                                             ? (item.totalRevenue / dataReport.totalRevenue).toFixed(2)

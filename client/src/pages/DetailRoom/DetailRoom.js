@@ -10,7 +10,7 @@ import { addFavoriteRoom, checkFavoriteRoom, deleteFavoriteRoom, getAllRoomTypes
 import { FaHeartBroken } from 'react-icons/fa';
 import DateRange from '../../components/DateRange/DateRange';
 import searchSlice from '../../store/searchSlice';
-import SimilarRooms from './SimilarRooms'
+import SimilarRooms from './SimilarRooms';
 
 import icon1 from '../../assets/images/detailRoom/icon1.png';
 import icon2 from '../../assets/images/detailRoom/icon2.png';
@@ -36,7 +36,7 @@ const DetailRoom = () => {
     const [room, setRoom] = useState({});
     const [loading, setLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false);
-    const [roomType, setRoomType] = useState([])
+    const [roomType, setRoomType] = useState([]);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
 
@@ -94,30 +94,33 @@ const DetailRoom = () => {
         setDateRange([item.selection]);
     };
 
+    const addDays = (date, days) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
+
     const handleSearch = () => {
         dispatch(
-            searchSlice.actions.setSearchContent(
-                {
-                    dateStart: dateRange[0].startDate.toString(),
-                    dateEnd: dateRange[0].endDate.toString(),
-                    type: document.getElementById("type-room").value,
-                    price: document.getElementById("price-room").value
-
-                }
-            ),
-        )
-        navigate('/search/1')
-    }
+            searchSlice.actions.setSearchContent({
+                dateStart: addDays(dateRange[0].startDate, 1).toString(),
+                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                type: document.getElementById('type-room').value,
+                price: document.getElementById('price-room').value,
+            }),
+        );
+        navigate('/search/1');
+    };
 
     const getAllTypeRoom = async () => {
-        const res = await getAllRoomTypes()
-        setRoomType(res.data.data)
-    }
+        const res = await getAllRoomTypes();
+        setRoomType(res.data.data);
+    };
 
     useEffect(() => {
         setLoading(true);
         GetDetailRoom(params.id);
-        getAllTypeRoom()
+        getAllTypeRoom();
         setLoading(false);
         checkFavoriteRoomFunc(params.id);
         document.documentElement.scrollTop = 0;
@@ -130,7 +133,6 @@ const DetailRoom = () => {
             }),
         );
     };
-
 
     if (loading || room._id === undefined) {
         return (
@@ -227,10 +229,7 @@ const DetailRoom = () => {
                                                 onClick={handleRemoveFavorite}
                                             >
                                                 Đã yêu thích
-                                                <FaHeartBroken
-                                                    size={20}
-                                                    className="heart position-absolute me-2 end-0"
-                                                />
+                                                <FaHeartBroken size={20} className="heart position-absolute" />
                                             </button>
                                         ) : (
                                             <button
@@ -257,11 +256,11 @@ const DetailRoom = () => {
                                         </h6>
                                     </div>
 
-                                    <h4><b>Giới thiệu sơ lược</b></h4>
+                                    <h4>
+                                        <b>Giới thiệu sơ lược</b>
+                                    </h4>
 
                                     <p>{room.description}</p>
-
-
                                 </div>
 
                                 <div className="room-service mb-50">
@@ -311,7 +310,10 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Phòng đẹp, rộng và sạch hơn mình nghĩ. Nhân viên nhiệt tình, thân thiện, luôn chào đón với nụ cười. Giường êm, phòng đầy đủ tiện nghi, toilet và buồng tắm tách riêng rất thích. Rất gần biển luôn, đi vài bước chân là ra biển. Đường trước khách sạn
+                                                Phòng đẹp, rộng và sạch hơn mình nghĩ. Nhân viên nhiệt tình, thân thiện,
+                                                luôn chào đón với nụ cười. Giường êm, phòng đầy đủ tiện nghi, toilet và
+                                                buồng tắm tách riêng rất thích. Rất gần biển luôn, đi vài bước chân là
+                                                ra biển. Đường trước khách sạn
                                             </p>
                                         </div>
                                     </div>
@@ -335,8 +337,9 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Nhân viên rất nhiệt tình vui vẻ, phòng sạch và thoải mái .
-                                                Bữa ăn sáng rất tốt. Phòng cách âm tốt.Khách sạn mới, nhân viên nhiệt tình chu đáo. Ngay trung tâm phố tây an thượng
+                                                Nhân viên rất nhiệt tình vui vẻ, phòng sạch và thoải mái . Bữa ăn sáng
+                                                rất tốt. Phòng cách âm tốt.Khách sạn mới, nhân viên nhiệt tình chu đáo.
+                                                Ngay trung tâm phố tây an thượng
                                             </p>
                                         </div>
                                     </div>
@@ -360,7 +363,9 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Sạch sẽ lịch sự, dịch vụ tốt và các bạn nhân viên rất thân thiện.Gần biển. Đồ ăn sáng ngon. Nhân viên thân thiện, chuyên nghiệp. Phòng bài trí đẹp mắt. Giường đôi cực rộng
+                                                Sạch sẽ lịch sự, dịch vụ tốt và các bạn nhân viên rất thân thiện.Gần
+                                                biển. Đồ ăn sáng ngon. Nhân viên thân thiện, chuyên nghiệp. Phòng bài
+                                                trí đẹp mắt. Giường đôi cực rộng
                                             </p>
                                         </div>
                                     </div>
@@ -386,27 +391,39 @@ const DetailRoom = () => {
                                                             />
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="form-group mb-30">
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <label htmlFor="type-room"><b>Loại:</b></label>
-                                                    <select name="type-room" id="type-room" className="form-control form-select">
+                                                    <label htmlFor="type-room">
+                                                        <b>Loại:</b>
+                                                    </label>
+                                                    <select
+                                                        name="type-room"
+                                                        id="type-room"
+                                                        className="form-control form-select"
+                                                    >
                                                         <option value="all">Tất cả</option>
-                                                        {
-                                                            roomType.map(item => (
-                                                                <option key={item._id} value={item.typeOfRooms}>{item.typeOfRooms}</option>
-                                                            ))}
+                                                        {roomType.map((item) => (
+                                                            <option key={item._id} value={item.typeOfRooms}>
+                                                                {item.typeOfRooms}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
 
                                                 <div className="col-6">
-                                                    <label htmlFor="price-room"><b>Giá:</b></label>
+                                                    <label htmlFor="price-room">
+                                                        <b>Giá:</b>
+                                                    </label>
 
-                                                    <select name="price-room" id="price-room" className="form-control form-select">
+                                                    <select
+                                                        name="price-room"
+                                                        id="price-room"
+                                                        className="form-control form-select"
+                                                    >
                                                         <option value="1">Dưới 500k</option>
                                                         <option value="2">Từ 500k - 1 triệu</option>
                                                         <option value="3">Trên 1 triệu</option>
@@ -416,7 +433,11 @@ const DetailRoom = () => {
                                         </div>
 
                                         <div className="form-group">
-                                            <button type="button" className="btn roberto-btn-detail roberto-btn w-100" onClick={handleSearch}>
+                                            <button
+                                                type="button"
+                                                className="btn roberto-btn-detail roberto-btn w-100"
+                                                onClick={handleSearch}
+                                            >
                                                 Tìm kiếm
                                             </button>
                                         </div>

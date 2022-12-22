@@ -44,7 +44,9 @@ function User_infor() {
                                 style={{ width: 150 + 'px' }}
                             />
                             <h5 className="my-3">{infor.user.Name}</h5>
-                            <p className="text-muted mb-1">Loại: {infor.user.typeUser}</p>
+                            <p className="text-muted mb-1">
+                                Quốc tịch: {infor.user.typeUser === 'Inland' ? 'Việt Nam' : 'Nước ngoài'}
+                            </p>
                             <p className="text-muted mb-4">
                                 {infor.user.address === undefined ? '' : infor.user.address}
                             </p>
