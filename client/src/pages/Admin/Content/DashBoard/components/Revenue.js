@@ -1,7 +1,41 @@
 import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import { BsSortDown, BsSortDownAlt } from 'react-icons/bs';
 import FormatPrice from '../../../../../components/FormatPrice/FormatPrice';
 
-function Revenue({ title, dataReport, isLoading }) {
+function Revenue({ dataReport, isLoading }) {
+    const [data, setData] = useState({});
+    const [sort, setSort] = useState('');
+
+    console.log(dataReport);
+
+    useEffect(() => {
+        if (!_.isEmpty(dataReport)) {
+            const sortState = 'desc';
+
+            const reportByRoomType = _.orderBy(dataReport.reportByRoomType, ['totalRevenue'], [sortState]);
+            setData({
+                month: dataReport.month,
+                year: dataReport.year,
+                totalRevenue: dataReport.totalRevenue,
+                reportByRoomType,
+            });
+            setSort(sortState);
+        }
+    }, [dataReport]);
+
+    useEffect(() => {
+        if (sort) {
+            const reportByRoomType = _.orderBy(dataReport.reportByRoomType, ['totalRevenue'], [sort]);
+            setData({
+                month: dataReport.month,
+                year: dataReport.year,
+                totalRevenue: dataReport.totalRevenue,
+                reportByRoomType,
+            });
+        }
+    }, [sort]);
+
     return (
         <>
             <div className="admin-revenue-container mt-5">
@@ -9,12 +43,12 @@ function Revenue({ title, dataReport, isLoading }) {
                     <thead>
                         <tr className="table-dark">
                             <th scope="col" colSpan="5" className="text-center">
-                                {title}
+                                Báo Cáo Doanh Thu Theo Loại Phòng
                             </th>
                         </tr>
                         <tr>
                             <th scope="col" className="text-center" colSpan="5">
-                                {_.isEmpty(dataReport) ? 'Tháng ...' : `Tháng ${dataReport.month}/${dataReport.year}`}
+                                {_.isEmpty(data) ? 'Tháng ...' : `Tháng ${data.month}/${data.year}`}
                             </th>
                         </tr>
                         <tr className="table-dark">
@@ -28,14 +62,28 @@ function Revenue({ title, dataReport, isLoading }) {
                                 Doanh Thu(VND)
                             </th>
                             <th scope="col" className="text-center">
-                                Tỷ Lệ
+                                <div className="d-flex align-items-center justify-content-center">
+                                    Tỷ Lệ
+                                    <div className="sort-container">
+                                        {sort === 'desc' && (
+                                            <span onClick={() => setSort('asc')}>
+                                                <BsSortDown />
+                                            </span>
+                                        )}
+                                        {sort === 'asc' && (
+                                            <span onClick={() => setSort('desc')}>
+                                                <BsSortDownAlt />
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {!_.isEmpty(dataReport) &&
+                        {!_.isEmpty(data) &&
                             !isLoading &&
-                            dataReport.reportByRoomType.map((item, index) => (
+                            data.reportByRoomType.map((item, index) => (
                                 <tr key={item._id}>
                                     <th className="text-center" scope="row">
                                         {index + 1}
@@ -45,13 +93,13 @@ function Revenue({ title, dataReport, isLoading }) {
                                         <FormatPrice>{item.totalRevenue}</FormatPrice>
                                     </th>
                                     <th className="text-center">
-                                        {dataReport.totalRevenue !== 0
-                                            ? (item.totalRevenue / dataReport.totalRevenue).toFixed(2)
+                                        {data.totalRevenue !== 0
+                                            ? (item.totalRevenue / data.totalRevenue).toFixed(2)
                                             : 0}
                                     </th>
                                 </tr>
                             ))}
-                        {!_.isEmpty(dataReport) && isLoading && (
+                        {!_.isEmpty(data) && isLoading && (
                             <tr>
                                 <th colSpan="4" className="text-center" scope="row">
                                     <div className="spinner-border" role="status">
@@ -61,7 +109,7 @@ function Revenue({ title, dataReport, isLoading }) {
                             </tr>
                         )}
 
-                        {_.isEmpty(dataReport) && (
+                        {_.isEmpty(data) && (
                             <tr>
                                 <th colSpan="4" className="text-center" scope="row">
                                     KHÔNG CÓ DỮ LIỆU
