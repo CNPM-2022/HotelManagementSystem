@@ -3,7 +3,7 @@ import './RoomScreen.scss';
 import { getRoomsByPage, getAllRoomTypes } from '../../services/apiServices';
 import { useParams } from 'react-router';
 import AllRoom from './AllRoom';
-import { useDispatch } from "react-redux"
+import { useDispatch } from 'react-redux';
 import searchSlice from '../../store/searchSlice';
 import DateRange from '../../components/DateRange/DateRange';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,11 +17,11 @@ const RoomsScreen = () => {
             key: 'selection',
         },
     ];
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const params = useParams();
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(parseInt(params.page));
-    const [roomType, setRoomType] = useState([])
+    const [roomType, setRoomType] = useState([]);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -30,26 +30,28 @@ const RoomsScreen = () => {
         setDateRange([item.selection]);
     };
 
+    const addDays = (date, days) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
+
     const handleSearch = () => {
         dispatch(
-            searchSlice.actions.setSearchContent(
-                {
-                    dateStart: dateRange[0].startDate.toString(),
-                    dateEnd: dateRange[0].endDate.toString(),
-                    type: document.getElementById("type-room").value,
-                    price: document.getElementById("price-room").value
-
-                }
-            ),
-        )
-        navigate('/search/1')
-    }
-
+            searchSlice.actions.setSearchContent({
+                dateStart: addDays(dateRange[0].startDate, 1).toString(),
+                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                type: document.getElementById('type-room').value,
+                price: document.getElementById('price-room').value,
+            }),
+        );
+        navigate('/search/1');
+    };
 
     useEffect(() => {
         setLoading(true);
         getRooms(page);
-        getAllTypeRoom()
+        getAllTypeRoom();
         setLoading(false);
         document.documentElement.scrollTop = 500;
     }, [page]);
@@ -70,9 +72,9 @@ const RoomsScreen = () => {
     };
 
     const getAllTypeRoom = async () => {
-        const res = await getAllRoomTypes()
-        setRoomType(res.data.data)
-    }
+        const res = await getAllRoomTypes();
+        setRoomType(res.data.data);
+    };
 
     const handleChangePage = (page) => {
         setPage(page);
@@ -106,9 +108,8 @@ const RoomsScreen = () => {
                 <div className="hotel-search-form-area" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
                     <div className="container-fluid">
                         <div className="hotel-search-form">
-                            <form >
+                            <form>
                                 <div className="row justify-content-between align-items-end abc">
-
                                     <div className="col-12 col-md-4 col-lg-4 ">
                                         <div className="form-group ">
                                             <label className="form-label">
@@ -133,17 +134,18 @@ const RoomsScreen = () => {
                                             name="checkout-date"
                                         />
                                     </div> */}
-                                    <div className="col-4 col-md-1" style={{ width: "150px" }}>
+                                    <div className="col-4 col-md-1" style={{ width: '150px' }}>
                                         <label htmlFor="type-room">Loại:</label>
                                         <select name="type-room" id="type-room" className="form-control form-select">
                                             <option value="all">Tất cả</option>
-                                            {
-                                                roomType.map(item => (
-                                                    <option key={item._id} value={item.typeOfRooms}>{item.typeOfRooms}</option>
-                                                ))}
+                                            {roomType.map((item) => (
+                                                <option key={item._id} value={item.typeOfRooms}>
+                                                    {item.typeOfRooms}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
-                                    <div className="col-4 col-md-1" style={{ width: "200px" }}>
+                                    <div className="col-4 col-md-1" style={{ width: '200px' }}>
                                         <label htmlFor="price-room">Giá:</label>
 
                                         <select name="price-room" id="price-room" className="form-control form-select">
@@ -153,7 +155,11 @@ const RoomsScreen = () => {
                                         </select>
                                     </div>
                                     <div className="col-12 col-md-3">
-                                        <button type="button" className="form-control btn roberto-btn w-100" onClick={handleSearch}>
+                                        <button
+                                            type="button"
+                                            className="form-control btn roberto-btn w-100"
+                                            onClick={handleSearch}
+                                        >
                                             Tìm kiếm
                                         </button>
                                     </div>
