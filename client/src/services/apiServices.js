@@ -130,3 +130,7 @@ export const deleteFavoriteRoom = (id) => {
 export const checkFavoriteRoom = (id) => {
     return axios.get(`favorite-rooms/check/${id}`);
 };
+
+export const getRoomByType = (type) => {
+    return axios.get(`rooms/all/type/name/${type}`)
+}

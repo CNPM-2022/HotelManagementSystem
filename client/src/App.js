@@ -28,6 +28,7 @@ import Favorite from './pages/UserProfile/component/Favorite/Favorite'
 import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
 import AdminBooking from './pages/Admin/Content/Booking/Booking';
 import Regulation from './pages/Admin/Content/Regulation/Regulation';
+import Search from './pages/Search/Search'
 
 function App() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -62,16 +63,24 @@ function App() {
                         </DefaultLayout>
                     }
                 />
-                {/* {isAuthenticated ? (
+                <Route
+                    path="/search/:page"
+                    element={
+                        <DefaultLayout>
+                            <Search />
+                        </DefaultLayout>
+                    }
+                />
+                {isAuthenticated ? (
                     <Route path="/login" element={<Navigate to="/" />} />
-                ) : (
-                    )} */}
-                <Route path="/login" element={<Login />} />
-                {/* {isAuthenticated ? (
+                ) : (<Route path="/login" element={<Login />} />
+                )}
+
+                {isAuthenticated ? (
                     <Route path="/register" element={<Navigate to="/" />} />
                 ) : (
-                    )} */}
-                <Route path="/register" element={<Register />} />
+                    <Route path="/register" element={<Register />} />
+                )}
 
                 <Route path="/" element={<PrivateRoute />}>
                     <Route

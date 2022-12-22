@@ -208,7 +208,7 @@ h1 {
 
 .single-room-area {
     position: relative;
-    z-index: 1;
+    z-index: 0;
 
     @media #{$breakpoint-xs} {
         @include flex-wrap(wrap);
@@ -670,4 +670,17 @@ h1 {
 
 .pagination-allroom .page-link:focus {
     box-shadow: none;
+}
+
+@media only screen and (max-width: 936px) and (min-width: 767px) {
+    .hotel-search-form-area .hotel-search-form .form-control {
+        margin-bottom: 10px;
+    }
+
+    .roberto-btn {
+        margin-left: 180%;
+    }
+    .roberto-rooms-area {
+        padding-top: 30px;
+    }
 }

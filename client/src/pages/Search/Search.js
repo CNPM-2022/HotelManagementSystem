@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react';
-import './RoomScreen.scss';
+import '../RoomScreen/RoomScreen.scss';
 import { getRoomsByPage, getAllRoomTypes } from '../../services/apiServices';
 import { useParams } from 'react-router';
-import AllRoom from './AllRoom';
-import { useDispatch } from "react-redux"
+import SearchContent from './SearchContent';
+import { useDispatch, useSelector } from "react-redux"
 import searchSlice from '../../store/searchSlice';
 import DateRange from '../../components/DateRange/DateRange';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const RoomsScreen = () => {
-    const navigate = useNavigate();
+const Search = () => {
+    const searchInfor = useSelector(state => state.search)
+    let dateStart = null
+    let dateEnd = null
+    if (searchInfor.dateStart && searchInfor.dateEnd) {
+        dateStart = new Date(searchInfor.dateStart)
+        dateEnd = new Date(searchInfor.dateEnd)
+    }
     const initalDateRange = [
         {
-            startDate: null,
-            endDate: null,
+            startDate: dateStart,
+            endDate: dateEnd,
             key: 'selection',
         },
     ];
@@ -31,6 +37,8 @@ const RoomsScreen = () => {
     };
 
     const handleSearch = () => {
+        // console.log(typeof document.getElementById("type-room").value)
+        // console.log(dateRange[0].startDate.toString())
         dispatch(
             searchSlice.actions.setSearchContent(
                 {
@@ -42,7 +50,6 @@ const RoomsScreen = () => {
                 }
             ),
         )
-        navigate('/search/1')
     }
 
 
@@ -78,6 +85,11 @@ const RoomsScreen = () => {
         setPage(page);
     };
 
+    for (let i = 0; i < document.querySelectorAll('.types').length; i++) {
+        if (document.querySelectorAll('.types')[i].value === searchInfor.type) {
+            document.querySelectorAll('.types')[i].setAttribute('selected', 'selected')
+        }
+    }
     return (
         <>
             <div className="breadcrumb-area bg-img bg-overlay jarallax">
@@ -85,14 +97,17 @@ const RoomsScreen = () => {
                     <div className="row h-100 align-items-center">
                         <div className="col-12">
                             <div className="breadcrumb-content text-center">
-                                <h2 className="page-title">Danh sách phòng</h2>
+                                <h2 className="page-title">Tìm kiếm</h2>
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb justify-content-center">
                                         <li className="breadcrumb-item">
                                             <Link to="/">Trang chủ</Link>
                                         </li>
+                                        <li className="breadcrumb-item">
+                                            <Link to="/rooms/1">Phòng</Link>
+                                        </li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                            Phòng
+                                            Tìm kiếm
                                         </li>
                                     </ol>
                                 </nav>
@@ -136,17 +151,17 @@ const RoomsScreen = () => {
                                     <div className="col-4 col-md-1" style={{ width: "150px" }}>
                                         <label htmlFor="type-room">Loại:</label>
                                         <select name="type-room" id="type-room" className="form-control form-select">
-                                            <option value="all">Tất cả</option>
+                                            <option className='types' value="all">Tất cả</option>
                                             {
                                                 roomType.map(item => (
-                                                    <option key={item._id} value={item.typeOfRooms}>{item.typeOfRooms}</option>
+                                                    <option className='types' key={item._id} value={item.typeOfRooms}>{item.typeOfRooms}</option>
                                                 ))}
                                         </select>
                                     </div>
                                     <div className="col-4 col-md-1" style={{ width: "200px" }}>
                                         <label htmlFor="price-room">Giá:</label>
 
-                                        <select name="price-room" id="price-room" className="form-control form-select">
+                                        <select defaultValue={searchInfor.price} name="price-room" id="price-room" className="form-control form-select">
                                             <option value="1">Dưới 500k</option>
                                             <option value="2">Từ 500k - 1 triệu</option>
                                             <option value="3">Trên 1 triệu</option>
@@ -170,10 +185,10 @@ const RoomsScreen = () => {
                     </div>
                 </div>
             ) : (
-                <AllRoom roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
+                <SearchContent roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
             )}
         </>
     );
 };
 
-export default RoomsScreen;
+export default Search;
