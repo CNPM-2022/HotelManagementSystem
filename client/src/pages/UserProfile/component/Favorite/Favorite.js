@@ -22,11 +22,11 @@ function Favorite() {
         <div className="container-xl px-4">
             <nav className="nav nav-borders nav-borders-handle">
                 <h2 className="fs-bolder text-danger">
-                    Danh sách yêu thích<i class="fa-solid fa-heart ms-2"></i>
+                    Danh sách yêu thích<i className="fa-solid fa-heart ms-2"></i>
                 </h2>
             </nav>
             <hr className="mt-0 mb-4 " />
-            <FavoriteRoomsTable listFavoriteRooms={favoriteRooms.rooms} change={setChange} />
+            <FavoriteRoomsTable listFavoriteRooms={favoriteRooms?.rooms} change={setChange} />
         </div>
     );
 }

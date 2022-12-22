@@ -59,7 +59,7 @@ export const FavoriteRoomsTable = ({ listFavoriteRooms, change }) => {
                     ) : (
                         <tr>
                             <td colSpan="6" className="text-center">
-                                Không có dữ liệu
+                                Danh sách yêu thích rỗng
                             </td>
                         </tr>
                     )}

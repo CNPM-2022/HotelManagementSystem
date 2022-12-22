@@ -187,8 +187,8 @@ const DetailRoom = () => {
                                             >
                                                 Đã yêu thích
                                                 <FaHeartBroken
-                                                    size={24}
-                                                    className="heart position-absolute me-2 end-0 "
+                                                    size={20}
+                                                    className="heart position-absolute me-2 end-0"
                                                 />
                                             </button>
                                         ) : (
