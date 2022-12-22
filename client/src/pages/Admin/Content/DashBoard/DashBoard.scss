@@ -14,4 +14,15 @@
             }
         }
     }
+
+    .sort-container {
+        margin-left: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+        user-select: none;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
 }

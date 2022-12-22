@@ -1,6 +1,38 @@
 import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import { BsSortDown, BsSortDownAlt } from 'react-icons/bs';
 
-function Density({ title, dataReport, isLoading }) {
+function Density({ dataReport, isLoading }) {
+    const [data, setData] = useState({});
+    const [sort, setSort] = useState('');
+
+    useEffect(() => {
+        if (!_.isEmpty(dataReport)) {
+            const sortState = 'desc';
+
+            const roomUsageDensityReport = _.orderBy(dataReport.roomUsageDensityReport, ['totalRentDays'], [sortState]);
+            setData({
+                month: dataReport.month,
+                year: dataReport.year,
+                totalRentDays: dataReport.totalRentDays,
+                roomUsageDensityReport,
+            });
+            setSort(sortState);
+        }
+    }, [dataReport]);
+
+    useEffect(() => {
+        if (sort) {
+            const roomUsageDensityReport = _.orderBy(dataReport.roomUsageDensityReport, ['totalRentDays'], [sort]);
+            setData({
+                month: dataReport.month,
+                year: dataReport.year,
+                totalRentDays: dataReport.totalRentDays,
+                roomUsageDensityReport,
+            });
+        }
+    }, [sort]);
+
     return (
         <>
             <div className="admin-density-container mt-5">
@@ -8,12 +40,12 @@ function Density({ title, dataReport, isLoading }) {
                     <thead>
                         <tr className="table-dark">
                             <th scope="col" colSpan="5" className="text-center">
-                                {title}
+                                Báo Cáo Mật Độ Sử Dụng Phòng
                             </th>
                         </tr>
                         <tr>
                             <th scope="col" className="text-center" colSpan="5">
-                                {_.isEmpty(dataReport) ? 'Tháng ...' : `Tháng ${dataReport.month}/${dataReport.year}`}
+                                {_.isEmpty(data) ? 'Tháng ...' : `Tháng ${data.month}/${data.year}`}
                             </th>
                         </tr>
                         <tr className="table-dark">
@@ -27,14 +59,28 @@ function Density({ title, dataReport, isLoading }) {
                                 Số Ngày Thuê
                             </th>
                             <th scope="col" className="text-center">
-                                Tỷ Lệ
+                                <div className="d-flex align-items-center justify-content-center">
+                                    Tỷ Lệ
+                                    <div className="sort-container">
+                                        {sort === 'desc' && (
+                                            <span onClick={() => setSort('asc')}>
+                                                <BsSortDown />
+                                            </span>
+                                        )}
+                                        {sort === 'asc' && (
+                                            <span onClick={() => setSort('desc')}>
+                                                <BsSortDownAlt />
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {!_.isEmpty(dataReport) &&
+                        {!_.isEmpty(data) &&
                             !isLoading &&
-                            dataReport.roomUsageDensityReport.map((item, index) => (
+                            data.roomUsageDensityReport.map((item, index) => (
                                 <tr key={item._id}>
                                     <th className="text-center" scope="row">
                                         {index + 1}
@@ -42,13 +88,13 @@ function Density({ title, dataReport, isLoading }) {
                                     <th className="text-center">{item.roomNumber}</th>
                                     <th className="text-center">{item.totalRentDays}</th>
                                     <th className="text-center">
-                                        {dataReport.totalRentDays !== 0
-                                            ? (item.totalRentDays / dataReport.totalRentDays).toFixed(2)
+                                        {data.totalRentDays !== 0
+                                            ? (item.totalRentDays / data.totalRentDays).toFixed(2)
                                             : 0}
                                     </th>
                                 </tr>
                             ))}
-                        {!_.isEmpty(dataReport) && isLoading && (
+                        {!_.isEmpty(data) && isLoading && (
                             <tr>
                                 <th colSpan="4" className="text-center" scope="row">
                                     <div className="spinner-border" role="status">
@@ -58,7 +104,7 @@ function Density({ title, dataReport, isLoading }) {
                             </tr>
                         )}
 
-                        {_.isEmpty(dataReport) && (
+                        {_.isEmpty(data) && (
                             <tr>
                                 <th colSpan="4" className="text-center" scope="row">
                                     KHÔNG CÓ DỮ LIỆU

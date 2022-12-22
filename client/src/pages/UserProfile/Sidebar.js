@@ -50,7 +50,7 @@ function Sidebar() {
                 </li>
                 <li className="list">
                     <NavLink to="/user/favorite">
-                        <i class="fa-solid fa-heart me-2"></i>Danh sách yêu thích
+                        <i className="fa-solid fa-heart me-2"></i>Danh sách yêu thích
                     </NavLink>
                 </li>
                 <li onClick={hanldesingout}>
