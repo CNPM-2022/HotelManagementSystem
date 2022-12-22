@@ -252,6 +252,9 @@ const DetailRoom = () => {
                                         <h6>
                                             Dịch vụ: <span>{room.note}</span>
                                         </h6>
+                                        <h6>
+                                            Đánh giá: <span>{Math.floor(Math.random() * 4) + 7}/10</span>
+                                        </h6>
                                     </div>
 
                                     <p>{room.description}</p>
