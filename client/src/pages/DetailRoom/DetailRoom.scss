@@ -972,8 +972,9 @@ html .ui-button.ui-state-disabled:active {
     &:hover {
         background: #fe2f22;
         &.heart {
-            -webkit-animation: bounceright 0.3s alternate ease infinite;
-            animation: bounceright 0.3s alternate ease infinite;
+            // -webkit-animation: bounceright 0.3s alternate ease infinite;
+            // animation: bounceright 0.3s alternate ease infinite;
+            transform: scale(1.4);
         }
     }
 }

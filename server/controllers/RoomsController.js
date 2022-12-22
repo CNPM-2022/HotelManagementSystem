@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Rooms from '../models/Room';
 import RoomType from '../models/RoomType';
+import Booking from '../models/Booking';
 import fs from 'fs';
 
 // @desc    Fetch all rooms
@@ -370,10 +371,8 @@ const updateRoomWithBookingDetails = asyncHandler(async (req, res) => {
                     oldType.listRoom.splice(index, 1);
                 }
                 await oldType.save();
-                console.log(oldType.listRoom);
             }
             const typeIsTrue = await RoomType.findOne({ typeOfRooms: type });
-            console.log(typeIsTrue);
             if (typeIsTrue) {
                 typeIsTrue.listRoom.push(roomIsAlreadyExist.roomNumber);
                 await typeIsTrue.save();
@@ -457,52 +456,62 @@ const getAllRoomsWithPagination = asyncHandler(async (req, res) => {
 
 const getRoomsFilter = asyncHandler(async (req, res) => {
     const { page } = req.params;
-    const { type, price, rentperDate, checkOutDate } = req.body;
+    const { type, roomNumber, rentperDate, checkOutDate } = req.body;
     const limit = 5;
     try {
         const startIndex = (Number(page) - 1) * Number(limit);
         const endIndex = Number(page) * Number(limit);
         const results = {};
 
-        if (type && price && rentperDate && checkOutDate) {
+        const DateNow = new Date();
+        const newCheckInDate = new Date(rentperDate);
+        const newCheckOutDate = new Date(checkOutDate);
+
+        results.results = await Rooms.find();
+        if (type && type !== 'all') {
             results.results = await Rooms.find({
                 type,
-                price: { $lte: price },
-                rentperDate: { $gte: checkOutDate },
-                checkOutDate: { $gte: checkOutDate },
-            });
-        } else if (type && rentperDate && checkOutDate) {
-            results.results = await Rooms.find({
-                type,
-                rentperDate: { $gte: checkOutDate },
-                checkOutDate: { $gte: checkOutDate },
-            });
-        } else if (price && rentperDate && checkOutDate) {
-            results.results = await Rooms.find({
-                price: { $lte: price },
-                rentperDate: { $gte: checkOutDate },
-                checkOutDate: { $gte: checkOutDate },
-            });
-        } else if (type && price) {
-            results.results = await Rooms.find({
-                type,
-                price: { $lte: price },
-            });
-        } else if (type) {
-            results.results = await Rooms.find({
-                type,
-            });
-        } else if (price) {
-            results.results = await Rooms.find({
-                price: { $lte: price },
-            });
-        } else if (rentperDate && checkOutDate) {
-            results.results = await Rooms.find({
-                rentperDate: { $gte: checkOutDate },
-                checkOutDate: { $gte: checkOutDate },
             });
         }
-        console.log(results);
+
+        if (roomNumber) {
+            results.results = await Rooms.find({
+                roomNumber,
+            });
+        }
+
+        if (newCheckInDate && newCheckOutDate) {
+            for (let i = 0; i < results.results.length; i++) {
+                let currentBookings;
+                if (results.results[i].currentBookings.length > 0) {
+                    currentBookings = results.results[i].currentBookings;
+                    let count = 0;
+                    for (let j = 0; j < currentBookings.length; j++) {
+                        const newCheckInDate = new Date(rentperDate);
+                        const newCheckOutDate = new Date(checkOutDate);
+                        const booking = await Booking.findById(currentBookings[j]);
+                        const currentCheckInDate = new Date(booking.checkInDate);
+                        const currentCheckOutDate = new Date(booking.checkOutDate);
+
+                        if (
+                            (newCheckInDate >= currentCheckOutDate &&
+                                newCheckInDate <= newCheckOutDate &&
+                                newCheckInDate >= DateNow) ||
+                            (newCheckOutDate <= currentCheckInDate &&
+                                newCheckOutDate >= newCheckInDate &&
+                                newCheckInDate >= DateNow)
+                        ) {
+                            count++;
+                        }
+                    }
+                    if (count == 0) {
+                        results.results.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+        }
+
         const lengthOfRooms = results.results.length;
 
         if (endIndex < lengthOfRooms) {

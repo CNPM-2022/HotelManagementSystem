@@ -148,7 +148,7 @@ const DetailRoom = () => {
                         <div className="row h-100 align-items-end">
                             <div className="col-12">
                                 <div className="breadcrumb-content d-flex align-items-center justify-content-between pb-5">
-                                    <h2 className="room-title">Room #{room.roomNumber}</h2>
+                                    <h2 className="room-title">Phòng #{room.roomNumber}</h2>
                                     <h2 className="room-price">
                                         {room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} VNĐ{' '}
                                         <span>/ Ngày</span>
@@ -219,17 +219,17 @@ const DetailRoom = () => {
 
                                     <div className="mb-3 d-flex justify-content-evenly">
                                         <Link to={`/booking/${room._id}`} onClick={handleBookNow}>
-                                            <button className="button-detail-room book-btn">Book now</button>
+                                            <button className="button-detail-room book-btn">Đặt phòng ngay</button>
                                         </Link>
                                         {isFavorite ? (
                                             <button
                                                 className="button-detail-room  unfavorite-btn"
                                                 onClick={handleRemoveFavorite}
                                             >
-                                                Remove favorite
+                                                Đã yêu thích
                                                 <FaHeartBroken
-                                                    size={24}
-                                                    className="heart position-absolute me-2 end-0 "
+                                                    size={20}
+                                                    className="heart position-absolute me-2 end-0"
                                                 />
                                             </button>
                                         ) : (
@@ -237,23 +237,20 @@ const DetailRoom = () => {
                                                 className="button-detail-room  favorite-btn"
                                                 onClick={handleAddFavorite}
                                             >
-                                                Add to favorite
+                                                Yêu thích
                                             </button>
                                         )}
                                     </div>
 
                                     <div className="room-features-area d-flex flex-wrap mb-50">
                                         <h6>
-                                            Type: <span>{room.type}</span>
+                                            Loại: <span>{room.type}</span>
                                         </h6>
                                         <h6>
-                                            Capacity: <span>Max persion {room.maxCount}</span>
+                                            Sức chứa: <span>Tối đa {room.maxCount} người</span>
                                         </h6>
                                         <h6>
-                                            Status: <span>King beds</span>
-                                        </h6>
-                                        <h6>
-                                            Services: <span>{room.note}</span>
+                                            Dịch vụ: <span>{room.note}</span>
                                         </h6>
                                     </div>
 
@@ -280,32 +277,32 @@ const DetailRoom = () => {
                                 </div>
 
                                 <div className="room-service mb-50">
-                                    <h4>Room Services</h4>
+                                    <h4>Các dịch vụ</h4>
 
                                     <ul>
                                         <li>
-                                            <img src={icon1} alt="" /> Air Conditioning
+                                            <img src={icon1} alt="" /> Điều hòa
                                         </li>
                                         <li>
-                                            <img src={icon2} alt="" /> Free drinks
+                                            <img src={icon2} alt="" /> Đồ uống
                                         </li>
                                         <li>
-                                            <img src={icon3} alt="" /> Restaurant quality
+                                            <img src={icon3} alt="" /> Nhà hàng
                                         </li>
                                         <li>
-                                            <img src={icon4} alt="" /> Cable TV
+                                            <img src={icon4} alt="" /> Ti vi
                                         </li>
                                         <li>
-                                            <img src={icon5} alt="" /> Unlimited Wifi
+                                            <img src={icon5} alt="" /> Wifi
                                         </li>
                                         <li>
-                                            <img src={icon6} alt="" /> Service 24/24
+                                            <img src={icon6} alt="" /> Phục vụ 24/24
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="room-review-area mb-100">
-                                    <h4>Room Review</h4>
+                                    <h4>Đánh giá</h4>
 
                                     <div className="single-room-review-area d-flex align-items-center">
                                         <div className="reviwer-thumbnail">

@@ -302,6 +302,7 @@ h1 {
         .room-feature {
             @include display-flex(flex);
             @include flex-wrap(wrap);
+            flex-direction: column;
             position: relative;
             z-index: 1;
             margin-bottom: 20px;
