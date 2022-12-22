@@ -1,5 +1,5 @@
 import RegisterForm from './RegisterForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/authSlice';
 import './Register.scss';
@@ -45,9 +45,12 @@ const Regiter = () => {
 
     return (
         <div className="register-container">
+
             <header className="header">
-                <span>Already have an account?</span>
-                <button onClick={() => navigate('/login')}>Log in</button>
+                <Link to={"/"} className='hehe'>Trang chủ</Link>
+                <div><span>Bạn đã có tài khoản?</span>
+                    <button onClick={() => navigate('/login')}>Đăng nhập</button></div>
+
             </header>
             <RegisterForm onRegister={registerHandler} />
         </div>

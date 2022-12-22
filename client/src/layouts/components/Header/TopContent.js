@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { FaPhoneAlt } from 'react-icons/fa';
-import { HiMail } from 'react-icons/hi';
+import { RiGroupFill } from 'react-icons/ri';
+import { MdOutlineSubject } from 'react-icons/md';
+
 
 import './Header.scss';
 import UserMenu from '../../../components/UserMenu/UserMenu';
@@ -17,12 +18,12 @@ const TopContent = () => {
                     <div className="content">
                         <div className="contact-list">
                             <span className="contact">
-                                <FaPhoneAlt className="icon" />
-                                <span>(123) 456-789-1230</span>
+                                <RiGroupFill className="icon" />
+                                <span>Team 16</span>
                             </span>
                             <span className="contact">
-                                <HiMail className="icon" />
-                                <span>info.colorlib@gmail.com</span>
+                                <MdOutlineSubject className="icon" />
+                                <span>Nhập môn Công nghệ phần mềm</span>
                             </span>
                         </div>
 

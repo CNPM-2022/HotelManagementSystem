@@ -21,14 +21,14 @@ const LoginForm = (props) => {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-lg-10 col-xl-7 mx-auto">
-                                            <h3 className="display-5 font-weight-bold">LOG IN!</h3>
-                                            <p className="text-muted mb-4 ">Login to your account to continue</p>
+                                            <h3 className="display-5 font-weight-bold">Đăng Nhập</h3>
+                                            <p className="text-muted mb-4 ">Đăng nhập để trải nghiệm tốt hơn</p>
                                             <form onSubmit={submitHandler}>
                                                 <div className="form-group mb-3">
                                                     <input
                                                         id="inputEmail"
                                                         type="text"
-                                                        placeholder="Username"
+                                                        placeholder="Tài khoản"
                                                         required=""
                                                         autoFocus=""
                                                         className="form-control rounded-pill border-0 shadow-sm px-4"
@@ -39,7 +39,7 @@ const LoginForm = (props) => {
                                                     <input
                                                         id="inputPassword"
                                                         type="password"
-                                                        placeholder="Password"
+                                                        placeholder="Mật khẩu"
                                                         required=""
                                                         className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                                                         ref={passwordRef}
@@ -53,20 +53,20 @@ const LoginForm = (props) => {
                                                         className="custom-control-input"
                                                     />
                                                     <label htmlFor="customCheck1" className="custom-control-label mx-2">
-                                                        Remember password
+                                                        Ghi nhớ mật khẩu
                                                     </label>
                                                 </div>
-                                                <p>
-                                                    New Customer?
-                                                    <Link to="/register" className="px-2">
-                                                        Register Now
+                                                <p >
+                                                    Chưa có tài khoản?
+                                                    <Link to="/register" className="px-2 text-primary">
+                                                        Đăng kí ngay
                                                     </Link>
                                                 </p>
                                                 <button
                                                     type="submit"
                                                     className="btn btn_login btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                                                 >
-                                                    Sign in
+                                                    Đăng nhập
                                                 </button>
                                             </form>
                                         </div>

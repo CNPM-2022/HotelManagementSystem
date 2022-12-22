@@ -41,7 +41,7 @@
     .header {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         height: 58px;
         padding: 0px 60px;
         background-color: #181313;
@@ -92,4 +92,11 @@
 }
 .container2 span i.hide-btn::before {
     content: '\f070';
+}
+
+.hehe {
+    margin-left: -40px;
+    &:hover {
+        color: rgb(81, 81, 185);
+    }
 }

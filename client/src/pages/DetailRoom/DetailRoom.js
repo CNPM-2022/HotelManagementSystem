@@ -257,26 +257,11 @@ const DetailRoom = () => {
                                         </h6>
                                     </div>
 
+                                    <h4><b>Giới thiệu sơ lược</b></h4>
+
                                     <p>{room.description}</p>
 
-                                    <p>
-                                        If you live in New York City or travel to and from New York City a lot, you know
-                                        all about the traffic there. Getting places is often next to impossible, even
-                                        with the gazillion yellow cabs. If you’re like me you often look with envy at
-                                        those shiny limousines with their unformed drivers and wish you could sit in
-                                        one. Well, you can. New York limo service is more affordable than you think,
-                                        whether it’s for Newark airport transportation, LaGuardia airport
-                                        transportation, or to drive wherever you wish to go.
-                                    </p>
 
-                                    <p>
-                                        Every time I hail a cab in New York City or wait for one at the airports, I hope
-                                        I’ll be lucky enough to get one that’s halfway decent and that the driver
-                                        actually speaks English. I have spent many anxious moments wondering if I ever
-                                        get to my destination. Or whether I’d get ripped off. Even if all goes well, I
-                                        can’t say I can remember many rides in New York cabs that were very pleasant.
-                                        And given how much they cost by now, going with a limo makes ever more sense.
-                                    </p>
                                 </div>
 
                                 <div className="room-service mb-50">
@@ -315,7 +300,7 @@ const DetailRoom = () => {
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
                                                     <span>27 Aug 2019</span>
-                                                    <h6>Brandon Kelley</h6>
+                                                    <h6>Trần Tuấn</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
                                                     <i className="fa fa-star"></i>
@@ -326,8 +311,7 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                                consectetur, adipisci velit, sed quia non numquam eius modi tempora.
+                                                Phòng đẹp, rộng và sạch hơn mình nghĩ. Nhân viên nhiệt tình, thân thiện, luôn chào đón với nụ cười. Giường êm, phòng đầy đủ tiện nghi, toilet và buồng tắm tách riêng rất thích. Rất gần biển luôn, đi vài bước chân là ra biển. Đường trước khách sạn
                                             </p>
                                         </div>
                                     </div>
@@ -340,7 +324,7 @@ const DetailRoom = () => {
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
                                                     <span>27 Aug 2019</span>
-                                                    <h6>Sounron Masha</h6>
+                                                    <h6>Nguyễn Lan Hương</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
                                                     <i className="fa fa-star"></i>
@@ -351,8 +335,8 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                                consectetur, adipisci velit, sed quia non numquam eius modi tempora.
+                                                Nhân viên rất nhiệt tình vui vẻ, phòng sạch và thoải mái .
+                                                Bữa ăn sáng rất tốt. Phòng cách âm tốt.Khách sạn mới, nhân viên nhiệt tình chu đáo. Ngay trung tâm phố tây an thượng
                                             </p>
                                         </div>
                                     </div>
@@ -365,7 +349,7 @@ const DetailRoom = () => {
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
                                                     <span>27 Aug 2019</span>
-                                                    <h6>Amada Lyly</h6>
+                                                    <h6>Trần Lyly</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
                                                     <i className="fa fa-star"></i>
@@ -376,8 +360,7 @@ const DetailRoom = () => {
                                                 </div>
                                             </div>
                                             <p>
-                                                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                                consectetur, adipisci velit, sed quia non numquam eius modi tempora.
+                                                Sạch sẽ lịch sự, dịch vụ tốt và các bạn nhân viên rất thân thiện.Gần biển. Đồ ăn sáng ngon. Nhân viên thân thiện, chuyên nghiệp. Phòng bài trí đẹp mắt. Giường đôi cực rộng
                                             </p>
                                         </div>
                                     </div>

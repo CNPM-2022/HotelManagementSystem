@@ -1,5 +1,5 @@
 import LoginForm from './LoginForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/authSlice';
 import { toast } from 'react-toastify';
@@ -42,10 +42,13 @@ const Login = () => {
     return (
         <div className="login-container">
             <header className="header">
-                <span>Don't have an account yet?</span>
-                <button className="btn-signup" onClick={() => navigate('/register')}>
-                    Sign up
-                </button>
+                <Link to={"/"} className='hehe'>Trang chủ</Link>
+                <div>
+                    <span>Bạn chưa có tài khoản?</span>
+                    <button className="btn-signup" onClick={() => navigate('/register')}>
+                        Đăng kí
+                    </button>
+                </div>
             </header>
             <LoginForm onLogin={loginHandler} />
         </div>

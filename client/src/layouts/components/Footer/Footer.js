@@ -9,7 +9,7 @@ function Footer() {
                 <div className="container">
                     <div className="row align-items-baseline justify-content-between">
                         <div className="col-12 col-sm-12 col-lg-6">
-                            <div className="single-footer-widget mb-80">
+                            <div className="single-footer-widget">
                                 <Link href="/" className="footer-logo">
                                     <img src={images.logoLight} alt="logo" />
                                 </Link>
@@ -51,7 +51,7 @@ function Footer() {
                         </div> */}
 
                         <div className="col-12 col-sm-12 col-lg-6">
-                            <div className="single-footer-widget mb-80">
+                            <div className="single-footer-widget">
                                 <h5 className="widget-title">Theo dõi bản tin</h5>
                                 <span>Theo dõi bản tin của chúng tôi để nhận thông báo về các bản cập nhật mới.</span>
 
