@@ -3,11 +3,14 @@ import { useDispatch } from 'react-redux';
 import bookingSlice from '../../store/bookingSlice';
 import { toast } from 'react-toastify';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import './DetailRoom.scss';
 import { getRoomById } from '../../services/apiServices';
-import { addFavoriteRoom, checkFavoriteRoom, deleteFavoriteRoom } from '../../services/apiServices';
+import { addFavoriteRoom, checkFavoriteRoom, deleteFavoriteRoom, getAllRoomTypes } from '../../services/apiServices';
 import { FaHeartBroken } from 'react-icons/fa';
+import DateRange from '../../components/DateRange/DateRange';
+import searchSlice from '../../store/searchSlice';
+import SimilarRooms from './SimilarRooms'
 
 import icon1 from '../../assets/images/detailRoom/icon1.png';
 import icon2 from '../../assets/images/detailRoom/icon2.png';
@@ -20,11 +23,23 @@ import avt2 from '../../assets/images/detailRoom/54.jpg';
 import avt3 from '../../assets/images/detailRoom/55.jpg';
 
 const DetailRoom = () => {
+    const navigate = useNavigate();
+    const initalDateRange = [
+        {
+            startDate: null,
+            endDate: null,
+            key: 'selection',
+        },
+    ];
     const dispatch = useDispatch();
     const params = useParams();
     const [room, setRoom] = useState({});
     const [loading, setLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [roomType, setRoomType] = useState([])
+    const [dateRange, setDateRange] = useState(initalDateRange);
+    const [isShowDateRange, setIsShowDateRange] = useState(false);
+
     let autoIncrease = 0;
 
     const checkFavoriteRoomFunc = async (roomId) => {
@@ -75,13 +90,38 @@ const DetailRoom = () => {
         }
     };
 
+    const handleChangeDateRange = (item) => {
+        setDateRange([item.selection]);
+    };
+
+    const handleSearch = () => {
+        dispatch(
+            searchSlice.actions.setSearchContent(
+                {
+                    dateStart: dateRange[0].startDate.toString(),
+                    dateEnd: dateRange[0].endDate.toString(),
+                    type: document.getElementById("type-room").value,
+                    price: document.getElementById("price-room").value
+
+                }
+            ),
+        )
+        navigate('/search/1')
+    }
+
+    const getAllTypeRoom = async () => {
+        const res = await getAllRoomTypes()
+        setRoomType(res.data.data)
+    }
+
     useEffect(() => {
         setLoading(true);
         GetDetailRoom(params.id);
+        getAllTypeRoom()
         setLoading(false);
         checkFavoriteRoomFunc(params.id);
         document.documentElement.scrollTop = 0;
-    }, []);
+    }, [params.id]);
 
     const handleBookNow = () => {
         dispatch(
@@ -90,6 +130,7 @@ const DetailRoom = () => {
             }),
         );
     };
+
 
     if (loading || room._id === undefined) {
         return (
@@ -344,60 +385,56 @@ const DetailRoom = () => {
                             </div>
                             <div className="col-12 col-lg-4">
                                 <div className="hotel-reservation--area-detail mb-100">
-                                    <form action="#" method="post" className="p-3">
-                                        <div className="fw-bolder fs-5 mb-3">Search</div>
+                                    <form className="p-3">
+                                        <div className="fw-bolder fs-5 mb-3">Tìm kiếm</div>
                                         <div className="form-group mb-30">
                                             <div className="input-daterange" id="datepicker">
                                                 <div className="row no-gutters">
-                                                    <div className="col-6">
-                                                        <label htmlFor="checkIn">Check In</label>
-                                                        <input
-                                                            type="date"
-                                                            className="form-control"
-                                                            id="checkIn"
-                                                            name="checkin-date"
-                                                        />
+                                                    <div className="col-12">
+                                                        <div className="form-group ">
+                                                            <label className="form-label">
+                                                                <b>Chọn ngày nhận/trả phòng:</b>
+                                                            </label>
+                                                            <DateRange
+                                                                handleChangeDateRange={handleChangeDateRange}
+                                                                dateRange={dateRange}
+                                                                isShowDateRange={isShowDateRange}
+                                                                setIsShowDateRange={setIsShowDateRange}
+                                                            />
+                                                        </div>
                                                     </div>
-                                                    <div className="col-6">
-                                                        <label htmlFor="checkOut">Check Out</label>
-                                                        <input
-                                                            type="date"
-                                                            className="form-control"
-                                                            id="checkOut"
-                                                            name="checkout-date"
-                                                        />
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="form-group mb-30">
-                                            <label htmlFor="room">Type</label>
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <select name="room" id="room" className="form-control form-select">
-                                                        <option value="all">All</option>
-                                                        <option value="A">A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="C">C</option>
+                                                    <label htmlFor="type-room"><b>Loại:</b></label>
+                                                    <select name="type-room" id="type-room" className="form-control form-select">
+                                                        <option value="all">Tất cả</option>
+                                                        {
+                                                            roomType.map(item => (
+                                                                <option key={item._id} value={item.typeOfRooms}>{item.typeOfRooms}</option>
+                                                            ))}
                                                     </select>
                                                 </div>
+
                                                 <div className="col-6">
-                                                    <select name="children" id="children" className="form-control">
-                                                        <option value="children">Children</option>
-                                                        <option value="01">01</option>
-                                                        <option value="02">02</option>
-                                                        <option value="03">03</option>
-                                                        <option value="04">04</option>
-                                                        <option value="05">05</option>
-                                                        <option value="06">06</option>
+                                                    <label htmlFor="price-room"><b>Giá:</b></label>
+
+                                                    <select name="price-room" id="price-room" className="form-control form-select">
+                                                        <option value="1">Dưới 500k</option>
+                                                        <option value="2">Từ 500k - 1 triệu</option>
+                                                        <option value="3">Trên 1 triệu</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="form-group">
-                                            <button type="submit" className="btn roberto-btn-detail roberto-btn w-100">
-                                                Check Available
+                                            <button type="button" className="btn roberto-btn-detail roberto-btn w-100" onClick={handleSearch}>
+                                                Tìm kiếm
                                             </button>
                                         </div>
                                     </form>
@@ -408,15 +445,14 @@ const DetailRoom = () => {
                                     <div className="accordion-item">
                                         <h2 className="accordion-header" id="headingOne">
                                             <button
-                                                className="accordion-button collapsed"
+                                                className="accordion-button collapsed text-primary"
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#collapseOne"
                                                 aria-expanded="false"
                                                 aria-controls="collapseOne"
-                                                style={{ color: 'red' }}
                                             >
-                                                <b>Similar rooms</b>
+                                                <b>Các phòng tương tự</b>
                                             </button>
                                         </h2>
                                         <div
@@ -425,7 +461,9 @@ const DetailRoom = () => {
                                             aria-labelledby="headingOne"
                                             data-bs-parent="#accordionExample"
                                         >
-                                            <div className="accordion-body">chưa có gì đâu mà xem</div>
+                                            <div className="accordion-body">
+                                                <SimilarRooms type={room.type} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
