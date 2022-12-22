@@ -456,7 +456,7 @@ const getAllRoomsWithPagination = asyncHandler(async (req, res) => {
 
 const getRoomsFilter = asyncHandler(async (req, res) => {
     const { page } = req.params;
-    const { type, roomNumber, rentperDate, checkOutDate } = req.body;
+    const { type, price, rentperDate, checkOutDate } = req.body;
     const limit = 5;
     try {
         const startIndex = (Number(page) - 1) * Number(limit);
@@ -474,10 +474,20 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
             });
         }
 
-        if (roomNumber) {
-            results.results = await Rooms.find({
-                roomNumber,
-            });
+        if (price) {
+            if (price === '1') {
+                results.results = await Rooms.find({
+                    price: { $lte: 500000 },
+                });
+            } else if (price === '2') {
+                results.results = await Rooms.find({
+                    price: { $gte: 500000, $lte: 1000000 },
+                });
+            } else if (price === '3') {
+                results.results = await Rooms.find({
+                    price: { $gte: 1000000 },
+                });
+            }
         }
 
         if (newCheckInDate && newCheckOutDate) {
