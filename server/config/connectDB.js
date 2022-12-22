@@ -3,7 +3,7 @@ require('dotenv').config();
 const connectDB = async () => {
     try {
         await mongoose.connect(
-            `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@project1.hodrtv1.mongodb.net/?retryWrites=true&w=majority`,
+            `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@hotelmanage.xjfexqv.mongodb.net/?retryWrites=true&w=majority`,
             {
                 useUnifiedTopology: true,
             },
