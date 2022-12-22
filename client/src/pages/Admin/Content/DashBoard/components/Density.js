@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import FormatPrice from '../../../../../components/FormatPrice/FormatPrice';
 
 function Density({ title, dataReport, isLoading }) {
     return (
@@ -41,9 +40,7 @@ function Density({ title, dataReport, isLoading }) {
                                         {index + 1}
                                     </th>
                                     <th className="text-center">{item.roomNumber}</th>
-                                    <th className="text-center">
-                                        <FormatPrice>{item.totalRentDays}</FormatPrice>
-                                    </th>
+                                    <th className="text-center">{item.totalRentDays}</th>
                                     <th className="text-center">
                                         {dataReport.totalRentDays !== 0
                                             ? (item.totalRentDays / dataReport.totalRentDays).toFixed(2)

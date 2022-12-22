@@ -73,6 +73,12 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
         setIsShowDateRange(false);
     };
 
+    const addDays = (date, days) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
+
     const handleUpdateRoom = async () => {
         let isValidRoom = true;
 
@@ -128,8 +134,8 @@ function ModalManageRoom({ show, setShow, modalType, typeOptions, dataRoom, fetc
             formData.append('maxCount', capacity);
 
             if (dateRange[0].startDate && dateRange[0].endDate) {
-                formData.append('rentperDate', dateRange[0].startDate);
-                formData.append('checkOutDate', dateRange[0].endDate);
+                formData.append('rentperDate', addDays(dateRange[0].startDate, 1));
+                formData.append('checkOutDate', addDays(dateRange[0].endDate, 1));
             }
 
             const res = await putUpdateRoom(dataRoom._id, formData);

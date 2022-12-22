@@ -957,8 +957,9 @@ html .ui-button.ui-state-disabled:active {
         background: #fe2f22;
 
         &:after {
-            -webkit-animation: bounceright 0.3s alternate ease infinite;
-            animation: bounceright 0.3s alternate ease infinite;
+            // -webkit-animation: bounceright 0.3s alternate ease infinite;
+            // animation: bounceright 0.3s alternate ease infinite;
+            transform: scale(1.4);
         }
     }
 
@@ -969,12 +970,19 @@ html .ui-button.ui-state-disabled:active {
 
 .unfavorite-btn {
     background: #fe5f55;
+
+    .heart {
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.2s;
+    }
     &:hover {
         background: #fe2f22;
-        &.heart {
+        .heart {
             // -webkit-animation: bounceright 0.3s alternate ease infinite;
             // animation: bounceright 0.3s alternate ease infinite;
-            transform: scale(1.4);
+            transform: translateY(-50%) scale(1.4);
         }
     }
 }
