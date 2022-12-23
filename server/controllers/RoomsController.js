@@ -476,13 +476,28 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
 
         if (price) {
             if (price === '1') {
-                results.results.filter((item) => item.price <= 500000);
+                for (let i = 0; i < results.results.length; i++) {
+                    if (results.results[i].price > 500000) {
+                        results.results.splice(i, 1);
+                        i--;
+                    }
+                }
             }
             if (price === '2') {
-                results.results.filter((item) => item.price >= 500000 && item.price <= 1000000);
+                for (let i = 0; i < results.results.length; i++) {
+                    if (results.results[i].price > 1000000 || results.results[i].price < 500000) {
+                        results.results.splice(i, 1);
+                        i--;
+                    }
+                }
             }
             if (price === '3') {
-                results.results.filter((item) => item.price >= 1000000);
+                for (let i = 0; i < results.results.length; i++) {
+                    if (results.results[i].price < 1000000) {
+                        results.results.splice(i, 1);
+                        i--;
+                    }
+                }
             }
         }
 
