@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import './RoomScreen.scss';
 
 function AllRoom(props) {
+    const serverURL = process.env.REACT_APP_SERVER_URL
     const params = useParams();
     const navigate = useNavigate();
     const pageRef = useRef();
@@ -34,7 +35,7 @@ function AllRoom(props) {
     for (let i = 1; i <= numberOfPage; i++) {
         listPage.push(i);
     }
-    const page = params.page;
+    //const page = params.page;
     const handleChangePage = (e) => {
         props.handleChangePage(parseInt(e.target.innerText));
         document.documentElement.scrollTop = 500;
@@ -68,7 +69,7 @@ function AllRoom(props) {
                                     data-aos-anchor-placement="center-bottom"
                                 >
                                     <div className="room-thumbnail">
-                                        <img src={`http://localhost:5000/${room.imageUrls[0].filePath}`} alt="" />
+                                        <img src={`${serverURL + room.imageUrls[0].filePath}`} alt="" />
                                     </div>
 
                                     <div className="room-content">
