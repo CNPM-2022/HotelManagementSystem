@@ -88,6 +88,7 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
         setSearchValue('');
         setSortChecked(initSortCheckedState);
     };
+
     return (
         <>
             <div className="mb-2">
