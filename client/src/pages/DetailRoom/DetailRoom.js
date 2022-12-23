@@ -23,6 +23,7 @@ import avt2 from '../../assets/images/detailRoom/54.jpg';
 import avt3 from '../../assets/images/detailRoom/55.jpg';
 
 const DetailRoom = () => {
+    const serverURL = process.env.REACT_APP_SERVER_URL
     const navigate = useNavigate();
     const initalDateRange = [
         {
@@ -174,7 +175,7 @@ const DetailRoom = () => {
                                             <div className="carousel-inner">
                                                 <div className="carousel-item active">
                                                     <img
-                                                        src={`http://localhost:5000/${room.imageUrls[0].filePath}`}
+                                                        src={`${serverURL + room.imageUrls[0].filePath}`}
                                                         className="d-block w-100"
                                                         alt=""
                                                     />
@@ -182,7 +183,7 @@ const DetailRoom = () => {
                                                 {room.imageUrls.slice(1).map((room) => (
                                                     <div className="carousel-item" key={room.fileName}>
                                                         <img
-                                                            src={`http://localhost:5000/${room.filePath}`}
+                                                            src={`${serverURL + room.filePath}`}
                                                             className="d-block w-100"
                                                             alt=""
                                                         />
@@ -197,7 +198,7 @@ const DetailRoom = () => {
                                                     className="active"
                                                 >
                                                     <img
-                                                        src={`http://localhost:5000/${room.imageUrls[0].filePath}`}
+                                                        src={`${serverURL + room.imageUrls[0].filePath}`}
                                                         className="d-block w-100"
                                                         alt=""
                                                     />
@@ -209,7 +210,7 @@ const DetailRoom = () => {
                                                         data-bs-slide-to={(autoIncrease += 1)}
                                                     >
                                                         <img
-                                                            src={`http://localhost:5000/${room.filePath}`}
+                                                            src={`${serverURL + room.filePath}`}
                                                             className="d-block w-100"
                                                             alt=""
                                                         />

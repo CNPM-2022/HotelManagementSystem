@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import '../RoomScreen/RoomScreen.scss';
-import { getRoomsByPage, getAllRoomTypes } from '../../services/apiServices';
+import { searchRooms, getAllRoomTypes } from '../../services/apiServices';
 import { useParams } from 'react-router';
 import SearchContent from './SearchContent';
 import { useDispatch, useSelector } from 'react-redux';
 import searchSlice from '../../store/searchSlice';
 import DateRange from '../../components/DateRange/DateRange';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Search = () => {
     const searchInfor = useSelector((state) => state.search);
     let dateStart = null;
     let dateEnd = null;
-    if (searchInfor.dateStart && searchInfor.dateEnd) {
+    if (searchInfor.dateStart !== '' && searchInfor.dateEnd !== '') {
         dateStart = new Date(searchInfor.dateStart);
         dateEnd = new Date(searchInfor.dateEnd);
     }
@@ -30,6 +31,7 @@ const Search = () => {
     const [roomType, setRoomType] = useState([]);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
+    const [isChange, setIsChange] = useState(false)
     const [loading, setLoading] = useState(true);
 
     const handleChangeDateRange = (item) => {
@@ -42,9 +44,11 @@ const Search = () => {
         return result;
     };
 
-    const handleSearch = () => {
-        // console.log(typeof document.getElementById("type-room").value)
-        // console.log(dateRange[0].startDate.toString())
+    const handleSearchButton = () => {
+        if (dateRange[0].startDate === null && dateRange[0].endDate === null) {
+            toast.error('Vui lòng chọn ngày nhận/trả phòng')
+            return
+        }
         dispatch(
             searchSlice.actions.setSearchContent({
                 dateStart: addDays(dateRange[0].startDate, 1).toString(),
@@ -53,19 +57,27 @@ const Search = () => {
                 price: document.getElementById('price-room').value,
             }),
         );
+        setIsChange(!isChange)
     };
 
     useEffect(() => {
         setLoading(true);
-        getRooms(page);
+        const infor = {
+            "type": searchInfor.type,
+            "price": searchInfor.price,
+            "rentperDate": searchInfor.dateStart,
+            "checkOutDate": searchInfor.dateEnd
+        }
+        getRoomsBySearch(infor);
         getAllTypeRoom();
         setLoading(false);
         document.documentElement.scrollTop = 500;
-    }, [page]);
+    }, [isChange, page]);
 
-    const getRooms = async (page) => {
+    const getRoomsBySearch = async (infor) => {
         try {
-            const res = await getRoomsByPage(page);
+            const res = await searchRooms(infor);
+
             const data = res.data;
 
             if (res.status !== 200) {
@@ -90,6 +102,15 @@ const Search = () => {
     for (let i = 0; i < document.querySelectorAll('.types').length; i++) {
         if (document.querySelectorAll('.types')[i].value === searchInfor.type) {
             document.querySelectorAll('.types')[i].setAttribute('selected', 'selected');
+        }
+    }
+
+    const checkAvailable = () => {
+        if (searchInfor.dateStart === '' && searchInfor.dateEnd === '') {
+            return false
+        }
+        else if (searchInfor.dateStart !== '' && searchInfor.dateEnd !== '') {
+            return true
         }
     }
     return (
@@ -180,7 +201,7 @@ const Search = () => {
                                         <button
                                             type="button"
                                             className="form-control btn roberto-btn w-100"
-                                            onClick={handleSearch}
+                                            onClick={handleSearchButton}
                                         >
                                             Tìm kiếm
                                         </button>
@@ -198,7 +219,8 @@ const Search = () => {
                     </div>
                 </div>
             ) : (
-                <SearchContent roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
+                rooms.results.results.length === 0 || !checkAvailable() ? <div className='text-center my-4'><h4>Không có kết quả nào phù hợp</h4></div> :
+                    <SearchContent roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
             )}
         </>
     );

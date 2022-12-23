@@ -7,8 +7,6 @@ function Revenue({ dataReport, isLoading }) {
     const [data, setData] = useState({});
     const [sort, setSort] = useState('');
 
-    console.log(dataReport);
-
     useEffect(() => {
         if (!_.isEmpty(dataReport)) {
             const sortState = 'desc';

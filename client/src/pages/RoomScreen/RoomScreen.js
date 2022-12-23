@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import searchSlice from '../../store/searchSlice';
 import DateRange from '../../components/DateRange/DateRange';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const RoomsScreen = () => {
     const navigate = useNavigate();
@@ -37,6 +38,10 @@ const RoomsScreen = () => {
     };
 
     const handleSearch = () => {
+        if (dateRange[0].startDate === null && dateRange[0].endDate === null) {
+            toast.error('Vui lòng chọn ngày nhận/trả phòng')
+            return
+        }
         dispatch(
             searchSlice.actions.setSearchContent({
                 dateStart: addDays(dateRange[0].startDate, 1).toString(),
