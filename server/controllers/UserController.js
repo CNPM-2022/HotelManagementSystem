@@ -26,6 +26,9 @@ const changeInfo = asyncHandler(async (req, res) => {
             user.CMND = CMND;
             user.address = address;
             user.typeUser = typeUser;
+        }
+
+        if (isAdmin) {
             user.isAdmin = isAdmin;
         }
         const updatedUser = await user.save();
