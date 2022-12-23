@@ -232,7 +232,7 @@ const DetailRoom = () => {
                                             Sức chứa: <span>Tối đa {room.maxCount} người</span>
                                         </h6>
                                         <h6>
-                                            Ghi chú: <span>{room.note}</span>
+                                            Dịch vụ: <span>{room.note}</span>
                                         </h6>
                                         <h6>
                                             Đánh giá: <span>{Math.floor(Math.random() * 4) + 7}/10</span>
@@ -281,7 +281,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Trần Tuấn</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
@@ -308,7 +308,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Nguyễn Lan Hương</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
@@ -334,7 +334,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Trần Lyly</h6>
                                                 </div>
                                                 <div className="reviwer-rating">

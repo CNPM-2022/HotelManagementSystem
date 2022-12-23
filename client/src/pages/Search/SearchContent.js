@@ -90,7 +90,7 @@ function SearchContent(props) {
                                                 Sức chứa: <span>Tối đa {room.maxCount} người</span>
                                             </h6>
                                             <h6>
-                                                Ghi chú: <span>{room.note}</span>
+                                                Dịch vụ: <span>{room.note}</span>
                                             </h6>
                                         </div>
                                         <Link to={`/room/${room._id}`} className="btn view-detail-btn">

@@ -117,8 +117,8 @@ export const ConfirmInfor = () => {
     let autoIncrease = 1;
     if (infor.user !== undefined) {
         let totalCost = 0
-        let amountDateRent = ((dateRentEnd.getTime() - dateRentStart.getTime()) / 1000) / 86400;
-        if (amountDateRent === 0) amountDateRent = 1
+        let amountDateRent = ((dateRentEnd.getTime() - dateRentStart.getTime()) / 1000) / 86400 + 1;
+        //if (amountDateRent === 0) amountDateRent = 1
 
         if (infor.user.typeUser === 'Foreign' || bookingInfor.bookingInformation.listCustomer.some((element) => element.typeUser === 'Foreign')) {
 
@@ -129,7 +129,6 @@ export const ConfirmInfor = () => {
             }
             else {
                 totalCost = bookingInfor.price * rule.heSo * amountDateRent
-                console.log(bookingInfor.price)
             }
             dispatch(
                 bookingSlice.actions.setTotalCost(

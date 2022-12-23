@@ -45,18 +45,7 @@ const LoginForm = (props) => {
                                                         ref={passwordRef}
                                                     />
                                                 </div>
-                                                <div className="custom-control custom-checkbox mb-3">
-                                                    <input
-                                                        id="customCheck1"
-                                                        type="checkbox"
-                                                        defaultChecked
-                                                        className="custom-control-input"
-                                                    />
-                                                    <label htmlFor="customCheck1" className="custom-control-label mx-2">
-                                                        Ghi nhớ mật khẩu
-                                                    </label>
-                                                </div>
-                                                <p >
+                                                <p>
                                                     Chưa có tài khoản?
                                                     <Link to="/register" className="px-2 text-primary">
                                                         Đăng kí ngay

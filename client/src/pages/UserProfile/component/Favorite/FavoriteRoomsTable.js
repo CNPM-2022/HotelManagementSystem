@@ -37,7 +37,7 @@ export const FavoriteRoomsTable = ({ listFavoriteRooms, change }) => {
                                 <td>{room.roomNumber}</td>
                                 <td className="fw-bold">{room.maxCount}</td>
                                 <td>
-                                    <FormatPrice>{room.price}vnđ</FormatPrice>
+                                    <p>{room.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} VNĐ</p>
                                 </td>
                                 <td>{room.type}</td>
                                 <td className="d-flex">

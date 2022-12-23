@@ -7,7 +7,7 @@ import { Stepper } from '@progress/kendo-react-layout';
 import { useDispatch } from 'react-redux';
 import { FormInputInfor, ConfirmInfor, Bill } from './formComponents';
 import bookingSlice from '../../store/bookingSlice';
-import { getRoomById } from '../../services/apiServices';
+import { getRoomById, searchRooms } from '../../services/apiServices';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import './Booking.scss';
@@ -84,6 +84,15 @@ const BookingScreen = () => {
         }),
     );
 
+    const checkDate = async (data) => {
+        const res = await searchRooms(data);
+        for (const i of res.data.results.results) {
+            if (i._id === room._id) {
+                return true;
+            }
+        }
+        return false;
+    };
     const [steps, setSteps] = useState([
         {
             label: 'Nhập thông tin',
@@ -142,7 +151,30 @@ const BookingScreen = () => {
                 );
             }
             if (step === 1) {
-                toast.success('Đặt phòng thành công');
+                let price;
+                if (room.price < 500000) {
+                    price = '1';
+                }
+                if (room.price > 1000000) {
+                    price = '2';
+                }
+                if (room.price <= 1000000 && room.price >= 500000) {
+                    price = '3';
+                }
+                const data = {
+                    type: room.type,
+                    price: price,
+                    rentperDate: values.dateRent.start.toString(),
+                    checkOutDate: values.dateRent.end.toString(),
+                };
+                checkDate(data).then((available) => {
+                    if (available) {
+                        toast.success('Đặt phòng thành công');
+                    } else {
+                        toast.error('Ngày bạn đặt đã không còn chỗ');
+                        setStep(0);
+                    }
+                });
             }
             if (isLastStep) {
                 navigate('/User/My-Booking');

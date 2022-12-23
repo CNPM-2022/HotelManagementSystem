@@ -226,11 +226,11 @@ function ModalManageType({ show, setShow, modalType, title, dataType = {}, fetch
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Đóng
                     </Button>
                     {modalType !== 'VIEW' && (
                         <Button variant="primary" onClick={handleSubmit}>
-                            Save
+                            Lưu
                         </Button>
                     )}
                 </Modal.Footer>
