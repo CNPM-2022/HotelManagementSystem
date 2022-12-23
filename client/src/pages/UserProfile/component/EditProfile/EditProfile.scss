@@ -317,9 +317,7 @@ display-flex {
 .form-radio-changeInfor {
     @extend display-flex;
     @include align-items(center);
-    margin-bottom: 30px;
     position: relative;
-
     margin-bottom: 40px;
 }
 
@@ -331,16 +329,15 @@ display-flex {
         margin: 0px;
         padding: 12px 10px;
         width: auto;
-        height: 50px;
+        height: 40px;
         box-sizing: border-box;
         position: relative;
         display: inline-block;
-        // width: auto;
         text-align: center;
         background-color: #f8f8f8;
         font-size: 14px;
         font-weight: 400;
-        color: #f8f8f8;
+        color: black;
         text-align: center;
         text-transform: none;
         transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out,
@@ -362,6 +359,7 @@ display-flex {
 }
 
 .form-radio-changeInfor-item {
+    color: black;
     @extend display-flex;
     input + label {
         &:first-of-type {

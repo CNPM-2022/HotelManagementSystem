@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -43,6 +43,7 @@ function ChangeInfor(props) {
             phoneNumber: props.userInfor.phoneNumber,
             CMND: props.userInfor.CMND,
             address: props.userInfor.address,
+            typeUser: ''
         },
 
         validationSchema: Yup.object({
@@ -59,10 +60,17 @@ function ChangeInfor(props) {
         }),
 
         onSubmit: (newInfor) => {
-            console.log(newInfor);
+            let typeUser
+            for (const radioButton of document.querySelectorAll('input[name="typeUser"]')) {
+                if (radioButton.checked) {
+                    typeUser = radioButton.value
+                }
+            }
+            newInfor.typeUser = typeUser
             changeInfor(props.userInfor._id, newInfor);
         },
     });
+
 
     return (
         <div className="container-xl px-4">
@@ -178,7 +186,7 @@ function ChangeInfor(props) {
                                 </div>
 
                                 <div className="mb-3">
-                                    <div className="form-radio-changeInfor">
+                                    <div className="form-radio-changeInfor d-flex justify-content-start align-items-center">
                                         <label htmlFor="typeUser" className="form-label small mb-1 ms-1">
                                             Khách
                                         </label>
@@ -188,25 +196,17 @@ function ChangeInfor(props) {
                                                 name="typeUser"
                                                 value="Inland"
                                                 id="Inland"
-                                                checked="checked"
+                                                defaultChecked={props.userInfor.typeUser === 'Inland'}
                                             />
-                                            <label htmlFor="Inland">Trong nước</label>
+                                            <label htmlFor="Inland" >Trong nước</label>
 
-                                            <input type="radio" name="typeUser" value="Foreign" id="Foreign" />
+                                            <input type="radio" name="typeUser" value="Foreign"
+                                                id="Foreign"
+                                                defaultChecked={props.userInfor.typeUser === 'Foreign'}
+                                            />
                                             <label htmlFor="Foreign">Nước ngoài</label>
                                         </div>
                                     </div>
-
-                                    {/* <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
-                                        <label className="btn btn-outline-primary" for="btnradio1">Radio 1</label>
-
-                                        <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
-                                        <label className="btn btn-outline-primary" for="btnradio2">Radio 2</label>
-
-                                        <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
-                                        <label className="btn btn-outline-primary" for="btnradio3">Radio 3</label>
-                                    </div> */}
                                 </div>
 
                                 <div className="row gx-3 mb-3 mx-0 d-flex justify-content-center">

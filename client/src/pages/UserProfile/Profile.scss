@@ -58,6 +58,9 @@ h5,
                     font-family: 'Bootstrap-icons';
                     content: '\F234';
                     right: 2px !important;
+                    @media only screen and (max-width: 768px) {
+                        content: '\f230';
+                    }
                 }
                 &:after {
                     display: none;
@@ -172,6 +175,9 @@ h5,
                 &:after {
                     content: '\f230';
                     left: 2px;
+                    @media only screen and (max-width: 768px) {
+                        content: '\f234';
+                    }
                 }
             }
         }

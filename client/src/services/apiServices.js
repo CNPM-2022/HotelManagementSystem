@@ -134,3 +134,7 @@ export const checkFavoriteRoom = (id) => {
 export const getRoomByType = (type) => {
     return axios.get(`rooms/all/type/name/${type}`)
 }
+
+export const searchRooms = (infor) => {
+    return axios.post('rooms/filter/1', infor)
+}
