@@ -476,19 +476,17 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
 
         if (price) {
             if (price === '1') {
-                results.results = await Rooms.find({
-                    price: { $lte: 500000 },
-                });
-            } else if (price === '2') {
-                results.results = await Rooms.find({
-                    price: { $gte: 500000, $lte: 1000000 },
-                });
-            } else if (price === '3') {
-                results.results = await Rooms.find({
-                    price: { $gte: 1000000 },
-                });
+                results.results.filter((item) => item.price <= 500000);
+            }
+            if (price === '2') {
+                results.results.filter((item) => item.price >= 500000 && item.price <= 1000000);
+            }
+            if (price === '3') {
+                results.results.filter((item) => item.price >= 1000000);
             }
         }
+
+        console.log(results.results);
 
         if (newCheckInDate && newCheckOutDate) {
             for (let i = 0; i < results.results.length; i++) {
