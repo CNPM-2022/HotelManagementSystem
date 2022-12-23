@@ -23,7 +23,7 @@ import avt2 from '../../assets/images/detailRoom/54.jpg';
 import avt3 from '../../assets/images/detailRoom/55.jpg';
 
 const DetailRoom = () => {
-    const serverURL = process.env.REACT_APP_SERVER_URL
+    const serverURL = process.env.REACT_APP_SERVER_URL;
     const navigate = useNavigate();
     const initalDateRange = [
         {
@@ -59,23 +59,11 @@ const DetailRoom = () => {
     const handleAddFavorite = async () => {
         const res = await addFavoriteRoom(params.id);
         setIsFavorite(true);
-        const { success, message } = res.data;
-        if (success) {
-            toast.success(message);
-        } else {
-            toast.error(message);
-        }
     };
 
     const handleRemoveFavorite = async () => {
         const res = await deleteFavoriteRoom(params.id);
         setIsFavorite(false);
-        const { success, message } = res.data;
-        if (success) {
-            toast.success(message);
-        } else {
-            toast.error(message);
-        }
     };
 
     const GetDetailRoom = async (roomId) => {
@@ -95,17 +83,11 @@ const DetailRoom = () => {
         setDateRange([item.selection]);
     };
 
-    const addDays = (date, days) => {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    };
-
     const handleSearch = () => {
         dispatch(
             searchSlice.actions.setSearchContent({
-                dateStart: addDays(dateRange[0].startDate, 1).toString(),
-                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                dateStart: dateRange[0].startDate.toString(),
+                dateEnd: dateRange[0].endDate.toString(),
                 type: document.getElementById('type-room').value,
                 price: document.getElementById('price-room').value,
             }),
@@ -250,7 +232,7 @@ const DetailRoom = () => {
                                             Sức chứa: <span>Tối đa {room.maxCount} người</span>
                                         </h6>
                                         <h6>
-                                            Dịch vụ: <span>{room.note}</span>
+                                            Ghi chú: <span>{room.note}</span>
                                         </h6>
                                         <h6>
                                             Đánh giá: <span>{Math.floor(Math.random() * 4) + 7}/10</span>

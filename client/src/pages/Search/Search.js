@@ -31,43 +31,37 @@ const Search = () => {
     const [roomType, setRoomType] = useState([]);
     const [dateRange, setDateRange] = useState(initalDateRange);
     const [isShowDateRange, setIsShowDateRange] = useState(false);
-    const [isChange, setIsChange] = useState(false)
+    const [isChange, setIsChange] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const handleChangeDateRange = (item) => {
         setDateRange([item.selection]);
     };
 
-    const addDays = (date, days) => {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    };
-
     const handleSearchButton = () => {
         if (dateRange[0].startDate === null && dateRange[0].endDate === null) {
-            toast.error('Vui lòng chọn ngày nhận/trả phòng')
-            return
+            toast.error('Vui lòng chọn ngày nhận/trả phòng');
+            return;
         }
         dispatch(
             searchSlice.actions.setSearchContent({
-                dateStart: addDays(dateRange[0].startDate, 1).toString(),
-                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                dateStart: dateRange[0].startDate.toString(),
+                dateEnd: dateRange[0].endDate.toString(),
                 type: document.getElementById('type-room').value,
                 price: document.getElementById('price-room').value,
             }),
         );
-        setIsChange(!isChange)
+        setIsChange(!isChange);
     };
 
     useEffect(() => {
         setLoading(true);
         const infor = {
-            "type": searchInfor.type,
-            "price": searchInfor.price,
-            "rentperDate": searchInfor.dateStart,
-            "checkOutDate": searchInfor.dateEnd
-        }
+            type: searchInfor.type,
+            price: searchInfor.price,
+            rentperDate: searchInfor.dateStart,
+            checkOutDate: searchInfor.dateEnd,
+        };
         getRoomsBySearch(infor);
         getAllTypeRoom();
         setLoading(false);
@@ -107,12 +101,11 @@ const Search = () => {
 
     const checkAvailable = () => {
         if (searchInfor.dateStart === '' && searchInfor.dateEnd === '') {
-            return false
+            return false;
+        } else if (searchInfor.dateStart !== '' && searchInfor.dateEnd !== '') {
+            return true;
         }
-        else if (searchInfor.dateStart !== '' && searchInfor.dateEnd !== '') {
-            return true
-        }
-    }
+    };
     return (
         <>
             <div className="breadcrumb-area bg-img bg-overlay jarallax">
@@ -218,9 +211,12 @@ const Search = () => {
                         <span className="sr-only">Loading...</span>
                     </div>
                 </div>
+            ) : rooms.results.results.length === 0 || !checkAvailable() ? (
+                <div className="text-center my-4">
+                    <h4>Không có kết quả nào phù hợp</h4>
+                </div>
             ) : (
-                rooms.results.results.length === 0 || !checkAvailable() ? <div className='text-center my-4'><h4>Không có kết quả nào phù hợp</h4></div> :
-                    <SearchContent roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
+                <SearchContent roomData={rooms} curPage={page} handleChangePage={handleChangePage} />
             )}
         </>
     );

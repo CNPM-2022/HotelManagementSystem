@@ -20,14 +20,17 @@ function Booking() {
         if (res && res.data && res.data.success === true) {
             const data = res.data.bills
                 .filter((bill) => bill.booking !== null)
-                .map((bill) => ({
-                    ...bill,
-                    ...bill.booking,
-                    totalAmount: +bill.totalAmount,
-                    customer: bill.user.isAdmin === true ? bill.booking.customerList[0] : bill.user,
-                    roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
-                    roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
-                }));
+                .map((bill) => {
+                    bill.user.name = bill.user.Name;
+                    return {
+                        ...bill,
+                        ...bill.booking,
+                        totalAmount: +bill.totalAmount,
+                        customer: bill.user.isAdmin === true ? bill.booking.customerList[0] : bill.user,
+                        roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
+                        roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
+                    };
+                });
 
             setListBills(data);
         }
