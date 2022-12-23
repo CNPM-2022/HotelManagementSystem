@@ -85,28 +85,25 @@ const BookingScreen = () => {
     );
 
     const checkDate = async (data) => {
-        const res = await searchRooms(data);
+        const res = await searchRooms(data)
         for (const i of res.data.results.results) {
             if (i._id === room._id) {
-                return true;
+                return true
             }
         }
-        return false;
-    };
-    const [steps, setSteps] = useState([
-        {
-            label: 'Nhập thông tin',
-            isValid: undefined,
-        },
-        {
-            label: 'Xác nhận',
-            isValid: undefined,
-        },
-        {
-            label: 'Hóa đơn',
-            isValid: undefined,
-        },
-    ]);
+        return false
+    }
+    const [steps, setSteps] = useState([{
+        label: 'Nhập thông tin',
+        isValid: undefined
+    }, {
+        label: 'Xác nhận',
+        isValid: undefined
+    }, {
+        label: 'Hóa đơn',
+        isValid: undefined
+    }]);
+
     const lastStepIndex = steps.length - 1;
     const isLastStep = lastStepIndex === step;
     const onStepSubmit = useCallback(
