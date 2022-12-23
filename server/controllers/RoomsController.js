@@ -486,8 +486,6 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
             }
         }
 
-        console.log(results.results);
-
         if (newCheckInDate && newCheckOutDate) {
             for (let i = 0; i < results.results.length; i++) {
                 let currentBookings;
