@@ -19,7 +19,7 @@ router.get('/all', getAllRooms);
 
 router.get('/all/:page', getAllRoomsWithPagination);
 
-router.get('/filter/:page', getRoomsFilter);
+router.post('/filter/:page', getRoomsFilter);
 
 router.get('/all/type/:id', getAllRoomsByType);
 
