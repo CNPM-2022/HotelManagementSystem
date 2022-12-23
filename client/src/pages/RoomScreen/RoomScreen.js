@@ -31,21 +31,15 @@ const RoomsScreen = () => {
         setDateRange([item.selection]);
     };
 
-    const addDays = (date, days) => {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    };
-
     const handleSearch = () => {
         if (dateRange[0].startDate === null && dateRange[0].endDate === null) {
-            toast.error('Vui lòng chọn ngày nhận/trả phòng')
-            return
+            toast.error('Vui lòng chọn ngày nhận/trả phòng');
+            return;
         }
         dispatch(
             searchSlice.actions.setSearchContent({
-                dateStart: addDays(dateRange[0].startDate, 1).toString(),
-                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                dateStart: dateRange[0].startDate.toString(),
+                dateEnd: dateRange[0].endDate.toString(),
                 type: document.getElementById('type-room').value,
                 price: document.getElementById('price-room').value,
             }),

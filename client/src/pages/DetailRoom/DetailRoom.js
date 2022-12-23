@@ -23,7 +23,7 @@ import avt2 from '../../assets/images/detailRoom/54.jpg';
 import avt3 from '../../assets/images/detailRoom/55.jpg';
 
 const DetailRoom = () => {
-    const serverURL = process.env.REACT_APP_SERVER_URL
+    const serverURL = process.env.REACT_APP_SERVER_URL;
     const navigate = useNavigate();
     const initalDateRange = [
         {
@@ -59,23 +59,11 @@ const DetailRoom = () => {
     const handleAddFavorite = async () => {
         const res = await addFavoriteRoom(params.id);
         setIsFavorite(true);
-        const { success, message } = res.data;
-        if (success) {
-            toast.success(message);
-        } else {
-            toast.error(message);
-        }
     };
 
     const handleRemoveFavorite = async () => {
         const res = await deleteFavoriteRoom(params.id);
         setIsFavorite(false);
-        const { success, message } = res.data;
-        if (success) {
-            toast.success(message);
-        } else {
-            toast.error(message);
-        }
     };
 
     const GetDetailRoom = async (roomId) => {
@@ -95,17 +83,11 @@ const DetailRoom = () => {
         setDateRange([item.selection]);
     };
 
-    const addDays = (date, days) => {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    };
-
     const handleSearch = () => {
         dispatch(
             searchSlice.actions.setSearchContent({
-                dateStart: addDays(dateRange[0].startDate, 1).toString(),
-                dateEnd: addDays(dateRange[0].endDate, 1).toString(),
+                dateStart: dateRange[0].startDate.toString(),
+                dateEnd: dateRange[0].endDate.toString(),
                 type: document.getElementById('type-room').value,
                 price: document.getElementById('price-room').value,
             }),
@@ -299,7 +281,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Trần Tuấn</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
@@ -326,7 +308,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Nguyễn Lan Hương</h6>
                                                 </div>
                                                 <div className="reviwer-rating">
@@ -352,7 +334,7 @@ const DetailRoom = () => {
                                         <div className="reviwer-content">
                                             <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
                                                 <div className="reviwer-title">
-                                                    <span>27 Aug 2019</span>
+                                                    <span>27 Aug 2022</span>
                                                     <h6>Trần Lyly</h6>
                                                 </div>
                                                 <div className="reviwer-rating">

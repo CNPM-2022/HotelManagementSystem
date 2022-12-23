@@ -753,6 +753,10 @@ html .ui-button.ui-state-disabled:active {
         span {
             display: block;
             color: $heading;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         &:last-child {
