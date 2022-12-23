@@ -83,8 +83,8 @@ function DashBoard() {
 
                 <hr />
                 <div>
-                    <Revenue dataReport={dataReport} isLoading={isLoading} title="Báo Cáo Doanh Thu Theo Loại Phòng" />
-                    <Density dataReport={dataReport} isLoading={isLoading} title="Báo Cáo Mật Độ Sử Dụng Phòng" />
+                    <Revenue dataReport={dataReport} isLoading={isLoading} />
+                    <Density dataReport={dataReport} isLoading={isLoading} />
                 </div>
             </div>
         </div>
