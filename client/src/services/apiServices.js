@@ -59,6 +59,10 @@ export const deleteRoom = (id) => {
     return axios.delete(`rooms/deleteRoom/${id}`);
 };
 
+export const getAllBooking = () => {
+    return axios.get('booking/all');
+}
+
 export const putUpdateRoom = (id, data) => {
     return axios.put(`rooms/updateRoom/${id}`, data);
 };
@@ -132,9 +136,9 @@ export const checkFavoriteRoom = (id) => {
 };
 
 export const getRoomByType = (type) => {
-    return axios.get(`rooms/all/type/name/${type}`)
+    return axios.get(`rooms/all/type/name/${type}`);
 }
 
 export const searchRooms = (infor) => {
-    return axios.post('rooms/filter/1', infor)
+    return axios.post('rooms/filter/1', infor);
 }
